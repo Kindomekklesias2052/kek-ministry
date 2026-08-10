@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aaron & Hur Altar Initiative | Partner Intake Questionnaire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0c1b33;
+            --gold: #c59b27;
+            --slate: #4a5568;
+            --light-bg: #f8f9fa;
+            --border-color: #cbd5e1;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light-bg);
+            color: #2d3748;
+            line-height: 1.6;
+            padding: 40px 15px;
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 8px;
+            border-top: 5px solid var(--gold);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        .header-banner {
+            text-align: center;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .header-banner h1 {
+            font-family: 'Cinzel', serif;
+            color: var(--navy);
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .header-banner p {
+            color: var(--gold);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .scripture-quote {
+            background-color: #f1f5f9;
+            border-left: 4px solid var(--gold);
+            padding: 12px 15px;
+            font-style: italic;
+            color: var(--slate);
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .section-header {
+            font-family: 'Cinzel', serif;
+            background-color: var(--navy);
+            color: var(--white);
+            padding: 10px 15px;
+            font-size: 1rem;
+            margin: 30px 0 20px 0;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .radio-group, .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+
+        .radio-option input {
+            margin-top: 4px;
+        }
+
+        .submit-btn {
+            background-color: var(--gold);
+            color: var(--navy);
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: none;
+            padding: 15px 40px;
+            width: 100%;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 30px;
+        }
+
+        .submit-btn:hover {
+            background-color: #a37f1e;
+            color: var(--white);
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            .form-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <div class="header-banner">
+        <h1>The Aaron & Hur Altar Initiative</h1>
+        <p>Partner Confidential Intake Questionnaire & Prayer Dossier</p>
+    </div>
+
+    <div class="scripture-quote">
+        "When Moses’ hands grew tired, they took a stone and put it under him and he sat on it. Aaron and Hur held his hands up—one on one side, one on the other..." — <strong>Exodus 17:12</strong>
+    </div>
+
+    <!-- FORM START -->
+    <form action="https://formspree.io/f/mppapvnl" method="POST">
+
+        <!-- SECTION 1 -->
+        <div class="section-header">
+            <span>SECTION 1: PERSONAL & PARTNER DETAILS</span>
+        </div>
+
+        <div class="form-group">
+            <label for="fullname">Full Name *</label>
+            <input type="text" id="fullname" name="Full_Name" required placeholder="Enter your full official name">
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="dob">Date of Birth *</label>
+                <input type="date" id="dob" name="Date_of_Birth" required>
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender *</label>
+                <select id="gender" name="Gender" required>
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="Email" required placeholder="example@email.com">
+            </div>
+            <div class="form-group">
+                <label for="phone">WhatsApp Phone Number *</label>
+                <input type="tel" id="phone" name="Phone_WhatsApp" required placeholder="+254 7XX XXX XXX">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="residence">City & Country of Residence *</label>
+                <input type="text" id="residence" name="Residence" required placeholder="e.g. Nairobi, Kenya">
+            </div>
+            <div class="form-group">
+                <label for="marital">Marital Status *</label>
+                <select id="marital" name="Marital_Status" required>
+                    <option value="">Select Status</option>
+                    <option value="Single">Single</option>
+                    <option value="Married">Married</option>
+                    <option value="Widowed">Widowed</option>
+                    <option value="Divorced">Divorced</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- SECTION 2 -->
+        <div class="section-header">
+            <span>SECTION 2: PARTNERSHIP TIER</span>
+        </div>
+
+        <div class="form-group">
+            <label>Select Enrolled Intercessory Covering Tier *</label>
+            <div class="radio-group">
+                <label class="radio-option">
+                    <input type="radio" name="Partnership_Tier" value="Shield Partner" required>
+                    <span><strong>Shield Partner</strong> — Dedicated Intercessor (Shared Group Watch)</span>
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="Partnership_Tier" value="Covenant Partner">
+                    <span><strong>Covenant Partner</strong> — 1 Dedicated Primary Intercessor</span>
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="Partnership_Tier" value="Kingdom Vanguard">
+                    <span><strong>Kingdom Vanguard</strong> — 2 Dedicated Intercessors (Primary & Lead Watch)</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- SECTION 3 -->
+        <div class="section-header">
+            <span>SECTION 3: FAMILY & BLOODLINE DOSSIER</span>
+        </div>
+
+        <div class="form-group">
+            <label for="spouse">Spouse's Full Name (if applicable)</label>
+            <input type="text" id="spouse" name="Spouse_Name">
+        </div>
+
+        <div class="form-group">
+            <label for="children">Children's Names & Ages (if applicable)</label>
+            <textarea id="children" name="Children_Details" rows="2" placeholder="e.g. Sarah (12), David (8)"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="bloodline_cycles">Persistent Bloodline Patterns / Recurring Cycles</label>
+            <textarea id="bloodline_cycles" name="Bloodline_Patterns" rows="3" placeholder="Describe any recurring patterns in your lineage requiring prayer (e.g., premature death, chronic sickness, marital delay, financial collapse)"></textarea>
+        </div>
+
+        <!-- SECTION 4 -->
+        <div class="section-header">
+            <span>SECTION 4: HEALTH & VITALITY DOSSIER</span>
+        </div>
+
+        <div class="form-group">
+            <label for="health_conditions">Specific Medical Conditions / Diagnoses</label>
+            <textarea id="health_conditions" name="Health_Conditions" rows="2" placeholder="List any specific health diagnoses requiring divine healing"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="spiritual_attacks">Recurring Emotional or Spiritual Attacks</label>
+            <textarea id="spiritual_attacks" name="Spiritual_Attacks" rows="2" placeholder="e.g. tormenting dreams, insomnia, unexplained fear, depression"></textarea>
+        </div>
+
+        <!-- SECTION 5 -->
+        <div class="section-header">
+            <span>SECTION 5: BUSINESS, CAREER & FINANCES</span>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="occupation">Primary Occupation / Business Name</label>
+                <input type="text" id="occupation" name="Occupation">
+            </div>
+            <div class="form-group">
+                <label for="industry">Industry / Field</label>
+                <input type="text" id="industry" name="Industry">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="financial_goals">Financial & Enterprise Goals (6–12 Months)</label>
+            <textarea id="financial_goals" name="Financial_Goals" rows="2" placeholder="Key enterprise milestones and financial prayer targets"></textarea>
+        </div>
+
+        <!-- SECTION 6 -->
+        <div class="section-header">
+            <span>SECTION 6: PRAYER TARGETS & DESTINY</span>
+        </div>
+
+        <div class="form-group">
+            <label for="top_requests">Top 3 Priority Prayer Requests for This Month *</label>
+            <textarea id="top_requests" name="Priority_Prayer_Requests" rows="4" required placeholder="1. 
+2. 
+3. "></textarea>
+        </div>
+
+        <!-- CONFIDENTIALITY ACKNOWLEDGEMENT -->
+        <div class="form-group" style="margin-top: 30px;">
+            <label class="radio-option">
+                <input type="checkbox" name="Confidentiality_Agreement" required>
+                <span style="font-size: 0.85rem; color: var(--slate);">I confirm that the information provided is accurate and agree that my assigned intercessor will maintain strict pastoral confidentiality while praying over my dossier.</span>
+            </label>
+        </div>
+
+        <button type="submit" class="submit-btn">SUBMIT PRAYER DOSSIER & ENROLL</button>
+
+    </form>
+</div>
+
+</body>
+</html>
