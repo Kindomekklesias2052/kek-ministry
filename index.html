@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kingdom Ekklesias Koinonia (KEK) | Spiritual Legislation & Goshen Ecosystem</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0c1b33;
+            --gold: #c59b27;
+            --gold-hover: #a37f1e;
+            --slate: #4a5568;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --card-border: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #2d3748;
+            background-color: var(--white);
+            line-height: 1.6;
+        }
+
+        /* HEADER & NAVIGATION */
+        header {
+            background-color: var(--navy);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid var(--gold);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 20px;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            color: var(--white);
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--gold);
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        .btn-gold {
+            background-color: var(--gold);
+            color: var(--navy) !important;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: 700;
+            transition: background 0.3s;
+        }
+
+        .btn-gold:hover {
+            background-color: var(--gold-hover);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(135deg, rgba(12, 27, 51, 0.95), rgba(27, 38, 59, 0.9)), url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            color: var(--white);
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: var(--white);
+            letter-spacing: 1px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+            color: #e2e8f0;
+        }
+
+        /* ABOUT SECTION */
+        .section-padding {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            color: var(--navy);
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--gold);
+            margin: 10px auto 0;
+        }
+
+        .about-text {
+            text-align: center;
+            max-width: 800px;
+            margin: 20px auto 0;
+            font-size: 1.1rem;
+            color: var(--slate);
+        }
+
+        /* SERVICES GRID */
+        .services-bg {
+            background-color: var(--light-bg);
+            border-top: 1px solid var(--card-border);
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background: var(--white);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            border-top: 4px solid var(--gold);
+        }
+
+        .service-number {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .service-card h3 {
+            font-size: 1.25rem;
+            color: var(--navy);
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            color: var(--slate);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .card-btn {
+            color: var(--navy);
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: inline-block;
+            transition: color 0.3s;
+        }
+
+        .card-btn:hover {
+            color: var(--gold);
+        }
+
+        /* CTA & CONTACT SECTION */
+        .cta-section {
+            background-color: var(--navy);
+            color: var(--white);
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .cta-section h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: #cbd5e1;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: #081221;
+            color: #718096;
+            text-align: center;
+            padding: 25px 20px;
+            font-size: 0.85rem;
+            border-top: 1px solid #1e293b;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .nav-container { flex-direction: column; gap: 15px; }
+            nav a { margin: 0 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION HEADER -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">KINGDOM EKKLESIAS <span>KOINONIA</span></a>
+            <nav>
+                <a href="#about">About Us</a>
+                <a href="#services">Our Services</a>
+                <a href="#contact" class="btn-gold">Book Session</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Bridging Divine Legislation with Territorial Dominion</h1>
+            <p>An apostolic, prophetic, and governance assembly equipping believers to operate in the Courts of Heaven and build insulated economic ecosystems on earth.</p>
+            <a href="#services" class="btn-gold" style="font-size: 1rem; padding: 12px 30px;">Explore Our Pillars</a>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="section-padding">
+        <h2 class="section-title">Who We Are</h2>
+        <p class="about-text">
+            At Kingdom Ekklesias Koinonia (KEK), we believe that effective prayer is not a matter of emotional striving—it is a matter of <strong>legal alignment in the spiritual realm</strong>. We operate as a modern legislative assembly (<em>Ekklesia</em>), bridging judicial intercession in the Courtrooms of Heaven with real-world structural transformation through our youth governance pipelines and the <strong>Goshen Cities Ecosystem</strong>.
+        </p>
+    </section>
+
+    <!-- SERVICES / 6 DOCKETS SECTION -->
+    <section id="services" class="services-bg">
+        <div class="section-padding">
+            <h2 class="section-title">Our Six Functional Pillars</h2>
+            
+            <div class="services-grid">
+                
+                <!-- Pillar 1 -->
+                <div class="service-card">
+                    <div>
+                        <div class="service-number">01</div>
+                        <h3>Global Apostolic Equipping</h3>
+                        <p>Weekly digital sessions via Google Meet & Zoom unpacking spiritual mechanics, bloodline deliverance, prophetic blueprints, and kingdom governance for believers globally.</p>
+                    </div>
+                    <a href="#contact" class="card-btn">Join Classroom &rarr;</a>
+                </div>
+
+                <!-- Pillar 2 -->
+                <div class="service-card">
+                    <div>
+                        <div class="service-number">02</div>
+                        <h3>Courts of Heaven 101</h3>
+                        <p>Private, bookable consultations designed to identify legal spiritual blockages, revoke demonic accusations, and obtain binding divine verdicts over persistent cycles.</p>
+                    </div>
+                    <a href="https://calendar.app.google/xpVNkHP4NMz9TsdYA" target="_blank" class="card-btn">Book 1-on-1 Session &rarr;</a>
+                </div>
+
+                <!-- Pillar 3 -->
+                <div class="service-card">
+                    <div>
+                        <div class="service-number">03</div>
+                        <h3>Youth & Generational Outreach</h3>
+                        <p>Targeted workshops and campus outreaches equipping Gen Z and Alpha to operate in the Realms of the Spirit, raising clean kingdom legislators in tech, governance, and industry.</p>
+                    </div>
+                    <a href="#contact" class="card-btn">Invite KEK to Your Fellowship &rarr;</a>
+                </div>
+
+                <!-- Pillar 4 -->
+                <div class="service-card">
+                    <div>
+                        <div class="service-number">04</div>
+                        <h3>Territorial Watches & Legislation</h3>
+                        <p>Consecrated daily watches (including 3:00 PM and Midnight EAT) standing at geographic gates to execute warfare, enforce prophetic scrolls, and dismantle unrighteous altars.</p>
+                    </div>
+                    <a href="#contact" class="card-btn">Align With Our Watches &rarr;</a>
+                </div>
+
+                <!-- Pillar 5 -->
+                <div class="service-card">
+                    <div>
+                        <div class="service-number">05</div>
+                        <h3>Aaron & Hur Intercessory Covering</h3>
+                        <p>A subscription partnership matching individuals and entrepreneurs with assigned ministers who maintain a daily (Monday–Friday) judicial prayer watch over their life, health, and enterprise.</p>
+                    </div>
+                    <a href="#contact" class="card-btn">Subscribe for Covering &rarr;</a>
+                </div>
+
+                <!-- Pillar 6 -->
+                <div class="service-card">
+                    <div>
+                        <div class="service-number">06</div>
+                        <h3>Kingdom Wealth & Goshen Ecosystem</h3>
+                        <p>Aligning households with financial stewardship through private liquidity pools, trust-backed asset protection, agricultural sanctuaries, and insulated family wealth systems.</p>
+                    </div>
+                    <a href="#contact" class="card-btn">Enroll in Wealth Academy &rarr;</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CALL TO ACTION / CONTACT -->
+    <section id="contact" class="cta-section">
+        <div class="hero-content">
+            <h2>Ready to Step Into Higher Realms of Governance?</h2>
+            <p>Reserve your seat in our virtual courtroom or connect with our administrative team to align your family, ministry, or enterprise.</p>
+            <a href="https://calendar.app.google/xpVNkHP4NMz9TsdYA" target="_blank" class="btn-gold" style="font-size: 1.1rem; padding: 15px 35px;">Reserve Your Seat on Google Calendar</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Kingdom Ekklesias Koinonia (KEK). All Rights Reserved. | Designed for Kingdom Governance</p>
+    </footer>
+
+</body>
+</html>
