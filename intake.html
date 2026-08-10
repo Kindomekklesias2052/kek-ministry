@@ -30,7 +30,7 @@
         }
 
         .form-container {
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto;
             background: var(--white);
             padding: 40px;
@@ -124,23 +124,81 @@
             border-color: var(--gold);
         }
 
-        .radio-group, .checkbox-group {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 8px;
-        }
-
-        .radio-option {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            font-size: 0.95rem;
+        /* TIER CARDS */
+        .tier-card {
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 18px;
+            margin-bottom: 15px;
+            background-color: #f8fafc;
+            transition: border-color 0.3s;
             cursor: pointer;
         }
 
-        .radio-option input {
-            margin-top: 4px;
+        .tier-card:hover {
+            border-color: var(--gold);
+        }
+
+        .tier-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--navy);
+            margin-bottom: 8px;
+        }
+
+        .tier-price {
+            background-color: var(--gold);
+            color: var(--navy);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .tier-details {
+            font-size: 0.88rem;
+            color: var(--slate);
+            margin-left: 28px;
+        }
+
+        .tier-details ul {
+            padding-left: 15px;
+            margin-top: 5px;
+        }
+
+        .tier-details li {
+            margin-bottom: 4px;
+        }
+
+        /* PAYMENT BOX */
+        .payment-box {
+            background-color: #f1f5f9;
+            border: 1px dashed var(--gold);
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .payment-method {
+            margin-bottom: 15px;
+        }
+
+        .payment-method h4 {
+            color: var(--navy);
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .payment-method p {
+            font-size: 0.88rem;
+            color: var(--slate);
+            margin-left: 24px;
         }
 
         .submit-btn {
@@ -244,30 +302,127 @@
 
         <!-- SECTION 2 -->
         <div class="section-header">
-            <span>SECTION 2: PARTNERSHIP TIER</span>
+            <span>SECTION 2: PARTNERSHIP TIER & SCHEDULE</span>
         </div>
 
-        <div class="form-group">
-            <label>Select Enrolled Intercessory Covering Tier *</label>
-            <div class="radio-group">
-                <label class="radio-option">
-                    <input type="radio" name="Partnership_Tier" value="Shield Partner" required>
-                    <span><strong>Shield Partner</strong> — Dedicated Intercessor (Shared Group Watch)</span>
-                </label>
-                <label class="radio-option">
-                    <input type="radio" name="Partnership_Tier" value="Covenant Partner">
-                    <span><strong>Covenant Partner</strong> — 1 Dedicated Primary Intercessor</span>
-                </label>
-                <label class="radio-option">
-                    <input type="radio" name="Partnership_Tier" value="Kingdom Vanguard">
-                    <span><strong>Kingdom Vanguard</strong> — 2 Dedicated Intercessors (Primary & Lead Watch)</span>
-                </label>
-            </div>
+        <p style="font-size: 0.9rem; color: var(--slate); margin-bottom: 15px;">
+            Select your monthly partnership tier. Your contribution provides a stipend for assigned intercessors and a love offering to support core ministry operations.
+        </p>
+
+        <!-- Covenant Partner -->
+        <div class="tier-card">
+            <label style="cursor: pointer;">
+                <div class="tier-header">
+                    <div>
+                        <input type="radio" name="Partnership_Tier" value="Covenant Partner ($200 - $299/mo)" required>
+                        <span style="margin-left: 8px;">Covenant Partner</span>
+                    </div>
+                    <span class="tier-price">$200 – $299 / month</span>
+                </div>
+                <div class="tier-details">
+                    <strong>What to Expect:</strong>
+                    <ul>
+                        <li>1 Dedicated Primary Intercessor assigned to your dossier.</li>
+                        <li>Daily (Mon–Fri) intercessory prayer over health, family, business, and purpose.</li>
+                        <li>Bi-weekly written prayer logs and access to urgent prayer intake.</li>
+                    </ul>
+                </div>
+            </label>
+        </div>
+
+        <!-- Kingdom Vanguard -->
+        <div class="tier-card">
+            <label style="cursor: pointer;">
+                <div class="tier-header">
+                    <div>
+                        <input type="radio" name="Partnership_Tier" value="Kingdom Vanguard ($300 - $449/mo)">
+                        <span style="margin-left: 8px;">Kingdom Vanguard</span>
+                    </div>
+                    <span class="tier-price">$300 – $449 / month</span>
+                </div>
+                <div class="tier-details">
+                    <strong>What to Expect:</strong>
+                    <ul>
+                        <li>2 Dedicated Intercessors (Primary Watch & Lead Watch).</li>
+                        <li>Comprehensive daily (Mon–Fri) spiritual warfare, legal petitions, and altar coverage.</li>
+                        <li>Weekly direct updates, monthly direct prayer calls, and targeted Courts of Heaven petition drafting.</li>
+                    </ul>
+                </div>
+            </label>
+        </div>
+
+        <!-- Shield Partner -->
+        <div class="tier-card">
+            <label style="cursor: pointer;">
+                <div class="tier-header">
+                    <div>
+                        <input type="radio" name="Partnership_Tier" value="Shield Partner ($450 - $1000/mo)">
+                        <span style="margin-left: 8px;">Shield Partner</span>
+                    </div>
+                    <span class="tier-price">$450 – $1,000 / month</span>
+                </div>
+                <div class="tier-details">
+                    <strong>What to Expect:</strong>
+                    <ul>
+                        <li>Lead Intercessory Watch team covering personal, family, and high-level enterprise dockets.</li>
+                        <li>Daily strategic legislation across spiritual, financial, and territorial domains.</li>
+                        <li>Priority pastoral consultations, monthly legal court sessions, and direct progress reporting.</li>
+                    </ul>
+                </div>
+            </label>
+        </div>
+
+        <!-- Custom Contribution Field -->
+        <div class="form-group" style="margin-top: 15px;">
+            <label for="custom_amount">Specified Monthly Contribution Amount ($ USD or KES equivalent) *</label>
+            <input type="text" id="custom_amount" name="Specified_Monthly_Contribution" required placeholder="e.g. $250 / month or KES equivalent">
         </div>
 
         <!-- SECTION 3 -->
         <div class="section-header">
-            <span>SECTION 3: FAMILY & BLOODLINE DOSSIER</span>
+            <span>SECTION 3: CONTRIBUTION & PAYMENT OPTIONS</span>
+        </div>
+
+        <p style="font-size: 0.9rem; color: var(--slate); margin-bottom: 15px;">
+            Please choose your preferred monthly payment channel below:
+        </p>
+
+        <div class="payment-box">
+            <!-- M-PESA -->
+            <div class="payment-method">
+                <h4>🟢 M-PESA / Mobile Money (Kenya & East Africa)</h4>
+                <p>Send direct to WhatsApp/SMS Contact: <strong>+254 727 953 458</strong></p>
+            </div>
+
+            <!-- WORLDREMIT -->
+            <div class="payment-method">
+                <h4>🌐 WorldRemit / Remitly / International Money Transfer</h4>
+                <p>
+                    Recipient Name: <strong>Elizaphan Kamau Mwangi</strong><br>
+                    Mobile Number: <strong>+254 727 953 458</strong> (M-PESA Kenya)
+                </p>
+            </div>
+
+            <!-- PAYPAL -->
+            <div class="payment-method" style="margin-bottom: 0;">
+                <h4>💙 PayPal / Card Payments</h4>
+                <p>Send via Email: <strong>kingdom.ekklesias.inv@gmail.com</strong></p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="payment_method_selected">Select Your Intended Payment Method *</label>
+            <select id="payment_method_selected" name="Preferred_Payment_Method" required>
+                <option value="">Select Payment Method</option>
+                <option value="M-PESA (+254 727 953 458)">M-PESA Direct (+254 727 953 458)</option>
+                <option value="WorldRemit / Remitly">WorldRemit / Remitly</option>
+                <option value="PayPal (kingdom.ekklesias.inv@gmail.com)">PayPal (kingdom.ekklesias.inv@gmail.com)</option>
+            </select>
+        </div>
+
+        <!-- SECTION 4 -->
+        <div class="section-header">
+            <span>SECTION 4: FAMILY & BLOODLINE DOSSIER</span>
         </div>
 
         <div class="form-group">
@@ -285,9 +440,9 @@
             <textarea id="bloodline_cycles" name="Bloodline_Patterns" rows="3" placeholder="Describe any recurring patterns in your lineage requiring prayer (e.g., premature death, chronic sickness, marital delay, financial collapse)"></textarea>
         </div>
 
-        <!-- SECTION 4 -->
+        <!-- SECTION 5 -->
         <div class="section-header">
-            <span>SECTION 4: HEALTH & VITALITY DOSSIER</span>
+            <span>SECTION 5: HEALTH & VITALITY DOSSIER</span>
         </div>
 
         <div class="form-group">
@@ -300,9 +455,9 @@
             <textarea id="spiritual_attacks" name="Spiritual_Attacks" rows="2" placeholder="e.g. tormenting dreams, insomnia, unexplained fear, depression"></textarea>
         </div>
 
-        <!-- SECTION 5 -->
+        <!-- SECTION 6 -->
         <div class="section-header">
-            <span>SECTION 5: BUSINESS, CAREER & FINANCES</span>
+            <span>SECTION 6: BUSINESS, CAREER & FINANCES</span>
         </div>
 
         <div class="form-row">
@@ -321,9 +476,9 @@
             <textarea id="financial_goals" name="Financial_Goals" rows="2" placeholder="Key enterprise milestones and financial prayer targets"></textarea>
         </div>
 
-        <!-- SECTION 6 -->
+        <!-- SECTION 7 -->
         <div class="section-header">
-            <span>SECTION 6: PRAYER TARGETS & DESTINY</span>
+            <span>SECTION 7: PRAYER TARGETS & DESTINY</span>
         </div>
 
         <div class="form-group">
