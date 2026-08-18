@@ -83,6 +83,12 @@
             align-items: center;
         }
 
+        fieldset.section-fieldset {
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+
         .form-group {
             margin-bottom: 20px;
         }
@@ -131,12 +137,19 @@
             padding: 18px;
             margin-bottom: 15px;
             background-color: #f8fafc;
-            transition: border-color 0.3s;
+            transition: all 0.3s ease;
             cursor: pointer;
         }
 
         .tier-card:hover {
             border-color: var(--gold);
+        }
+
+        /* Active styling when radio inside is checked */
+        .tier-card:has(input[type="radio"]:checked) {
+            border-color: var(--gold);
+            background-color: #fefcf3;
+            box-shadow: 0 0 0 2px var(--gold);
         }
 
         .tier-header {
@@ -201,6 +214,17 @@
             margin-left: 24px;
         }
 
+        .checkbox-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            margin-top: 3px;
+        }
+
         .submit-btn {
             background-color: var(--gold);
             color: var(--navy);
@@ -224,7 +248,7 @@
         @media (max-width: 600px) {
             .form-row {
                 flex-direction: column;
-                gap: 0;
+                gap: 15px;
             }
             .form-container {
                 padding: 20px;
@@ -246,6 +270,10 @@
 
     <!-- FORM START -->
     <form action="https://formspree.io/f/mppapvnl" method="POST">
+
+        <!-- Formspree Configurations -->
+        <input type="hidden" name="_subject" value="New Aaron & Hur Partner Intake Questionnaire">
+        <input type="text" name="_gotcha" style="display:none">
 
         <!-- SECTION 1 -->
         <div class="section-header">
@@ -279,7 +307,7 @@
             </div>
             <div class="form-group">
                 <label for="phone">WhatsApp Phone Number *</label>
-                <input type="tel" id="phone" name="Phone_WhatsApp" required placeholder="+254 7XX XXX XXX">
+                <input type="tel" id="phone" name="Phone_WhatsApp" required placeholder="+254 727 923 458">
             </div>
         </div>
 
@@ -301,76 +329,78 @@
         </div>
 
         <!-- SECTION 2 -->
-        <div class="section-header">
-            <span>SECTION 2: PARTNERSHIP TIER & SCHEDULE</span>
-        </div>
+        <fieldset class="section-fieldset">
+            <legend class="section-header" style="width: 100%;">
+                <span>SECTION 2: PARTNERSHIP TIER & SCHEDULE</span>
+            </legend>
 
-        <p style="font-size: 0.9rem; color: var(--slate); margin-bottom: 15px;">
-            Select your monthly partnership tier. Your contribution provides a stipend for assigned intercessors and a love offering to support core ministry operations.
-        </p>
+            <p style="font-size: 0.9rem; color: var(--slate); margin-bottom: 15px;">
+                Select your monthly partnership tier. Your contribution provides a stipend for assigned intercessors and a love offering to support core ministry operations.
+            </p>
 
-        <!-- Covenant Partner -->
-        <div class="tier-card">
-            <label style="cursor: pointer;">
-                <div class="tier-header">
-                    <div>
-                        <input type="radio" name="Partnership_Tier" value="Covenant Partner ($200 - $299/mo)" required>
-                        <span style="margin-left: 8px;">Covenant Partner</span>
+            <!-- Covenant Partner -->
+            <div class="tier-card">
+                <label style="cursor: pointer;">
+                    <div class="tier-header">
+                        <div>
+                            <input type="radio" id="tier_covenant" name="Partnership_Tier" value="Covenant Partner ($200 - $299/mo)" required>
+                            <span style="margin-left: 8px;">Covenant Partner</span>
+                        </div>
+                        <span class="tier-price">$200 – $299 / month</span>
                     </div>
-                    <span class="tier-price">$200 – $299 / month</span>
-                </div>
-                <div class="tier-details">
-                    <strong>What to Expect:</strong>
-                    <ul>
-                        <li>1 Dedicated Primary Intercessor assigned to your dossier.</li>
-                        <li>Daily (Mon–Fri) intercessory prayer over health, family, business, and purpose.</li>
-                        <li>Bi-weekly written prayer logs and access to urgent prayer intake.</li>
-                    </ul>
-                </div>
-            </label>
-        </div>
-
-        <!-- Kingdom Vanguard -->
-        <div class="tier-card">
-            <label style="cursor: pointer;">
-                <div class="tier-header">
-                    <div>
-                        <input type="radio" name="Partnership_Tier" value="Kingdom Vanguard ($300 - $449/mo)">
-                        <span style="margin-left: 8px;">Kingdom Vanguard</span>
+                    <div class="tier-details">
+                        <strong>What to Expect:</strong>
+                        <ul>
+                            <li>1 Dedicated Primary Intercessor assigned to your dossier.</li>
+                            <li>Daily (Mon–Fri) intercessory prayer over health, family, business, and purpose.</li>
+                            <li>Bi-weekly written prayer logs and access to urgent prayer intake.</li>
+                        </ul>
                     </div>
-                    <span class="tier-price">$300 – $449 / month</span>
-                </div>
-                <div class="tier-details">
-                    <strong>What to Expect:</strong>
-                    <ul>
-                        <li>2 Dedicated Intercessors (Primary Watch & Lead Watch).</li>
-                        <li>Comprehensive daily (Mon–Fri) spiritual warfare, legal petitions, and altar coverage.</li>
-                        <li>Weekly direct updates, monthly direct prayer calls, and targeted Courts of Heaven petition drafting.</li>
-                    </ul>
-                </div>
-            </label>
-        </div>
+                </label>
+            </div>
 
-        <!-- Shield Partner -->
-        <div class="tier-card">
-            <label style="cursor: pointer;">
-                <div class="tier-header">
-                    <div>
-                        <input type="radio" name="Partnership_Tier" value="Shield Partner ($450 - $1000/mo)">
-                        <span style="margin-left: 8px;">Shield Partner</span>
+            <!-- Kingdom Vanguard -->
+            <div class="tier-card">
+                <label style="cursor: pointer;">
+                    <div class="tier-header">
+                        <div>
+                            <input type="radio" id="tier_vanguard" name="Partnership_Tier" value="Kingdom Vanguard ($300 - $449/mo)">
+                            <span style="margin-left: 8px;">Kingdom Vanguard</span>
+                        </div>
+                        <span class="tier-price">$300 – $449 / month</span>
                     </div>
-                    <span class="tier-price">$450 – $1,000 / month</span>
-                </div>
-                <div class="tier-details">
-                    <strong>What to Expect:</strong>
-                    <ul>
-                        <li>Lead Intercessory Watch team covering personal, family, and high-level enterprise dockets.</li>
-                        <li>Daily strategic legislation across spiritual, financial, and territorial domains.</li>
-                        <li>Priority pastoral consultations, monthly legal court sessions, and direct progress reporting.</li>
-                    </ul>
-                </div>
-            </label>
-        </div>
+                    <div class="tier-details">
+                        <strong>What to Expect:</strong>
+                        <ul>
+                            <li>2 Dedicated Intercessors (Primary Watch & Lead Watch).</li>
+                            <li>Comprehensive daily (Mon–Fri) spiritual warfare, legal petitions, and altar coverage.</li>
+                            <li>Weekly direct updates, monthly direct prayer calls, and targeted Courts of Heaven petition drafting.</li>
+                        </ul>
+                    </div>
+                </label>
+            </div>
+
+            <!-- Shield Partner -->
+            <div class="tier-card">
+                <label style="cursor: pointer;">
+                    <div class="tier-header">
+                        <div>
+                            <input type="radio" id="tier_shield" name="Partnership_Tier" value="Shield Partner ($450 - $1000/mo)">
+                            <span style="margin-left: 8px;">Shield Partner</span>
+                        </div>
+                        <span class="tier-price">$450 – $1,000 / month</span>
+                    </div>
+                    <div class="tier-details">
+                        <strong>What to Expect:</strong>
+                        <ul>
+                            <li>Lead Intercessory Watch team covering personal, family, and high-level enterprise dockets.</li>
+                            <li>Daily strategic legislation across spiritual, financial, and territorial domains.</li>
+                            <li>Priority pastoral consultations, monthly legal court sessions, and direct progress reporting.</li>
+                        </ul>
+                    </div>
+                </label>
+            </div>
+        </fieldset>
 
         <!-- Custom Contribution Field -->
         <div class="form-group" style="margin-top: 15px;">
@@ -391,7 +421,7 @@
             <!-- M-PESA -->
             <div class="payment-method">
                 <h4>🟢 M-PESA / Mobile Money (Kenya & East Africa)</h4>
-                <p>Send direct to WhatsApp/SMS Contact: <strong>+254 727 953 458</strong></p>
+                <p>Send direct to WhatsApp/SMS Contact: <strong>+254 727 923 458</strong></p>
             </div>
 
             <!-- WORLDREMIT -->
@@ -399,7 +429,7 @@
                 <h4>🌐 WorldRemit / Remitly / International Money Transfer</h4>
                 <p>
                     Recipient Name: <strong>Elizaphan Kamau Mwangi</strong><br>
-                    Mobile Number: <strong>+254 727 953 458</strong> (M-PESA Kenya)
+                    Mobile Number: <strong>+254 727 923 458</strong> (M-PESA Kenya)
                 </p>
             </div>
 
@@ -414,7 +444,7 @@
             <label for="payment_method_selected">Select Your Intended Payment Method *</label>
             <select id="payment_method_selected" name="Preferred_Payment_Method" required>
                 <option value="">Select Payment Method</option>
-                <option value="M-PESA (+254 727 953 458)">M-PESA Direct (+254 727 953 458)</option>
+                <option value="M-PESA (+254 727 923 458)">M-PESA Direct (+254 727 923 458)</option>
                 <option value="WorldRemit / Remitly">WorldRemit / Remitly</option>
                 <option value="PayPal (kingdom.ekklesias.inv@gmail.com)">PayPal (kingdom.ekklesias.inv@gmail.com)</option>
             </select>
@@ -483,14 +513,12 @@
 
         <div class="form-group">
             <label for="top_requests">Top 3 Priority Prayer Requests for This Month *</label>
-            <textarea id="top_requests" name="Priority_Prayer_Requests" rows="4" required placeholder="1. 
-2. 
-3. "></textarea>
+            <textarea id="top_requests" name="Priority_Prayer_Requests" rows="4" required placeholder="1. &#10;2. &#10;3. "></textarea>
         </div>
 
         <!-- CONFIDENTIALITY ACKNOWLEDGEMENT -->
         <div class="form-group" style="margin-top: 30px;">
-            <label class="radio-option">
+            <label class="checkbox-label">
                 <input type="checkbox" name="Confidentiality_Agreement" required>
                 <span style="font-size: 0.85rem; color: var(--slate);">I confirm that the information provided is accurate and agree that my assigned intercessor will maintain strict pastoral confidentiality while praying over my dossier.</span>
             </label>
