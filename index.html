@@ -15,6 +15,85 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* MOBILE HAMBURGER MENU ACTIONS */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1010;
+        }
+
+        .hamburger .bar {
+            width: 100%;
+            height: 3px;
+            background-color: var(--white);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* RESPONSIVE LAYOUT ADJUSTMENTS */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+
+            .nav-container {
+                position: relative;
+                flex-direction: row !important; /* Forces logo and menu button side-by-side */
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+            }
+
+            nav {
+                display: none; /* Hidden by default on mobile screens */
+                flex-direction: column;
+                background-color: var(--navy);
+                position: absolute;
+                top: 100%; /* Mounts directly under the bottom of header */
+                left: 0;
+                width: 100%;
+                padding: 15px 0;
+                border-bottom: 3px solid var(--gold);
+                z-index: 999;
+                box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            }
+
+            nav.active {
+                display: flex; /* Displays full stack navigation when toggle active */
+            }
+
+            nav a {
+                margin: 12px 20px !important;
+                display: block;
+                text-align: center;
+                font-size: 1rem;
+            }
+
+            .hamburger {
+                display: flex; /* Activates the physical three-bar trigger */
+            }
+
+            /* Cross transition animation (Transforms ☰ into X when clicked) */
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(9px) rotate(45deg);
+            }
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-9px) rotate(-45deg);
+            }
+
+            .resource-card { flex-direction: column; text-align: center; }
+        }
+    </style>
 </head>
 <body>
 
@@ -25,6 +104,14 @@
                 <img src="IMG-20260706-WA0004.jpg" alt="KEK Emblem">
                 KINGDOM EKKLESIAS <span>KOINONIA</span>
             </a>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button class="hamburger" id="hamburger-menu" aria-label="Toggle menu Navigation">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
             <nav>
                 <a href="#about">About</a>
                 <a href="#services">Pillars</a>
@@ -51,7 +138,7 @@
     <section id="about" class="section-padding">
         <h2 class="section-title">Who We Are</h2>
         <p class="about-text">
-            At Kingdom Ekklesias Koinonia (KEK), we believe that effective prayer is not a matter of emotional striving—it is a matter of <strong>legal alignment in the spiritual realm</strong>. We operate as a modern legislative assembly (<em>Ekklesia</em>), bridging judicial intercession in the Courtrooms of Heaven with real-world structural transformation through our youth governance pipelines and the <strong>Goshen Cities Ecosystem</strong>.
+            At Kingdom Ekklesias Koinonia (KEK), we believe that effective prayer is not a matter of emotional striving—it is a matter of <strong>legal alignment in the spiritual realm</strong>[cite: 9]. We operate as a modern legislative assembly (<em>Ekklesia</em>), bridging judicial intercession in the Courtrooms of Heaven with real-world structural transformation through our youth governance pipelines and the <strong>Goshen Cities Ecosystem</strong>[cite: 9, 11].
         </p>
     </section>
 
@@ -66,7 +153,7 @@
                     <div>
                         <div class="service-number">01</div>
                         <h3>Global Apostolic Equipping</h3>
-                        <p>Weekly digital sessions via Google Meet & Zoom unpacking spiritual mechanics, bloodline deliverance, prophetic blueprints, and kingdom governance for believers globally.</p>
+                        <p>Weekly digital sessions via Google Meet & Zoom unpacking spiritual mechanics, bloodline deliverance, prophetic blueprints, and kingdom governance for believers globally[cite: 9].</p>
                     </div>
                     <a href="https://chat.whatsapp.com/KicB3kPctrrHHZpieyfPfA" class="card-btn" target="_blank" rel="noopener noreferrer">Join WhatsApp Group &rarr;</a>
                 </div>
@@ -75,7 +162,7 @@
                     <div>
                         <div class="service-number">02</div>
                         <h3>Ekklesia Gatherings & Teaching</h3>
-                        <p>Join our online fellowship and virtual prayer sessions to build spiritual foundations and learn heavenly legislation.</p>
+                        <p>Join our online fellowship and virtual prayer sessions to build spiritual foundations and learn heavenly legislation[cite: 9, 10].</p>
                     </div>
                     <a href="https://chat.whatsapp.com/KicB3kPctrrHHZpieyfPfA" class="card-btn" target="_blank" rel="noopener noreferrer">Join WhatsApp Group &rarr;</a>
                 </div>
@@ -84,7 +171,7 @@
                     <div>
                         <div class="service-number">03</div>
                         <h3>Kingdom Intercession & Warfare</h3>
-                        <p>Stand in agreement with our dedicated prayer watchmen and intercessors for strategic breakthrough and spiritual alignment.</p>
+                        <p>Stand in agreement with our dedicated prayer watchmen and intercessors for strategic breakthrough and spiritual alignment[cite: 9].</p>
                     </div>
                     <a href="https://chat.whatsapp.com/L8y90Aslvjn2batMryOePn" class="card-btn" target="_blank" rel="noopener noreferrer">Join WhatsApp Group &rarr;</a>
                 </div>
@@ -93,7 +180,7 @@
                     <div>
                         <div class="service-number">04</div>
                         <h3>Territorial Watches & Legislation</h3>
-                        <p>Consecrated daily watches (including 3:00 PM and Midnight EAT) standing at geographic gates to execute warfare, enforce prophetic scrolls, and dismantle unrighteous altars.</p>
+                        <p>Consecrated daily watches (including 3:00 PM and Midnight EAT) standing at geographic gates to execute warfare, enforce prophetic scrolls, and dismantle unrighteous altars[cite: 9].</p>
                     </div>
                     <a href="https://chat.whatsapp.com/KicB3kPctrrHHZpieyfPfA" target="_blank" rel="noopener noreferrer" class="card-btn">Align With Our Watches &rarr;</a>
                 </div>
@@ -102,7 +189,7 @@
                     <div>
                         <div class="service-number">05</div>
                         <h3>Aaron & Hur Intercessory Covering</h3>
-                        <p>A subscription partnership matching individuals and entrepreneurs with assigned ministers for daily, personalized prayer coverage and spiritual dossier reporting.</p>
+                        <p>A subscription partnership matching individuals and entrepreneurs with assigned ministers for daily, personalized prayer coverage and spiritual dossier reporting[cite: 6, 9].</p>
                     </div>
                     <a href="intake.html" class="card-btn">View Proposal & Subscribe &rarr;</a>
                 </div>
@@ -111,7 +198,7 @@
                     <div>
                         <div class="service-number">06</div>
                         <h3>Kingdom Wealth & Goshen Ecosystem</h3>
-                        <p>Aligning households with financial stewardship through private liquidity pools, trust-backed asset protection, agricultural sanctuaries, and insulated family wealth systems.</p>
+                        <p>Aligning households with financial stewardship through private liquidity pools, trust-backed asset protection, agricultural sanctuaries, and insulated family wealth systems[cite: 9, 11].</p>
                     </div>
                     <a href="#resources" class="card-btn">Download Master Blueprint &rarr;</a>
                 </div>
@@ -127,39 +214,39 @@
             <div class="courtroom-header">
                 <div class="courtroom-tagline">LEGISLATE YOUR BREAKTHROUGH</div>
                 <h2 class="section-title" style="margin-bottom: 15px;">Courts of Heaven Sessions</h2>
-                <p class="courtroom-subheading">A Three-Dimensional Shift from the Battleground to the Courtroom</p>
+                <p class="courtroom-subheading">A Three-Dimensional Shift from the Battleground to the Courtroom[cite: 7]</p>
             </div>
 
             <div class="courtroom-body">
                 <p style="margin-bottom: 15px;">
-                    True transformation is not a product of human willpower or emotional hype—it is a matter of legal alignment in the realms of the spirit.
+                    True transformation is not a product of human willpower or emotional hype—it is a matter of legal alignment in the realms of the spirit[cite: 7, 8].
                 </p>
                 <p style="margin-bottom: 15px;">
-                    Many believers face persistent, cyclical battles that seem to resist ordinary prayer. Scripture reveals that our God is not only a loving Father; He is a Righteous Judge (Hebrews 12:23). When invisible ceilings block your destiny despite your devotion, it is often because you are fighting on an emotional battlefield when you ought to be legislating in a Heavenly Courtroom.
+                    Many believers face persistent, cyclical battles that seem to resist ordinary prayer[cite: 7, 9]. Scripture reveals that our God is not only a loving Father; He is a Righteous Judge (Hebrews 12:23)[cite: 7, 9]. When invisible ceilings block your destiny despite your devotion, it is often because you are fighting on an emotional battlefield when you ought to be legislating in a Heavenly Courtroom[cite: 7, 9].
                 </p>
                 <p>
-                    Under the covenant grace of Yeshua Hamashiach (Jesus Christ)—our Eternal Advocate and High Priest—every legal accusation, ancient covenant, or unrighteous trade can be legally annulled and dismantled.
+                    Under the covenant grace of Yeshua Hamashiach (Jesus Christ)—our Eternal Advocate and High Priest—every legal accusation, ancient covenant, or unrighteous trade can be legally annulled and dismantled[cite: 7, 9].
                 </p>
             </div>
 
             <div class="matrices-box">
                 <h3 class="matrices-title">The Three Matrices of Bondage We Confront</h3>
                 <p style="color: var(--slate); font-size: 0.95rem; margin-bottom: 20px;">
-                    Before a systematic destiny shift can occur, three foundational matrices governing your life must be judicially addressed and rewritten:
+                    Before a systematic destiny shift can occur, three foundational matrices governing your life must be judicially addressed and rewritten[cite: 7, 9]:
                 </p>
 
                 <ul class="matrices-list">
                     <li>
                         <span>⚖️</span>
-                        <strong>Generational Iniquities & Ancient DNA Programming:</strong> The hidden legal codes written into your bloodline that enforce repeated cycles of premature death, marital delays, or financial stagnation.
+                        <strong>Generational Iniquities & Ancient DNA Programming:</strong> The hidden legal codes written into your bloodline that enforce repeated cycles of premature death, marital delays, or financial stagnation[cite: 7, 9].
                     </li>
                     <li>
                         <span>⚖️</span>
-                        <strong>Emotional Trauma & Soul Fractures:</strong> Unhealed wounds and emotional fractures that provide the accuser a legal landing pad for fear, self-sabotage, and spiritual blockage.
+                        <strong>Emotional Trauma & Soul Fractures:</strong> Unhealed wounds and emotional fractures that provide the accuser a legal landing pad for fear, self-sabotage, and spiritual blockage[cite: 7, 9].
                     </li>
                     <li>
                         <span>⚖️</span>
-                        <strong>The Environmental & Relational Matrix:</strong> Unrighteous territorial altars and misaligned associations that act as atmospheric drags against your spiritual growth.
+                        <strong>The Environmental & Relational Matrix:</strong> Unrighteous territorial altars and misaligned associations that act as atmospheric drags against your spiritual growth[cite: 7, 9].
                     </li>
                 </ul>
             </div>
@@ -174,27 +261,27 @@
             <div class="sessions-grid">
                 <div class="session-card">
                     <h4>🧬 Personal Battles & Destiny Constraints</h4>
-                    <p>Dismantling unexplainable delays, chronic health challenges, and soul trades across your timeline to unseal your personal identity scroll.</p>
+                    <p>Dismantling unexplainable delays, chronic health challenges, and soul trades across your timeline to unseal your personal identity scroll[cite: 7].</p>
                 </div>
 
                 <div class="session-card">
                     <h4>🏛️ Generational & Family Altars</h4>
-                    <p>Annulling recurring patterns of divorce, premature death, and dysfunctional household cycles to secure an unbroken spiritual legacy for your lineage.</p>
+                    <p>Annulling recurring patterns of divorce, premature death, and dysfunctional household cycles to secure an unbroken spiritual legacy for your lineage[cite: 7, 9].</p>
                 </div>
 
                 <div class="session-card">
                     <h4>🌾 Financial, Business, & Career Shifting</h4>
-                    <p>Uprooting lack, stagnant enterprise doors, and missing helper connections while aligning your wealth with the insulated Goshen Ecosystem architecture.</p>
+                    <p>Uprooting lack, stagnant enterprise doors, and missing helper connections while aligning your wealth with the insulated Goshen Ecosystem architecture[cite: 7, 9, 11].</p>
                 </div>
 
                 <div class="session-card">
                     <h4>🛡️ Ministry Alignment & Spiritual Authority</h4>
-                    <p>Breaking ministerial ceilings, leadership fatigue, and division—shifting your operations from defensive warfare to legislative governance.</p>
+                    <p>Breaking ministerial ceilings, leadership fatigue, and division—shifting your operations from defensive warfare to legislative governance[cite: 7, 9, 10].</p>
                 </div>
 
                 <div class="session-card">
                     <h4>🌐 Territorial & Jurisdictional Clearance</h4>
-                    <p>Dealing with localized witchcraft, regional strongholds, and environmental limitations to enforce the frequency of the New Jerusalem over your home or land.</p>
+                    <p>Dealing with localized witchcraft, regional strongholds, and environmental limitations to enforce the frequency of the New Jerusalem over your home or land[cite: 7, 9].</p>
                 </div>
             </div>
 
@@ -204,14 +291,14 @@
                     "Every man according as he purposeth in his heart, so let him give; not grudgingly, or of necessity: for God loveth a cheerful giver. And God is able to make all grace abound toward you..." — <strong>2 Corinthians 9:7–8</strong>
                 </blockquote>
                 <p style="color: var(--slate); font-size: 0.92rem; margin: 0;">
-                    When we step into these judicial dimensions of divine ministration, co-partnering with the Lord through seeds and love offerings honors the altar, releases intercessory covering, and anchors spiritual verdicts into physical manifestation.
+                    When we step into these judicial dimensions of divine ministration, co-partnering with the Lord through seeds and love offerings honors the altar, releases intercessory covering, and anchors spiritual verdicts into physical manifestation[cite: 6, 7].
                 </p>
             </div>
 
             <div class="booking-cta-box">
                 <h3 style="font-family: 'Cinzel', serif; color: var(--gold); font-size: 1.5rem; margin-bottom: 10px;">Book Your Session Today</h3>
                 <p style="color: #e2e8f0; font-size: 0.95rem; margin-bottom: 25px;">
-                    Move your case from the battleground to the courtroom and enforce the verdict of the Cross over your life, family, or enterprise.
+                    Move your case from the battleground to the courtroom and enforce the verdict of the Cross over your life, family, or enterprise[cite: 7, 9].
                 </p>
 
                 <div class="qr-box">
@@ -233,7 +320,7 @@
                 </p>
 
                 <div class="cta-footer">
-                    <p style="font-style: italic; color: var(--gold); margin-bottom: 8px;">The Court is in session. Enter His gates with bold legislation.</p>
+                    <p style="font-style: italic; color: var(--gold); margin-bottom: 8px;">The Court is in session. Enter His gates with bold legislation[cite: 7, 8, 10].</p>
                     <p style="font-weight: 600; font-size: 0.95rem; margin: 0;">In Kingdom Governance,</p>
                     <p style="font-family: 'Cinzel', serif; font-size: 1.1rem; color: #fff; margin-top: 4px;">Apostle Kamau Mwangi</p>
                     <p style="font-size: 0.85rem; color: #cbd5e1; margin: 0;">Kingdom Ekklesias Koinonia (KEK)</p>
@@ -251,7 +338,7 @@
         <div class="resource-card">
             <div class="resource-info">
                 <h4>📄 Goshen Covenantal Economy: Master Blueprint (PDF)</h4>
-                <p>Unified framework for territorial insulation, asset protection trusts, Private Family Banks, and generational governance.</p>
+                <p>Unified framework for territorial insulation, asset protection trusts, Private Family Banks, and generational governance[cite: 9, 11].</p>
             </div>
             <a href="Goshen_Covenantal_Economy_Master_Blueprint.pdf" download class="btn-download">Download PDF</a>
         </div>
@@ -259,7 +346,7 @@
         <div class="resource-card">
             <div class="resource-info">
                 <h4>📄 The Aaron & Hur Altar Initiative Proposal (PDF)</h4>
-                <p>Structural proposal for daily (Mon–Fri) assigned intercessory covering, stipend allocations, and monthly partner dossiers.</p>
+                <p>Structural proposal for daily (Mon–Fri) assigned intercessory covering, stipend allocations, and monthly partner dossiers[cite: 6, 9].</p>
             </div>
             <a href="Aaron_and_Hur_Intercession_Proposal.pdf" download class="btn-download">Download PDF</a>
         </div>
@@ -267,7 +354,7 @@
         <div class="resource-card">
             <div class="resource-info">
                 <h4>📄 KEK Ministry Profile & Functional Dockets (PDF)</h4>
-                <p>Official 6-docket organizational profile detailing our apostolic mandate, territorial watches, and Kingdom Wealth Academy.</p>
+                <p>Official 6-docket organizational profile detailing our apostolic mandate, territorial watches, and Kingdom Wealth Academy[cite: 9].</p>
             </div>
             <a href="KEK_Ministry_Profile.pdf" download class="btn-download">Download PDF</a>
         </div>
@@ -275,7 +362,7 @@
         <div class="resource-card">
             <div class="resource-info">
                 <h4>📰 Kingdom Legislation Newsletter — Latest Edition</h4>
-                <p>Monthly prophetic bulletin on Courts of Heaven protocols, territorial altars, and economic resilience.</p>
+                <p>Monthly prophetic bulletin on Courts of Heaven protocols, territorial altars, and economic resilience[cite: 7, 8, 9].</p>
             </div>
             <a href="#" class="btn-download" style="background-color: var(--slate);">Coming Soon</a>
         </div>
@@ -291,19 +378,19 @@
                 <div class="log-item">
                     <div class="log-date">July 2026</div>
                     <div class="log-title">Master Blueprint Formulation: Goshen Cities Strategy</div>
-                    <div class="log-desc">Finalized and published the comprehensive framework for the Goshen Covenantal Economy, incorporating the Irrevocable Dynastic Trust, Private Family Bank, and EPS housing technologies.</div>
+                    <div class="log-desc">Finalized and published the comprehensive framework for the Goshen Covenantal Economy, incorporating the Irrevocable Dynastic Trust, Private Family Bank, and EPS housing technologies[cite: 9, 11].</div>
                 </div>
 
                 <div class="log-item">
                     <div class="log-date">June 2026</div>
                     <div class="log-title">Youth Leadership & Governance Community Seminar</div>
-                    <div class="log-desc">Conducted a public community seminar focusing on Gen Z and Alpha spiritual legislation, judicial intercession, and civic-spiritual responsibility on Ngong Road, Nairobi.</div>
+                    <div class="log-desc">Conducted a public community seminar focusing on Gen Z and Alpha spiritual legislation, judicial intercession, and civic-spiritual responsibility on Ngong Road, Nairobi[cite: 9, 11].</div>
                 </div>
 
                 <div class="log-item">
                     <div class="log-date">Ongoing / Daily</div>
                     <div class="log-title">Daily Territorial Watches (3:00 PM & Midnight EAT)</div>
-                    <div class="log-desc">Active execution of daily legislative prayer watches covering national gates, bloodline deliverance, and Courts of Heaven petitioning.</div>
+                    <div class="log-desc">Active execution of daily legislative prayer watches covering national gates, bloodline deliverance, and Courts of Heaven petitioning[cite: 7, 9].</div>
                 </div>
             </div>
         </div>
@@ -312,14 +399,14 @@
     <!-- GOOGLE FORMS & EVENT INTAKE -->
     <section id="forms" class="section-padding">
         <h2 class="section-title">Registration & Application Center</h2>
-        <p class="section-subtitle">Complete intake forms for event attendance, Courts of Heaven prayer dossiers, and intercessory partnership enrollment.</p>
+        <p class="section-subtitle">Complete intake forms for event attendance, Courts of Heaven prayer dossiers, and intercessory partnership enrollment[cite: 6, 7].</p>
 
         <div class="forms-container">
 
             <div class="form-card form-card-booking">
                 <div>
                     <h3>🏛️ Courts of Heaven Session Booking</h3>
-                    <p style="color: var(--slate); font-size: 0.9rem; margin-bottom: 18px;">Schedule your 1-on-1 virtual courtroom session via our calendar application.</p>
+                    <p style="color: var(--slate); font-size: 0.9rem; margin-bottom: 18px;">Schedule your 1-on-1 virtual courtroom session via our calendar application[cite: 7].</p>
 
                     <div class="qr-small">
                         <img src="https://quickchart.io/qr?text=https%3A%2F%2Fcalendar.app.google%2FxPmrk5LuasqAE9rw7&size=150&margin=1&ecLevel=M&dark=0c1b33" alt="Booking QR Code">
@@ -330,13 +417,13 @@
 
             <div class="form-card">
                 <h3>📋 Partner Prayer Dossier Form</h3>
-                <p style="color: var(--slate); font-size: 0.9rem; margin-bottom: 18px;">Submit your confidential prayer requests for assigned daily intercession.</p>
+                <p style="color: var(--slate); font-size: 0.9rem; margin-bottom: 18px;">Submit your confidential prayer requests for assigned daily intercession[cite: 6].</p>
                 <a href="intake.html" class="btn-gold" style="background-color: var(--navy); color: var(--white) !important;">Submit Prayer Dossier</a>
             </div>
 
             <div class="form-card">
                 <h3>🌾 Goshen Wealth Academy Intake</h3>
-                <p style="color: var(--slate); font-size: 0.9rem; margin-bottom: 18px;">Enroll your family or business into the Goshen asset protection & trust program.</p>
+                <p style="color: var(--slate); font-size: 0.9rem; margin-bottom: 18px;">Enroll your family or business into the Goshen asset protection & trust program[cite: 9, 11].</p>
                 <a href="https://wa.me/254727953458?text=Hello%20Apostle%20Kamau,%20I%20would%20like%20to%20enroll%20in%20the%20Goshen%20Wealth%20Academy." target="_blank" class="btn-gold" style="background-color: var(--navy); color: var(--white) !important;">Request Goshen Enrollment</a>
             </div>
 
@@ -347,7 +434,7 @@
     <section id="gallery" class="services-bg">
         <div class="section-padding">
             <h2 class="section-title">Photo & Media Gallery</h2>
-            <p class="section-subtitle">Visual highlights from our seminars, prison ministries, and regional assemblies across Kenya.</p>
+            <p class="section-subtitle">Visual highlights from our seminars, prison ministries, and regional assemblies across Kenya[cite: 9].</p>
 
             <div class="gallery-grid">
                 
@@ -402,7 +489,7 @@
     <section class="community-section">
         <div style="max-width: 1000px; margin: 0 auto;">
             <h2 style="font-family: 'Cinzel', serif; color: #ffffff; font-size: 2rem; margin-bottom: 10px;">Connect With Our Global Community</h2>
-            <p style="color: #cbd5e1; font-size: 1.05rem; margin-bottom: 35px;">Stay aligned with our daily prayer watches, weekly teachings, and legislative broadcasts across all platforms.</p>
+            <p style="color: #cbd5e1; font-size: 1.05rem; margin-bottom: 35px;">Stay aligned with our daily prayer watches, weekly teachings, and legislative broadcasts across all platforms[cite: 9, 10].</p>
 
             <div class="social-links">
                 <a href="https://youtube.com/@kingdomekklesiaskoinonia" target="_blank" class="social-btn btn-yt">▶ YouTube Channel</a>
@@ -428,6 +515,25 @@
     <footer>
         <p>&copy; 2026 Kingdom Ekklesias Koinonia (KEK). All Rights Reserved. | <a href="privacy.html" style="color: #718096; text-decoration: underline;">Privacy Policy</a> | Designed for Kingdom Governance</p>
     </footer>
+
+    <!-- JavaScript for Mobile Hamburger Menu Toggle -->
+    <script>
+        const hamburger = document.getElementById('hamburger-menu');
+        const navMenu = document.querySelector('header nav');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Autoclose mobile dropdown when navigation anchor points are tapped
+        document.querySelectorAll('header nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
 
 </body>
 </html>
