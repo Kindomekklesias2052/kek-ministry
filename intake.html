@@ -5,44 +5,135 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- SEO Meta Tags -->
-    <title>Partner Prayer Dossier | Kingdom Ekklesias Koinonia (KEK)</title>
-    <meta name="description" content="Confidential Prayer Dossier and Intake Form for Aaron & Hur Intercessory Covering under Kingdom Ekklesias Koinonia.">
+    <title>Aaron & Hur Altar Initiative | Kingdom Ekklesias Koinonia</title>
+    <meta name="description" content="Enroll in The Aaron & Hur Altar Initiative for consecrated daily intercessory coverage over your life, household, and enterprise.">
     <meta name="author" content="Apostle Kamau Mwangi">
 
     <!-- Favicon Integration -->
     <link rel="icon" type="image/jpeg" href="IMG-20260706-WA0004.jpg">
 
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 
     <style>
         .form-page-wrapper {
-            max-width: 800px;
+            max-width: 850px;
             margin: 40px auto;
-            padding: 30px;
+            padding: 35px;
             background: #ffffff;
             border-radius: 8px;
             border: 1px solid var(--card-border);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
         }
 
-        .form-header {
+        .form-header-brand {
             text-align: center;
-            margin-bottom: 30px;
-            border-bottom: 2px solid var(--gold);
+            margin-bottom: 25px;
             padding-bottom: 20px;
+            border-bottom: 2px solid var(--gold);
         }
 
-        .form-header h1 {
+        .form-header-brand img {
+            height: 75px;
+            width: 75px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+            object-fit: cover;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .form-header-brand h1 {
             font-family: 'Cinzel', serif;
             color: var(--navy);
             font-size: 1.8rem;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
-        .form-header p {
-            color: var(--slate);
+        .form-header-brand .subtitle {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-weight: 700;
             font-size: 0.95rem;
+        }
+
+        .scripture-banner {
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--gold);
+            padding: 18px;
+            border-radius: 4px;
+            margin-bottom: 25px;
+            font-size: 0.92rem;
+            color: var(--slate);
+        }
+
+        .scripture-banner strong {
+            color: var(--navy);
+        }
+
+        .tier-display-box {
+            background: #fafbfc;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .tier-display-box h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--navy);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--gold);
+            padding-bottom: 6px;
+        }
+
+        .tier-item {
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+
+        .tier-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .tier-title {
+            font-weight: 700;
+            color: var(--navy);
+            font-size: 0.95rem;
+        }
+
+        .tier-price {
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .tier-desc {
+            font-size: 0.88rem;
+            color: var(--slate);
+            margin-top: 4px;
+        }
+
+        .guideline-callout {
+            background-color: #fefcf3;
+            border: 1px solid var(--gold);
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 25px;
+            font-size: 0.88rem;
+            color: var(--slate);
+        }
+
+        .section-divider {
+            font-family: 'Cinzel', serif;
+            color: var(--navy);
+            font-size: 1.1rem;
+            margin: 30px 0 15px 0;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--gold);
         }
 
         .form-group {
@@ -72,7 +163,7 @@
 
         .form-group textarea {
             resize: vertical;
-            min-height: 120px;
+            min-height: 110px;
         }
 
         .form-group input:focus,
@@ -83,27 +174,46 @@
             background-color: #ffffff;
         }
 
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .checkbox-group input {
+            width: auto;
+            margin-top: 4px;
+        }
+
+        .checkbox-group label {
+            font-weight: normal;
+            font-size: 0.88rem;
+            color: var(--slate);
+        }
+
         .btn-submit {
             background-color: var(--gold);
             color: var(--navy);
+            font-family: 'Cinzel', serif;
             font-weight: 700;
-            padding: 14px 28px;
+            padding: 15px 28px;
             border: none;
             border-radius: 4px;
-            font-size: 1rem;
+            font-size: 1.05rem;
             cursor: pointer;
             width: 100%;
             transition: background 0.3s;
+            margin-top: 20px;
         }
 
         .btn-submit:hover {
             background-color: var(--gold-hover);
         }
 
-        /* Mobile Adjustments */
         @media (max-width: 768px) {
             .form-page-wrapper {
-                margin: 20px 15px;
+                margin: 20px 12px;
                 padding: 20px;
             }
         }
@@ -129,71 +239,139 @@
         </div>
     </header>
 
-    <!-- FORM CONTAINER -->
+    <!-- FORM PAGE WRAPPER -->
     <div class="form-page-wrapper">
-        <div class="form-header">
-            <h1>Partner Prayer Dossier</h1>
-            <p>The Aaron & Hur Altar Initiative — Confidential Intake Form</p>
+        
+        <!-- HEADER WITH LOGO EMBLEM -->
+        <div class="form-header-brand">
+            <img src="IMG-20260706-WA0004.jpg" alt="Kingdom Ekklesias Koinonia Logo">
+            <h1>The Aaron & Hur Altar Initiative</h1>
+            <div class="subtitle">Partner Confidential Intake & Prayer Dossier</div>
         </div>
 
-        <!-- Secure Formspree Integration -->
+        <!-- BIBLICAL FOUNDATION -->
+        <div class="scripture-banner">
+            <p style="margin-bottom: 8px;"><strong>📖 Biblical Foundation (Exodus 17:12)</strong>[cite: 4]</p>
+            <p style="margin: 0; text-align: justify;">
+                <em>"When Moses' hands grew tired, Aaron and Hur held his hands up—one on one side, one on the other—so that his hands remained steady till sunset, and victory was secured."</em>[cite: 4]
+            </p>
+            <p style="margin-top: 10px; margin-bottom: 0; text-align: justify;">
+                Through The Aaron & Hur Altar Initiative, we establish a structured, daily judicial watch over your life, household, business, and spiritual alignment[cite: 4]. When you enroll, you are matched with consecrated intercessors who maintain a daily (Monday through Friday) intercessory watch on your behalf[cite: 4].
+            </p>
+        </div>
+
+        <!-- PARTNERSHIP TIERS -->
+        <div class="tier-display-box">
+            <h3>🛡️ Schedule of Coverage & Covenant Tiers</h3>
+            
+            <div class="tier-item">
+                <div class="tier-title">1. Covenant Partner <span class="tier-price">($200 – $299 / month)</span></div>[cite: 4]
+                <div class="tier-desc"><strong>Coverage:</strong> 1 Dedicated Primary Intercessor[cite: 4]. Daily (Mon–Fri) targeted intercession cycling systematically through spiritual alignment, bloodline shield, health, career/finances, and destiny[cite: 4]. Includes bi-weekly written prayer logs and urgent prayer line access[cite: 4].</div>
+            </div>
+
+            <div class="tier-item">
+                <div class="tier-title">2. Kingdom Vanguard <span class="tier-price">($300 – $449 / month)</span></div>[cite: 4]
+                <div class="tier-desc"><strong>Coverage:</strong> 2 Dedicated Intercessors (Primary Watch & Lead Watch)[cite: 4]. Comprehensive daily warfare, legal petitions, and altar coverage[cite: 4]. Includes weekly updates, monthly pastoral prayer calls, and targeted Courts of Heaven petition drafting[cite: 4].</div>
+            </div>
+
+            <div class="tier-item">
+                <div class="tier-title">3. Shield Partner <span class="tier-price">($450 – $1,000 / month)</span></div>[cite: 4]
+                <div class="tier-desc"><strong>Coverage:</strong> Lead Intercessory Watch Team[cite: 4]. Full-spectrum legislative coverage over personal, family, and enterprise dockets[cite: 4]. Includes priority pastoral consultations, monthly legal court session alignment, and dedicated territorial warfare shields[cite: 4].</div>
+            </div>
+        </div>
+
+        <!-- GIVING GUIDELINE -->
+        <div class="guideline-callout">
+            <strong>💡 Important Giving Guideline & Purpose:</strong>[cite: 4]
+            The monthly contribution serves as an honorable stipend for your assigned intercessors (1 Timothy 5:18) and a love offering to advance core ministry operations and territorial watches[cite: 4]. Tier figures are provided for guidance—anyone is welcome to contribute as the Lord enables them[cite: 4]. Every seed faithfully sown empowers the watchmen and strengthens the altar[cite: 4].
+        </div>
+
+        <!-- FORMSPREE FORM -->
         <form action="https://formspree.io/f/mppapvnl" method="POST">
 
-            <!-- Custom Subject Line for Your Email Inbox -->
-            <input type="hidden" name="_subject" value="New KEK Partner Intake Submission">
-
-            <!-- Automatic Redirect Back to Homepage After Submission -->
+            <input type="hidden" name="_subject" value="New Aaron & Hur Covenant Partner Intake">
             <input type="hidden" name="_next" value="https://kindomekklesias2052.github.io/kek-ministry/index.html">
-
-            <!-- Hidden Anti-Spam Honeypot Field -->
             <input type="text" name="_gotcha" style="display:none">
 
-            <!-- Personal Information -->
+            <div class="section-divider">1. Partner Identification & Standing</div>
+
             <div class="form-group">
-                <label for="fullName">Full Name *</label>
-                <input type="text" id="fullName" name="Full Name" required placeholder="Enter your full name">
+                <label for="fullName">Full Legal Name *</label>
+                <input type="text" id="fullName" name="Full Name" required placeholder="Enter your official full name">
             </div>
 
             <div class="form-group">
-                <label for="email">Email Address *</label>
-                <input type="email" id="email" name="Email" required placeholder="your.email@example.com">
+                <label for="email">Primary Email Address *</label>
+                <input type="email" id="email" name="Email Address" required placeholder="example@domain.com">
             </div>
 
             <div class="form-group">
-                <label for="phone">Phone / WhatsApp Number (With Country Code) *</label>
-                <input type="tel" id="phone" name="Phone Number" required placeholder="+254 700 000 000">
+                <label for="phone">Direct WhatsApp / Telephone Number *</label>
+                <input type="tel" id="phone" name="WhatsApp Number" required placeholder="+254 700 000 000 (With country code)">
             </div>
 
             <div class="form-group">
-                <label for="location">City & Country of Residence *</label>
-                <input type="text" id="location" name="Location" required placeholder="e.g., Nairobi, Kenya">
+                <label for="location">Current City & Country of Jurisdiction *</label>
+                <input type="text" id="location" name="City and Country" required placeholder="e.g., Nairobi, Kenya / London, UK">
             </div>
 
-            <!-- Partnership Selection -->
+            <div class="section-divider">2. Partnership Alignment & Commitment</div>
+
             <div class="form-group">
-                <label for="tier">Select Partnership Tier *</label>
-                <select id="tier" name="Partnership Tier" required>
-                    <option value="" disabled selected>-- Select Partnership Tier --</option>
-                    <option value="Covenant Partner ($200-$299/mo)">Covenant Partner ($200–$299/month)</option>
-                    <option value="Kingdom Vanguard ($300-$449/mo)">Kingdom Vanguard ($300–$449/month)</option>
-                    <option value="Shield Partner ($450-$1,000/mo)">Shield Partner ($450–$1,000/month)</option>
-                    <option value="General Partner / Voluntary Contribution">General Partner / Voluntary Seed</option>
+                <label for="tierSelect">Selected Covenant Partnership Tier *</label>
+                <select id="tierSelect" name="Partnership Tier Selected" required>
+                    <option value="" disabled selected>-- Select Your Partnership Tier --</option>
+                    <option value="Covenant Partner ($200 - $299 / month)">1. Covenant Partner ($200 – $299 / month)</option>[cite: 4]
+                    <option value="Kingdom Vanguard ($300 - $449 / month)">2. Kingdom Vanguard ($300 – $449 / month)</option>[cite: 4]
+                    <option value="Shield Partner ($450 - $1,000 / month)">3. Shield Partner ($450 – $1,000 / month)</option>[cite: 4]
+                    <option value="Voluntary Seed / Custom Covenant Offering">Custom Seed / Voluntary Contribution</option>[cite: 4]
                 </select>
             </div>
 
-            <!-- Confidential Prayer Requests -->
             <div class="form-group">
-                <label for="personalDossier">Personal & Family Prayer Dossier *</label>
-                <textarea id="personalDossier" name="Personal Prayer Requests" required placeholder="Detail key family timelines, health goals, or bloodline situations for intercessory coverage..."></textarea>
+                <label for="attendanceMode">Physical Assemblies & Gathering Access Preference *</label>
+                <select id="attendanceMode" name="Gathering Preference" required>
+                    <option value="" disabled selected>-- Select Access Preference --</option>
+                    <option value="Physical Attendee (Nairobi / Regional Venues)">Physical Attendee (Send Venue & Meeting Notifications)</option>[cite: 4]
+                    <option value="Virtual / Remote Partner (Zoom / Google Meet Live Stream)">Virtual / Remote Partner (Send Live Stream Links & Audio Recordings)</option>[cite: 4]
+                </select>
+            </div>
+
+            <div class="section-divider">3. Confidential Prayer Dossier & Specific Dockets</div>
+
+            <div class="form-group">
+                <label for="personalDossier">Personal & Family Bloodline Docket *</label>
+                <textarea id="personalDossier" name="Personal and Family Dossier" required placeholder="Detail specific household goals, physical health challenges, bloodline patterns, or marital alignment needing daily judicial prayer coverage..."></textarea>
             </div>
 
             <div class="form-group">
-                <label for="businessDossier">Enterprise, Career, or Ministry Goals</label>
-                <textarea id="businessDossier" name="Business and Ministry Goals" placeholder="Detail business dockets, career doors, or territorial assignments..."></textarea>
+                <label for="businessDossier">Enterprise, Financial, & Career Docket</label>
+                <textarea id="businessDossier" name="Enterprise and Career Dossier" placeholder="Detail corporate goals, business doors, stagnant investments, or career breakthroughs requiring spiritual covering..."></textarea>
             </div>
 
-            <!-- Submission Button -->
-            <button type="submit" class="btn-submit">Submit Confidential Dossier</button>
+            <div class="form-group">
+                <label for="urgentPlea">Most Urgent Prayer Breakthrough (Next 90 Days)</label>
+                <textarea id="urgentPlea" name="90 Day Urgent Breakthrough Request" placeholder="What specific legal verdict or breakthrough are you trusting God to manifest over the next 3 months?"></textarea>
+            </div>
+
+            <div class="section-divider">4. 3-Month Covenant Accord</div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="covenantCommitment" name="3-Month Covenant Agreement" required>
+                <label for="covenantCommitment">
+                    <strong>3-Month Altar Covenant Accord:</strong> I commit to standing in agreement with my assigned intercessors for a minimum 3-month season, honoring my monthly partnership seed to strengthen the watchmen and enforce Kingdom verdicts over my household[cite: 4].
+                </label>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="confidentialityAck" name="Confidentiality Policy Agreement" required>
+                <label for="confidentialityAck">
+                    I confirm the information provided is true and understand my assigned ministers will handle my dossier with strict pastoral confidentiality in accordance with the <a href="privacy.html" target="_blank" style="color: var(--navy); text-decoration: underline;">KEK Privacy Policy</a>.
+                </label>
+            </div>
+
+            <button type="submit" class="btn-submit">SEAL COVENANT DOSSIER & ENROLL</button>
+
         </form>
     </div>
 
