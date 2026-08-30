@@ -3,254 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aaron & Hur Altar Initiative | Partner Intake Questionnaire</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- SEO Meta Tags -->
+    <title>Partner Prayer Dossier | Kingdom Ekklesias Koinonia (KEK)</title>
+    <meta name="description" content="Confidential Prayer Dossier and Intake Form for Aaron & Hur Intercessory Covering under Kingdom Ekklesias Koinonia.">
+    <meta name="author" content="Apostle Kamau Mwangi">
+
+    <!-- Favicon Integration -->
+    <link rel="icon" type="image/jpeg" href="IMG-20260706-WA0004.jpg">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
     <style>
-        :root {
-            --navy: #0c1b33;
-            --gold: #c59b27;
-            --slate: #4a5568;
-            --light-bg: #f8f9fa;
-            --border-color: #cbd5e1;
-            --white: #ffffff;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--light-bg);
-            color: #2d3748;
-            line-height: 1.6;
-            padding: 40px 15px;
-        }
-
-        .form-container {
-            max-width: 850px;
-            margin: 0 auto;
-            background: var(--white);
-            padding: 40px;
+        .form-page-wrapper {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            background: #ffffff;
             border-radius: 8px;
-            border-top: 5px solid var(--gold);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            border: 1px solid var(--card-border);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
 
-        .header-banner {
+        .form-header {
             text-align: center;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 20px;
             margin-bottom: 30px;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 20px;
         }
 
-        .header-banner h1 {
+        .form-header h1 {
             font-family: 'Cinzel', serif;
             color: var(--navy);
             font-size: 1.8rem;
             margin-bottom: 8px;
         }
 
-        .header-banner p {
-            color: var(--gold);
-            font-weight: 600;
-            font-size: 1rem;
-        }
-
-        .scripture-quote {
-            background-color: #f1f5f9;
-            border-left: 4px solid var(--gold);
-            padding: 12px 15px;
-            font-style: italic;
+        .form-header p {
             color: var(--slate);
-            font-size: 0.9rem;
-            margin-bottom: 30px;
-            border-radius: 0 4px 4px 0;
-        }
-
-        .section-header {
-            font-family: 'Cinzel', serif;
-            background-color: var(--navy);
-            color: var(--white);
-            padding: 10px 15px;
-            font-size: 1rem;
-            margin: 30px 0 20px 0;
-            border-radius: 4px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        fieldset.section-fieldset {
-            border: none;
-            padding: 0;
-            margin: 0;
+            font-size: 0.95rem;
         }
 
         .form-group {
             margin-bottom: 20px;
         }
 
-        .form-row {
-            display: flex;
-            gap: 20px;
-        }
-
-        .form-row .form-group {
-            flex: 1;
-        }
-
-        label {
+        .form-group label {
             display: block;
             font-weight: 600;
             color: var(--navy);
-            margin-bottom: 6px;
-            font-size: 0.9rem;
+            margin-bottom: 8px;
+            font-size: 0.92rem;
         }
 
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        input[type="date"],
-        select,
-        textarea {
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
             width: 100%;
             padding: 12px;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--card-border);
             border-radius: 4px;
             font-family: 'Montserrat', sans-serif;
             font-size: 0.95rem;
-            transition: border-color 0.3s;
+            color: #2d3748;
+            background-color: #f8f9fa;
         }
 
-        input:focus, select:focus, textarea:focus {
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
             outline: none;
             border-color: var(--gold);
+            background-color: #ffffff;
         }
 
-        /* TIER CARDS */
-        .tier-card {
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 18px;
-            margin-bottom: 15px;
-            background-color: #f8fafc;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .tier-card:hover {
-            border-color: var(--gold);
-        }
-
-        /* Active styling when radio inside is checked */
-        .tier-card:has(input[type="radio"]:checked) {
-            border-color: var(--gold);
-            background-color: #fefcf3;
-            box-shadow: 0 0 0 2px var(--gold);
-        }
-
-        .tier-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 700;
-            font-size: 1.05rem;
-            color: var(--navy);
-            margin-bottom: 8px;
-        }
-
-        .tier-price {
+        .btn-submit {
             background-color: var(--gold);
             color: var(--navy);
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 0.85rem;
             font-weight: 700;
-        }
-
-        .tier-details {
-            font-size: 0.88rem;
-            color: var(--slate);
-            margin-left: 28px;
-        }
-
-        .tier-details ul {
-            padding-left: 15px;
-            margin-top: 5px;
-        }
-
-        .tier-details li {
-            margin-bottom: 4px;
-        }
-
-        /* PAYMENT BOX */
-        .payment-box {
-            background-color: #f1f5f9;
-            border: 1px dashed var(--gold);
-            border-radius: 6px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .payment-method {
-            margin-bottom: 15px;
-        }
-
-        .payment-method h4 {
-            color: var(--navy);
-            font-size: 0.95rem;
-            margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .payment-method p {
-            font-size: 0.88rem;
-            color: var(--slate);
-            margin-left: 24px;
-        }
-
-        .checkbox-label {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            cursor: pointer;
-        }
-
-        .checkbox-label input[type="checkbox"] {
-            margin-top: 3px;
-        }
-
-        .submit-btn {
-            background-color: var(--gold);
-            color: var(--navy);
-            font-family: 'Cinzel', serif;
-            font-weight: 700;
-            font-size: 1.1rem;
+            padding: 14px 28px;
             border: none;
-            padding: 15px 40px;
-            width: 100%;
             border-radius: 4px;
+            font-size: 1rem;
             cursor: pointer;
+            width: 100%;
             transition: background 0.3s;
-            margin-top: 30px;
         }
 
-        .submit-btn:hover {
-            background-color: #a37f1e;
-            color: var(--white);
+        .btn-submit:hover {
+            background-color: var(--gold-hover);
         }
 
-        @media (max-width: 600px) {
-            .form-row {
-                flex-direction: column;
-                gap: 15px;
-            }
-            .form-container {
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .form-page-wrapper {
+                margin: 20px 15px;
                 padding: 20px;
             }
         }
@@ -258,276 +111,96 @@
 </head>
 <body>
 
-<div class="form-container">
-    <div class="header-banner">
-        <h1>The Aaron & Hur Altar Initiative</h1>
-        <p>Partner Confidential Intake Questionnaire & Prayer Dossier</p>
-    </div>
+    <!-- NAVIGATION HEADER -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="IMG-20260706-WA0004.jpg" alt="KEK Emblem">
+                KINGDOM EKKLESIAS <span>KOINONIA</span>
+            </a>
+            <nav>
+                <a href="index.html#about">About</a>
+                <a href="index.html#services">Pillars</a>
+                <a href="index.html#courtroom-101">Courts 101</a>
+                <a href="index.html#resources">Resources</a>
+                <a href="index.html#forms">Forms</a>
+                <a href="https://calendar.app.google/xPmrk5LuasqAE9rw7" target="_blank" class="btn-gold">Book Session</a>
+            </nav>
+        </div>
+    </header>
 
-    <div class="scripture-quote">
-        "When Moses’ hands grew tired, they took a stone and put it under him and he sat on it. Aaron and Hur held his hands up—one on one side, one on the other..." — <strong>Exodus 17:12</strong>
-    </div>
-
-    <!-- FORM START -->
-    <form action="https://formspree.io/f/mppapvnl" method="POST">
-
-        <!-- Formspree Configurations -->
-        <input type="hidden" name="_subject" value="New Aaron & Hur Partner Intake Questionnaire">
-        <input type="text" name="_gotcha" style="display:none">
-
-        <!-- SECTION 1 -->
-        <div class="section-header">
-            <span>SECTION 1: PERSONAL & PARTNER DETAILS</span>
+    <!-- FORM CONTAINER -->
+    <div class="form-page-wrapper">
+        <div class="form-header">
+            <h1>Partner Prayer Dossier</h1>
+            <p>The Aaron & Hur Altar Initiative — Confidential Intake Form</p>
         </div>
 
-        <div class="form-group">
-            <label for="fullname">Full Name *</label>
-            <input type="text" id="fullname" name="Full_Name" required placeholder="Enter your full official name">
-        </div>
+        <!-- Secure Formspree Integration -->
+        <form action="https://formspree.io/f/mppapvnl" method="POST">
 
-        <div class="form-row">
+            <!-- Custom Subject Line for Your Email Inbox -->
+            <input type="hidden" name="_subject" value="New KEK Partner Intake Submission">
+
+            <!-- Automatic Redirect Back to Homepage After Submission -->
+            <input type="hidden" name="_next" value="https://kindomekklesias2052.github.io/kek-ministry/index.html">
+
+            <!-- Hidden Anti-Spam Honeypot Field -->
+            <input type="text" name="_gotcha" style="display:none">
+
+            <!-- Personal Information -->
             <div class="form-group">
-                <label for="dob">Date of Birth *</label>
-                <input type="date" id="dob" name="Date_of_Birth" required>
+                <label for="fullName">Full Name *</label>
+                <input type="text" id="fullName" name="Full Name" required placeholder="Enter your full name">
             </div>
-            <div class="form-group">
-                <label for="gender">Gender *</label>
-                <select id="gender" name="Gender" required>
-                    <option value="">Select Gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                </select>
-            </div>
-        </div>
 
-        <div class="form-row">
             <div class="form-group">
                 <label for="email">Email Address *</label>
-                <input type="email" id="email" name="Email" required placeholder="example@email.com">
+                <input type="email" id="email" name="Email" required placeholder="your.email@example.com">
             </div>
-            <div class="form-group">
-                <label for="phone">WhatsApp Phone Number *</label>
-                <input type="tel" id="phone" name="Phone_WhatsApp" required placeholder="+254 727 923 458">
-            </div>
-        </div>
 
-        <div class="form-row">
             <div class="form-group">
-                <label for="residence">City & Country of Residence *</label>
-                <input type="text" id="residence" name="Residence" required placeholder="e.g. Nairobi, Kenya">
+                <label for="phone">Phone / WhatsApp Number (With Country Code) *</label>
+                <input type="tel" id="phone" name="Phone Number" required placeholder="+254 700 000 000">
             </div>
+
             <div class="form-group">
-                <label for="marital">Marital Status *</label>
-                <select id="marital" name="Marital_Status" required>
-                    <option value="">Select Status</option>
-                    <option value="Single">Single</option>
-                    <option value="Married">Married</option>
-                    <option value="Widowed">Widowed</option>
-                    <option value="Divorced">Divorced</option>
+                <label for="location">City & Country of Residence *</label>
+                <input type="text" id="location" name="Location" required placeholder="e.g., Nairobi, Kenya">
+            </div>
+
+            <!-- Partnership Selection -->
+            <div class="form-group">
+                <label for="tier">Select Partnership Tier *</label>
+                <select id="tier" name="Partnership Tier" required>
+                    <option value="" disabled selected>-- Select Partnership Tier --</option>
+                    <option value="Covenant Partner ($200-$299/mo)">Covenant Partner ($200–$299/month)</option>
+                    <option value="Kingdom Vanguard ($300-$449/mo)">Kingdom Vanguard ($300–$449/month)</option>
+                    <option value="Shield Partner ($450-$1,000/mo)">Shield Partner ($450–$1,000/month)</option>
+                    <option value="General Partner / Voluntary Contribution">General Partner / Voluntary Seed</option>
                 </select>
             </div>
-        </div>
 
-        <!-- SECTION 2 -->
-        <fieldset class="section-fieldset">
-            <legend class="section-header" style="width: 100%;">
-                <span>SECTION 2: PARTNERSHIP TIER & SCHEDULE</span>
-            </legend>
-
-            <p style="font-size: 0.9rem; color: var(--slate); margin-bottom: 15px;">
-                Select your monthly partnership tier. Your contribution provides a stipend for assigned intercessors and a love offering to support core ministry operations.
-            </p>
-
-            <!-- Covenant Partner -->
-            <div class="tier-card">
-                <label style="cursor: pointer;">
-                    <div class="tier-header">
-                        <div>
-                            <input type="radio" id="tier_covenant" name="Partnership_Tier" value="Covenant Partner ($200 - $299/mo)" required>
-                            <span style="margin-left: 8px;">Covenant Partner</span>
-                        </div>
-                        <span class="tier-price">$200 – $299 / month</span>
-                    </div>
-                    <div class="tier-details">
-                        <strong>What to Expect:</strong>
-                        <ul>
-                            <li>1 Dedicated Primary Intercessor assigned to your dossier.</li>
-                            <li>Daily (Mon–Fri) intercessory prayer over health, family, business, and purpose.</li>
-                            <li>Bi-weekly written prayer logs and access to urgent prayer intake.</li>
-                        </ul>
-                    </div>
-                </label>
-            </div>
-
-            <!-- Kingdom Vanguard -->
-            <div class="tier-card">
-                <label style="cursor: pointer;">
-                    <div class="tier-header">
-                        <div>
-                            <input type="radio" id="tier_vanguard" name="Partnership_Tier" value="Kingdom Vanguard ($300 - $449/mo)">
-                            <span style="margin-left: 8px;">Kingdom Vanguard</span>
-                        </div>
-                        <span class="tier-price">$300 – $449 / month</span>
-                    </div>
-                    <div class="tier-details">
-                        <strong>What to Expect:</strong>
-                        <ul>
-                            <li>2 Dedicated Intercessors (Primary Watch & Lead Watch).</li>
-                            <li>Comprehensive daily (Mon–Fri) spiritual warfare, legal petitions, and altar coverage.</li>
-                            <li>Weekly direct updates, monthly direct prayer calls, and targeted Courts of Heaven petition drafting.</li>
-                        </ul>
-                    </div>
-                </label>
-            </div>
-
-            <!-- Shield Partner -->
-            <div class="tier-card">
-                <label style="cursor: pointer;">
-                    <div class="tier-header">
-                        <div>
-                            <input type="radio" id="tier_shield" name="Partnership_Tier" value="Shield Partner ($450 - $1000/mo)">
-                            <span style="margin-left: 8px;">Shield Partner</span>
-                        </div>
-                        <span class="tier-price">$450 – $1,000 / month</span>
-                    </div>
-                    <div class="tier-details">
-                        <strong>What to Expect:</strong>
-                        <ul>
-                            <li>Lead Intercessory Watch team covering personal, family, and high-level enterprise dockets.</li>
-                            <li>Daily strategic legislation across spiritual, financial, and territorial domains.</li>
-                            <li>Priority pastoral consultations, monthly legal court sessions, and direct progress reporting.</li>
-                        </ul>
-                    </div>
-                </label>
-            </div>
-        </fieldset>
-
-        <!-- Custom Contribution Field -->
-        <div class="form-group" style="margin-top: 15px;">
-            <label for="custom_amount">Specified Monthly Contribution Amount ($ USD or KES equivalent) *</label>
-            <input type="text" id="custom_amount" name="Specified_Monthly_Contribution" required placeholder="e.g. $250 / month or KES equivalent">
-        </div>
-
-        <!-- SECTION 3 -->
-        <div class="section-header">
-            <span>SECTION 3: CONTRIBUTION & PAYMENT OPTIONS</span>
-        </div>
-
-        <p style="font-size: 0.9rem; color: var(--slate); margin-bottom: 15px;">
-            Please choose your preferred monthly payment channel below:
-        </p>
-
-        <div class="payment-box">
-            <!-- M-PESA -->
-            <div class="payment-method">
-                <h4>🟢 M-PESA / Mobile Money (Kenya & East Africa)</h4>
-                <p>Send direct to WhatsApp/SMS Contact: <strong>+254 727 923 458</strong></p>
-            </div>
-
-            <!-- WORLDREMIT -->
-            <div class="payment-method">
-                <h4>🌐 WorldRemit / Remitly / International Money Transfer</h4>
-                <p>
-                    Recipient Name: <strong>Elizaphan Kamau Mwangi</strong><br>
-                    Mobile Number: <strong>+254 727 923 458</strong> (M-PESA Kenya)
-                </p>
-            </div>
-
-            <!-- PAYPAL -->
-            <div class="payment-method" style="margin-bottom: 0;">
-                <h4>💙 PayPal / Card Payments</h4>
-                <p>Send via Email: <strong>kingdom.ekklesias.inv@gmail.com</strong></p>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="payment_method_selected">Select Your Intended Payment Method *</label>
-            <select id="payment_method_selected" name="Preferred_Payment_Method" required>
-                <option value="">Select Payment Method</option>
-                <option value="M-PESA (+254 727 923 458)">M-PESA Direct (+254 727 923 458)</option>
-                <option value="WorldRemit / Remitly">WorldRemit / Remitly</option>
-                <option value="PayPal (kingdom.ekklesias.inv@gmail.com)">PayPal (kingdom.ekklesias.inv@gmail.com)</option>
-            </select>
-        </div>
-
-        <!-- SECTION 4 -->
-        <div class="section-header">
-            <span>SECTION 4: FAMILY & BLOODLINE DOSSIER</span>
-        </div>
-
-        <div class="form-group">
-            <label for="spouse">Spouse's Full Name (if applicable)</label>
-            <input type="text" id="spouse" name="Spouse_Name">
-        </div>
-
-        <div class="form-group">
-            <label for="children">Children's Names & Ages (if applicable)</label>
-            <textarea id="children" name="Children_Details" rows="2" placeholder="e.g. Sarah (12), David (8)"></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="bloodline_cycles">Persistent Bloodline Patterns / Recurring Cycles</label>
-            <textarea id="bloodline_cycles" name="Bloodline_Patterns" rows="3" placeholder="Describe any recurring patterns in your lineage requiring prayer (e.g., premature death, chronic sickness, marital delay, financial collapse)"></textarea>
-        </div>
-
-        <!-- SECTION 5 -->
-        <div class="section-header">
-            <span>SECTION 5: HEALTH & VITALITY DOSSIER</span>
-        </div>
-
-        <div class="form-group">
-            <label for="health_conditions">Specific Medical Conditions / Diagnoses</label>
-            <textarea id="health_conditions" name="Health_Conditions" rows="2" placeholder="List any specific health diagnoses requiring divine healing"></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="spiritual_attacks">Recurring Emotional or Spiritual Attacks</label>
-            <textarea id="spiritual_attacks" name="Spiritual_Attacks" rows="2" placeholder="e.g. tormenting dreams, insomnia, unexplained fear, depression"></textarea>
-        </div>
-
-        <!-- SECTION 6 -->
-        <div class="section-header">
-            <span>SECTION 6: BUSINESS, CAREER & FINANCES</span>
-        </div>
-
-        <div class="form-row">
+            <!-- Confidential Prayer Requests -->
             <div class="form-group">
-                <label for="occupation">Primary Occupation / Business Name</label>
-                <input type="text" id="occupation" name="Occupation">
+                <label for="personalDossier">Personal & Family Prayer Dossier *</label>
+                <textarea id="personalDossier" name="Personal Prayer Requests" required placeholder="Detail key family timelines, health goals, or bloodline situations for intercessory coverage..."></textarea>
             </div>
+
             <div class="form-group">
-                <label for="industry">Industry / Field</label>
-                <input type="text" id="industry" name="Industry">
+                <label for="businessDossier">Enterprise, Career, or Ministry Goals</label>
+                <textarea id="businessDossier" name="Business and Ministry Goals" placeholder="Detail business dockets, career doors, or territorial assignments..."></textarea>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label for="financial_goals">Financial & Enterprise Goals (6–12 Months)</label>
-            <textarea id="financial_goals" name="Financial_Goals" rows="2" placeholder="Key enterprise milestones and financial prayer targets"></textarea>
-        </div>
+            <!-- Submission Button -->
+            <button type="submit" class="btn-submit">Submit Confidential Dossier</button>
+        </form>
+    </div>
 
-        <!-- SECTION 7 -->
-        <div class="section-header">
-            <span>SECTION 7: PRAYER TARGETS & DESTINY</span>
-        </div>
-
-        <div class="form-group">
-            <label for="top_requests">Top 3 Priority Prayer Requests for This Month *</label>
-            <textarea id="top_requests" name="Priority_Prayer_Requests" rows="4" required placeholder="1. &#10;2. &#10;3. "></textarea>
-        </div>
-
-        <!-- CONFIDENTIALITY ACKNOWLEDGEMENT -->
-        <div class="form-group" style="margin-top: 30px;">
-            <label class="checkbox-label">
-                <input type="checkbox" name="Confidentiality_Agreement" required>
-                <span style="font-size: 0.85rem; color: var(--slate);">I confirm that the information provided is accurate and agree that my assigned intercessor will maintain strict pastoral confidentiality while praying over my dossier.</span>
-            </label>
-        </div>
-
-        <button type="submit" class="submit-btn">SUBMIT PRAYER DOSSIER & ENROLL</button>
-
-    </form>
-</div>
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Kingdom Ekklesias Koinonia (KEK). All Rights Reserved. | <a href="privacy.html" style="color: #718096; text-decoration: underline;">Privacy Policy</a></p>
+    </footer>
 
 </body>
 </html>
