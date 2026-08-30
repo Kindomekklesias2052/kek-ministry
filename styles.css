@@ -36,26 +36,43 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 18px 20px;
+    padding: 10px 20px;
 }
 
 .logo {
     font-family: 'Cinzel', serif;
     color: var(--white);
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: 700;
     text-decoration: none;
     letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo img {
+    height: 40px !important;
+    width: 40px !important;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    flex-shrink: 0;
 }
 
 .logo span {
     color: var(--gold);
 }
 
+nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
 nav a {
     color: var(--white);
     text-decoration: none;
-    margin-left: 15px;
     font-size: 0.9rem;
     font-weight: 500;
     transition: color 0.3s;
@@ -68,7 +85,7 @@ nav a:hover {
 .btn-gold {
     background-color: var(--gold);
     color: var(--navy) !important;
-    padding: 10px 18px;
+    padding: 8px 16px;
     border-radius: 4px;
     font-weight: 700;
     text-decoration: none;
@@ -578,7 +595,7 @@ footer {
 /* RESPONSIVE DESIGN */
 @media (max-width: 768px) {
     .hero h1 { font-size: 2rem; }
-    .nav-container { flex-direction: column; gap: 15px; }
-    nav a { margin: 0 8px; font-size: 0.85rem; }
+    .nav-container { flex-direction: column; gap: 15px; text-align: center; }
+    nav { flex-wrap: wrap; justify-content: center; }
     .resource-card { flex-direction: column; text-align: center; }
 }
