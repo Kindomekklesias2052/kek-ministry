@@ -657,17 +657,30 @@
       document.addEventListener('DOMContentLoaded', loadCMSContent);
     </script>
 
-    <!-- Netlify Identity Login Redirect Helper -->
     <script>
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", user => {
-          if (!user) {
-            window.netlifyIdentity.on("login", () => {
-              document.location.href = "/admin/";
-            });
-          }
-        });
+  async function loadCMSContent() {
+    try {
+      // Relative path works correctly on GitHub Pages subfolders
+      const photoResponse = await fetch('content/photos/index.json');
+      if (photoResponse.ok) {
+        const photos = await photoResponse.json();
+        const photoGallery = document.getElementById('photo-gallery-container');
+        if (photoGallery && Array.isArray(photos)) {
+          const cmsPhotosHTML = photos.map(p => `
+            <div class="gallery-item">
+              <img src="${p.image.replace(/^\//, '')}" alt="${p.title}" loading="lazy">
+              <div class="gallery-caption">${p.title} — <em>${p.location}</em></div>
+            </div>
+          `).join('');
+          photoGallery.insertAdjacentHTML('afterbegin', cmsPhotosHTML);
+        }
       }
-    </script>
+    } catch (err) {
+      console.log('CMS fetch info:', err);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', loadCMSContent);
+</script>
 </body>
 </html>
