@@ -4,13 +4,14 @@ backend:
   branch: main
 
 media_folder: "uploads"
-public_folder: "/uploads"
+public_folder: "uploads"
 
 collections:
-  # 1. PDF & Document Downloads
   - name: "resources"
     label: "Ministry Resources & PDFs"
     folder: "content/resources"
+    extension: "json"
+    format: "json"
     create: true
     slug: "{{slug}}"
     fields:
@@ -19,10 +20,11 @@ collections:
       - { label: "Upload PDF File", name: "pdf_file", widget: "file" }
       - { label: "Publish Date", name: "date", widget: "datetime" }
 
-  # 2. Photo Gallery Updates
   - name: "photos"
     label: "Photo Gallery"
     folder: "content/photos"
+    extension: "json"
+    format: "json"
     create: true
     slug: "{{slug}}"
     fields:
@@ -31,10 +33,11 @@ collections:
       - { label: "Upload Image", name: "image", widget: "image" }
       - { label: "Date Taken / Uploaded", name: "date", widget: "datetime" }
 
-  # 3. Video Gallery Updates (YouTube / Direct Videos)
   - name: "videos"
     label: "Video Gallery & Teachings"
     folder: "content/videos"
+    extension: "json"
+    format: "json"
     create: true
     slug: "{{slug}}"
     fields:
