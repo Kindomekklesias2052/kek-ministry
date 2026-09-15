@@ -452,7 +452,35 @@
             </div>
         </div>
     </section>
+<!-- Document 9: Four Winds & Elements Alignment -->
+        <div class="resource-card">
+            <div class="resource-info">
+                <h4>📄 Legislative Decree: Alignment of the Four Winds, Elementals, and Destiny (PDF)</h4>
+                <p>Magistrate decree cleansing physical vessels, commanding the Four Winds (North, South, East, West), and aligning creation with your pre-written destiny scroll.</p>
+            </div>
+            <a href="Legislative_Decree_Alignment_Four_Winds_&_Elements.pdf" download class="btn-download">Download PDF</a>
+        </div>
+    </section>
+    <!-- END OF RESOURCES SECTION -->
 
+    <!-- ======================================================= -->
+    <!-- VIDEO GALLERY SECTION (PLACED DIRECTLY BELOW RESOURCES)  -->
+    <!-- ======================================================= -->
+    <section id="videos" class="section-padding">
+        <h2 class="section-title">Teachings & Video Broadcasts</h2>
+        <p class="section-subtitle">Watch judicial session breakdowns, masterclasses, and legislative teachings.</p>
+        
+        <div id="video-gallery-container" class="video-grid">
+            <!-- New videos uploaded via /admin will load here dynamically -->
+            
+            <!-- Baseline/Default Video Card (Example YouTube Link) -->
+            <div class="video-card">
+                <h4>Courts of Heaven 101: Understanding Spiritual Governance</h4>
+                <p>An introduction to operating in the judicial chambers of Heaven and enacting binding decrees.</p>
+                <a href="https://youtube.com/@kingdomekklesiaskoinonia" target="_blank" rel="noopener noreferrer" class="btn-watch">Watch on YouTube</a>
+            </div>
+        </div>
+    </section>
     <!-- GOOGLE FORMS & EVENT INTAKE -->
 <!-- GOOGLE FORMS & EVENT INTAKE -->
     <section id="forms" class="section-padding">
@@ -493,6 +521,27 @@
         </div>
     </section>
 
+    <!-- PHOTO GALLERY SECTION -->
+<section id="gallery" class="section-padding">
+    <h2 class="section-title">Territorial Mission Photo Gallery</h2>
+    <p class="section-subtitle">Visual updates from our national circuits, regional youth assemblies, and altar assignments.</p>
+    
+    <!-- Add id="photo-gallery-container" to your existing gallery grid -->
+    <div id="photo-gallery-container" class="gallery-grid">
+        
+        <!-- KEEP YOUR EXISTING GALLERY IMAGES HERE -->
+        <div class="gallery-item">
+            <img src="your-existing-image-1.jpg" alt="Mission Photo 1">
+            <p><strong>Territorial Alignment</strong> — <em>Mwingi Assignment</em></p>
+        </div>
+        
+        <div class="gallery-item">
+            <img src="your-existing-image-2.jpg" alt="Mission Photo 2">
+            <p><strong>Youth Leadership Convocation</strong> — <em>Regional Gate</em></p>
+        </div>
+
+    </div>
+</section>
     <!-- PHOTO & MEDIA GALLERY -->
     <section id="gallery" class="services-bg">
         <div class="section-padding">
@@ -597,6 +646,47 @@
             });
         });
     </script>
+<!-- Decap CMS Dynamic Content Fetcher -->
+<script>
+  // Dynamic fetcher for Admin-uploaded Photos & Videos
+  async function loadCMSContent() {
+    try {
+      // Fetch Photos
+      const photoResponse = await fetch('/content/photos/index.json');
+      if (photoResponse.ok) {
+        const photos = await photoResponse.json();
+        const photoGallery = document.getElementById('photo-gallery-container');
+        if (photoGallery) {
+          photoGallery.innerHTML = photos.map(p => `
+            <div class="gallery-item">
+              <img src="${p.image}" alt="${p.title}" loading="lazy">
+              <p><strong>${p.title}</strong> — <em>${p.location}</em></p>
+            </div>
+          `).join('');
+        }
+      }
 
+      // Fetch Videos
+      const videoResponse = await fetch('/content/videos/index.json');
+      if (videoResponse.ok) {
+        const videos = await videoResponse.json();
+        const videoGallery = document.getElementById('video-gallery-container');
+        if (videoGallery) {
+          videoGallery.innerHTML = videos.map(v => `
+            <div class="video-card">
+              <h4>${v.title}</h4>
+              <p>${v.description}</p>
+              <a href="${v.video_url}" target="_blank" class="btn-watch">Watch Teaching</a>
+            </div>
+          `).join('');
+        }
+      }
+    } catch (err) {
+      console.log('CMS content loading static fallback:', err);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', loadCMSContent);
+</script>
 </body>
 </html>
