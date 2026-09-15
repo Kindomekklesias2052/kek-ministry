@@ -615,21 +615,42 @@
   document.addEventListener('DOMContentLoaded', loadCMSContent);
 </script>
 
-    <script>
+<script>
   async function loadCMSContent() {
     try {
-      // Relative path works correctly on GitHub Pages subfolders
-      const photoResponse = await fetch('content/photos/index.json');
-      if (photoResponse.ok) {
-        const photos = await photoResponse.json();
-        const photoGallery = document.getElementById('photo-gallery-container');
-        if (photoGallery && Array.isArray(photos)) {
-          const cmsPhotosHTML = photos.map(p => `
-            <div class="gallery-item">
-              <img src="${p.image.replace(/^\//, '')}" alt="${p.title}" loading="lazy">
-              <div class="gallery-caption">${p.title} — <em>${p.location}</em></div>
-            </div>
-          `).join('');
+      const photoGallery = document.getElementById('photo-gallery-container');
+      
+      // Query GitHub API to list all uploaded photo JSON files in content/photos/
+      const apiUrl = 'https://api.github.com/repos/kindomekklesias2052/kek-ministry/contents/content/photos';
+      const response = await fetch(apiUrl);
+
+      if (response.ok) {
+        const files = await response.json();
+
+        // Filter for JSON content files created by Decap CMS
+        const jsonFiles = files.filter(file => file.name.endsWith('.json') && file.name !== 'index.json');
+
+        // Fetch each individual photo details
+        const photoPromises = jsonFiles.map(async (file) => {
+          const res = await fetch(file.download_url);
+          return res.ok ? await res.json() : null;
+        });
+
+        const photos = (await Promise.all(photoPromises)).filter(Boolean);
+
+        if (photoGallery && photos.length > 0) {
+          const cmsPhotosHTML = photos.map(p => {
+            // Normalize image path for GitHub Pages relative URL
+            const imagePath = p.image ? p.image.replace(/^\/?(kek-ministry\/)?/, '') : '';
+            return `
+              <div class="gallery-item">
+                <img src="${imagePath}" alt="${p.title}" loading="lazy">
+                <div class="gallery-caption">${p.title} — <em>${p.location || 'Territorial Circuit'}</em></div>
+              </div>
+            `;
+          }).join('');
+
+          // Prepend new backend CMS uploads directly into the existing gallery container
           photoGallery.insertAdjacentHTML('afterbegin', cmsPhotosHTML);
         }
       }
