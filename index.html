@@ -509,59 +509,17 @@
     </section>
 
     <!-- PHOTO & MEDIA GALLERY SECTION -->
-    <section id="gallery" class="services-bg">
-        <div class="section-padding">
-            <h2 class="section-title">Photo & Media Gallery</h2>
-            <p class="section-subtitle">Visual highlights from our seminars, prison ministries, and regional assemblies across Kenya.</p>
+<section id="gallery" class="services-bg">
+    <div class="section-padding">
+        <h2 class="section-title">Photo & Media Gallery</h2>
+        <p class="section-subtitle">Visual highlights from our seminars, prison ministries, and regional assemblies across Kenya.</p>
 
-            <div id="photo-gallery-container" class="gallery-grid">
-                
-                <!-- Lamu Outreaches -->
-                <div class="gallery-item">
-                    <img src="Lamu_1.jpg" alt="Lamu Ministry">
-                    <div class="gallery-caption">Lamu Ministry Outreach I</div>
-                </div>
-
-                <div class="gallery-item">
-                    <img src="Lamu_4.jpg" alt="Lamu Ministry">
-                    <div class="gallery-caption">Lamu Ministry Outreach II</div>
-                </div>
-
-                <div class="gallery-item">
-                    <img src="Lamu_8.jpg" alt="Lamu Ministry">
-                    <div class="gallery-caption">Lamu Ministry Outreach III</div>
-                </div>
-
-                <!-- Prison & Conference Ministry -->
-                <div class="gallery-item">
-                    <img src="Mwingi_Women_Prison_3.jpg" alt="Mwingi Prison Ministry">
-                    <div class="gallery-caption">Mwingi Women Prison Outreach</div>
-                </div>
-
-                <div class="gallery-item">
-                    <img src="Ngomeni_Conference_3.jpg" alt="Ngomeni Conference">
-                    <div class="gallery-caption">Ngomeni Conference Highlights</div>
-                </div>
-
-                <!-- Ikime Assemblies -->
-                <div class="gallery-item">
-                    <img src="ikime_1.jpg" alt="Ikime Assembly">
-                    <div class="gallery-caption">Ikime Assembly Gathering I</div>
-                </div>
-
-                <div class="gallery-item">
-                    <img src="ikime_6.jpg" alt="Ikime Assembly">
-                    <div class="gallery-caption">Ikime Assembly Gathering II</div>
-                </div>
-
-                <div class="gallery-item">
-                    <img src="ikime_11.jpg" alt="Ikime Assembly">
-                    <div class="gallery-caption">Ikime Assembly Gathering III</div>
-                </div>
-
-            </div>
+        <!-- Keep container empty: JS will render images from index.json without duplicating -->
+        <div id="photo-gallery-container" class="gallery-grid">
+            <p style="color: var(--slate); grid-column: 1/-1; text-align: center;"><em>Loading gallery images...</em></p>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- COMMUNITY & CONTACT SECTION -->
     <section class="community-section">
@@ -614,48 +572,48 @@
     </script>
 
     <!-- Decap CMS Dynamic Content Fetcher -->
-    <script>
-      async function loadCMSContent() {
-        try {
-          // Fetch Admin Photos
-          const photoResponse = await fetch('/content/photos/index.json');
-          if (photoResponse.ok) {
-            const photos = await photoResponse.json();
-            const photoGallery = document.getElementById('photo-gallery-container');
-            if (photoGallery && Array.isArray(photos)) {
-              const cmsPhotosHTML = photos.map(p => `
-                <div class="gallery-item">
-                  <img src="${p.image}" alt="${p.title}" loading="lazy">
-                  <div class="gallery-caption">${p.title} — <em>${p.location}</em></div>
-                </div>
-              `).join('');
-              photoGallery.insertAdjacentHTML('afterbegin', cmsPhotosHTML);
-            }
-          }
-
-          // Fetch Admin Videos
-          const videoResponse = await fetch('/content/videos/index.json');
-          if (videoResponse.ok) {
-            const videos = await videoResponse.json();
-            const videoGallery = document.getElementById('video-gallery-container');
-            if (videoGallery && Array.isArray(videos)) {
-              const cmsVideosHTML = videos.map(v => `
-                <div class="video-card">
-                  <h4>${v.title}</h4>
-                  <p>${v.description}</p>
-                  <a href="${v.video_url}" target="_blank" class="btn-watch">Watch Teaching</a>
-                </div>
-              `).join('');
-              videoGallery.insertAdjacentHTML('afterbegin', cmsVideosHTML);
-            }
-          }
-        } catch (err) {
-          console.log('CMS content loading fallback:', err);
+<script>
+  async function loadCMSContent() {
+    try {
+      // Fetch Photos Array
+      const photoResponse = await fetch('content/photos/index.json');
+      if (photoResponse.ok) {
+        const photos = await photoResponse.json();
+        const photoGallery = document.getElementById('photo-gallery-container');
+        
+        if (photoGallery && Array.isArray(photos)) {
+          // Clear loading text and render photos cleanly
+          photoGallery.innerHTML = photos.map(p => `
+            <div class="gallery-item">
+              <img src="${p.image.replace(/^\//, '')}" alt="${p.title}" loading="lazy">
+              <div class="gallery-caption">${p.title} — <em>${p.location}</em></div>
+            </div>
+          `).join('');
         }
       }
 
-      document.addEventListener('DOMContentLoaded', loadCMSContent);
-    </script>
+      // Fetch Videos Array
+      const videoResponse = await fetch('content/videos/index.json');
+      if (videoResponse.ok) {
+        const videos = await videoResponse.json();
+        const videoGallery = document.getElementById('video-gallery-container');
+        if (videoGallery && Array.isArray(videos)) {
+          videoGallery.innerHTML = videos.map(v => `
+            <div class="video-card">
+              <h4>${v.title}</h4>
+              <p>${v.description}</p>
+              <a href="${v.video_url}" target="_blank" class="btn-watch">Watch Teaching</a>
+            </div>
+          `).join('');
+        }
+      }
+    } catch (err) {
+      console.log('CMS fetch info:', err);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', loadCMSContent);
+</script>
 
     <script>
   async function loadCMSContent() {
