@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta name="theme-color" content="#0c1b33">
+    <title>KEK Member &amp; Ekklesias Academy Portal | Kingdom Ekklesias Koinonia</title>
+    <link rel="icon" type="image/png" href="kek-emblem.png">
+    <link rel="manifest" href="manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --navy: #0c1b33;
+            --navy-deep: #060e1c;
+            --gold: #c59b27;
+            --gold-bright: #e3bc4b;
+            --slate: #475569;
+            --light-bg: #f8fafc;
+            --white: #ffffff;
+            --green: #16a34a;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            background-color: var(--light-bg);
+            color: #1e293b;
+        }
+
+        /* HEADER */
+        header {
+            background: var(--navy);
+            border-bottom: 2px solid rgba(197, 155, 39, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--white);
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            border: 1.5px solid var(--gold);
+        }
+
+        .logo span { color: var(--gold); }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-links a {
+            color: #e2e8f0;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover { color: var(--gold-bright); }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #d4ab38 0%, #b5891b 100%);
+            color: var(--navy);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-gold:hover { transform: translateY(-1px); }
+
+        .btn-navy {
+            background: var(--navy);
+            color: var(--gold-bright);
+            border: 1px solid var(--navy);
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .btn-navy:hover {
+            background: var(--gold);
+            color: var(--navy);
+            border-color: var(--gold);
+        }
+
+        /* PORTAL BANNER */
+        .portal-hero {
+            background: radial-gradient(circle at top, #162f59 0%, #0c1b33 70%);
+            color: var(--white);
+            padding: 42px 24px;
+            text-align: center;
+            border-bottom: 3px solid var(--gold);
+        }
+
+        .portal-hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            margin: 0 0 8px;
+        }
+
+        .portal-hero p {
+            color: #cbd5e1;
+            max-width: 720px;
+            margin: 0 auto;
+            font-size: 0.95rem;
+        }
+
+        /* AUTH CARD */
+        .auth-wrapper {
+            max-width: 460px;
+            margin: 48px auto;
+            padding: 0 20px;
+        }
+
+        .auth-card {
+            background: var(--white);
+            border-top: 5px solid var(--gold);
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 14px 36px rgba(12, 27, 51, 0.1);
+        }
+
+        .auth-tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 22px;
+            background: #f1f5f9;
+            padding: 4px;
+            border-radius: 8px;
+        }
+
+        .auth-tab {
+            padding: 9px;
+            border: none;
+            background: transparent;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--slate);
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .auth-tab.active {
+            background: var(--navy);
+            color: var(--gold-bright);
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 5px;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .btn-google {
+            width: 100%;
+            background: var(--white);
+            color: #1e293b;
+            border: 1.5px solid #cbd5e1;
+            padding: 11px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .btn-google:hover { background: #f8fafc; border-color: var(--navy); }
+
+        .divider {
+            text-align: center;
+            font-size: 0.78rem;
+            color: #94a3b8;
+            margin: 14px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .status-msg {
+            font-size: 0.85rem;
+            padding: 10px 12px;
+            border-radius: 6px;
+            margin-top: 12px;
+            display: none;
+        }
+
+        .status-msg.error { display: block; background: #fee2e2; color: #991b1b; }
+        .status-msg.success { display: block; background: #dcfce7; color: #166534; }
+
+        /* AUTHENTICATED DASHBOARD */
+        .dashboard-container {
+            max-width: 1180px;
+            margin: 32px auto 64px;
+            padding: 0 24px;
+            display: none;
+        }
+
+        /* KEK IDENTITY CARD */
+        .kek-id-banner {
+            background: linear-gradient(135deg, #0c1b33 0%, #162f59 100%);
+            color: var(--white);
+            border: 2px solid var(--gold);
+            border-radius: 14px;
+            padding: 26px 30px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 28px;
+            box-shadow: 0 12px 30px rgba(12, 27, 51, 0.16);
+        }
+
+        .kek-id-left {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .kek-id-left img {
+            width: 68px;
+            height: 68px;
+            border-radius: 12px;
+            border: 2px solid var(--gold);
+        }
+
+        .kek-badge {
+            display: inline-block;
+            background: rgba(197, 155, 39, 0.2);
+            border: 1px solid var(--gold);
+            color: var(--gold-bright);
+            font-family: monospace;
+            font-size: 0.95rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 6px;
+            margin-bottom: 6px;
+        }
+
+        /* DASHBOARD NAVIGATION TABS */
+        .dash-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 24px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 12px;
+        }
+
+        .dash-tab-btn {
+            padding: 10px 18px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            background: var(--white);
+            color: var(--navy);
+            font-weight: 700;
+            font-size: 0.86rem;
+            cursor: pointer;
+        }
+
+        .dash-tab-btn.active {
+            background: var(--navy);
+            color: var(--gold-bright);
+            border-color: var(--navy);
+        }
+
+        .dash-panel { display: none; }
+        .dash-panel.active { display: block; }
+
+        /* COURSES GRID */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 22px;
+        }
+
+        .course-card {
+            background: var(--white);
+            border: 1px solid #e2e8f0;
+            border-top: 4px solid var(--gold);
+            border-radius: 10px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+        }
+
+        .course-track {
+            font-size: 0.74rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #9e7816;
+            margin-bottom: 6px;
+        }
+
+        .course-card h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--navy);
+            font-size: 1.12rem;
+            margin: 0 0 10px;
+        }
+
+        .course-meta {
+            font-size: 0.83rem;
+            color: var(--slate);
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .enrolled-pill {
+            display: inline-block;
+            background: #dcfce7;
+            color: #166534;
+            font-weight: 700;
+            font-size: 0.78rem;
+            padding: 5px 12px;
+            border-radius: 999px;
+            margin-bottom: 12px;
+        }
+
+        .course-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding-top: 14px;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        /* PROFILE & AUDIT TABLE */
+        .card-box {
+            background: var(--white);
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 26px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+        }
+
+        .audit-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        .audit-table th, .audit-table td {
+            text-align: left;
+            padding: 12px 14px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .audit-table th {
+            background: #f1f5f9;
+            color: var(--navy);
+            font-weight: 700;
+        }
+
+        @media (max-width: 680px) {
+            .kek-id-banner { flex-direction: column; align-items: flex-start; }
+            .audit-table { display: block; overflow-x: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="kek-emblem.png" alt="KEK Emblem">
+                KINGDOM EKKLESIAS <span>KOINONIA</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">&larr; Main Sanctuary</a>
+                <button type="button" id="logout-btn" class="btn-gold" style="display: none; padding: 7px 14px; font-size: 0.8rem;">Sign Out</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="portal-hero">
+        <h1>KEK Citizen &amp; Ekklesias Academy Portal</h1>
+        <p>Manifesting the Sons of Yahweh &bull; Manage your Kingdom Ekklesias Koinonia identity, enroll in apostolic governance classes, and access verified ministry archives.</p>
+    </section>
+
+    <!-- AUTHENTICATION VIEW (Logged Out) -->
+    <div id="auth-view" class="auth-wrapper">
+        <div class="auth-card">
+            <div class="auth-tabs">
+                <button type="button" class="auth-tab active" id="tab-signin" onclick="switchAuthMode('signin')">Member Sign In</button>
+                <button type="button" class="auth-tab" id="tab-register" onclick="switchAuthMode('register')">Create KEK Account</button>
+            </div>
+
+            <button type="button" id="google-signin-btn" class="btn-google">
+                <span>🔐</span> Continue with Google Account
+            </button>
+
+            <div class="divider">or with email</div>
+
+            <form id="auth-form">
+                <div id="register-fields" style="display: none;">
+                    <div class="form-group">
+                        <label for="reg-name">Full Name</label>
+                        <input type="text" id="reg-name" placeholder="e.g., Esther Wanjiku">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-whatsapp">WhatsApp / Phone Number (with Country Code)</label>
+                        <input type="tel" id="reg-whatsapp" placeholder="e.g., +254 7XX XXX XXX">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-office">Primary KEK Ministry Docket / Interest</label>
+                        <select id="reg-office">
+                            <option value="Ekklesia Member & Watchman">Ekklesia Member &amp; Prayer Watchman</option>
+                            <option value="Courts of Heaven & Judicial Intercession">Courts of Heaven &amp; Judicial Intercession</option>
+                            <option value="Goshen Builders & Covenant Economy">Goshen Builders &amp; Covenant Economy</option>
+                            <option value="Holistic Human Development & Youth">Holistic Human Development &amp; Youth</option>
+                            <option value="Media, Archiving & Technology">Media, Archiving &amp; Technology</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="auth-email">Email Address</label>
+                    <input type="email" id="auth-email" required placeholder="you@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="auth-password">Password (minimum 6 characters)</label>
+                    <input type="password" id="auth-password" required minlength="6" placeholder="••••••••">
+                </div>
+
+                <button type="submit" id="auth-submit-btn" class="btn-gold" style="width: 100%; padding: 12px;">
+                    Sign In to KEK Portal
+                </button>
+            </form>
+
+            <div style="text-align: center; margin-top: 14px;">
+                <button type="button" id="reset-pass-btn" style="background: none; border: none; color: var(--slate); font-size: 0.8rem; text-decoration: underline; cursor: pointer;">
+                    Forgot password? Send reset link
+                </button>
+            </div>
+
+            <div id="auth-status" class="status-msg"></div>
+        </div>
+    </div>
+
+    <!-- MEMBER & STUDENT DASHBOARD (Logged In) -->
+    <div id="dashboard-view" class="dashboard-container">
+
+        <!-- Branded KEK Identity Header -->
+        <div class="kek-id-banner">
+            <div class="kek-id-left">
+                <img src="kek-emblem.png" alt="KEK Crest">
+                <div>
+                    <div class="kek-badge" id="dash-kek-id">KEK-2026-0000</div>
+                    <h2 style="font-family: 'Cinzel', serif; margin: 0 0 4px; font-size: 1.35rem;" id="dash-name">Kingdom Citizen</h2>
+                    <div style="font-size: 0.85rem; color: #cbd5e1;" id="dash-office">Ekklesia Member &amp; Watchman</div>
+                </div>
+            </div>
+            <div style="text-align: right;">
+                <div style="font-size: 0.78rem; color: var(--gold-bright); text-transform: uppercase; letter-spacing: 1px;">Covenant Standing</div>
+                <div style="font-weight: 700; font-size: 0.95rem;">Active Stakeholder &bull; Verified</div>
+            </div>
+        </div>
+
+        <!-- Dashboard Tabs -->
+        <div class="dash-tabs">
+            <button type="button" class="dash-tab-btn active" onclick="switchDashTab('academy', this)">📚 Ekklesias Academy &amp; Classes</button>
+            <button type="button" class="dash-tab-btn" onclick="switchDashTab('profile', this)">🪪 My KEK Dossier &amp; Profile</button>
+            <button type="button" class="dash-tab-btn" onclick="switchDashTab('logs', this)">📜 Immutable KEK Audit Log</button>
+        </div>
+
+        <!-- TAB 1: EKKLESIAS ACADEMY & ENROLLMENTS -->
+        <div id="panel-academy" class="dash-panel active">
+            <h2 style="font-family: 'Cinzel', serif; color: var(--navy); margin-top: 0;">Ekklesias Academy — Course Registration &amp; Live Classrooms</h2>
+            <p style="color: var(--slate); font-size: 0.92rem; margin-bottom: 24px;">
+                Enroll in structured apostolic governance cohorts. Once enrolled, your live Google Meet / Zoom classroom link and Google Drive study workbooks unlock immediately.
+            </p>
+            <div id="courses-grid" class="courses-grid"></div>
+        </div>
+
+        <!-- TAB 2: MEMBER PROFILE & DOSSIER -->
+        <div id="panel-profile" class="dash-panel">
+            <div class="card-box" style="max-width: 640px;">
+                <h3 style="font-family: 'Cinzel', serif; color: var(--navy); margin-top: 0;">Update Covenant Member Dossier</h3>
+                <form id="profile-form">
+                    <div class="form-group">
+                        <label>Assigned KEK Membership ID (Permanent)</label>
+                        <input type="text" id="prof-kek-id" disabled style="background: #f1f5f9; font-weight: 700;">
+                    </div>
+                    <div class="form-group">
+                        <label for="prof-name">Full Name</label>
+                        <input type="text" id="prof-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="prof-whatsapp">WhatsApp / Phone Number</label>
+                        <input type="tel" id="prof-whatsapp" placeholder="+254 7XX XXX XXX">
+                    </div>
+                    <div class="form-group">
+                        <label for="prof-country">Country / Territory</label>
+                        <input type="text" id="prof-country" placeholder="Kenya">
+                    </div>
+                    <div class="form-group">
+                        <label for="prof-office">Functional Ministry Docket</label>
+                        <select id="prof-office">
+                            <option value="Ekklesia Member & Watchman">Ekklesia Member &amp; Prayer Watchman</option>
+                            <option value="Courts of Heaven & Judicial Intercession">Courts of Heaven &amp; Judicial Intercession</option>
+                            <option value="Goshen Builders & Covenant Economy">Goshen Builders &amp; Covenant Economy</option>
+                            <option value="Holistic Human Development & Youth">Holistic Human Development &amp; Youth</option>
+                            <option value="Media, Archiving & Technology">Media, Archiving &amp; Technology</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-gold">Save Updated Dossier</button>
+                    <div id="profile-status" class="status-msg"></div>
+                </form>
+            </div>
+        </div>
+
+        <!-- TAB 3: IMMUTABLE AUDIT LOG -->
+        <div id="panel-logs" class="dash-panel">
+            <div class="card-box">
+                <h3 style="font-family: 'Cinzel', serif; color: var(--navy); margin-top: 0;">Verified KEK Governance &amp; Activity Ledger</h3>
+                <p style="color: var(--slate); font-size: 0.86rem; margin-bottom: 18px;">
+                    Every registration, course enrollment, and dossier update is permanently recorded with a cryptographic timestamp.
+                </p>
+                <table class="audit-table">
+                    <thead>
+                        <tr>
+                            <th>Timestamp (UTC)</th>
+                            <th>KEK ID</th>
+                            <th>Action</th>
+                            <th>Record Details</th>
+                        </tr>
+                    </thead>
+                    <tbody id="audit-log-tbody">
+                        <tr><td colspan="4">Loading verified logs...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="module">
+        import {
+            auth,
+            db,
+            googleProvider,
+            signInWithPopup,
+            createUserWithEmailAndPassword,
+            signInWithEmailAndPassword,
+            sendPasswordResetEmail,
+            signOut,
+            onAuthStateChanged,
+            updateProfile,
+            doc,
+            updateDoc,
+            addDoc,
+            collection,
+            query,
+            where,
+            getDocs,
+            serverTimestamp,
+            ensureMemberProfile,
+            writeAuditLog
+        } from "./firebase-config.js";
+
+        // Baseline Ekklesias Academy Catalog (merged with any custom Firestore classes_catalog docs)
+        const DEFAULT_COURSES = [
+            {
+                class_id: "KEK-101",
+                track: "Judicial Intercession & Governance",
+                title: "Courts of Heaven & Spiritual Legislation 101",
+                instructor: "Apostle Elizaphan Kamau Mwangi",
+                schedule: "Tuesdays • 8:00 PM – 9:30 PM EAT",
+                description: "Foundational training on standing before the Righteous Judge, revoking bloodline liens, and enforcing Heaven's verdicts.",
+                meet_link: "https://calendar.app.google/xPmrk5LuasqAE9rw7",
+                drive_url: "https://kingdomekklesiaskoinonia.org/Legislation_in_the_Courts_of_Heaven.pdf"
+            },
+            {
+                class_id: "KEK-201",
+                track: "Apostolic Councils & Priesthood",
+                title: "Melchizedek Order & Legislative Councils",
+                instructor: "Apostle Elizaphan Kamau Mwangi",
+                schedule: "Thursdays • 8:00 PM – 9:30 PM EAT",
+                description: "Stepping into the Councils of Heaven to receive territorial blueprints and exercise the Keys of the Kingdom across the Seven Mountains.",
+                meet_link: "https://calendar.app.google/xPmrk5LuasqAE9rw7",
+                drive_url: "https://kingdomekklesiaskoinonia.org/heavenly_governance_legislation.pdf"
+            },
+            {
+                class_id: "KEK-301",
+                track: "Economic Sovereignty & Stewardship",
+                title: "Goshen Cities Ecosystem & Covenant Wealth",
+                instructor: "KEK Goshen Governance Desk",
+                schedule: "Saturdays • 10:00 AM – 11:30 AM EAT",
+                description: "Building debt-free household ecosystems, dynastic stewardship, and the 8 Pillars of the Goshen Cities blueprint.",
+                meet_link: "https://docs.google.com/forms/d/e/1FAIpQLSfJJXaEFN77UXfbHU3fGmsMEjFMq94wWx6lXotnD5vmEyGWzg/viewform",
+                drive_url: "https://kingdomekklesiaskoinonia.org/national_legislative_protocols_brief.pdf"
+            },
+            {
+                class_id: "KEK-401",
+                track: "Holistic Human Development (Ages 5–15)",
+                title: "Youth Kingdom Governance, Coding & AI Prompt Engineering",
+                instructor: "E. K. Mwangi & KEK Tech Desk",
+                schedule: "Saturdays • 2:00 PM – 3:30 PM EAT",
+                description: "4-week practical cohort equipping young sons and daughters in technological stewardship (Exodus 31:1–5), coding logic, and AI tools.",
+                meet_link: "https://forms.gle/nhn6zZ5RQ2VU5tLt7",
+                drive_url: "https://kingdomekklesiaskoinonia.org/#resources"
+            }
+        ];
+
+        let currentUser = null;
+        let currentProfile = null;
+        let authMode = "signin";
+
+        window.switchAuthMode = function(mode) {
+            authMode = mode;
+            document.getElementById("tab-signin").classList.toggle("active", mode === "signin");
+            document.getElementById("tab-register").classList.toggle("active", mode === "register");
+            document.getElementById("register-fields").style.display = mode === "register" ? "block" : "none";
+            document.getElementById("auth-submit-btn").textContent = mode === "register"
+                ? "Create KEK Account & Issue KEK-ID"
+                : "Sign In to KEK Portal";
+            hideStatus("auth-status");
+        };
+
+        window.switchDashTab = function(tabName, btn) {
+            document.querySelectorAll(".dash-tab-btn").forEach(b => b.classList.remove("active"));
+            document.querySelectorAll(".dash-panel").forEach(p => p.classList.remove("active"));
+            btn.classList.add("active");
+            document.getElementById(`panel-${tabName}`).classList.add("active");
+        };
+
+        function showStatus(elId, msg, type) {
+            const el = document.getElementById(elId);
+            el.textContent = msg;
+            el.className = `status-msg ${type}`;
+        }
+
+        function hideStatus(elId) {
+            const el = document.getElementById(elId);
+            el.className = "status-msg";
+            el.textContent = "";
+        }
+
+        // Google One-Click Sign-In
+        document.getElementById("google-signin-btn").addEventListener("click", async () => {
+            hideStatus("auth-status");
+            try {
+                await signInWithPopup(auth, googleProvider);
+            } catch (err) {
+                showStatus("auth-status", `Google Sign-In error: ${err.message}`, "error");
+            }
+        });
+
+        // Email + Password Sign-In / Registration
+        document.getElementById("auth-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            hideStatus("auth-status");
+            const email = document.getElementById("auth-email").value.trim();
+            const password = document.getElementById("auth-password").value;
+
+            try {
+                if (authMode === "register") {
+                    const fullName = document.getElementById("reg-name").value.trim() || "Kingdom Citizen";
+                    const whatsapp = document.getElementById("reg-whatsapp").value.trim();
+                    const office = document.getElementById("reg-office").value;
+
+                    const cred = await createUserWithEmailAndPassword(auth, email, password);
+                    await updateProfile(cred.user, { displayName: fullName });
+                    await ensureMemberProfile(cred.user, {
+                        full_name: fullName,
+                        whatsapp: whatsapp,
+                        office_role: office
+                    });
+                } else {
+                    await signInWithEmailAndPassword(auth, email, password);
+                }
+            } catch (err) {
+                showStatus("auth-status", err.message, "error");
+            }
+        });
+
+        // Password Reset
+        document.getElementById("reset-pass-btn").addEventListener("click", async () => {
+            const email = document.getElementById("auth-email").value.trim();
+            if (!email) {
+                showStatus("auth-status", "Enter your email address above first, then click Forgot Password.", "error");
+                return;
+            }
+            try {
+                await sendPasswordResetEmail(auth, email);
+                showStatus("auth-status", "Password reset link sent to your email inbox.", "success");
+            } catch (err) {
+                showStatus("auth-status", err.message, "error");
+            }
+        });
+
+        // Sign Out
+        document.getElementById("logout-btn").addEventListener("click", async () => {
+            await signOut(auth);
+        });
+
+        // Load Courses & Member Enrollments
+        async function renderAcademy() {
+            const grid = document.getElementById("courses-grid");
+            grid.innerHTML = "<p>Loading Ekklesias Academy catalog...</p>";
+
+            // Fetch member's enrolled class_ids
+            const enrolledSet = new Set();
+            const enrollQ = query(collection(db, "class_enrollments"), where("uid", "==", currentUser.uid));
+            const enrollSnap = await getDocs(enrollQ);
+            enrollSnap.forEach(d => enrolledSet.add(d.data().class_id));
+
+            // Merge Firestore classes_catalog with DEFAULT_COURSES
+            let courses = [...DEFAULT_COURSES];
+            try {
+                const catSnap = await getDocs(collection(db, "classes_catalog"));
+                catSnap.forEach(d => {
+                    const data = d.data();
+                    if (!courses.some(c => c.class_id === data.class_id)) {
+                        courses.push(data);
+                    }
+                });
+            } catch (_) {}
+
+            grid.innerHTML = courses.map(course => {
+                const isEnrolled = enrolledSet.has(course.class_id);
+                return `
+                    <div class="course-card">
+                        <div>
+                            <div class="course-track">${course.class_id} &bull; ${course.track}</div>
+                            <h3>${course.title}</h3>
+                            ${isEnrolled ? '<span class="enrolled-pill">✓ Enrolled Student</span>' : ''}
+                            <div class="course-meta">
+                                <strong>Instructor:</strong> ${course.instructor}<br>
+                                <strong>Schedule:</strong> ${course.schedule}<br><br>
+                                ${course.description}
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            ${isEnrolled ? `
+                                <a href="${course.meet_link}" target="_blank" rel="noopener noreferrer" class="btn-gold" style="flex: 1;">
+                                    🎥 Join Live Class
+                                </a>
+                                <a href="${course.drive_url}" target="_blank" rel="noopener noreferrer" class="btn-navy" style="flex: 1;">
+                                    📄 Study Guide
+                                </a>
+                            ` : `
+                                <button type="button" class="btn-gold enroll-btn" data-id="${course.class_id}" data-title="${course.title}" style="width: 100%;">
+                                    Enroll in Class
+                                </button>
+                            `}
+                        </div>
+                    </div>
+                `;
+            }).join("");
+
+            document.querySelectorAll(".enroll-btn").forEach(btn => {
+                btn.addEventListener("click", async () => {
+                    const classId = btn.getAttribute("data-id");
+                    const classTitle = btn.getAttribute("data-title");
+                    btn.disabled = true;
+                    btn.textContent = "Enrolling...";
+                    try {
+                        await addDoc(collection(db, "class_enrollments"), {
+                            uid: currentUser.uid,
+                            kek_id: currentProfile.kek_id,
+                            full_name: currentProfile.full_name,
+                            email: currentProfile.email,
+                            class_id: classId,
+                            class_title: classTitle,
+                            status: "Enrolled",
+                            enrolled_at: serverTimestamp()
+                        });
+                        await writeAuditLog(currentUser.uid, currentProfile.kek_id, "CLASS_ENROLLED", classId, `Enrolled in ${classTitle}`);
+                        await renderAcademy();
+                        await renderAuditLogs();
+                    } catch (err) {
+                        alert("Enrollment error: " + err.message);
+                        btn.disabled = false;
+                        btn.textContent = "Enroll in Class";
+                    }
+                });
+            });
+        }
+
+        // Load Immutable Audit Logs for Current Member
+        async function renderAuditLogs() {
+            const tbody = document.getElementById("audit-log-tbody");
+            const logQ = query(collection(db, "kek_audit_logs"), where("actor_uid", "==", currentUser.uid));
+            const snap = await getDocs(logQ);
+            const rows = [];
+            snap.forEach(d => rows.push(d.data()));
+            rows.sort((a, b) => (b.client_time_iso || "").localeCompare(a.client_time_iso || ""));
+
+            if (rows.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4">No audit records yet.</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = rows.map(r => `
+                <tr>
+                    <td>${(r.client_time_iso || "").replace("T", " ").slice(0, 19)}</td>
+                    <td><strong>${r.kek_id}</strong></td>
+                    <td>${r.action_type}</td>
+                    <td>${r.details}</td>
+                </tr>
+            `).join("");
+        }
+
+        // Save Profile Updates
+        document.getElementById("profile-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            hideStatus("profile-status");
+            const updatedName = document.getElementById("prof-name").value.trim();
+            const updatedWhatsapp = document.getElementById("prof-whatsapp").value.trim();
+            const updatedCountry = document.getElementById("prof-country").value.trim();
+            const updatedOffice = document.getElementById("prof-office").value;
+
+            try {
+                await updateDoc(doc(db, "members", currentUser.uid), {
+                    full_name: updatedName,
+                    whatsapp: updatedWhatsapp,
+                    country: updatedCountry,
+                    office_role: updatedOffice
+                });
+                currentProfile.full_name = updatedName;
+                currentProfile.whatsapp = updatedWhatsapp;
+                currentProfile.country = updatedCountry;
+                currentProfile.office_role = updatedOffice;
+
+                document.getElementById("dash-name").textContent = updatedName;
+                document.getElementById("dash-office").textContent = updatedOffice;
+
+                await writeAuditLog(currentUser.uid, currentProfile.kek_id, "PROFILE_UPDATED", currentProfile.kek_id, `Updated dossier (${updatedOffice})`);
+                await renderAuditLogs();
+                showStatus("profile-status", "Your KEK member dossier has been updated and logged.", "success");
+            } catch (err) {
+                showStatus("profile-status", err.message, "error");
+            }
+        });
+
+        // Auth State Observer
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                currentUser = user;
+                currentProfile = await ensureMemberProfile(user);
+
+                document.getElementById("auth-view").style.display = "none";
+                document.getElementById("dashboard-view").style.display = "block";
+                document.getElementById("logout-btn").style.display = "inline-flex";
+
+                document.getElementById("dash-kek-id").textContent = currentProfile.kek_id;
+                document.getElementById("dash-name").textContent = currentProfile.full_name;
+                document.getElementById("dash-office").textContent = currentProfile.office_role;
+
+                document.getElementById("prof-kek-id").value = currentProfile.kek_id;
+                document.getElementById("prof-name").value = currentProfile.full_name;
+                document.getElementById("prof-whatsapp").value = currentProfile.whatsapp || "";
+                document.getElementById("prof-country").value = currentProfile.country || "Kenya";
+                document.getElementById("prof-office").value = currentProfile.office_role;
+
+                await renderAcademy();
+                await renderAuditLogs();
+            } else {
+                currentUser = null;
+                currentProfile = null;
+                document.getElementById("auth-view").style.display = "block";
+                document.getElementById("dashboard-view").style.display = "none";
+                document.getElementById("logout-btn").style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>
