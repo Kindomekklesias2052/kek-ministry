@@ -1,7 +1,9 @@
-const CACHE_NAME = 'kek-portal-v3';
+const CACHE_NAME = 'kek-portal-v4';
 const CORE_ASSETS = [
   './',
   './index.html',
+  './portal.html',
+  './watch-hub.html',
   './styles.css',
   './manifest.json',
   './kek-emblem.png',
