@@ -1,0 +1,26 @@
+{
+  "id": "/",
+  "name": "Kingdom Ekklesias Koinonia (KEK)",
+  "short_name": "KEK Portal",
+  "description": "Manifesting the Sons of Yahweh | Seated in Heavenly Places, Building on Earth. Apostolic-Prophetic Governance Assembly & Goshen Cities Ecosystem.",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0c1b33",
+  "theme_color": "#0c1b33",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "kek-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "kek-emblem.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
