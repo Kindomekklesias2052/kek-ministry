@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta name="theme-color" content="#0c1b33">
+    <title>Apostolic Executive Command Desk | Kingdom Ekklesias Koinonia</title>
+    <link rel="icon" type="image/png" href="kek-emblem.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --navy: #0c1b33;
+            --navy-deep: #060e1c;
+            --gold: #c59b27;
+            --gold-bright: #e3bc4b;
+            --slate: #475569;
+            --light-bg: #f8fafc;
+            --white: #ffffff;
+            --danger: #dc2626;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            background-color: var(--light-bg);
+            color: #1e293b;
+        }
+
+        header {
+            background: var(--navy-deep);
+            border-bottom: 2px solid var(--gold);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 0.98rem;
+            color: var(--white);
+        }
+
+        .logo img {
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+            border: 1.5px solid var(--gold);
+        }
+
+        .logo span { color: var(--gold); }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 0.84rem;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover { color: var(--gold-bright); }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #d4ab38 0%, #b5891b 100%);
+            color: var(--navy);
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-danger {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-weight: 700;
+            font-size: 0.78rem;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .btn-danger:hover {
+            background: var(--danger);
+            color: var(--white);
+        }
+
+        .admin-hero {
+            background: linear-gradient(135deg, #0c1b33 0%, #162f59 100%);
+            color: var(--white);
+            padding: 36px 24px;
+            text-align: center;
+            border-bottom: 3px solid var(--gold);
+        }
+
+        .admin-hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.85rem;
+            margin: 0 0 6px;
+        }
+
+        .admin-hero p {
+            color: #cbd5e1;
+            margin: 0;
+            font-size: 0.92rem;
+        }
+
+        /* LOGIN & ACCESS DENIED BOXES */
+        .center-box {
+            max-width: 460px;
+            margin: 48px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: var(--white);
+            border-top: 5px solid var(--gold);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 12px 32px rgba(12, 27, 51, 0.1);
+        }
+
+        .btn-google {
+            width: 100%;
+            background: var(--white);
+            color: #1e293b;
+            border: 1.5px solid #cbd5e1;
+            padding: 11px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .btn-google:hover { border-color: var(--navy); background: #f8fafc; }
+
+        .form-group { margin-bottom: 14px; }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 5px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.88rem;
+        }
+
+        .status-msg {
+            font-size: 0.84rem;
+            padding: 10px 12px;
+            border-radius: 6px;
+            margin-top: 12px;
+            display: none;
+        }
+
+        .status-msg.error { display: block; background: #fee2e2; color: #991b1b; }
+        .status-msg.success { display: block; background: #dcfce7; color: #166534; }
+
+        /* ADMIN DASHBOARD */
+        .admin-workspace {
+            max-width: 1240px;
+            margin: 30px auto 64px;
+            padding: 0 24px;
+            display: none;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+            margin-bottom: 26px;
+        }
+
+        .kpi-card {
+            background: var(--white);
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid var(--gold);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .kpi-card strong {
+            display: block;
+            font-family: 'Cinzel', serif;
+            font-size: 1.75rem;
+            color: var(--navy);
+        }
+
+        .kpi-card span {
+            font-size: 0.78rem;
+            color: var(--slate);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+        }
+
+        .admin-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 22px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 12px;
+        }
+
+        .tab-btn {
+            padding: 10px 16px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            background: var(--white);
+            color: var(--navy);
+            font-weight: 700;
+            font-size: 0.84rem;
+            cursor: pointer;
+        }
+
+        .tab-btn.active {
+            background: var(--navy);
+            color: var(--gold-bright);
+            border-color: var(--navy);
+        }
+
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+
+        .panel-box {
+            background: var(--white);
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 24px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+            margin-bottom: 24px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.84rem;
+        }
+
+        .data-table th, .data-table td {
+            text-align: left;
+            padding: 11px 12px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .data-table th {
+            background: #f1f5f9;
+            color: var(--navy);
+            font-weight: 700;
+        }
+
+        .course-form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .data-table { display: block; overflow-x: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="kek-emblem.png" alt="KEK Crest">
+                KEK <span>EXECUTIVE COMMAND</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Main Sanctuary</a>
+                <a href="portal.html">Member Portal</a>
+                <a href="watch-hub.html">24/7 Watch Hub</a>
+                <button type="button" id="admin-logout-btn" class="btn-gold" style="display: none; padding: 7px 14px; font-size: 0.8rem;">Sign Out</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="admin-hero">
+        <h1>Apostolic Executive Command Desk</h1>
+        <p>Restricted Governance Console &bull; Member Roster, Ekklesias Academy Curriculum &amp; Altar Ledger Oversight</p>
+    </section>
+
+    <!-- STEP 1: ADMIN SIGN-IN VIEW -->
+    <div id="admin-login-view" class="center-box">
+        <div class="card">
+            <h3 style="font-family: 'Cinzel', serif; color: var(--navy); margin-top: 0; text-align: center;">Executive Authentication</h3>
+            <p style="color: var(--slate); font-size: 0.85rem; text-align: center; margin-bottom: 20px;">
+                Sign in with the KEK account assigned <strong>role: "admin"</strong> in Cloud Firestore.
+            </p>
+
+            <button type="button" id="admin-google-btn" class="btn-google">
+                <span>🔐</span> Sign In with Administrator Google Account
+            </button>
+
+            <form id="admin-email-form">
+                <div class="form-group">
+                    <label for="admin-email">Administrator Email</label>
+                    <input type="email" id="admin-email" required placeholder="ekmwangi@kingdomekklesiaskoinonia.org">
+                </div>
+                <div class="form-group">
+                    <label for="admin-password">Password</label>
+                    <input type="password" id="admin-password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-gold" style="width: 100%; padding: 12px;">
+                    Verify Clearance &amp; Enter Command Desk
+                </button>
+            </form>
+
+            <div id="admin-login-status" class="status-msg"></div>
+        </div>
+    </div>
+
+    <!-- ACCESS DENIED VIEW (Signed in, but role != admin) -->
+    <div id="admin-denied-view" class="center-box" style="display: none;">
+        <div class="card" style="border-top-color: var(--danger);">
+            <h3 style="font-family: 'Cinzel', serif; color: var(--danger); margin-top: 0;">Executive Clearance Required</h3>
+            <p style="font-size: 0.88rem; color: #334155; line-height: 1.6;" id="denied-details">
+                This account does not currently hold administrator privileges.
+            </p>
+            <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px; padding: 12px; font-size: 0.82rem; margin: 14px 0;">
+                <strong>To activate Administrator access:</strong><br>
+                Open Firebase Console &rarr; <strong>Cloud Firestore &rarr; Data &rarr; members</strong> &rarr; select your UID document and edit <code>role</code> from <code>"member"</code> to <code>"admin"</code>, then refresh this page.
+            </div>
+            <button type="button" id="denied-signout-btn" class="btn-gold" style="width: 100%;">Sign Out</button>
+        </div>
+    </div>
+
+    <!-- AUTHENTICATED ADMIN DASHBOARD -->
+    <div id="admin-workspace" class="admin-workspace">
+
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <strong id="kpi-members">0</strong>
+                <span>Registered KEK Citizens</span>
+            </div>
+            <div class="kpi-card">
+                <strong id="kpi-enrollments">0</strong>
+                <span>Academy Course Enrollments</span>
+            </div>
+            <div class="kpi-card">
+                <strong id="kpi-courses">0</strong>
+                <span>Custom Catalog Courses</span>
+            </div>
+            <div class="kpi-card">
+                <strong id="kpi-decrees">0</strong>
+                <span>Published Altar Decrees</span>
+            </div>
+        </div>
+
+        <div class="admin-tabs">
+            <button type="button" class="tab-btn active" onclick="switchAdminTab('members', this)">👥 KEK Citizens Roster</button>
+            <button type="button" class="tab-btn" onclick="switchAdminTab('academy', this)">📚 Academy &amp; Enrollments</button>
+            <button type="button" class="tab-btn" onclick="switchAdminTab('decrees', this)">🛡️ Altar Decrees Moderation</button>
+            <button type="button" class="tab-btn" onclick="switchAdminTab('audit', this)">📜 Master Audit Ledger</button>
+        </div>
+
+        <!-- TAB 1: MEMBERS DIRECTORY -->
+        <div id="tab-members" class="tab-panel active">
+            <div class="panel-box">
+                <h3 style="font-family: 'Cinzel', serif; color: var(--navy); margin-top: 0;">Registered KEK Citizens &amp; Dockets</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>KEK ID</th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>WhatsApp</th>
+                            <th>Ministry Docket</th>
+                            <th>Role</th>
+                        </tr>
+                    </thead>
+                    <tbody id="members-tbody">
+                        <tr><td colspan="6">Loading members...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- TAB 2: ACADEMY CATALOG & ENROLLMENTS -->
+        <div id="tab-academy" class="tab-panel">
+            <div class="panel-box">
+                <h3 style="font-family: 'Cinzel', serif; color: var(--navy); margin-top: 0;">Publish New Ekklesias Academy Course</h3>
+                <p style="color: var(--slate); font-size: 0.85rem; margin-bottom: 16px;">
+                    Courses published here are saved to <code>classes_catalog</code> and appear immediately on <strong>portal.html</strong> for student registration.
+                </p>
+                <form id="new-course-form">
+                    <div class="course-form-grid">
+                        <div class="form-group">
+                            <label for="c-id">Course Code (Unique)</label>
+                            <input type="text" id="c-id" required placeholder="e.g., KEK-501">
+                        </div>
+                        <div class="form-group">
+                            <label for="c-track">Governance Track</label>
+                            <input type="text" id="c-track" required placeholder="e.g., Territorial Legislation">
+                        </div>
+                        <div class="form-group">
+                            <label for="c-title">Course Title</label>
+                            <input type="text" id="c-title" required placeholder="e.g., Advanced Bloodline & Altar Audits">
+                        </div>
+                        <div class="form-group">
+                            <label for="c-instructor">Instructor</label>
+                            <input type="text" id="c-instructor" required value="Apostle Elizaphan Kamau Mwangi">
+                        </div>
+                        <div class="form-group">
+                            <label for="c-schedule">Schedule (EAT)</label>
+                            <input type="text" id="c-schedule" required placeholder="e.g., Fridays • 8:00 PM – 9:30 PM EAT">
+                        </div>
+                        <div class="form-group">
+                            <label for="c-meet">Live Classroom / Booking URL</label>
+                            <input type="url" id="c-meet" required value="https://calendar.app.google/xPmrk5LuasqAE9rw7">
+                        </div>
+                        <div class="form-group">
+                            <label for="c-drive">Study Guide / PDF URL</label>
+                            <input type="url" id="c-drive" required value="https://kingdomekklesiaskoinonia.org/#resources">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="c-desc">Course Syllabus Overview</label>
+                        <textarea id="c-desc" rows="2" required placeholder="Brief summary of legislative outcomes and study modules..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-gold">Publish Course to Student Portal</button>
+                    <div id="course-form-status" class="status-msg"></div>
+                </form>
+            </div>
+
+            <div class="panel-box">
+                <h3 style="font-family: 'Cinzel', serif; color: var(--navy); margin-top: 0;">Student Course Enrollments</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>KEK ID</th>
+                            <th>Student Name</th>
+                            <th>Email</th>
+                            <th>Course</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="enrollments-tbody">
+                        <tr><td colspan="5">Loading enrollments...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- TAB 3: ALTAR DECREES MODERATION -->
+        <div id="tab-decrees" class="tab-panel">
+            <div class="panel-box">
+                <h3 style="font-family: 'Cinzel', serif; color: var(--navy); margin-top: 0;">Live Watch Altar Decrees (Moderation)</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Watch</th>
+                            <th>Watchman (KEK ID)</th>
+                            <th>Decree Text</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="decrees-tbody">
+                        <tr><td colspan="4">Loading watch decrees...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- TAB 4: SYSTEM AUDIT LEDGER -->
+        <div id="tab-audit" class="tab-panel">
+            <div class="panel-box">
+                <h3 style="font-family: 'Cinzel', serif; color: var(--navy); margin-top: 0;">Master Immutable Audit Ledger (All Members)</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Timestamp (UTC)</th>
+                            <th>KEK ID</th>
+                            <th>Action Type</th>
+                            <th>Target</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody id="master-audit-tbody">
+                        <tr><td colspan="5">Loading master audit ledger...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="module">
+        import {
+            auth,
+            db,
+            googleProvider,
+            signInWithPopup,
+            signInWithEmailAndPassword,
+            signOut,
+            onAuthStateChanged,
+            doc,
+            getDoc,
+            setDoc,
+            collection,
+            getDocs,
+            writeAuditLog
+        } from "./firebase-config.js";
+        import { deleteDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+        let adminUser = null;
+        let adminProfile = null;
+
+        window.switchAdminTab = function(tabName, btn) {
+            document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+            document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+            btn.classList.add("active");
+            document.getElementById(`tab-${tabName}`).classList.add("active");
+        };
+
+        function showMsg(id, text, type) {
+            const el = document.getElementById(id);
+            el.textContent = text;
+            el.className = `status-msg ${type}`;
+        }
+
+        document.getElementById("admin-google-btn").addEventListener("click", async () => {
+            try {
+                await signInWithPopup(auth, googleProvider);
+            } catch (err) {
+                showMsg("admin-login-status", err.message, "error");
+            }
+        });
+
+        document.getElementById("admin-email-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const email = document.getElementById("admin-email").value.trim();
+            const pass = document.getElementById("admin-password").value;
+            try {
+                await signInWithEmailAndPassword(auth, email, pass);
+            } catch (err) {
+                showMsg("admin-login-status", err.message, "error");
+            }
+        });
+
+        const handleLogout = async () => { await signOut(auth); };
+        document.getElementById("admin-logout-btn").addEventListener("click", handleLogout);
+        document.getElementById("denied-signout-btn").addEventListener("click", handleLogout);
+
+        async function loadAllAdminData() {
+            // 1. Members
+            const memSnap = await getDocs(collection(db, "members"));
+            const members = [];
+            memSnap.forEach(d => members.push(d.data()));
+            document.getElementById("kpi-members").textContent = members.length;
+            document.getElementById("members-tbody").innerHTML = members.map(m => `
+                <tr>
+                    <td><strong>${m.kek_id || "—"}</strong></td>
+                    <td>${m.full_name || "—"}</td>
+                    <td>${m.email || "—"}</td>
+                    <td>${m.whatsapp || "—"}</td>
+                    <td>${m.office_role || "—"}</td>
+                    <td><strong>${m.role || "member"}</strong></td>
+                </tr>
+            `).join("") || '<tr><td colspan="6">No members found.</td></tr>';
+
+            // 2. Enrollments & Custom Courses
+            const enrSnap = await getDocs(collection(db, "class_enrollments"));
+            const enrollments = [];
+            enrSnap.forEach(d => enrollments.push(d.data()));
+            document.getElementById("kpi-enrollments").textContent = enrollments.length;
+            document.getElementById("enrollments-tbody").innerHTML = enrollments.map(e => `
+                <tr>
+                    <td><strong>${e.kek_id || "—"}</strong></td>
+                    <td>${e.full_name || "—"}</td>
+                    <td>${e.email || "—"}</td>
+                    <td>${e.class_id} — ${e.class_title}</td>
+                    <td>${e.status || "Enrolled"}</td>
+                </tr>
+            `).join("") || '<tr><td colspan="5">No enrollments recorded yet.</td></tr>';
+
+            const catSnap = await getDocs(collection(db, "classes_catalog"));
+            document.getElementById("kpi-courses").textContent = catSnap.size;
+
+            // 3. Watch Decrees
+            const decSnap = await getDocs(collection(db, "watch_decrees"));
+            const decrees = [];
+            decSnap.forEach(d => decrees.push({ id: d.id, ...d.data() }));
+            decrees.sort((a, b) => (b.created_at_iso || "").localeCompare(a.created_at_iso || ""));
+            document.getElementById("kpi-decrees").textContent = decrees.length;
+            document.getElementById("decrees-tbody").innerHTML = decrees.map(dec => `
+                <tr>
+                    <td>${dec.watch_name || "—"}</td>
+                    <td>${dec.full_name} (${dec.kek_id})</td>
+                    <td>${(dec.decree_text || "").replace(/</g, "&lt;")}</td>
+                    <td><button type="button" class="btn-danger del-decree-btn" data-id="${dec.id}">Remove</button></td>
+                </tr>
+            `).join("") || '<tr><td colspan="4">No watch decrees published yet.</td></tr>';
+
+            document.querySelectorAll(".del-decree-btn").forEach(btn => {
+                btn.addEventListener("click", async () => {
+                    if (!confirm("Remove this decree from the public Altar Ledger?")) return;
+                    const docId = btn.getAttribute("data-id");
+                    await deleteDoc(doc(db, "watch_decrees", docId));
+                    await writeAuditLog(adminUser.uid, adminProfile.kek_id, "ADMIN_DECREE_REMOVED", docId, "Moderated watch decree");
+                    await loadAllAdminData();
+                });
+            });
+
+            // 4. Master Audit Logs
+            const logSnap = await getDocs(collection(db, "kek_audit_logs"));
+            const logs = [];
+            logSnap.forEach(d => logs.push(d.data()));
+            logs.sort((a, b) => (b.client_time_iso || "").localeCompare(a.client_time_iso || ""));
+            document.getElementById("master-audit-tbody").innerHTML = logs.slice(0, 50).map(l => `
+                <tr>
+                    <td>${(l.client_time_iso || "").replace("T", " ").slice(0, 19)}</td>
+                    <td><strong>${l.kek_id || "—"}</strong></td>
+                    <td>${l.action_type || "—"}</td>
+                    <td>${l.target_id || "—"}</td>
+                    <td>${l.details || "—"}</td>
+                </tr>
+            `).join("") || '<tr><td colspan="5">No audit entries found.</td></tr>';
+        }
+
+        // Publish New Course to classes_catalog
+        document.getElementById("new-course-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const classId = document.getElementById("c-id").value.trim().toUpperCase();
+            const courseData = {
+                class_id: classId,
+                track: document.getElementById("c-track").value.trim(),
+                title: document.getElementById("c-title").value.trim(),
+                instructor: document.getElementById("c-instructor").value.trim(),
+                schedule: document.getElementById("c-schedule").value.trim(),
+                meet_link: document.getElementById("c-meet").value.trim(),
+                drive_url: document.getElementById("c-drive").value.trim(),
+                description: document.getElementById("c-desc").value.trim()
+            };
+
+            try {
+                await setDoc(doc(db, "classes_catalog", classId), courseData);
+                await writeAuditLog(adminUser.uid, adminProfile.kek_id, "ADMIN_COURSE_PUBLISHED", classId, `Published course: ${courseData.title}`);
+                showMsg("course-form-status", `Course ${classId} published and now live on portal.html.`, "success");
+                e.target.reset();
+                await loadAllAdminData();
+            } catch (err) {
+                showMsg("course-form-status", err.message, "error");
+            }
+        });
+
+        // Auth & Admin Role Gate
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                adminUser = null;
+                adminProfile = null;
+                document.getElementById("admin-login-view").style.display = "block";
+                document.getElementById("admin-denied-view").style.display = "none";
+                document.getElementById("admin-workspace").style.display = "none";
+                document.getElementById("admin-logout-btn").style.display = "none";
+                return;
+            }
+
+            const snap = await getDoc(doc(db, "members", user.uid));
+            const profile = snap.exists() ? snap.data() : null;
+
+            document.getElementById("admin-login-view").style.display = "none";
+            document.getElementById("admin-logout-btn").style.display = "inline-flex";
+
+            if (profile && profile.role === "admin") {
+                adminUser = user;
+                adminProfile = profile;
+                document.getElementById("admin-denied-view").style.display = "none";
+                document.getElementById("admin-workspace").style.display = "block";
+                await loadAllAdminData();
+            } else {
+                document.getElementById("admin-workspace").style.display = "none";
+                document.getElementById("admin-denied-view").style.display = "block";
+                document.getElementById("denied-details").textContent =
+                    `Signed in as ${user.email} (${profile ? profile.kek_id : "No Profile"}), which currently has role: "${profile ? profile.role : "none"}".`;
+            }
+        });
+    </script>
+</body>
+</html>
