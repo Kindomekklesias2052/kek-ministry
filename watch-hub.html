@@ -1,0 +1,13 @@
+// 5. Tabernacle of David 24/7 Watch Roster
+    match /watch_signups/{signupId} {
+      allow read: if true;
+      allow create: if request.auth != null && request.resource.data.uid == request.auth.uid;
+      allow update, delete: if request.auth != null && resource.data.uid == request.auth.uid;
+    }
+
+    // 6. Live Altar Reports & Watch Decrees
+    match /watch_decrees/{decreeId} {
+      allow read: if true;
+      allow create: if request.auth != null && request.resource.data.uid == request.auth.uid;
+      allow update, delete: if isAdmin();
+    }
