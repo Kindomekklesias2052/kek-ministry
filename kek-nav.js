@@ -12,7 +12,7 @@
     { icon: "🏛️", label: "Main Sanctuary", badge: "Home", href: "index.html", pageMatch: "index.html" },
     { icon: "⏱️", label: "24/7 Watch & Hebrew Cal", badge: "Live", href: "watch-hub.html", pageMatch: "watch-hub.html" },
     { icon: "🎓", label: "Member & Classes Portal", badge: "Portal", href: "portal.html", pageMatch: "portal.html" },
-    { icon: "📋", label: "Aaron & Hur Coverage", badge: "Watch", href: "aaron-hur.html", pageMatch: "aaron-hur.html" },
+    { icon: "📋", label: "Aaron & Hur Coverage Page", badge: "Watch", href: "intake.html", pageMatch: "intake.html" },
     { icon: "🔒", label: "Privacy & Confidentiality", badge: "Policy", href: "privacy.html", pageMatch: "privacy.html" }
   ];
 
@@ -59,9 +59,17 @@
         body.kek-left-nav-enabled {
           padding-left: var(--kek-left-w);
           padding-right: 0;
+          overflow-x: hidden;
         }
 
-        /* Hide duplicate top row nav bars on subpages so the left sidebar is primary navigation */
+        /* Prevent duplicate sidebars/rails from splitting the page into two columns */
+        body.kek-left-nav-enabled aside:not(.kek-left-sidebar),
+        body.kek-left-nav-enabled [class*="rail"]:not(.kek-left-sidebar):not(.kek-left-sidebar *),
+        body.kek-left-nav-enabled [id*="rail"]:not(.kek-left-sidebar):not(.kek-left-sidebar *) {
+          display: none !important;
+        }
+
+        /* Hide duplicate top horizontal nav bars on subpages */
         body.kek-left-nav-enabled.kek-is-subpage header nav,
         body.kek-left-nav-enabled.kek-is-subpage header .nav-links,
         body.kek-left-nav-enabled.kek-is-subpage .kek-shared-return-bar {
@@ -309,12 +317,11 @@
     if (isHomePage) {
       const chambers = Array.from(document.querySelectorAll("[data-chamber], .chamber-section"));
       if (chambers.length > 0 && readingMode === "focused" && targetChamber) {
-        chambers.forEach((el) => {
-          const elChamber = el.getAttribute("data-chamber") || el.id;
-          el.style.display = elChamber === targetChamber ? "" : "none";
-        });
         const matched = document.querySelector(`[data-chamber="${targetChamber}"], #${targetChamber}`);
         if (matched) {
+          chambers.forEach((el) => {
+            el.style.display = el === matched || matched.contains(el) ? "" : "none";
+          });
           matched.style.display = "";
           matched.scrollIntoView({ behavior: "smooth", block: "start" });
         }
