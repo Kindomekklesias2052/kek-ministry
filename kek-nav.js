@@ -1,19 +1,25 @@
 (function () {
   const MODE_KEY = "kek_reading_mode";
+  const HIDDEN_KEY = "kek_subpage_nav_hidden";
   const SIDEBAR_WIDTH = "284px";
 
   const currentFile = (window.location.pathname.split("/").pop() || "index.html").toLowerCase();
   const isHomePage = currentFile === "" || currentFile === "index.html";
 
-  // Let index.html manage its own built-in left chamber rail without duplicate sidebars
+  // index.html uses its own built-in chamber rail without loading kek-nav.js
   if (isHomePage) {
-    document.body.classList.remove("kek-left-nav-enabled", "kek-right-col-active", "kek-is-subpage");
+    document.body.classList.remove(
+      "kek-left-nav-enabled",
+      "kek-left-nav-hidden",
+      "kek-right-col-active",
+      "kek-is-subpage"
+    );
     return;
   }
 
   const params = new URLSearchParams(window.location.search);
-  const activeChamber = params.get("chamber") || "";
   let readingMode = localStorage.getItem(MODE_KEY) || "focused";
+  let isHidden = localStorage.getItem(HIDDEN_KEY) === "1";
 
   const MAIN_PAGES = [
     { icon: "🏛️", label: "Main Sanctuary", badge: "Home", href: "index.html", pageMatch: "index.html" },
@@ -67,6 +73,11 @@
           padding-left: var(--kek-left-w);
           padding-right: 0;
           overflow-x: hidden;
+          transition: padding-left 0.22s ease;
+        }
+
+        body.kek-left-nav-enabled.kek-left-nav-hidden {
+          padding-left: 0;
         }
 
         body.kek-left-nav-enabled.kek-is-subpage header nav,
@@ -89,11 +100,85 @@
         color: #e2e8f0;
         font-family: 'Montserrat', sans-serif;
         z-index: 1500;
-        padding: 16px 12px 28px;
+        padding: 14px 12px 28px;
         overflow-y: auto;
         scrollbar-width: thin;
         scrollbar-color: rgba(197, 155, 39, 0.4) transparent;
         transition: transform 0.22s ease;
+      }
+
+      @media (min-width: 981px) {
+        body.kek-left-nav-hidden .kek-left-sidebar {
+          transform: translateX(-100%);
+        }
+      }
+
+      .kek-left-top-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 4px 6px 10px;
+        margin-bottom: 4px;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+      }
+
+      .kek-left-brand-label {
+        font-family: 'Cinzel', serif;
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: var(--kek-gold-bright);
+        letter-spacing: 0.6px;
+      }
+
+      .kek-left-hide-btn {
+        background: rgba(197, 155, 39, 0.14);
+        color: var(--kek-gold-bright);
+        border: 1px solid rgba(197, 155, 39, 0.45);
+        border-radius: 7px;
+        padding: 5px 10px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.72rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+
+      .kek-left-hide-btn:hover {
+        background: var(--kek-gold);
+        color: #091324;
+      }
+
+      .kek-left-unhide-btn {
+        display: none;
+        position: fixed;
+        top: 16px;
+        left: 16px;
+        z-index: 1600;
+        background: #0c1b33;
+        color: var(--kek-gold-bright);
+        border: 1.5px solid var(--kek-gold);
+        border-radius: 999px;
+        padding: 9px 14px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.76rem;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+        align-items: center;
+        gap: 6px;
+        transition: all 0.15s ease;
+      }
+
+      .kek-left-unhide-btn:hover {
+        background: var(--kek-gold);
+        color: #091324;
+      }
+
+      @media (min-width: 981px) {
+        body.kek-left-nav-hidden .kek-left-unhide-btn {
+          display: inline-flex;
+        }
       }
 
       .kek-left-group-label {
@@ -292,6 +377,21 @@
   document.body.classList.remove("kek-right-col-active");
   document.body.classList.add("kek-left-nav-enabled", "kek-is-subpage");
 
+  function syncNavHiddenState(hidden) {
+    isHidden = Boolean(hidden);
+    localStorage.setItem(HIDDEN_KEY, isHidden ? "1" : "0");
+
+    if (window.innerWidth > 980) {
+      document.body.classList.toggle("kek-left-nav-hidden", isHidden);
+      sidebar.classList.remove("is-open");
+      toggleBtn.setAttribute("aria-expanded", "false");
+    } else {
+      sidebar.classList.toggle("is-open", !isHidden);
+      toggleBtn.textContent = isHidden ? "☰ Unhide Nav" : "✕ Hide Nav";
+      toggleBtn.setAttribute("aria-expanded", String(!isHidden));
+    }
+  }
+
   function applyReadingMode(mode) {
     readingMode = mode === "scroll" ? "scroll" : "focused";
     localStorage.setItem(MODE_KEY, readingMode);
@@ -351,6 +451,10 @@
   sidebar.className = "kek-left-sidebar";
   sidebar.setAttribute("aria-label", "KEK Sanctuary Navigation");
   sidebar.innerHTML = `
+    <div class="kek-left-top-bar">
+      <span class="kek-left-brand-label">KEK Navigation</span>
+      <button type="button" class="kek-left-hide-btn" id="kek-left-hide-btn" title="Hide Navigation">✕ Hide</button>
+    </div>
     ${mainPagesHtml}
     ${groupsHtml}
 
@@ -367,15 +471,38 @@
     </div>
   `;
 
+  const unhideBtn = document.createElement("button");
+  unhideBtn.type = "button";
+  unhideBtn.className = "kek-left-unhide-btn";
+  unhideBtn.id = "kek-left-unhide-btn";
+  unhideBtn.innerHTML = `<span>▶</span><span>Unhide Nav</span>`;
+
   const toggleBtn = document.createElement("button");
   toggleBtn.type = "button";
   toggleBtn.className = "kek-left-mobile-btn";
-  toggleBtn.textContent = "☰ Navigation";
-  toggleBtn.setAttribute("aria-expanded", "false");
+  toggleBtn.textContent = isHidden ? "☰ Unhide Nav" : "☰ Navigation";
+  toggleBtn.setAttribute("aria-expanded", String(!isHidden));
+
+  sidebar.querySelector("#kek-left-hide-btn")?.addEventListener("click", () => {
+    syncNavHiddenState(true);
+  });
+
+  unhideBtn.addEventListener("click", () => {
+    syncNavHiddenState(false);
+  });
 
   toggleBtn.addEventListener("click", () => {
-    const isOpen = sidebar.classList.toggle("is-open");
-    toggleBtn.setAttribute("aria-expanded", String(isOpen));
+    syncNavHiddenState(!isHidden);
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 980) {
+      document.body.classList.toggle("kek-left-nav-hidden", isHidden);
+      sidebar.classList.remove("is-open");
+    } else {
+      document.body.classList.remove("kek-left-nav-hidden");
+      sidebar.classList.toggle("is-open", !isHidden);
+    }
   });
 
   sidebar.querySelectorAll(".kek-left-layout-btn").forEach((btn) => {
@@ -386,13 +513,19 @@
 
   sidebar.querySelectorAll(".kek-left-link").forEach((link) => {
     link.addEventListener("click", () => {
-      sidebar.classList.remove("is-open");
-      toggleBtn.setAttribute("aria-expanded", "false");
+      if (window.innerWidth <= 980) {
+        syncNavHiddenState(true);
+      }
     });
   });
 
   document.body.insertBefore(sidebar, document.body.firstChild);
+  document.body.appendChild(unhideBtn);
   document.body.appendChild(toggleBtn);
+
+  if (window.innerWidth > 980 && isHidden) {
+    document.body.classList.add("kek-left-nav-hidden");
+  }
 
   applyReadingMode(readingMode);
 })();
