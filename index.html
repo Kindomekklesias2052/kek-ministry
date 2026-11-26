@@ -86,7 +86,7 @@
             --rail-width: 284px;
         }
 
-        * {
+        *, *::before, *::after {
             box-sizing: border-box;
         }
 
@@ -2481,9 +2481,10 @@
         </div>
     </div>
 
-    <!-- UNIFIED NAVIGATION, HIDE/UNHIDE RAIL, SUB-TABS & LIVE WATCH CLOCK -->
+    <!-- SINGLE UNIFIED CONTROLLER FOR CHAMBERS, RAIL, SUB-TABS, STEPPER & WATCH CLOCK -->
     <script>
-        const chamberOrder = [
+    (function () {
+        const CHAMBERS = [
             "about",
             "mandates",
             "goshen-pillars",
@@ -2496,143 +2497,6 @@
             "gallery"
         ];
 
-        let activeChamberId = "about";
-        let isFullScrollMode = false;
-        let isRailHidden = false;
-
-        const railButtons = Array.from(document.querySelectorAll(".rail-nav-btn"));
-        const chamberPanels = Array.from(document.querySelectorAll(".chamber-panel"));
-        const leftRail = document.getElementById("left-chamber-rail");
-        const headerRailToggle = document.getElementById("header-rail-toggle");
-        const headerRailIcon = document.getElementById("header-rail-icon");
-        const headerRailLabel = document.getElementById("header-rail-label");
-        const railInnerHideBtn = document.getElementById("rail-inner-hide-btn");
-        const floatingUnhideBtn = document.getElementById("floating-unhide-rail");
-        const stepperTag = document.getElementById("stepper-tag");
-        const stepperTitle = document.getElementById("stepper-title");
-        const prevBtn = document.getElementById("prev-chamber-btn");
-        const nextBtn = document.getElementById("next-chamber-btn");
-        const focusedModeBtn = document.getElementById("mode-focused-btn");
-        const fullScrollModeBtn = document.getElementById("mode-fullscroll-btn");
-
-        function syncRailVisibilityUI() {
-            const isMobile = window.innerWidth <= 980;
-            if (isMobile) {
-                const openMobile = leftRail.classList.contains("mobile-open");
-                headerRailIcon.textContent = openMobile ? "✕" : "☰";
-                headerRailLabel.textContent = openMobile ? "Close Rail" : "Chambers";
-            } else {
-                document.body.classList.toggle("rail-hidden", isRailHidden);
-                headerRailIcon.textContent = isRailHidden ? "▶" : "◀";
-                headerRailLabel.textContent = isRailHidden ? "Unhide Rail" : "Hide Rail";
-            }
-        }
-
-        function setRailHidden(hidden) {
-            const isMobile = window.innerWidth <= 980;
-            if (isMobile) {
-                leftRail.classList.toggle("mobile-open", !hidden);
-            } else {
-                isRailHidden = Boolean(hidden);
-                try {
-                    localStorage.setItem("kek_rail_hidden", isRailHidden ? "1" : "0");
-                } catch (_) {}
-            }
-            syncRailVisibilityUI();
-        }
-
-        function toggleRail() {
-            const isMobile = window.innerWidth <= 980;
-            if (isMobile) {
-                leftRail.classList.toggle("mobile-open");
-                syncRailVisibilityUI();
-            } else {
-                setRailHidden(!isRailHidden);
-            }
-        }
-
-        try {
-            if (localStorage.getItem("kek_rail_hidden") === "1") {
-                isRailHidden = true;
-            }
-        } catch (_) {}
-        syncRailVisibilityUI();
-
-        headerRailToggle.addEventListener("click", (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            toggleRail();
-        });
-        railInnerHideBtn.addEventListener("click", (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            setRailHidden(true);
-        });
-        floatingUnhideBtn.addEventListener("click", (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            setRailHidden(false);
-        });
-
-        window.addEventListener("resize", () => {
-            if (window.innerWidth > 980) {
-                leftRail.classList.remove("mobile-open");
-            }
-            syncRailVisibilityUI();
-        });
-
-        function updateStepperUI(chamberId) {
-            const idx = chamberOrder.indexOf(chamberId);
-            const panel = document.getElementById(chamberId);
-            const label = panel?.getAttribute("data-chamber-label") || "Chamber";
-            stepperTag.textContent = `Chamber ${idx + 1} of ${chamberOrder.length}`;
-            stepperTitle.textContent = label;
-            prevBtn.disabled = idx <= 0;
-            nextBtn.disabled = idx >= chamberOrder.length - 1;
-        }
-
-        function activateChamber(chamberId, opts = {}) {
-            if (!chamberOrder.includes(chamberId)) return false;
-            const shouldScroll = opts.scroll !== undefined ? Boolean(opts.scroll) : isFullScrollMode;
-            activeChamberId = chamberId;
-
-            railButtons.forEach(btn => {
-                btn.classList.toggle("active", btn.getAttribute("data-chamber") === chamberId);
-            });
-
-            if (!isFullScrollMode) {
-                chamberPanels.forEach(panel => {
-                    panel.classList.toggle("active-chamber", panel.id === chamberId);
-                });
-            }
-
-            updateStepperUI(chamberId);
-
-            if (leftRail.classList.contains("mobile-open")) {
-                leftRail.classList.remove("mobile-open");
-                syncRailVisibilityUI();
-            }
-
-            if (shouldScroll) {
-                const target = document.getElementById(chamberId);
-                if (target) {
-                    const y = target.getBoundingClientRect().top + window.scrollY - 76;
-                    window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
-                }
-            } else if (!isFullScrollMode) {
-                const stepperTop = document.querySelector(".stage-stepper")?.getBoundingClientRect().top;
-                if (stepperTop !== undefined && stepperTop < 58) {
-                    window.scrollTo({ top: Math.max(0, window.scrollY + stepperTop - 76), behavior: "smooth" });
-                }
-            }
-            return true;
-        }
-
-        window.activateChamber = (id, scroll = false) => activateChamber(id, { scroll });
-
-        /* ==============================================================
-           GOSHEN 8 PILLARS INTERACTIVE SUB-TABS
-        ============================================================== */
         const GOSHEN_PILLARS_DATA = {
             "1": {
                 num: "Pillar 01 of 08",
@@ -2708,12 +2572,111 @@
             }
         };
 
-        const goshenAllView = document.getElementById("goshen-all-view");
-        const goshenSingleView = document.getElementById("goshen-single-view");
-        const goshenTabBtns = Array.from(document.querySelectorAll("[data-pillar-tab]"));
+        let activeChamberId = "about";
+        let isFullScrollMode = false;
+        let isRailHidden = false;
+
+        function syncRailVisibilityUI() {
+            const leftRail = document.getElementById("left-chamber-rail");
+            const headerRailIcon = document.getElementById("header-rail-icon");
+            const headerRailLabel = document.getElementById("header-rail-label");
+            if (!leftRail || !headerRailIcon || !headerRailLabel) return;
+
+            const isMobile = window.innerWidth <= 980;
+            if (isMobile) {
+                const openMobile = leftRail.classList.contains("mobile-open");
+                headerRailIcon.textContent = openMobile ? "✕" : "☰";
+                headerRailLabel.textContent = openMobile ? "Close Rail" : "Chambers";
+            } else {
+                document.body.classList.toggle("rail-hidden", isRailHidden);
+                headerRailIcon.textContent = isRailHidden ? "▶" : "◀";
+                headerRailLabel.textContent = isRailHidden ? "Unhide Rail" : "Hide Rail";
+            }
+        }
+
+        function setRailHidden(hidden) {
+            const leftRail = document.getElementById("left-chamber-rail");
+            if (!leftRail) return;
+            const isMobile = window.innerWidth <= 980;
+            if (isMobile) {
+                leftRail.classList.toggle("mobile-open", !hidden);
+            } else {
+                isRailHidden = Boolean(hidden);
+                try {
+                    localStorage.setItem("kek_rail_hidden", isRailHidden ? "1" : "0");
+                } catch (_) {}
+            }
+            syncRailVisibilityUI();
+        }
+
+        function updateStepperUI(chamberId) {
+            const idx = CHAMBERS.indexOf(chamberId);
+            const panel = document.getElementById(chamberId);
+            const stepperTag = document.getElementById("stepper-tag");
+            const stepperTitle = document.getElementById("stepper-title");
+            const prevBtn = document.getElementById("prev-chamber-btn");
+            const nextBtn = document.getElementById("next-chamber-btn");
+
+            if (stepperTag && idx !== -1) stepperTag.textContent = `Chamber ${idx + 1} of ${CHAMBERS.length}`;
+            if (stepperTitle && panel) {
+                stepperTitle.textContent = panel.getAttribute("data-chamber-label") || chamberId;
+            }
+            if (prevBtn) prevBtn.disabled = idx <= 0;
+            if (nextBtn) nextBtn.disabled = idx === -1 || idx >= CHAMBERS.length - 1;
+        }
+
+        function activateChamber(chamberId, opts = {}) {
+            if (!CHAMBERS.includes(chamberId)) return false;
+            const shouldScroll = opts.scroll !== undefined ? Boolean(opts.scroll) : isFullScrollMode;
+            activeChamberId = chamberId;
+
+            document.querySelectorAll("[data-chamber]").forEach((btn) => {
+                btn.classList.toggle("active", btn.getAttribute("data-chamber") === chamberId);
+            });
+
+            if (!isFullScrollMode) {
+                document.querySelectorAll(".chamber-panel").forEach((panel) => {
+                    panel.classList.toggle("active-chamber", panel.id === chamberId);
+                });
+            }
+
+            updateStepperUI(chamberId);
+
+            try {
+                const url = new URL(window.location.href);
+                url.searchParams.set("chamber", chamberId);
+                window.history.replaceState({ chamber: chamberId }, "", url.toString());
+            } catch (_) {}
+
+            const leftRail = document.getElementById("left-chamber-rail");
+            if (leftRail && leftRail.classList.contains("mobile-open")) {
+                leftRail.classList.remove("mobile-open");
+                syncRailVisibilityUI();
+            }
+
+            if (shouldScroll) {
+                const target = document.getElementById(chamberId);
+                if (target) {
+                    const y = target.getBoundingClientRect().top + window.scrollY - 76;
+                    window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+                }
+            } else if (!isFullScrollMode) {
+                const stepperTop = document.querySelector(".stage-stepper")?.getBoundingClientRect().top;
+                if (stepperTop !== undefined && stepperTop < 58) {
+                    window.scrollTo({ top: Math.max(0, window.scrollY + stepperTop - 76), behavior: "smooth" });
+                }
+            }
+            return true;
+        }
+
+        window.activateChamber = (id, scroll = false) => activateChamber(id, { scroll });
 
         function renderGoshenSubTab(tabKey) {
-            goshenTabBtns.forEach(b => {
+            const goshenAllView = document.getElementById("goshen-all-view");
+            const goshenSingleView = document.getElementById("goshen-single-view");
+            if (!goshenAllView || !goshenSingleView) return;
+
+            document.querySelectorAll("[data-pillar-tab]").forEach((b) => {
                 b.classList.toggle("active", b.getAttribute("data-pillar-tab") === tabKey);
             });
 
@@ -2768,33 +2731,27 @@
             `;
         }
 
-        /* ==============================================================
-           COURTS OF HEAVEN 101 INTERACTIVE SUB-TABS
-        ============================================================== */
-        const courtTabBtns = Array.from(document.querySelectorAll("[data-court-tab]"));
-        const courtPanes = ["court-overview", "court-sessions", "court-booking"].map(id => document.getElementById(id));
-
         function renderCourtSubTab(targetPaneId) {
-            if (!document.getElementById(targetPaneId)) return;
-            courtTabBtns.forEach(btn => {
+            const pane = document.getElementById(targetPaneId);
+            if (!pane) return;
+
+            document.querySelectorAll("[data-court-tab]").forEach((btn) => {
                 if (btn.classList.contains("subtab-btn")) {
                     btn.classList.toggle("active", btn.getAttribute("data-court-tab") === targetPaneId);
                 }
             });
-            courtPanes.forEach(pane => {
-                if (pane) {
-                    pane.classList.toggle("active", pane.id === targetPaneId);
-                }
+
+            ["court-overview", "court-sessions", "court-booking"].forEach((id) => {
+                const el = document.getElementById(id);
+                if (el) el.classList.toggle("active", id === targetPaneId);
             });
         }
 
-        /* ==============================================================
-           UNIFIED DELEGATED NAVIGATION HANDLER
-        ============================================================== */
         document.addEventListener("click", (e) => {
             const pillarBtn = e.target.closest("[data-pillar-tab]");
             if (pillarBtn) {
                 e.preventDefault();
+                activateChamber("goshen-pillars");
                 renderGoshenSubTab(pillarBtn.getAttribute("data-pillar-tab"));
                 return;
             }
@@ -2802,6 +2759,7 @@
             const openPillarCard = e.target.closest("[data-open-pillar]");
             if (openPillarCard) {
                 e.preventDefault();
+                activateChamber("goshen-pillars");
                 renderGoshenSubTab(openPillarCard.getAttribute("data-open-pillar"));
                 return;
             }
@@ -2824,7 +2782,7 @@
             const gotoBtn = e.target.closest("[data-goto-chamber]");
             if (gotoBtn) {
                 const targetId = gotoBtn.getAttribute("data-goto-chamber");
-                if (chamberOrder.includes(targetId)) {
+                if (CHAMBERS.includes(targetId)) {
                     e.preventDefault();
                     activateChamber(targetId);
                     return;
@@ -2834,71 +2792,124 @@
             const anchorLink = e.target.closest('a[href^="#"]');
             if (anchorLink) {
                 const rawHash = anchorLink.getAttribute("href").slice(1);
-                if (chamberOrder.includes(rawHash)) {
+                if (CHAMBERS.includes(rawHash)) {
                     e.preventDefault();
                     activateChamber(rawHash);
                     return;
                 }
             }
 
+            const leftRail = document.getElementById("left-chamber-rail");
+            const headerRailToggle = document.getElementById("header-rail-toggle");
             if (
+                leftRail &&
                 leftRail.classList.contains("mobile-open") &&
                 !leftRail.contains(e.target) &&
-                !headerRailToggle.contains(e.target)
+                (!headerRailToggle || !headerRailToggle.contains(e.target))
             ) {
                 leftRail.classList.remove("mobile-open");
                 syncRailVisibilityUI();
             }
         });
 
-        prevBtn.addEventListener("click", () => {
-            const idx = chamberOrder.indexOf(activeChamberId);
-            if (idx > 0) activateChamber(chamberOrder[idx - 1]);
+        document.addEventListener("DOMContentLoaded", () => {
+            try {
+                if (localStorage.getItem("kek_rail_hidden") === "1") {
+                    isRailHidden = true;
+                }
+            } catch (_) {}
+            syncRailVisibilityUI();
+
+            document.getElementById("header-rail-toggle")?.addEventListener("click", (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const isMobile = window.innerWidth <= 980;
+                if (isMobile) {
+                    document.getElementById("left-chamber-rail")?.classList.toggle("mobile-open");
+                    syncRailVisibilityUI();
+                } else {
+                    setRailHidden(!isRailHidden);
+                }
+            });
+
+            document.getElementById("rail-inner-hide-btn")?.addEventListener("click", (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setRailHidden(true);
+            });
+
+            document.getElementById("floating-unhide-rail")?.addEventListener("click", (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setRailHidden(false);
+            });
+
+            document.getElementById("prev-chamber-btn")?.addEventListener("click", () => {
+                const idx = CHAMBERS.indexOf(activeChamberId);
+                if (idx > 0) activateChamber(CHAMBERS[idx - 1]);
+            });
+
+            document.getElementById("next-chamber-btn")?.addEventListener("click", () => {
+                const idx = CHAMBERS.indexOf(activeChamberId);
+                if (idx !== -1 && idx < CHAMBERS.length - 1) activateChamber(CHAMBERS[idx + 1]);
+            });
+
+            const focusedModeBtn = document.getElementById("mode-focused-btn");
+            const fullScrollModeBtn = document.getElementById("mode-fullscroll-btn");
+
+            focusedModeBtn?.addEventListener("click", () => {
+                isFullScrollMode = false;
+                document.body.classList.remove("scroll-all-mode");
+                focusedModeBtn.classList.add("active");
+                fullScrollModeBtn?.classList.remove("active");
+                activateChamber(activeChamberId, { scroll: false });
+            });
+
+            fullScrollModeBtn?.addEventListener("click", () => {
+                isFullScrollMode = true;
+                document.body.classList.add("scroll-all-mode");
+                fullScrollModeBtn.classList.add("active");
+                focusedModeBtn?.classList.remove("active");
+                activateChamber(activeChamberId, { scroll: true });
+            });
+
+            const params = new URLSearchParams(window.location.search);
+            const fromQuery = params.get("chamber");
+            const fromHash = window.location.hash ? window.location.hash.slice(1) : "";
+            const initialChamber = CHAMBERS.includes(fromQuery)
+                ? fromQuery
+                : CHAMBERS.includes(fromHash)
+                ? fromHash
+                : "about";
+
+            activateChamber(initialChamber, { scroll: Boolean(fromQuery || fromHash) });
         });
 
-        nextBtn.addEventListener("click", () => {
-            const idx = chamberOrder.indexOf(activeChamberId);
-            if (idx < chamberOrder.length - 1) activateChamber(chamberOrder[idx + 1]);
-        });
-
-        focusedModeBtn.addEventListener("click", () => {
-            isFullScrollMode = false;
-            document.body.classList.remove("scroll-all-mode");
-            focusedModeBtn.classList.add("active");
-            fullScrollModeBtn.classList.remove("active");
-            activateChamber(activeChamberId, { scroll: false });
-        });
-
-        fullScrollModeBtn.addEventListener("click", () => {
-            isFullScrollMode = true;
-            document.body.classList.add("scroll-all-mode");
-            fullScrollModeBtn.classList.add("active");
-            focusedModeBtn.classList.remove("active");
-            activateChamber(activeChamberId, { scroll: true });
+        window.addEventListener("resize", () => {
+            if (window.innerWidth > 980) {
+                document.getElementById("left-chamber-rail")?.classList.remove("mobile-open");
+            }
+            syncRailVisibilityUI();
         });
 
         window.addEventListener("scroll", () => {
             if (!isFullScrollMode) return;
-            let currentBest = chamberOrder[0];
-            for (const id of chamberOrder) {
+            let currentBest = CHAMBERS[0];
+            for (const id of CHAMBERS) {
                 const el = document.getElementById(id);
-                if (!el) continue;
-                if (el.getBoundingClientRect().top <= 180) {
+                if (el && el.getBoundingClientRect().top <= 180) {
                     currentBest = id;
                 }
             }
             if (currentBest !== activeChamberId) {
                 activeChamberId = currentBest;
-                railButtons.forEach(btn => {
+                document.querySelectorAll("[data-chamber]").forEach((btn) => {
                     btn.classList.toggle("active", btn.getAttribute("data-chamber") === activeChamberId);
                 });
                 updateStepperUI(activeChamberId);
             }
         }, { passive: true });
 
-        /* ==============================================================
-           LIVE JERUSALEM WATCH & HEBREW DATE CLOCK
-        ============================================================== */
         function getWatchWindowLabel(hour24) {
             if (hour24 >= 0 && hour24 < 3) return "1st Watch (Midnight – 3 AM)";
             if (hour24 >= 3 && hour24 < 6) return "2nd Watch (3 AM – 6 AM)";
@@ -2912,23 +2923,20 @@
 
         function updateLiveWatchAndHebrewDate() {
             const now = new Date();
-            const eatFormatter = new Intl.DateTimeFormat("en-GB", {
+            const eatStr = new Intl.DateTimeFormat("en-GB", {
                 timeZone: "Africa/Nairobi",
                 hour: "2-digit",
                 minute: "2-digit",
                 second: "2-digit",
                 hour12: false
-            });
-            const jerFormatter = new Intl.DateTimeFormat("en-GB", {
+            }).format(now);
+            const jerStr = new Intl.DateTimeFormat("en-GB", {
                 timeZone: "Asia/Jerusalem",
                 hour: "2-digit",
                 minute: "2-digit",
                 second: "2-digit",
                 hour12: false
-            });
-
-            const eatStr = eatFormatter.format(now);
-            const jerStr = jerFormatter.format(now);
+            }).format(now);
             const eatHour = parseInt(eatStr.split(":")[0], 10) || 0;
             const watchLabel = getWatchWindowLabel(eatHour);
 
@@ -2955,38 +2963,38 @@
 
         updateLiveWatchAndHebrewDate();
         setInterval(updateLiveWatchAndHebrewDate, 1000);
+    })();
     </script>
 
     <!-- Document Search & Filter Script -->
     <script>
-        const docSearchInput = document.getElementById('doc-search-input');
-        const filterPills = document.querySelectorAll('.filter-pill');
-        const resourceCards = document.querySelectorAll('#resources-grid .resource-card');
-        let activeFilter = 'all';
+        (function () {
+            const docSearchInput = document.getElementById('doc-search-input');
+            const filterPills = document.querySelectorAll('.filter-pill');
+            const resourceCards = document.querySelectorAll('#resources-grid .resource-card');
+            let activeFilter = 'all';
 
-        function filterDocuments() {
-            const query = (docSearchInput.value || '').toLowerCase().trim();
-            resourceCards.forEach(card => {
-                const category = card.getAttribute('data-category');
-                const text = card.innerText.toLowerCase();
-                const matchesCategory = activeFilter === 'all' || category === activeFilter;
-                const matchesQuery = !query || text.includes(query);
-                card.style.display = (matchesCategory && matchesQuery) ? 'flex' : 'none';
+            function filterDocuments() {
+                const query = (docSearchInput?.value || '').toLowerCase().trim();
+                resourceCards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+                    const text = card.innerText.toLowerCase();
+                    const matchesCategory = activeFilter === 'all' || category === activeFilter;
+                    const matchesQuery = !query || text.includes(query);
+                    card.style.display = (matchesCategory && matchesQuery) ? 'flex' : 'none';
+                });
+            }
+
+            docSearchInput?.addEventListener('input', filterDocuments);
+            filterPills.forEach(pill => {
+                pill.addEventListener('click', () => {
+                    filterPills.forEach(p => p.classList.remove('active'));
+                    pill.classList.add('active');
+                    activeFilter = pill.getAttribute('data-filter');
+                    filterDocuments();
+                });
             });
-        }
-
-        if (docSearchInput) {
-            docSearchInput.addEventListener('input', filterDocuments);
-        }
-
-        filterPills.forEach(pill => {
-            pill.addEventListener('click', () => {
-                filterPills.forEach(p => p.classList.remove('active'));
-                pill.classList.add('active');
-                activeFilter = pill.getAttribute('data-filter');
-                filterDocuments();
-            });
-        });
+        })();
     </script>
 
     <!-- Unified Decap CMS & GitHub Gallery Loader -->
@@ -3085,5 +3093,7 @@
         if (e.target.id === 'pwa-install-modal') closeKEKInstallModal();
       });
     </script>
+
+    <script src="kek-nav.js" defer></script>
 </body>
 </html>
