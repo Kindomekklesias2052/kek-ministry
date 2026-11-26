@@ -88,6 +88,11 @@
             --slate: #475569;
             --light-bg: #f8fafc;
             --white: #ffffff;
+            --rail-width: 278px;
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         html {
@@ -97,46 +102,48 @@
         body {
             font-family: 'Montserrat', sans-serif;
             color: #1e293b;
-            background-color: var(--white);
+            background-color: var(--light-bg);
             margin: 0;
             overflow-x: hidden;
         }
 
-        /* STICKY EXECUTIVE HEADER */
-        header {
-            background: rgba(12, 27, 51, 0.96);
+        /* TOP SANCTUARY BAR */
+        .topbar {
+            background: rgba(7, 16, 32, 0.98);
             backdrop-filter: blur(10px);
             border-bottom: 2px solid rgba(197, 155, 39, 0.45);
             position: sticky;
             top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            z-index: 1200;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
         }
 
-        .nav-container {
-            max-width: 1260px;
+        .topbar-inner {
+            max-width: 1520px;
             margin: 0 auto;
-            padding: 12px 24px;
+            padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 11px;
             text-decoration: none;
             font-family: 'Cinzel', serif;
             font-weight: 700;
-            font-size: 1.05rem;
+            font-size: 0.98rem;
             color: var(--white);
             letter-spacing: 0.5px;
         }
 
         .logo img {
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             border-radius: 10px;
             border: 1.5px solid var(--gold);
             object-fit: cover;
@@ -146,141 +153,52 @@
             color: var(--gold);
         }
 
-        header nav {
+        .topbar-actions {
             display: flex;
             align-items: center;
-            gap: 18px;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
-        header nav a {
+        .top-link {
             color: #e2e8f0;
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
-            letter-spacing: 0.3px;
-            transition: color 0.25s ease;
+            padding: 6px 10px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
         }
 
-        header nav a:hover {
+        .top-link:hover {
             color: var(--gold-bright);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .top-link.highlight {
+            color: var(--gold-bright);
+            border: 1px solid rgba(197, 155, 39, 0.35);
         }
 
         .btn-install-nav {
             background: rgba(197, 155, 39, 0.16);
             color: var(--gold-bright);
             border: 1px solid var(--gold);
-            padding: 7px 14px;
+            padding: 7px 12px;
             border-radius: 6px;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 700;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            transition: all 0.25s ease;
+            transition: all 0.2s ease;
             font-family: 'Montserrat', sans-serif;
         }
 
         .btn-install-nav:hover {
             background: var(--gold);
             color: var(--navy);
-        }
-
-        /* HAMBURGER */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 28px;
-            height: 20px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            z-index: 1010;
-        }
-
-        .hamburger .bar {
-            width: 100%;
-            height: 3px;
-            background-color: var(--white);
-            border-radius: 2px;
-            transition: all 0.3s ease;
-        }
-
-        /* ROYAL HERO SECTION */
-        .hero {
-            background: radial-gradient(circle at top center, #162f59 0%, #0c1b33 55%, #060e1c 100%);
-            color: var(--white);
-            padding: 80px 24px 75px;
-            text-align: center;
-            position: relative;
-            border-bottom: 4px solid var(--gold);
-        }
-
-        .hero-content {
-            max-width: 960px;
-            margin: 0 auto;
-        }
-
-        .hero-crest {
-            width: 132px;
-            height: 132px;
-            border-radius: 18px;
-            border: 2.5px solid var(--gold);
-            box-shadow: 0 0 34px rgba(197, 155, 39, 0.42);
-            object-fit: cover;
-            margin-bottom: 20px;
-        }
-
-        .hero-status-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(197, 155, 39, 0.14);
-            border: 1px solid rgba(197, 155, 39, 0.5);
-            color: var(--gold-bright);
-            padding: 6px 16px;
-            border-radius: 999px;
-            font-size: 0.78rem;
-            font-weight: 700;
-            letter-spacing: 1.4px;
-            text-transform: uppercase;
-            margin-bottom: 18px;
-        }
-
-        .pulse-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #22c55e;
-            box-shadow: 0 0 8px #22c55e;
-        }
-
-        .hero h1 {
-            font-family: 'Cinzel', serif;
-            font-size: 2.75rem;
-            font-weight: 800;
-            line-height: 1.2;
-            margin: 0 0 18px;
-            color: var(--white);
-            letter-spacing: 0.8px;
-        }
-
-        .hero p {
-            font-size: 1.06rem;
-            line-height: 1.75;
-            color: #cbd5e1;
-            max-width: 820px;
-            margin: 0 auto;
-        }
-
-        .hero-actions {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 14px;
-            margin-top: 32px;
         }
 
         .btn-gold {
@@ -290,20 +208,21 @@
             gap: 8px;
             background: linear-gradient(135deg, #d4ab38 0%, #b5891b 100%);
             color: var(--navy) !important;
-            padding: 13px 26px;
-            border-radius: 6px;
+            padding: 11px 20px;
+            border-radius: 7px;
             font-weight: 700;
-            font-size: 0.92rem;
+            font-size: 0.86rem;
             text-decoration: none;
             border: none;
             cursor: pointer;
-            box-shadow: 0 6px 18px rgba(197, 155, 39, 0.28);
+            box-shadow: 0 6px 18px rgba(197, 155, 39, 0.25);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
+            font-family: 'Montserrat', sans-serif;
         }
 
         .btn-gold:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 24px rgba(197, 155, 39, 0.4);
+            box-shadow: 0 10px 24px rgba(197, 155, 39, 0.38);
         }
 
         .btn-outline-gold {
@@ -311,14 +230,14 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            padding: 12px 24px;
+            padding: 10px 18px;
             border: 1.5px solid var(--gold);
             color: var(--white);
             text-decoration: none;
-            border-radius: 6px;
+            border-radius: 7px;
             font-weight: 600;
-            font-size: 0.92rem;
-            transition: all 0.25s ease;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
             background: rgba(255, 255, 255, 0.04);
             cursor: pointer;
             font-family: 'Montserrat', sans-serif;
@@ -329,59 +248,459 @@
             color: var(--navy);
         }
 
-        /* HERO METRICS BAR */
-        .hero-metrics {
-            max-width: 960px;
-            margin: 42px auto 0;
-            padding-top: 26px;
-            border-top: 1px solid rgba(255, 255, 255, 0.12);
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
+        .mobile-rail-toggle {
+            display: none;
+            background: var(--navy);
+            color: var(--gold-bright);
+            border: 1px solid var(--gold);
+            padding: 7px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
         }
 
-        .metric-item strong {
-            display: block;
+        /* LEFT-COLUMN SHELL */
+        .app-shell {
+            max-width: 1520px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: var(--rail-width) minmax(0, 1fr);
+            min-height: calc(100vh - 64px);
+            align-items: start;
+        }
+
+        /* LEFT NAVIGATION COLUMN */
+        .left-rail {
+            position: sticky;
+            top: 64px;
+            height: calc(100vh - 64px);
+            overflow-y: auto;
+            background: linear-gradient(180deg, #0b1930 0%, #071020 100%);
+            border-right: 2px solid rgba(197, 155, 39, 0.38);
+            padding: 18px 14px 24px;
+            color: var(--white);
+            z-index: 1050;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(197, 155, 39, 0.45) transparent;
+        }
+
+        .rail-brand-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(197, 155, 39, 0.3);
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rail-brand-card img {
+            width: 42px;
+            height: 42px;
+            border-radius: 9px;
+            border: 1.5px solid var(--gold);
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .rail-brand-title {
             font-family: 'Cinzel', serif;
-            font-size: 1.35rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--gold-bright);
+            line-height: 1.25;
+        }
+
+        .rail-brand-sub {
+            font-size: 0.69rem;
+            color: #94a3b8;
+            margin-top: 2px;
+        }
+
+        .rail-group-label {
+            font-size: 0.66rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: #94a3b8;
+            padding: 10px 10px 6px;
+        }
+
+        .rail-nav-list {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .rail-nav-btn {
+            width: 100%;
+            background: transparent;
+            border: 1px solid transparent;
+            color: #cbd5e1;
+            padding: 10px 12px;
+            border-radius: 8px;
+            text-align: left;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            transition: all 0.18s ease;
+        }
+
+        .rail-nav-btn:hover {
+            background: rgba(197, 155, 39, 0.11);
+            color: var(--white);
+            border-color: rgba(197, 155, 39, 0.25);
+        }
+
+        .rail-nav-btn.active {
+            background: linear-gradient(135deg, rgba(197, 155, 39, 0.24), rgba(197, 155, 39, 0.1));
+            color: var(--gold-bright);
+            border-color: var(--gold);
+            box-shadow: inset 3px 0 0 var(--gold-bright);
+        }
+
+        .rail-badge {
+            font-size: 0.65rem;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.08);
+            color: #e2e8f0;
+            padding: 2px 7px;
+            border-radius: 999px;
+        }
+
+        .rail-nav-btn.active .rail-badge {
+            background: var(--gold);
+            color: var(--navy);
+        }
+
+        .rail-mode-box {
+            margin-top: 14px;
+            padding: 12px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+        }
+
+        .rail-mode-title {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--gold-bright);
+            margin-bottom: 8px;
+        }
+
+        .mode-switch-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+        }
+
+        .mode-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            color: #cbd5e1;
+            padding: 7px 6px;
+            border-radius: 6px;
+            font-size: 0.71rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.2s ease;
+        }
+
+        .mode-btn.active {
+            background: var(--gold);
+            color: var(--navy);
+            border-color: var(--gold);
+        }
+
+        .rail-quick-links {
+            margin-top: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .rail-ext-link {
+            text-decoration: none;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            padding: 8px 10px;
+            border-radius: 7px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+        }
+
+        .rail-ext-link:hover {
+            border-color: var(--gold);
             color: var(--gold-bright);
         }
 
-        .metric-item span {
-            font-size: 0.78rem;
-            color: #94a3b8;
+        /* MAIN STAGE AREA */
+        .main-stage {
+            padding: 24px 28px 56px;
+            min-width: 0;
+        }
+
+        /* COMPACT COMMAND HERO AT TOP OF STAGE */
+        .command-hero {
+            background: radial-gradient(circle at top right, #183463 0%, #0c1b33 58%, #060e1c 100%);
+            color: var(--white);
+            border-radius: 16px;
+            padding: 28px 30px;
+            border: 1.5px solid rgba(197, 155, 39, 0.55);
+            box-shadow: 0 14px 36px rgba(12, 27, 51, 0.16);
+            margin-bottom: 20px;
+        }
+
+        .command-hero-top {
+            display: grid;
+            grid-template-columns: minmax(0, 1.5fr) minmax(240px, 0.85fr);
+            gap: 24px;
+            align-items: center;
+        }
+
+        .hero-status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(197, 155, 39, 0.15);
+            border: 1px solid rgba(197, 155, 39, 0.5);
+            color: var(--gold-bright);
+            padding: 5px 14px;
+            border-radius: 999px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 1.1px;
             text-transform: uppercase;
-            letter-spacing: 0.8px;
+            margin-bottom: 12px;
         }
 
-        /* SECTIONS & TYPOGRAPHY */
-        .section-padding {
-            max-width: 1180px;
-            margin: 0 auto;
-            padding: 72px 24px;
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #22c55e;
+            box-shadow: 0 0 8px #22c55e;
+            flex-shrink: 0;
         }
 
-        .services-bg {
-            background-color: var(--light-bg);
-            border-top: 1px solid #e2e8f0;
-            border-bottom: 1px solid #e2e8f0;
+        .command-hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.1rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin: 0 0 12px;
+            color: var(--white);
+        }
+
+        .command-hero p {
+            font-size: 0.96rem;
+            line-height: 1.68;
+            color: #cbd5e1;
+            margin: 0;
+        }
+
+        .hero-spotlight-card {
+            background: rgba(6, 14, 28, 0.72);
+            border: 1px solid rgba(197, 155, 39, 0.4);
+            border-radius: 12px;
+            padding: 18px;
+            text-align: center;
+        }
+
+        .hero-spotlight-card img {
+            width: 78px;
+            height: 78px;
+            border-radius: 14px;
+            border: 2px solid var(--gold);
+            object-fit: cover;
+            margin-bottom: 10px;
+            box-shadow: 0 0 22px rgba(197, 155, 39, 0.3);
+        }
+
+        .spotlight-quote {
+            font-family: 'Cinzel', serif;
+            font-size: 0.88rem;
+            color: var(--gold-bright);
+            margin-bottom: 6px;
+        }
+
+        .spotlight-meta {
+            font-size: 0.76rem;
+            color: #94a3b8;
+            line-height: 1.45;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .hero-metrics {
+            margin-top: 22px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .metric-tile {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .metric-tile:hover {
+            border-color: var(--gold);
+            background: rgba(197, 155, 39, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .metric-tile strong {
+            display: block;
+            font-family: 'Cinzel', serif;
+            font-size: 1.15rem;
+            color: var(--gold-bright);
+        }
+
+        .metric-tile span {
+            font-size: 0.72rem;
+            color: #cbd5e1;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+        }
+
+        /* STAGE TOOLBAR (PREV / NEXT CHAMBER STEPPER) */
+        .stage-stepper {
+            background: var(--white);
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 12px 18px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            box-shadow: 0 4px 14px rgba(12, 27, 51, 0.04);
+        }
+
+        .stepper-current {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .stepper-tag {
+            background: rgba(197, 155, 39, 0.18);
+            color: var(--navy);
+            border: 1px solid rgba(197, 155, 39, 0.45);
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 999px;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+        }
+
+        .stepper-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.02rem;
+            font-weight: 700;
+            color: var(--navy);
+        }
+
+        .stepper-nav-btns {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .step-btn {
+            background: #f1f5f9;
+            color: var(--navy);
+            border: 1px solid #cbd5e1;
+            padding: 7px 14px;
+            border-radius: 7px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.2s ease;
+        }
+
+        .step-btn:hover:not(:disabled) {
+            background: var(--navy);
+            color: var(--gold-bright);
+            border-color: var(--navy);
+        }
+
+        .step-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        /* CHAMBER PANELS */
+        .chamber-panel {
+            display: none;
+            background: var(--white);
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 8px 26px rgba(12, 27, 51, 0.06);
+            animation: panelFade 0.24s ease;
+        }
+
+        .chamber-panel.active-chamber {
+            display: block;
+        }
+
+        body.scroll-all-mode .chamber-panel {
+            display: block;
+            margin-bottom: 24px;
+        }
+
+        @keyframes panelFade {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .section-title {
             font-family: 'Cinzel', serif;
-            font-size: 2rem;
+            font-size: 1.75rem;
             color: var(--navy);
             text-align: center;
-            margin: 0 0 12px;
+            margin: 0 0 10px;
         }
 
         .section-title::after {
             content: "";
             display: block;
-            width: 72px;
+            width: 68px;
             height: 3px;
             background: var(--gold);
-            margin: 14px auto 0;
+            margin: 12px auto 0;
             border-radius: 2px;
         }
 
@@ -389,24 +708,24 @@
             text-align: center;
             color: var(--slate);
             max-width: 760px;
-            margin: 16px auto 40px;
-            font-size: 1rem;
+            margin: 14px auto 30px;
+            font-size: 0.96rem;
             line-height: 1.65;
         }
 
         .about-text {
-            max-width: 900px;
+            max-width: 880px;
             margin: 0 auto;
-            font-size: 1.03rem;
+            font-size: 1rem;
             line-height: 1.8;
             color: #334155;
             text-align: center;
         }
 
         .koinonia-callout {
-            max-width: 900px;
-            margin: 34px auto 0;
-            padding: 30px 34px;
+            max-width: 880px;
+            margin: 28px auto 0;
+            padding: 26px 30px;
             background: linear-gradient(135deg, #0c1b33 0%, #14294d 100%);
             color: var(--white);
             border-left: 5px solid var(--gold);
@@ -418,79 +737,86 @@
         .koinonia-callout h3 {
             font-family: 'Cinzel', serif;
             color: var(--gold-bright);
-            font-size: 1.28rem;
+            font-size: 1.22rem;
             margin: 0 0 10px;
         }
 
         .koinonia-callout p {
             color: #e2e8f0;
-            font-size: 0.97rem;
-            line-height: 1.75;
+            font-size: 0.95rem;
+            line-height: 1.72;
             margin: 0;
         }
 
         /* CARDS & GRIDS */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
         }
 
         .service-card {
-            background: var(--white);
+            background: #f8fafc;
             border: 1px solid #e2e8f0;
             border-radius: 10px;
-            padding: 28px;
+            padding: 24px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            box-shadow: 0 6px 20px rgba(15, 23, 42, 0.05);
-            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+            transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
         }
 
         .service-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-3px);
             border-color: var(--gold);
-            box-shadow: 0 14px 30px rgba(12, 27, 51, 0.1);
+            background: var(--white);
+            box-shadow: 0 12px 24px rgba(12, 27, 51, 0.09);
         }
 
         .service-number {
             display: inline-block;
             font-family: 'Cinzel', serif;
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--navy);
             background: rgba(197, 155, 39, 0.2);
             border: 1px solid rgba(197, 155, 39, 0.5);
             padding: 4px 10px;
             border-radius: 4px;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
 
         .service-card h3 {
             font-family: 'Cinzel', serif;
             color: var(--navy);
-            font-size: 1.18rem;
-            margin: 0 0 12px;
+            font-size: 1.12rem;
+            margin: 0 0 10px;
         }
 
         .service-card p {
             color: var(--slate);
-            font-size: 0.94rem;
-            line-height: 1.65;
-            margin: 0 0 20px;
+            font-size: 0.9rem;
+            line-height: 1.62;
+            margin: 0 0 18px;
         }
 
         .card-btn {
             color: var(--navy);
             font-weight: 700;
-            font-size: 0.88rem;
+            font-size: 0.85rem;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 6px;
             padding-top: 12px;
-            border-top: 1px solid #f1f5f9;
+            border-top: 1px solid #e2e8f0;
+            background: transparent;
+            border-left: none;
+            border-right: none;
+            border-bottom: none;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
             transition: color 0.2s ease;
         }
 
@@ -501,60 +827,60 @@
         /* GOSHEN 8 PILLARS GRID */
         .goshen-pillars-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
-            gap: 22px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
         }
 
         .goshen-pillar-card {
-            background: var(--white);
+            background: #f8fafc;
             border: 1px solid #e2e8f0;
             border-top: 4px solid var(--gold);
             border-radius: 10px;
-            padding: 24px;
-            box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            padding: 20px;
+            transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
         }
 
         .goshen-pillar-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 26px rgba(12, 27, 51, 0.1);
+            transform: translateY(-3px);
+            background: var(--white);
+            box-shadow: 0 10px 22px rgba(12, 27, 51, 0.08);
         }
 
         .goshen-pillar-card h4 {
             font-family: 'Cinzel', serif;
             color: var(--navy);
-            font-size: 1.06rem;
-            margin: 0 0 10px;
+            font-size: 1.02rem;
+            margin: 0 0 8px;
         }
 
         .goshen-pillar-card p {
             color: var(--slate);
-            font-size: 0.92rem;
-            line-height: 1.62;
+            font-size: 0.88rem;
+            line-height: 1.6;
             margin: 0;
         }
 
-        /* DOCUMENT FILTER & 2-COLUMN GRID */
+        /* DOCUMENT FILTER & GRID */
         .doc-controls {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
-            gap: 14px;
-            margin-bottom: 26px;
-            background: var(--light-bg);
-            padding: 16px 20px;
+            gap: 12px;
+            margin-bottom: 22px;
+            background: #f8fafc;
+            padding: 14px 18px;
             border-radius: 10px;
             border: 1px solid #e2e8f0;
         }
 
         .doc-search {
-            flex: 1 1 260px;
+            flex: 1 1 240px;
             padding: 10px 14px;
             border: 1px solid #cbd5e1;
             border-radius: 6px;
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
         }
 
         .doc-filters {
@@ -564,15 +890,16 @@
         }
 
         .filter-pill {
-            padding: 8px 14px;
+            padding: 7px 13px;
             border-radius: 999px;
             border: 1px solid #cbd5e1;
             background: var(--white);
             color: var(--navy);
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s ease;
+            font-family: 'Montserrat', sans-serif;
         }
 
         .filter-pill.active, .filter-pill:hover {
@@ -583,40 +910,40 @@
 
         .resources-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
-            gap: 18px;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 16px;
         }
 
         .resource-card {
-            background: var(--white);
+            background: #f8fafc;
             border: 1px solid #e2e8f0;
             border-left: 4px solid var(--navy);
             border-radius: 8px;
-            padding: 20px 22px;
+            padding: 18px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 18px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-            transition: border-color 0.2s ease, transform 0.2s ease;
+            gap: 14px;
+            transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
         }
 
         .resource-card:hover {
             border-left-color: var(--gold);
+            background: var(--white);
             transform: translateY(-2px);
         }
 
         .resource-info h4 {
             font-family: 'Cinzel', serif;
             color: var(--navy);
-            font-size: 1rem;
+            font-size: 0.96rem;
             margin: 0 0 6px;
         }
 
         .resource-info p {
             color: var(--slate);
-            font-size: 0.86rem;
-            line-height: 1.55;
+            font-size: 0.84rem;
+            line-height: 1.52;
             margin: 0;
         }
 
@@ -625,9 +952,9 @@
             background: var(--navy);
             color: var(--gold-bright);
             text-decoration: none;
-            padding: 9px 16px;
+            padding: 8px 14px;
             border-radius: 6px;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 700;
             border: 1px solid var(--navy);
             transition: all 0.2s ease;
@@ -637,6 +964,220 @@
             background: var(--gold);
             color: var(--navy);
             border-color: var(--gold);
+        }
+
+        /* COURTROOM & FORMS & COMMUNITY FALLBACK STYLING */
+        .courtroom-wrapper {
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
+        .courtroom-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .courtroom-tagline {
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 1.4px;
+            color: #9e7816;
+            margin-bottom: 6px;
+        }
+
+        .courtroom-subheading {
+            color: var(--slate);
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 8px 0 0;
+        }
+
+        .courtroom-body {
+            font-size: 0.95rem;
+            line-height: 1.72;
+            color: #334155;
+            margin-bottom: 24px;
+        }
+
+        .matrices-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid var(--gold);
+            border-radius: 10px;
+            padding: 22px;
+            margin-bottom: 26px;
+        }
+
+        .matrices-title {
+            font-family: 'Cinzel', serif;
+            color: var(--navy);
+            margin: 0 0 8px;
+            font-size: 1.2rem;
+        }
+
+        .matrices-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .matrices-list li {
+            font-size: 0.9rem;
+            line-height: 1.58;
+            color: #334155;
+        }
+
+        .sessions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .session-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 18px;
+        }
+
+        .session-card h4 {
+            font-family: 'Cinzel', serif;
+            color: var(--navy);
+            margin: 0 0 8px;
+            font-size: 1rem;
+        }
+
+        .session-card p {
+            color: var(--slate);
+            font-size: 0.86rem;
+            line-height: 1.55;
+            margin: 0;
+        }
+
+        .seed-card {
+            background: #fffdf5;
+            border: 1px solid rgba(197, 155, 39, 0.45);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .booking-cta-box {
+            background: linear-gradient(135deg, #0c1b33 0%, #152b52 100%);
+            color: var(--white);
+            border-radius: 12px;
+            padding: 28px;
+            text-align: center;
+            border: 1.5px solid var(--gold);
+        }
+
+        .qr-box img, .qr-small img {
+            border-radius: 10px;
+            border: 2px solid var(--gold);
+            background: #fff;
+            padding: 4px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin: 18px 0;
+        }
+
+        .btn-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: #16a34a;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 12px 20px;
+            border-radius: 7px;
+        }
+
+        .forms-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 18px;
+        }
+
+        .form-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .form-card h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--navy);
+            margin: 0 0 10px;
+            font-size: 1.08rem;
+        }
+
+        .qr-small {
+            margin-bottom: 14px;
+        }
+
+        .community-section {
+            background: linear-gradient(135deg, #0c1b33 0%, #071020 100%);
+            color: var(--white);
+            padding: 44px 24px;
+            text-align: center;
+            border-top: 3px solid var(--gold);
+        }
+
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 26px;
+        }
+
+        .social-btn {
+            text-decoration: none;
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 9px 15px;
+            border-radius: 7px;
+            font-size: 0.84rem;
+            font-weight: 600;
+        }
+
+        .social-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold-bright);
+        }
+
+        .contact-card-box {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(197, 155, 39, 0.35);
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        footer {
+            background: #050b14;
+            color: #94a3b8;
+            text-align: center;
+            padding: 18px 20px;
+            font-size: 0.82rem;
         }
 
         /* INSTALL PWA MODAL */
@@ -695,51 +1236,57 @@
             color: var(--slate);
         }
 
-        /* RESPONSIVE LAYOUT ADJUSTMENTS */
-        @media (max-width: 860px) {
-            .hero h1 { font-size: 2rem; }
-            .hero-metrics { grid-template-columns: repeat(2, 1fr); }
-            .resources-grid { grid-template-columns: 1fr; }
+        /* RESPONSIVE LEFT-COLUMN ADAPTATION */
+        @media (max-width: 980px) {
+            .app-shell {
+                grid-template-columns: 1fr;
+            }
 
-            header nav {
+            .mobile-rail-toggle {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+            }
+
+            .left-rail {
                 display: none;
-                flex-direction: column;
-                background-color: var(--navy);
-                position: absolute;
-                top: 100%;
+                position: fixed;
+                top: 62px;
                 left: 0;
-                width: 100%;
-                padding: 18px 0;
-                border-bottom: 3px solid var(--gold);
-                z-index: 999;
-                box-shadow: 0 12px 24px rgba(0,0,0,0.25);
+                width: min(300px, 86vw);
+                height: calc(100vh - 62px);
+                box-shadow: 12px 0 32px rgba(0, 0, 0, 0.45);
+                z-index: 1300;
             }
 
-            header nav.active {
-                display: flex;
-            }
-
-            header nav a {
-                margin: 8px 20px !important;
+            .left-rail.mobile-open {
                 display: block;
-                text-align: center;
-                font-size: 0.98rem;
             }
 
-            .hamburger {
-                display: flex;
+            .command-hero-top {
+                grid-template-columns: 1fr;
             }
 
-            .hamburger.active .bar:nth-child(1) {
-                transform: translateY(8.5px) rotate(45deg);
-            }
-            .hamburger.active .bar:nth-child(2) {
-                opacity: 0;
-            }
-            .hamburger.active .bar:nth-child(3) {
-                transform: translateY(-8.5px) rotate(-45deg);
+            .hero-metrics {
+                grid-template-columns: repeat(2, 1fr);
             }
 
+            .main-stage {
+                padding: 16px 14px 44px;
+            }
+
+            .chamber-panel {
+                padding: 20px 16px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .command-hero h1 {
+                font-size: 1.6rem;
+            }
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
             .resource-card {
                 flex-direction: column;
                 align-items: flex-start;
@@ -749,790 +1296,171 @@
 </head>
 <body>
 
-    <!-- NAVIGATION HEADER -->
-    <header>
-        <div class="nav-container">
-            <a href="#" class="logo">
-                <img src="kek-emblem.png" alt="KEK Emblem">
-                KINGDOM EKKLESIAS <span>KOINONIA</span>
-            </a>
+    <!-- TOP SANCTUARY BAR -->
+    <header class="topbar">
+        <div class="topbar-inner">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <button type="button" class="mobile-rail-toggle" id="mobile-rail-btn" aria-label="Toggle Chamber Navigation">
+                    ☰ Chambers
+                </button>
+                <a href="#" class="logo" onclick="activateChamber('about'); return false;">
+                    <img src="kek-emblem.png" alt="KEK Emblem">
+                    KINGDOM EKKLESIAS <span>KOINONIA</span>
+                </a>
+            </div>
 
-            <!-- Mobile Menu Toggle Button -->
-            <button class="hamburger" id="hamburger-menu" aria-label="Toggle menu Navigation">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
-
-            <nav>
-                <a href="#about">Who We Are</a>
-                <a href="#mandates">Mandates</a>
-                <a href="#goshen-pillars">Goshen 8 Pillars</a>
-                <a href="#services">Functional Pillars</a>
-                <a href="#courtroom-101">Courts 101</a>
-                <a href="#resources">Resources</a>
-                <a href="#forms">Engage</a>
-                <a href="portal.html" style="color: var(--gold-bright);">Member &amp; Classes Portal</a>
-                <a href="watch-hub.html">24/7 Watch &amp; Live</a>
+            <div class="topbar-actions">
+                <a href="portal.html" class="top-link highlight">Member &amp; Classes Portal</a>
+                <a href="watch-hub.html" class="top-link">24/7 Watch &amp; Live</a>
                 <button type="button" onclick="triggerKEKInstall()" class="btn-install-nav pwa-install-trigger">
                     📲 Install App
                 </button>
-                <a href="https://calendar.app.google/xPmrk5LuasqAE9rw7" target="_blank" rel="noopener noreferrer" class="btn-gold" style="padding: 8px 16px; font-size: 0.82rem;">Book Session</a>
-            </nav>
+                <a href="https://calendar.app.google/xPmrk5LuasqAE9rw7" target="_blank" rel="noopener noreferrer" class="btn-gold" style="padding: 7px 14px; font-size: 0.78rem;">Book Session</a>
+            </div>
         </div>
     </header>
 
-    <!-- HERO SECTION -->
-    <section class="hero">
-        <div class="hero-content">
-            <img src="kek-emblem.png" alt="Kingdom Ekklesias Koinonia Crest" class="hero-crest">
-            <div>
-                <span class="hero-status-pill">
-                    <span class="pulse-dot"></span>
-                    Manifesting the Sons of God &bull; Seated in Heavenly Places, Building on Earth
-                </span>
+    <!-- MAIN LEFT-COLUMN WORKSPACE SHELL -->
+    <div class="app-shell">
+
+        <!-- LEFT COLUMN CHAMBER NAVIGATOR -->
+        <aside class="left-rail" id="left-chamber-rail" aria-label="Chamber Navigation Column">
+            <div class="rail-brand-card">
+                <img src="kek-emblem.png" alt="KEK Crest">
+                <div>
+                    <div class="rail-brand-title">KEK Governance Rail</div>
+                    <div class="rail-brand-sub">Select a chamber to view</div>
+                </div>
             </div>
-            <h1>Kingdom Ekklesias Koinonia (KEK)</h1>
-            <p>
-                An Apostolic-Prophetic Governance Assembly equipping mature sons and territorial Ekklesias to operate in the Kingdom of our Father. Through the Courtrooms, Councils, and Heavenly Realms, we legislate under the Headship of Christ Jesus to bring about the complete transformation of individuals, territories, and nations into His true image and likeness.
-            </p>
-            <div class="hero-actions">
-               <a href="portal.html" class="btn-gold">Member &amp; Academy Portal</a>
-                <a href="https://calendar.app.google/xPmrk5LuasqAE9rw7" target="_blank" rel="noopener noreferrer" class="btn-outline-gold">Book a Courtroom Session</a>
-                <a href="https://chat.whatsapp.com/KicB3kPctrrHHZpieyfPfA" target="_blank" rel="noopener noreferrer" class="btn-outline-gold">Join the KEK WhatsApp Community</a>
-                <button type="button" onclick="triggerKEKInstall()" class="btn-outline-gold pwa-install-trigger">
-                    📲 Install KEK App (Windows / Mobile)
+
+            <div class="rail-group-label">Core Foundations</div>
+            <div class="rail-nav-list">
+                <button type="button" class="rail-nav-btn active" data-chamber="about">
+                    <span>🏛️ Who We Are &amp; Koinonia</span>
+                    <span class="rail-badge">01</span>
+                </button>
+                <button type="button" class="rail-nav-btn" data-chamber="mandates">
+                    <span>⚖️ Governance Mandates</span>
+                    <span class="rail-badge">3</span>
+                </button>
+                <button type="button" class="rail-nav-btn" data-chamber="goshen-pillars">
+                    <span>🌾 Goshen 8 Pillars</span>
+                    <span class="rail-badge">8</span>
+                </button>
+                <button type="button" class="rail-nav-btn" data-chamber="services">
+                    <span>🛡️ Functional Dockets</span>
+                    <span class="rail-badge">6</span>
                 </button>
             </div>
 
-            <div class="hero-metrics">
-                <div class="metric-item">
-                    <strong>3 Mandates</strong>
-                    <span>Courtrooms &amp; Councils</span>
-                </div>
-                <div class="metric-item">
-                    <strong>8 Pillars</strong>
-                    <span>Goshen Cities Ecosystem</span>
-                </div>
-                <div class="metric-item">
-                    <strong>6 Dockets</strong>
-                    <span>Apostolic Operations</span>
-                </div>
-                <div class="metric-item">
-                    <strong>24/7 Watches</strong>
-                    <span>Territorial Legislation</span>
+            <div class="rail-group-label">Courts, Library &amp; Media</div>
+            <div class="rail-nav-list">
+                <button type="button" class="rail-nav-btn" data-chamber="courtroom-101">
+                    <span>📜 Courts of Heaven 101</span>
+                    <span class="rail-badge">Law</span>
+                </button>
+                <button type="button" class="rail-nav-btn" data-chamber="resources">
+                    <span>📚 Documents &amp; Decrees</span>
+                    <span class="rail-badge">10</span>
+                </button>
+                <button type="button" class="rail-nav-btn" data-chamber="logs">
+                    <span>🗂️ Work Log &amp; Milestones</span>
+                    <span class="rail-badge">Log</span>
+                </button>
+                <button type="button" class="rail-nav-btn" data-chamber="videos">
+                    <span>🎥 Teachings &amp; Video</span>
+                    <span class="rail-badge">Live</span>
+                </button>
+                <button type="button" class="rail-nav-btn" data-chamber="forms">
+                    <span>📝 Engage &amp; Intake Forms</span>
+                    <span class="rail-badge">Join</span>
+                </button>
+                <button type="button" class="rail-nav-btn" data-chamber="gallery">
+                    <span>🖼️ Photo &amp; Media Gallery</span>
+                    <span class="rail-badge">Pics</span>
+                </button>
+            </div>
+
+            <div class="rail-mode-box">
+                <div class="rail-mode-title">Reading Layout Mode</div>
+                <div class="mode-switch-row">
+                    <button type="button" class="mode-btn active" id="mode-focused-btn">Focused View</button>
+                    <button type="button" class="mode-btn" id="mode-fullscroll-btn">Full Scroll</button>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- WHO WE ARE SECTION -->
-    <section id="about" class="section-padding">
-        <h2 class="section-title">Who We Are</h2>
-        <p class="about-text" style="margin-bottom: 18px;">
-            At Kingdom Ekklesias Koinonia (KEK), we believe effective spiritual warfare and territorial transformation are not matters of emotional striving—they are <strong>operations of legal alignment and judicial decree in the Heavenly Realms</strong>.
-        </p>
-        <p class="about-text">
-            We function as a modern legislative assembly (<em>Ekklesia</em>), moving beyond traditional religious structures into executive Kingdom governance. We bridge judicial intercession in the Courtrooms of Heaven with real-world, physical infrastructure through our <strong>Goshen Cities Ecosystem Initiatives</strong>.
-        </p>
+            <div class="rail-quick-links">
+                <a href="watch-hub.html" class="rail-ext-link">
+                    <span>⏱️ 24/7 Watch &amp; Hebrew Cal</span>
+                    <span>&rarr;</span>
+                </a>
+                <a href="portal.html" class="rail-ext-link">
+                    <span>🎓 Member &amp; Classes Portal</span>
+                    <span>&rarr;</span>
+                </a>
+                <a href="https://chat.whatsapp.com/KicB3kPctrrHHZpieyfPfA" target="_blank" rel="noopener noreferrer" class="rail-ext-link">
+                    <span>💬 KEK WhatsApp Community</span>
+                    <span>&nearr;</span>
+                </a>
+            </div>
+        </aside>
 
-        <div class="koinonia-callout">
-            <h3>The Transition from Fellowship to Koinonia</h3>
-            <p>
-                KEK represents an elevation from voluntary social gathering to <strong>covenantal identification</strong>. <em>Koinonia</em> signifies deep, mutual participation in the Father’s work—where every member is a fully invested stakeholder with a shared spiritual destiny, material accountability, and a mandate to rule and reign.
-            </p>
-        </div>
-    </section>
+        <!-- RIGHT WORKSPACE STAGE -->
+        <main class="main-stage" id="main-stage">
 
-    <!-- OUR CORE GOVERNANCE MANDATES -->
-    <section id="mandates" class="services-bg">
-        <div class="section-padding">
-            <h2 class="section-title">Our Core Governance Mandates</h2>
-            <p class="section-subtitle">Executive legislative operations uniting Heavenly Courtroom authority with territorial manifestation.</p>
-
-            <div class="services-grid">
-                <div class="service-card">
+            <!-- COMMAND HERO BANNER -->
+            <section class="command-hero">
+                <div class="command-hero-top">
                     <div>
-                        <div class="service-number">MANDATE 01</div>
-                        <h3>Judicial Intercession in the Courtrooms of Heaven</h3>
-                        <p>We stand before the Ancient of Days, alongside Yeshua our Advocate and the Holy Spirit our Divine Counsel, to audit spiritual landscapes, revoke illegal demonic liens, expunge bloodline ledgers, and enforce Heaven’s verdicts over personal and territorial destinies.</p>
+                        <span class="hero-status-pill">
+                            <span class="pulse-dot"></span>
+                            Manifesting the Sons of God &bull; Seated in Heavenly Places, Building on Earth
+                        </span>
+                        <h1>Kingdom Ekklesias Koinonia (KEK)</h1>
+                        <p>
+                            An Apostolic-Prophetic Governance Assembly equipping mature sons and territorial Ekklesias to operate in the Kingdom of our Father. Through the Courtrooms, Councils, and Heavenly Realms, we legislate under the Headship of Christ Jesus to bring about the complete transformation of individuals, territories, and nations into His true image and likeness.
+                        </p>
+                        <div class="hero-actions">
+                            <a href="portal.html" class="btn-gold">Member &amp; Academy Portal</a>
+                            <button type="button" onclick="activateChamber('courtroom-101')" class="btn-outline-gold">Explore Courts 101</button>
+                            <button type="button" onclick="activateChamber('goshen-pillars')" class="btn-outline-gold">Goshen 8 Pillars</button>
+                            <button type="button" onclick="triggerKEKInstall()" class="btn-outline-gold pwa-install-trigger">
+                                📲 Install App
+                            </button>
+                        </div>
                     </div>
-                    <a href="#courtroom-101" class="card-btn">Enter Courtroom Protocols &rarr;</a>
-                </div>
 
-                <div class="service-card">
-                    <div>
-                        <div class="service-number">MANDATE 02</div>
-                        <h3>Legislative Councils &amp; Melchizedek Order</h3>
-                        <p>Operating under the High Priesthood of Melchizedek, we step into the Councils of Heaven to receive divine blueprints, steward Kingdom wealth, and exercise the Keys of the Kingdom—binding systemic corruption and loosing righteousness across the Seven Mountains of Influence.</p>
-                    </div>
-                    <a href="#resources" class="card-btn">Access Governance Blueprints &rarr;</a>
-                </div>
-
-                <div class="service-card">
-                    <div>
-                        <div class="service-number">MANDATE 03</div>
-                        <h3>The Goshen Cities Ecosystem Blueprint</h3>
-                        <p>To manifest Heaven's decrees on Earth, we establish autonomous, sustainable "Cities of Hope and Immunity"—territories of distinction shielded from the economic and systemic collapses of the world system.</p>
-                    </div>
-                    <a href="#goshen-pillars" class="card-btn">Explore the 8 Pillars &rarr;</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- THE 8 PILLARS OF THE GOSHEN ECOSYSTEM -->
-    <section id="goshen-pillars" class="section-padding" style="background-color: var(--white);">
-        <h2 class="section-title">The 8 Pillars of the Goshen Ecosystem</h2>
-        <p class="section-subtitle">Our physical and structural expansion is anchored upon eight foundational pillars:</p>
-
-        <div class="goshen-pillars-grid">
-            <div class="goshen-pillar-card">
-                <h4>1. 👑 The Covenant Community</h4>
-                <p>A royal priesthood of matured sons operating in corporate oneness and non-negotiable alignment with the Father's will.</p>
-            </div>
-
-            <div class="goshen-pillar-card">
-                <h4>2. 🏡 Integrated Housing Systems</h4>
-                <p>Sustainable physical architecture integrated with consecrated spiritual altars to provide complete safety and rest.</p>
-            </div>
-
-            <div class="goshen-pillar-card">
-                <h4>3. 🩺 Divine Wellness &amp; Healthcare</h4>
-                <p>Restoring original covenant wellness and caregiving systems shielded from systemic infirmity (Exodus 15:26).</p>
-            </div>
-
-            <div class="goshen-pillar-card">
-                <h4>4. 🌾 Harmonized Agriculture &amp; Food Security</h4>
-                <p>Replicating Edenic soil frequencies and advanced greenhouse technologies to ensure 100% regional food security.</p>
-            </div>
-
-            <div class="goshen-pillar-card">
-                <h4>5. 📚 Holistic Human Development</h4>
-                <p>Discipleship-driven education moving beyond academic theory to equip citizens for practical Kingdom governance.</p>
-            </div>
-
-            <div class="goshen-pillar-card">
-                <h4>6. 🚚 Strategic Mobility &amp; Logistics</h4>
-                <p>Dedicated transport and distribution networks designed for prophetic speed and territorial resource deployment.</p>
-            </div>
-
-            <div class="goshen-pillar-card">
-                <h4>7. ⚖️ Economic Sovereignty</h4>
-                <p>Debt-free, autonomous financial systems rooted in covenant equity, trade, and Melchizedek wealth stewardship.</p>
-            </div>
-
-            <div class="goshen-pillar-card">
-                <h4>8. 🛠️ Technological Stewardship</h4>
-                <p>Spirit-inspired engineering and technological innovation (Exodus 31:1–5) dedicated to serving humanity rather than enslaving the soul.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- SERVICES / 6 FUNCTIONAL DOCKETS SECTION -->
-    <section id="services" class="services-bg">
-        <div class="section-padding">
-            <h2 class="section-title">Our Six Functional Pillars</h2>
-            <p class="section-subtitle">Operational ministry dockets equipping believers, intercessors, and families worldwide.</p>
-
-            <div class="services-grid">
-
-                <div class="service-card">
-                    <div>
-                        <div class="service-number">01</div>
-                        <h3>Global Apostolic Equipping</h3>
-                        <p>Weekly digital sessions via Google Meet &amp; Zoom unpacking spiritual mechanics, bloodline deliverance, prophetic blueprints, and kingdom governance for believers globally.</p>
-                    </div>
-                    <a href="https://chat.whatsapp.com/KicB3kPctrrHHZpieyfPfA" class="card-btn" target="_blank" rel="noopener noreferrer">Join WhatsApp Group &rarr;</a>
-                </div>
-
-                <div class="service-card">
-                    <div>
-                        <div class="service-number">02</div>
-                        <h3>Ekklesia Gatherings &amp; Teaching</h3>
-                        <p>Join our online fellowship and virtual prayer sessions to build spiritual foundations and learn heavenly legislation.</p>
-                    </div>
-                    <a href="https://chat.whatsapp.com/KicB3kPctrrHHZpieyfPfA" class="card-btn" target="_blank" rel="noopener noreferrer">Join WhatsApp Group &rarr;</a>
-                </div>
-
-                <div class="service-card">
-                    <div>
-                        <div class="service-number">03</div>
-                        <h3>Kingdom Intercession &amp; Warfare</h3>
-                        <p>Stand in agreement with our dedicated prayer watchmen and intercessors for strategic breakthrough and spiritual alignment.</p>
-                    </div>
-                    <a href="https://chat.whatsapp.com/L8y90Aslvjn2batMryOePn" class="card-btn" target="_blank" rel="noopener noreferrer">Join WhatsApp Group &rarr;</a>
-                </div>
-
-                <div class="service-card">
-                    <div>
-                        <div class="service-number">04</div>
-                        <h3>Territorial Watches &amp; Legislation</h3>
-                        <p>Consecrated daily watches (including 3:00 PM and Midnight EAT) standing at geographic gates to execute warfare, enforce prophetic scrolls, and dismantle unrighteous altars.</p>
-                    </div>
-                    <a href="https://chat.whatsapp.com/KicB3kPctrrHHZpieyfPfA" target="_blank" rel="noopener noreferrer" class="card-btn">Align With Our Watches &rarr;</a>
-                </div>
-
-                <div class="service-card">
-                    <div>
-                        <div class="service-number">05</div>
-                        <h3>Aaron &amp; Hur Intercessory Covering</h3>
-                        <p>A subscription partnership matching individuals and entrepreneurs with assigned ministers for daily, personalized prayer coverage and spiritual dossier reporting.</p>
-                    </div>
-                    <a href="intake.html" class="card-btn">View Proposal &amp; Subscribe &rarr;</a>
-                </div>
-
-                <div class="service-card">
-                    <div>
-                        <div class="service-number">06</div>
-                        <h3>Kingdom Wealth &amp; Goshen Ecosystem</h3>
-                        <p>Aligning households with financial stewardship through private liquidity pools, trust-backed asset protection, agricultural sanctuaries, and insulated family wealth systems.</p>
-                    </div>
-                    <a href="#resources" class="card-btn">Download Master Blueprint &rarr;</a>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- COURTS OF HEAVEN 101 DETAILED SECTION -->
-    <section id="courtroom-101" class="section-padding" style="background-color: var(--white);">
-        <div class="courtroom-wrapper">
-
-            <div class="courtroom-header">
-                <div class="courtroom-tagline">LEGISLATE YOUR BREAKTHROUGH</div>
-                <h2 class="section-title" style="margin-bottom: 15px;">Courts of Heaven Sessions</h2>
-                <p class="courtroom-subheading">A Three-Dimensional Shift from the Battleground to the Courtroom</p>
-            </div>
-
-            <div class="courtroom-body">
-                <p style="margin-bottom: 15px;">
-                    True transformation is not a product of human willpower or emotional hype—it is a matter of legal alignment in the realms of the spirit.
-                </p>
-                <p style="margin-bottom: 15px;">
-                    Many believers face persistent, cyclical battles that seem to resist ordinary prayer. Scripture reveals that our God is not only a loving Father; He is a Righteous Judge (Hebrews 12:23). When invisible ceilings block your destiny despite your devotion, it is often because you are fighting on an emotional battlefield when you ought to be legislating in a Heavenly Courtroom.
-                </p>
-                <p>
-                    Under the covenant grace of Yeshua Hamashiach (Jesus Christ)—our Eternal Advocate and High Priest—every legal accusation, ancient covenant, or unrighteous trade can be legally annulled and dismantled.
-                </p>
-            </div>
-
-            <div class="matrices-box">
-                <h3 class="matrices-title">The Three Matrices of Bondage We Confront</h3>
-                <p style="color: var(--slate); font-size: 0.95rem; margin-bottom: 20px;">
-                    Before a systematic destiny shift can occur, three foundational matrices governing your life must be judicially addressed and rewritten:
-                </p>
-
-                <ul class="matrices-list">
-                    <li>
-                        <span>⚖️</span>
-                        <strong>Generational Iniquities &amp; Ancient DNA Programming:</strong> The hidden legal codes written into your bloodline that enforce repeated cycles of premature death, marital delays, or financial stagnation.
-                    </li>
-                    <li>
-                        <span>⚖️</span>
-                        <strong>Emotional Trauma &amp; Soul Fractures:</strong> Unhealed wounds and emotional fractures that provide the accuser a legal landing pad for fear, self-sabotage, and spiritual blockage.
-                    </li>
-                    <li>
-                        <span>⚖️</span>
-                        <strong>The Environmental &amp; Relational Matrix:</strong> Unrighteous territorial altars and misaligned associations that act as atmospheric drags against your spiritual growth.
-                    </li>
-                </ul>
-            </div>
-
-            <h3 style="font-family: 'Cinzel', serif; color: var(--navy); text-align: center; font-size: 1.4rem; margin-bottom: 25px;">
-                Available Courtroom Legislative Sessions
-            </h3>
-            <p style="text-align: center; color: var(--slate); font-size: 0.95rem; margin-bottom: 30px;">
-                We invite individuals, families, enterprise leaders, and corporate groups to book a dedicated, structured Courtroom session to address and resolve:
-            </p>
-
-            <div class="sessions-grid">
-                <div class="session-card">
-                    <h4>🧬 Personal Battles &amp; Destiny Constraints</h4>
-                    <p>Dismantling unexplainable delays, chronic health challenges, and soul trades across your timeline to unseal your personal identity scroll.</p>
-                </div>
-
-                <div class="session-card">
-                    <h4>🏛️ Generational &amp; Family Altars</h4>
-                    <p>Annulling recurring patterns of divorce, premature death, and dysfunctional household cycles to secure an unbroken spiritual legacy for your lineage.</p>
-                </div>
-
-                <div class="session-card">
-                    <h4>🌾 Financial, Business, &amp; Career Shifting</h4>
-                    <p>Uprooting lack, stagnant enterprise doors, and missing helper connections while aligning your wealth with the insulated Goshen Ecosystem architecture.</p>
-                </div>
-
-                <div class="session-card">
-                    <h4>🛡️ Ministry Alignment &amp; Spiritual Authority</h4>
-                    <p>Breaking ministerial ceilings, leadership fatigue, and division—shifting your operations from defensive warfare to legislative governance.</p>
-                </div>
-
-                <div class="session-card">
-                    <h4>🌐 Territorial &amp; Jurisdictional Clearance</h4>
-                    <p>Dealing with localized witchcraft, regional strongholds, and environmental limitations to enforce the frequency of the New Jerusalem over your home or land.</p>
-                </div>
-            </div>
-
-            <div class="seed-card">
-                <h3 style="font-family: 'Cinzel', serif; color: var(--navy); font-size: 1.2rem; margin-bottom: 12px;">Co-Partnership &amp; Covenant Seed</h3>
-                <blockquote style="font-style: italic; color: var(--slate); font-size: 0.9rem; margin-bottom: 15px;">
-                    "Every man according as he purposeth in his heart, so let him give; not grudgingly, or of necessity: for God loveth a cheerful giver. And God is able to make all grace abound toward you..." — <strong>2 Corinthians 9:7–8</strong>
-                </blockquote>
-                <p style="color: var(--slate); font-size: 0.92rem; margin: 0;">
-                    When we step into these judicial dimensions of divine ministration, co-partnering with the Lord through seeds and love offerings honors the altar, releases intercessory covering, and anchors spiritual verdicts into physical manifestation.
-                </p>
-            </div>
-
-            <div class="booking-cta-box">
-                <h3 style="font-family: 'Cinzel', serif; color: var(--gold); font-size: 1.5rem; margin-bottom: 10px;">Book Your Session Today</h3>
-                <p style="color: #e2e8f0; font-size: 0.95rem; margin-bottom: 25px;">
-                    Move your case from the battleground to the courtroom and enforce the verdict of the Cross over your life, family, or enterprise.
-                </p>
-
-                <div class="qr-box">
-                    <img src="https://quickchart.io/qr?text=https%3A%2F%2Fcalendar.app.google%2FxPmrk5LuasqAE9rw7&size=250&margin=1&ecLevel=M&dark=0c1b33" alt="Booking QR Code">
-                </div>
-
-                <div class="cta-buttons">
-                    <a href="https://calendar.app.google/xPmrk5LuasqAE9rw7" target="_blank" rel="noopener noreferrer" class="btn-gold" style="font-size: 0.95rem; padding: 12px 25px;">
-                        📅 Online Calendar Booking
-                    </a>
-                    <a href="https://wa.me/254727953458" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
-                        📲 WhatsApp / SMS: +254 727 953 458
-                    </a>
-                </div>
-
-                <p style="font-size: 0.9rem; color: #cbd5e1; margin-bottom: 8px;">
-                    ✉️ Executive Desk:
-                    <a href="mailto:ekmwangi@kingdomekklesiaskoinonia.org" style="color: var(--gold); text-decoration: underline;">ekmwangi@kingdomekklesiaskoinonia.org</a>
-                </p>
-                <p style="font-size: 0.9rem; color: #cbd5e1; margin-bottom: 20px;">
-                    ✉️ Direct Inquiries &amp; Submissions:
-                    <a href="mailto:kingdom.ekklesias.inv@gmail.com" style="color: var(--gold); text-decoration: underline;">kingdom.ekklesias.inv@gmail.com</a>
-                </p>
-
-                <div class="cta-footer">
-                    <p style="font-style: italic; color: var(--gold); margin-bottom: 8px;">The Court is in session. Enter His gates with bold legislation.</p>
-                    <p style="font-weight: 600; font-size: 0.95rem; margin: 0;">In Kingdom Governance,</p>
-                    <p style="font-family: 'Cinzel', serif; font-size: 1.1rem; color: #fff; margin-top: 4px;">Apostle Kamau Mwangi</p>
-                    <p style="font-size: 0.85rem; color: #cbd5e1; margin: 0;">Kingdom Ekklesias Koinonia (KEK)</p>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- DOCUMENTS & NEWSLETTERS HUB -->
-    <section id="resources" class="section-padding">
-        <h2 class="section-title">Documents, Publications &amp; Newsletters</h2>
-        <p class="section-subtitle">Access official blueprints, judicial frameworks, proposals, and training manuals for offline study and distribution.</p>
-
-        <!-- Search & Filter Bar -->
-        <div class="doc-controls">
-            <input type="search" id="doc-search-input" class="doc-search" placeholder="Search decrees, handbooks, blueprints..." aria-label="Search documents">
-            <div class="doc-filters">
-                <button type="button" class="filter-pill active" data-filter="all">All (10)</button>
-                <button type="button" class="filter-pill" data-filter="courtroom">Courtroom Manuals</button>
-                <button type="button" class="filter-pill" data-filter="financial">Financial &amp; Debt Decrees</button>
-                <button type="button" class="filter-pill" data-filter="goshen">Goshen &amp; Summons</button>
-            </div>
-        </div>
-
-        <div class="resources-grid" id="resources-grid">
-            <!-- Document Item 1 -->
-            <div class="resource-card" data-category="goshen">
-                <div class="resource-info">
-                    <h4>📰 Kingdom Legislation Newsletter: The Threshold of 5787 (PDF)</h4>
-                    <p>Special Royal Summons by Apostle Elizaphan Kamau Mwangi detailing the prophetic alignment for the Hebrew Year 5787, the Autumn Equinox thresholds, the High Holy Days circuit (Sept 11–Oct 2, 2026), and the transition into royal rest.</p>
-                </div>
-                <a href="Threshold_of_5787_KEK_Royal_Summons.pdf" download class="btn-download">Download PDF</a>
-            </div>
-
-            <!-- Document 2 -->
-            <div class="resource-card" data-category="goshen">
-                <div class="resource-info">
-                    <h4>📄 KEK Official Organizational Profile (PDF)</h4>
-                    <p>Official ministry profile detailing functional dockets, Courts of Heaven theological foundation, and regional operations.</p>
-                </div>
-                <a href="kek_organizational_profile.pdf" download class="btn-download">Download PDF</a>
-            </div>
-
-            <!-- Document 3 -->
-            <div class="resource-card" data-category="courtroom">
-                <div class="resource-info">
-                    <h4>📄 Heavenly Governance &amp; Legislation Blueprint (PDF)</h4>
-                    <p>Administrative and judicial framework for enacting binding decrees, petitions, and legal standings in the Councils of Heaven.</p>
-                </div>
-                <a href="heavenly_governance_legislation.pdf" download class="btn-download">Download PDF</a>
-            </div>
-
-            <!-- Document 4 -->
-            <div class="resource-card" data-category="courtroom">
-                <div class="resource-info">
-                    <h4>📄 The Heavenly Courtroom Petition Handbook (PDF)</h4>
-                    <p>Judicial manual containing step-by-step courtroom petitions for Melchizedek entry, legal cleansing, and destiny realization.</p>
-                </div>
-                <a href="courtroom-petition-handbook.pdf" download class="btn-download">Download PDF</a>
-            </div>
-
-            <!-- Document 5 -->
-            <div class="resource-card" data-category="courtroom">
-                <div class="resource-info">
-                    <h4>📄 Legislation in the Courts of Heaven Teaching (PDF)</h4>
-                    <p>Teaching manual on Ekklesia governance, binding and loosing protocols, and activating divine decrees on Earth.</p>
-                </div>
-                <a href="Legislation_in_the_Courts_of_Heaven.pdf" download class="btn-download">Download PDF</a>
-            </div>
-
-            <!-- Document 6 -->
-            <div class="resource-card" data-category="goshen">
-                <div class="resource-info">
-                    <h4>📄 Aaron &amp; Hur Partner Coverage &amp; Enrollment (PDF)</h4>
-                    <p>Comprehensive overview of intercessory coverage tiers, daily watches, and partner intake guidelines.</p>
-                </div>
-                <a href="Aaron_and_Hur_Partner_Coverage.pdf" download class="btn-download">Download PDF</a>
-            </div>
-
-            <!-- Document 7 -->
-            <div class="resource-card" data-category="goshen">
-                <div class="resource-info">
-                    <h4>📄 Goshen Cities National Legislative Protocols Brief (PDF)</h4>
-                    <p>Strategic brief detailing national realignment protocols, the Goshen ecosystem model, and Gen Z governance restoration.</p>
-                </div>
-                <a href="national_legislative_protocols_brief.pdf" download class="btn-download">Download PDF</a>
-            </div>
-
-            <!-- Document 8 -->
-            <div class="resource-card" data-category="financial">
-                <div class="resource-info">
-                    <h4>📄 Courts of Heaven Financial Decree (PDF)</h4>
-                    <p>The Corporate Identification Repentance, Financial Legal Cleansing, Co-Heirship Inheritance, and Abundance Authorization Decree.</p>
-                </div>
-                <a href="Courts_of_Heaven_Financial_Decree.pdf" download class="btn-download">Download PDF</a>
-            </div>
-
-            <!-- Document 9 -->
-            <div class="resource-card" data-category="financial">
-                <div class="resource-info">
-                    <h4>📄 Legislative Blueprint: Economy of the Courts of Heaven &amp; Debt Discharge (PDF)</h4>
-                    <p>Judicial framework for confronting spiritual servitude, blood settlement for debt cancellation, and transferring assets under Melchizedek jurisdiction.</p>
-                </div>
-                <a href="Legislative_Blueprint_Debt_Discharge.pdf" download class="btn-download">Download PDF</a>
-            </div>
-
-            <!-- Document 10 -->
-            <div class="resource-card" data-category="courtroom">
-                <div class="resource-info">
-                    <h4>📄 Legislative Decree: Alignment of the Four Winds, Elementals, and Destiny (PDF)</h4>
-                    <p>Magistrate decree cleansing physical vessels, commanding the Four Winds (North, South, East, West), and aligning creation with your pre-written destiny scroll.</p>
-                </div>
-                <a href="Legislative_Decree_Alignment_Four_Winds_&_Elements.pdf" download class="btn-download">Download PDF</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- MINISTRY LOG & ARCHIVE -->
-    <section id="logs" class="services-bg">
-        <div class="section-padding">
-            <h2 class="section-title">Ministry Work Log &amp; Project Milestones</h2>
-            <p class="section-subtitle">An ongoing ledger of completed territorial assignments, curriculum releases, and ecosystem developments.</p>
-
-            <div class="log-timeline">
-                <div class="log-item">
-                    <div class="log-date">July 2026</div>
-                    <div class="log-title">Master Blueprint Formulation: Goshen Cities Strategy</div>
-                    <div class="log-desc">Finalized and published the comprehensive framework for the Goshen Covenantal Economy, incorporating the Irrevocable Dynastic Trust, Private Family Bank, and EPS housing technologies.</div>
-                </div>
-
-                <div class="log-item">
-                    <div class="log-date">June 2026</div>
-                    <div class="log-title">Youth Leadership &amp; Governance Community Seminar</div>
-                    <div class="log-desc">Conducted a public community seminar focusing on Gen Z and Alpha spiritual legislation, judicial intercession, and civic-spiritual responsibility on Ngong Road, Nairobi.</div>
-                </div>
-
-                <div class="log-item">
-                    <div class="log-date">Ongoing / Daily</div>
-                    <div class="log-title">Daily Territorial Watches (3:00 PM &amp; Midnight EAT)</div>
-                    <div class="log-desc">Active execution of daily legislative prayer watches covering national gates, bloodline deliverance, and Courts of Heaven petitioning.</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- VIDEO GALLERY SECTION -->
-    <section id="videos" class="section-padding">
-        <h2 class="section-title">Teachings &amp; Video Broadcasts</h2>
-        <p class="section-subtitle">Watch judicial session breakdowns, masterclasses, and legislative teachings.</p>
-        
-        <div id="video-gallery-container" class="video-grid">
-            <!-- Baseline Video Card -->
-            <div class="video-card">
-                <h4>Courts of Heaven 101: Understanding Spiritual Governance</h4>
-                <p>An introduction to operating in the judicial chambers of Heaven and enacting binding decrees.</p>
-                <a href="https://youtube.com/@kingdomekklesiaskoinonia" target="_blank" rel="noopener noreferrer" class="btn-watch">Watch on YouTube</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ENGAGE WITH THE EKKLESIA / REGISTRATION & INTAKE FORMS -->
-    <section id="forms" class="section-padding">
-        <h2 class="section-title">Engage With the Ekklesia</h2>
-        <p class="section-subtitle">Step into judicial alignment, daily intercessory covering, and covenantal ecosystem building.</p>
-
-        <div class="forms-container">
-
-            <!-- Schedule a Judicial Session -->
-            <div class="form-card form-card-booking">
-                <div>
-                    <h3>🏛️ Schedule a Judicial Session</h3>
-                    <p style="color: var(--slate); font-size: 0.9rem; margin-bottom: 18px;">Address generational iniquities, bloodline covenants, and territorial altars with legal precision through our Courts of Heaven Session Bookings.</p>
-
-                    <div class="qr-small">
-                        <img src="https://quickchart.io/qr?text=https%3A%2F%2Fcalendar.app.google%2FxPmrk5LuasqAE9rw7&size=150&margin=1&ecLevel=M&dark=0c1b33" alt="Booking QR Code">
+                    <div class="hero-spotlight-card">
+                        <img src="kek-emblem.png" alt="Kingdom Ekklesias Koinonia Crest">
+                        <div class="spotlight-quote">Apostolic Governance &amp; Koinonia</div>
+                        <div class="spotlight-meta">
+                            Led by Apostle Elizaphan Kamau Mwangi &bull; Nairobi &amp; Global Ekklesia Circuit
+                        </div>
                     </div>
                 </div>
-                <a href="https://calendar.app.google/xPmrk5LuasqAE9rw7" target="_blank" rel="noopener noreferrer" class="btn-gold" style="width: 100%;">Book a Courtroom Session</a>
-            </div>
 
-            <!-- The Aaron & Hur Altar Initiative -->
-            <div class="form-card">
-                <h3>📋 The Aaron &amp; Hur Altar Initiative</h3>
-                <p style="color: var(--slate); font-size: 0.9rem; margin-bottom: 18px;">Enroll for daily, consecrated intercessory coverage over your household, enterprise, and dossier.</p>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSc5otxpeGsrobn43rVCo0qhg5HNFMxpkNi_0NHQunyqKwPcBg/viewform?usp=sharing&ouid=102920709206727082882" target="_blank" rel="noopener noreferrer" class="btn-gold" style="background-color: var(--navy); color: var(--white) !important;">Submit Prayer Dossier</a>
-            </div>
-
-            <!-- Become a Goshen Builder -->
-            <div class="form-card">
-                <h3>🌾 Become a Goshen Builder</h3>
-                <p style="color: var(--slate); font-size: 0.9rem; margin-bottom: 18px;">Partner with us as a covenant stakeholder in establishing regional hubs, agricultural blueprints, and wealth deployment networks.</p>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfJJXaEFN77UXfbHU3fGmsMEjFMq94wWx6lXotnD5vmEyGWzg/viewform?usp=header" target="_blank" rel="noopener noreferrer" class="btn-gold" style="background-color: var(--navy); color: var(--white) !important;">Goshen Builder Intake</a>
-            </div>
-
-            <!-- Co-Laborer Onboarding -->
-            <div class="form-card">
-                <h3>🤝 Co-Laborer &amp; Watchman Onboarding</h3>
-                <p style="color: var(--slate); font-size: 0.9rem; margin-bottom: 18px;">Register to serve across KEK operational offices, Day &amp; Night prayer watches, and regional outreach teams.</p>
-                <a href="https://forms.gle/nhn6zZ5RQ2VU5tLt7" target="_blank" rel="noopener noreferrer" class="btn-gold" style="background-color: var(--navy); color: var(--white) !important;">Enroll as Co-Laborer</a>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- PHOTO & MEDIA GALLERY SECTION -->
-    <section id="gallery" class="services-bg">
-        <div class="section-padding">
-            <h2 class="section-title">Photo &amp; Media Gallery</h2>
-            <p class="section-subtitle">Visual highlights from our seminars, prison ministries, and regional assemblies across Kenya.</p>
-
-            <div id="photo-gallery-container" class="gallery-grid">
-                <p style="color: var(--slate); grid-column: 1/-1; text-align: center;"><em>Loading gallery images...</em></p>
-            </div>
-        </div>
-    </section>
-
-    <!-- COMMUNITY & CONTACT SECTION -->
-    <section class="community-section">
-        <div style="max-width: 1000px; margin: 0 auto;">
-            <h2 style="font-family: 'Cinzel', serif; color: #ffffff; font-size: 2rem; margin-bottom: 10px;">Connect With Our Global Community</h2>
-            <p style="color: #cbd5e1; font-size: 1.05rem; margin-bottom: 35px;">Stay aligned with our daily prayer watches, weekly teachings, and legislative broadcasts across all platforms.</p>
-
-            <div class="social-links">
-                <a href="https://youtube.com/@kingdomekklesiaskoinonia" target="_blank" rel="noopener noreferrer" class="social-btn btn-yt">▶ YouTube Channel</a>
-                <a href="https://chat.whatsapp.com/KicB3kPctrrHHZpieyfPfA" target="_blank" rel="noopener noreferrer" class="social-btn btn-wa">💬 WhatsApp Community</a>
-                <a href="https://t.me/+_ehoRz2YkgA3M2Nk" target="_blank" rel="noopener noreferrer" class="social-btn btn-tg">✈️ Telegram Channel</a>
-                <a href="https://www.facebook.com/share/1EV4z8Tq9G/" target="_blank" rel="noopener noreferrer" class="social-btn btn-fb">👍 Facebook Page</a>
-                <a href="https://www.tiktok.com/@ekmwangi" target="_blank" rel="noopener noreferrer" class="social-btn btn-tt">🎵 TikTok (@ekmwangi)</a>
-            </div>
-
-            <div class="contact-card-box">
-                <h3 style="color: #c59b27; font-size: 1.2rem; margin-bottom: 15px; font-family: 'Cinzel', serif;">Direct Contact &amp; Enquiries</h3>
-                <p style="margin-bottom: 10px; font-size: 1rem;">
-                    ✉️ <strong>Apostolic &amp; Executive Office:</strong> <a href="mailto:ekmwangi@kingdomekklesiaskoinonia.org" style="color: #c59b27; font-weight: bold; text-decoration: underline;">ekmwangi@kingdomekklesiaskoinonia.org</a>
-                </p>
-                <p style="margin-bottom: 10px; font-size: 1rem;">
-                    ✉️ <strong>Ministry Desk &amp; Submissions:</strong> <a href="mailto:kingdom.ekklesias.inv@gmail.com" style="color: #ffffff; text-decoration: underline;">kingdom.ekklesias.inv@gmail.com</a>
-                </p>
-                <p style="margin-bottom: 0; font-size: 1rem;">
-                    📱 <strong>SMS / WhatsApp Direct:</strong> <a href="https://wa.me/254727953458" target="_blank" rel="noopener noreferrer" style="color: #c59b27; font-weight: bold; text-decoration: none;">+254 727 953 458</a>
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-        <p>&copy; 2026 Kingdom Ekklesias Koinonia (KEK). All Rights Reserved. | <a href="privacy.html" style="color: #718096; text-decoration: underline;">Privacy Policy</a> | Designed for Kingdom Governance</p>
-    </footer>
-
-    <!-- INSTALL KEK APP MODAL (Cross-Platform Fallback Guide) -->
-    <div id="pwa-install-modal" class="pwa-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="pwa-modal-title">
-        <div class="pwa-modal">
-            <button type="button" class="pwa-close" onclick="closeKEKInstallModal()" aria-label="Close modal">&times;</button>
-            <h3 id="pwa-modal-title">📲 Install KEK Portal App</h3>
-            <p style="color: var(--slate); font-size: 0.9rem; margin-bottom: 16px;">
-                Install <strong>Kingdom Ekklesias Koinonia</strong> directly onto your Windows desktop, taskbar, or mobile home screen for instant one-click access:
-            </p>
-            <div class="pwa-step-box">
-                <strong>💻 Windows 10 / 11 (Microsoft Edge or Chrome):</strong><br>
-                Click the <strong>Install icon</strong> in the right side of the browser address bar, or open browser menu (<strong>⋯</strong> / <strong>⋮</strong>) &rarr; <strong>Apps</strong> &rarr; <strong>Install this site as an app</strong>.
-            </div>
-            <div class="pwa-step-box">
-                <strong>🤖 Android (Chrome):</strong><br>
-                Tap the browser menu (<strong>⋮</strong>) &rarr; <strong>Install app</strong> or <strong>Add to Home screen</strong>.
-            </div>
-            <div class="pwa-step-box" style="margin-bottom: 18px;">
-                <strong>🍎 iPhone / iPad (Safari):</strong><br>
-                Tap the <strong>Share</strong> icon (square with upward arrow) &rarr; scroll down and tap <strong>Add to Home Screen</strong>.
-            </div>
-            <button type="button" onclick="closeKEKInstallModal()" class="btn-gold" style="width: 100%;">Got It</button>
-        </div>
-    </div>
-
-    <!-- Mobile Hamburger Menu Toggle -->
-    <script>
-        const hamburger = document.getElementById('hamburger-menu');
-        const navMenu = document.querySelector('header nav');
-
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
-
-        document.querySelectorAll('header nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-            });
-        });
-    </script>
-
-    <!-- Document Search & Filter Script -->
-    <script>
-        const docSearchInput = document.getElementById('doc-search-input');
-        const filterPills = document.querySelectorAll('.filter-pill');
-        const resourceCards = document.querySelectorAll('#resources-grid .resource-card');
-        let activeFilter = 'all';
-
-        function filterDocuments() {
-            const query = (docSearchInput.value || '').toLowerCase().trim();
-            resourceCards.forEach(card => {
-                const category = card.getAttribute('data-category');
-                const text = card.innerText.toLowerCase();
-                const matchesCategory = activeFilter === 'all' || category === activeFilter;
-                const matchesQuery = !query || text.includes(query);
-                card.style.display = (matchesCategory && matchesQuery) ? 'flex' : 'none';
-            });
-        }
-
-        if (docSearchInput) {
-            docSearchInput.addEventListener('input', filterDocuments);
-        }
-
-        filterPills.forEach(pill => {
-            pill.addEventListener('click', () => {
-                filterPills.forEach(p => p.classList.remove('active'));
-                pill.classList.add('active');
-                activeFilter = pill.getAttribute('data-filter');
-                filterDocuments();
-            });
-        });
-    </script>
-
-    <!-- Unified Decap CMS & GitHub Gallery Loader -->
-    <script>
-      async function loadCMSContent() {
-        const photoGallery = document.getElementById('photo-gallery-container');
-        let allPhotos = [];
-
-        try {
-          const photoResponse = await fetch('content/photos/index.json');
-          if (photoResponse.ok) {
-            const indexedPhotos = await photoResponse.json();
-            if (Array.isArray(indexedPhotos)) {
-              allPhotos = allPhotos.concat(indexedPhotos);
-            }
-          }
-        } catch (e) {
-          console.log('Photos index info:', e);
-        }
-
-        try {
-          const apiUrl = 'https://api.github.com/repos/kindomekklesias2052/kek-ministry/contents/content/photos';
-          const response = await fetch(apiUrl);
-          if (response.ok) {
-            const files = await response.json();
-            const jsonFiles = files.filter(file => file.name.endsWith('.json') && file.name !== 'index.json');
-            const photoPromises = jsonFiles.map(async (file) => {
-              const res = await fetch(file.download_url);
-              return res.ok ? await res.json() : null;
-            });
-            const cmsPhotos = (await Promise.all(photoPromises)).filter(Boolean);
-            allPhotos = cmsPhotos.concat(allPhotos);
-          }
-        } catch (err) {
-          console.log('CMS API fetch info:', err);
-        }
-
-        if (photoGallery && allPhotos.length > 0) {
-          photoGallery.innerHTML = allPhotos.map(p => {
-            const imagePath = p.image ? p.image.replace(/^\/?(kek-ministry\/)?/, '') : '';
-            return `
-              <div class="gallery-item">
-                <img src="${imagePath}" alt="${p.title}" loading="lazy">
-                <div class="gallery-caption">${p.title} — <em>${p.location || 'Territorial Circuit'}</em></div>
-              </div>
-            `;
-          }).join('');
-        }
-
-        try {
-          const videoResponse = await fetch('content/videos/index.json');
-          if (videoResponse.ok) {
-            const videos = await videoResponse.json();
-            const videoGallery = document.getElementById('video-gallery-container');
-            if (videoGallery && Array.isArray(videos) && videos.length > 0) {
-              videoGallery.innerHTML = videos.map(v => `
-                <div class="video-card">
-                  <h4>${v.title}</h4>
-                  <p>${v.description}</p>
-                  <a href="${v.video_url}" target="_blank" rel="noopener noreferrer" class="btn-watch">Watch Teaching</a>
+                <div class="hero-metrics">
+                    <div class="metric-tile" onclick="activateChamber('mandates')">
+                        <strong>3 Mandates</strong>
+                        <span>Courtrooms &amp; Councils</span>
+                    </div>
+                    <div class="metric-tile" onclick="activateChamber('goshen-pillars')">
+                        <strong>8 Pillars</strong>
+                        <span>Goshen Cities Ecosystem</span>
+                    </div>
+                    <div class="metric-tile" onclick="activateChamber('services')">
+                        <strong>6 Dockets</strong>
+                        <span>Apostolic Operations</span>
+                    </div>
+                    <div class="metric-tile" onclick="window.location.href='watch-hub.html'">
+                        <strong>24/7 Watches</strong>
+                        <span>Territorial Legislation</span>
+                    </div>
                 </div>
-              `).join('');
-            }
-          }
-        } catch (err) {
-          console.log('Video fetch info:', err);
-        }
-      }
+            </section>
 
-      document.addEventListener('DOMContentLoaded', loadCMSContent);
-    </script>
-
-    <!-- PWA Service Worker & Install Trigger Controller -->
-    <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('./service-worker.js').catch(err => console.log('SW registration:', err));
-        });
-      }
-
-      async function triggerKEKInstall() {
-        if (window.__kekInstallPrompt) {
-          window.__kekInstallPrompt.prompt();
-          await window.__kekInstallPrompt.userChoice;
-          window.__kekInstallPrompt = null;
-        } else {
-          document.getElementById('pwa-install-modal').classList.add('open');
-        }
-      }
-
-      function closeKEKInstallModal() {
-        document.getElementById('pwa-install-modal').classList.remove('open');
-      }
-
-      document.getElementById('pwa-install-modal').addEventListener('click', (e) => {
-        if (e.target.id === 'pwa-install-modal') closeKEKInstallModal();
-      });
-    </script>
-</body>
-</html>
+            <!-- CHAMBER STEPPER BAR -->
+            <div class="stage-stepper">
+                <div class="stepper-current">
+                    <span class="stepper-tag" id="stepper-tag">Chamber 1 of 10</span>
+                    <span class="stepper-title" id="stepper-title">Who We Are
