@@ -88,7 +88,7 @@
             --slate: #475569;
             --light-bg: #f8fafc;
             --white: #ffffff;
-            --rail-width: 278px;
+            --rail-width: 284px;
         }
 
         * {
@@ -119,31 +119,38 @@
         }
 
         .topbar-inner {
-            max-width: 1520px;
+            max-width: 1540px;
             margin: 0 auto;
             padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             flex-wrap: wrap;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 11px;
+            gap: 10px;
             text-decoration: none;
             font-family: 'Cinzel', serif;
             font-weight: 700;
-            font-size: 0.98rem;
+            font-size: 0.96rem;
             color: var(--white);
             letter-spacing: 0.5px;
         }
 
         .logo img {
-            width: 40px;
-            height: 40px;
+            width: 38px;
+            height: 38px;
             border-radius: 10px;
             border: 1.5px solid var(--gold);
             object-fit: cover;
@@ -153,17 +160,38 @@
             color: var(--gold);
         }
 
+        .rail-toggle-btn {
+            background: rgba(197, 155, 39, 0.16);
+            color: var(--gold-bright);
+            border: 1px solid var(--gold);
+            padding: 7px 12px;
+            border-radius: 7px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.2s ease;
+        }
+
+        .rail-toggle-btn:hover {
+            background: var(--gold);
+            color: var(--navy);
+        }
+
         .topbar-actions {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
         }
 
         .top-link {
             color: #e2e8f0;
             text-decoration: none;
-            font-size: 0.8rem;
+            font-size: 0.79rem;
             font-weight: 600;
             padding: 6px 10px;
             border-radius: 6px;
@@ -208,10 +236,10 @@
             gap: 8px;
             background: linear-gradient(135deg, #d4ab38 0%, #b5891b 100%);
             color: var(--navy) !important;
-            padding: 11px 20px;
+            padding: 11px 18px;
             border-radius: 7px;
             font-weight: 700;
-            font-size: 0.86rem;
+            font-size: 0.85rem;
             text-decoration: none;
             border: none;
             cursor: pointer;
@@ -230,13 +258,13 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            padding: 10px 18px;
+            padding: 10px 16px;
             border: 1.5px solid var(--gold);
             color: var(--white);
             text-decoration: none;
             border-radius: 7px;
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.84rem;
             transition: all 0.2s ease;
             background: rgba(255, 255, 255, 0.04);
             cursor: pointer;
@@ -248,59 +276,123 @@
             color: var(--navy);
         }
 
-        .mobile-rail-toggle {
-            display: none;
+        .btn-navy-solid {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             background: var(--navy);
+            color: var(--gold-bright) !important;
+            padding: 10px 18px;
+            border-radius: 7px;
+            font-weight: 700;
+            font-size: 0.84rem;
+            text-decoration: none;
+            border: 1px solid var(--navy);
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.2s ease;
+        }
+
+        .btn-navy-solid:hover {
+            background: var(--gold);
+            color: var(--navy) !important;
+            border-color: var(--gold);
+        }
+
+        /* FLOATING UNHIDE RAIL BUTTON (SHOWN WHEN RAIL IS HIDDEN) */
+        .floating-unhide-btn {
+            display: none;
+            position: fixed;
+            left: 16px;
+            bottom: 20px;
+            z-index: 1250;
+            background: linear-gradient(135deg, #0c1b33 0%, #162f59 100%);
             color: var(--gold-bright);
-            border: 1px solid var(--gold);
-            padding: 7px 12px;
-            border-radius: 6px;
+            border: 2px solid var(--gold);
+            padding: 11px 16px;
+            border-radius: 999px;
+            font-family: 'Montserrat', sans-serif;
             font-size: 0.8rem;
             font-weight: 700;
             cursor: pointer;
-            font-family: 'Montserrat', sans-serif;
+            box-shadow: 0 10px 26px rgba(6, 14, 28, 0.42);
+            align-items: center;
+            gap: 8px;
+        }
+
+        .floating-unhide-btn:hover {
+            background: var(--gold);
+            color: var(--navy);
+        }
+
+        body.rail-hidden .floating-unhide-btn {
+            display: inline-flex;
         }
 
         /* LEFT-COLUMN SHELL */
         .app-shell {
-            max-width: 1520px;
+            max-width: 1540px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: var(--rail-width) minmax(0, 1fr);
-            min-height: calc(100vh - 64px);
+            min-height: calc(100vh - 62px);
             align-items: start;
+            transition: grid-template-columns 0.22s ease;
+        }
+
+        body.rail-hidden .app-shell {
+            grid-template-columns: 0px minmax(0, 1fr);
         }
 
         /* LEFT NAVIGATION COLUMN */
         .left-rail {
             position: sticky;
-            top: 64px;
-            height: calc(100vh - 64px);
+            top: 62px;
+            height: calc(100vh - 62px);
             overflow-y: auto;
+            overflow-x: hidden;
             background: linear-gradient(180deg, #0b1930 0%, #071020 100%);
             border-right: 2px solid rgba(197, 155, 39, 0.38);
-            padding: 18px 14px 24px;
+            padding: 16px 13px 24px;
             color: var(--white);
             z-index: 1050;
             scrollbar-width: thin;
             scrollbar-color: rgba(197, 155, 39, 0.45) transparent;
+            transition: opacity 0.18s ease, padding 0.22s ease, border 0.22s ease;
+        }
+
+        body.rail-hidden .left-rail {
+            opacity: 0;
+            pointer-events: none;
+            padding: 0;
+            border-right-width: 0;
+        }
+
+        .rail-top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 12px;
         }
 
         .rail-brand-card {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(197, 155, 39, 0.3);
             border-radius: 10px;
-            padding: 12px;
-            margin-bottom: 14px;
+            padding: 10px;
             display: flex;
             align-items: center;
             gap: 10px;
+            flex: 1;
+            min-width: 0;
         }
 
         .rail-brand-card img {
-            width: 42px;
-            height: 42px;
-            border-radius: 9px;
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
             border: 1.5px solid var(--gold);
             object-fit: cover;
             flex-shrink: 0;
@@ -308,25 +400,44 @@
 
         .rail-brand-title {
             font-family: 'Cinzel', serif;
-            font-size: 0.82rem;
+            font-size: 0.78rem;
             font-weight: 700;
             color: var(--gold-bright);
             line-height: 1.25;
         }
 
         .rail-brand-sub {
-            font-size: 0.69rem;
+            font-size: 0.67rem;
             color: #94a3b8;
             margin-top: 2px;
         }
 
+        .rail-hide-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(197, 155, 39, 0.4);
+            color: var(--gold-bright);
+            padding: 7px 9px;
+            border-radius: 8px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+
+        .rail-hide-btn:hover {
+            background: var(--gold);
+            color: var(--navy);
+        }
+
         .rail-group-label {
-            font-size: 0.66rem;
+            font-size: 0.65rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1.2px;
+            letter-spacing: 1.15px;
             color: #94a3b8;
-            padding: 10px 10px 6px;
+            padding: 10px 10px 5px;
         }
 
         .rail-nav-list {
@@ -340,11 +451,11 @@
             background: transparent;
             border: 1px solid transparent;
             color: #cbd5e1;
-            padding: 10px 12px;
+            padding: 9px 11px;
             border-radius: 8px;
             text-align: left;
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.79rem;
             font-weight: 600;
             cursor: pointer;
             display: flex;
@@ -368,12 +479,13 @@
         }
 
         .rail-badge {
-            font-size: 0.65rem;
+            font-size: 0.64rem;
             font-weight: 700;
             background: rgba(255, 255, 255, 0.08);
             color: #e2e8f0;
             padding: 2px 7px;
             border-radius: 999px;
+            flex-shrink: 0;
         }
 
         .rail-nav-btn.active .rail-badge {
@@ -383,17 +495,17 @@
 
         .rail-mode-box {
             margin-top: 14px;
-            padding: 12px;
+            padding: 11px;
             border-radius: 10px;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.09);
         }
 
         .rail-mode-title {
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             font-weight: 700;
             color: var(--gold-bright);
-            margin-bottom: 8px;
+            margin-bottom: 7px;
         }
 
         .mode-switch-row {
@@ -408,7 +520,7 @@
             color: #cbd5e1;
             padding: 7px 6px;
             border-radius: 6px;
-            font-size: 0.71rem;
+            font-size: 0.7rem;
             font-weight: 700;
             cursor: pointer;
             font-family: 'Montserrat', sans-serif;
@@ -422,15 +534,15 @@
         }
 
         .rail-quick-links {
-            margin-top: 14px;
+            margin-top: 12px;
             display: flex;
             flex-direction: column;
-            gap: 7px;
+            gap: 6px;
         }
 
         .rail-ext-link {
             text-decoration: none;
-            font-size: 0.78rem;
+            font-size: 0.77rem;
             font-weight: 600;
             color: #e2e8f0;
             padding: 8px 10px;
@@ -450,7 +562,7 @@
 
         /* MAIN STAGE AREA */
         .main-stage {
-            padding: 24px 28px 56px;
+            padding: 22px 26px 52px;
             min-width: 0;
         }
 
@@ -459,16 +571,16 @@
             background: radial-gradient(circle at top right, #183463 0%, #0c1b33 58%, #060e1c 100%);
             color: var(--white);
             border-radius: 16px;
-            padding: 28px 30px;
+            padding: 24px 28px;
             border: 1.5px solid rgba(197, 155, 39, 0.55);
             box-shadow: 0 14px 36px rgba(12, 27, 51, 0.16);
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .command-hero-top {
             display: grid;
-            grid-template-columns: minmax(0, 1.5fr) minmax(240px, 0.85fr);
-            gap: 24px;
+            grid-template-columns: minmax(0, 1.55fr) minmax(230px, 0.85fr);
+            gap: 22px;
             align-items: center;
         }
 
@@ -479,13 +591,13 @@
             background: rgba(197, 155, 39, 0.15);
             border: 1px solid rgba(197, 155, 39, 0.5);
             color: var(--gold-bright);
-            padding: 5px 14px;
+            padding: 5px 13px;
             border-radius: 999px;
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             font-weight: 700;
-            letter-spacing: 1.1px;
+            letter-spacing: 1px;
             text-transform: uppercase;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .pulse-dot {
@@ -499,16 +611,16 @@
 
         .command-hero h1 {
             font-family: 'Cinzel', serif;
-            font-size: 2.1rem;
+            font-size: 2rem;
             font-weight: 800;
             line-height: 1.2;
-            margin: 0 0 12px;
+            margin: 0 0 10px;
             color: var(--white);
         }
 
         .command-hero p {
-            font-size: 0.96rem;
-            line-height: 1.68;
+            font-size: 0.94rem;
+            line-height: 1.65;
             color: #cbd5e1;
             margin: 0;
         }
@@ -517,29 +629,29 @@
             background: rgba(6, 14, 28, 0.72);
             border: 1px solid rgba(197, 155, 39, 0.4);
             border-radius: 12px;
-            padding: 18px;
+            padding: 16px;
             text-align: center;
         }
 
         .hero-spotlight-card img {
-            width: 78px;
-            height: 78px;
+            width: 72px;
+            height: 72px;
             border-radius: 14px;
             border: 2px solid var(--gold);
             object-fit: cover;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             box-shadow: 0 0 22px rgba(197, 155, 39, 0.3);
         }
 
         .spotlight-quote {
             font-family: 'Cinzel', serif;
-            font-size: 0.88rem;
+            font-size: 0.85rem;
             color: var(--gold-bright);
-            margin-bottom: 6px;
+            margin-bottom: 5px;
         }
 
         .spotlight-meta {
-            font-size: 0.76rem;
+            font-size: 0.74rem;
             color: #94a3b8;
             line-height: 1.45;
         }
@@ -548,12 +660,12 @@
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-            margin-top: 20px;
+            margin-top: 18px;
         }
 
         .hero-metrics {
-            margin-top: 22px;
-            padding-top: 18px;
+            margin-top: 20px;
+            padding-top: 16px;
             border-top: 1px solid rgba(255, 255, 255, 0.12);
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -564,10 +676,12 @@
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 10px;
-            padding: 12px;
+            padding: 11px;
             text-align: center;
             cursor: pointer;
             transition: all 0.2s ease;
+            font-family: 'Montserrat', sans-serif;
+            color: inherit;
         }
 
         .metric-tile:hover {
@@ -579,12 +693,12 @@
         .metric-tile strong {
             display: block;
             font-family: 'Cinzel', serif;
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: var(--gold-bright);
         }
 
         .metric-tile span {
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             color: #cbd5e1;
             text-transform: uppercase;
             letter-spacing: 0.6px;
@@ -595,8 +709,8 @@
             background: var(--white);
             border: 1px solid #e2e8f0;
             border-radius: 12px;
-            padding: 12px 18px;
-            margin-bottom: 20px;
+            padding: 11px 16px;
+            margin-bottom: 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -616,7 +730,7 @@
             background: rgba(197, 155, 39, 0.18);
             color: var(--navy);
             border: 1px solid rgba(197, 155, 39, 0.45);
-            font-size: 0.7rem;
+            font-size: 0.69rem;
             font-weight: 800;
             padding: 4px 10px;
             border-radius: 999px;
@@ -626,7 +740,7 @@
 
         .stepper-title {
             font-family: 'Cinzel', serif;
-            font-size: 1.02rem;
+            font-size: 1rem;
             font-weight: 700;
             color: var(--navy);
         }
@@ -641,9 +755,9 @@
             background: #f1f5f9;
             color: var(--navy);
             border: 1px solid #cbd5e1;
-            padding: 7px 14px;
+            padding: 7px 13px;
             border-radius: 7px;
-            font-size: 0.78rem;
+            font-size: 0.77rem;
             font-weight: 700;
             cursor: pointer;
             font-family: 'Montserrat', sans-serif;
@@ -667,9 +781,9 @@
             background: var(--white);
             border: 1px solid #e2e8f0;
             border-radius: 16px;
-            padding: 32px;
+            padding: 30px;
             box-shadow: 0 8px 26px rgba(12, 27, 51, 0.06);
-            animation: panelFade 0.24s ease;
+            animation: panelFade 0.22s ease;
         }
 
         .chamber-panel.active-chamber {
@@ -678,17 +792,17 @@
 
         body.scroll-all-mode .chamber-panel {
             display: block;
-            margin-bottom: 24px;
+            margin-bottom: 22px;
         }
 
         @keyframes panelFade {
-            from { opacity: 0; transform: translateY(6px); }
+            from { opacity: 0; transform: translateY(5px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .section-title {
             font-family: 'Cinzel', serif;
-            font-size: 1.75rem;
+            font-size: 1.7rem;
             color: var(--navy);
             text-align: center;
             margin: 0 0 10px;
@@ -708,9 +822,151 @@
             text-align: center;
             color: var(--slate);
             max-width: 760px;
-            margin: 14px auto 30px;
-            font-size: 0.96rem;
+            margin: 14px auto 24px;
+            font-size: 0.95rem;
             line-height: 1.65;
+        }
+
+        /* INTERACTIVE SUB-TABS (GOSHEN 8 PILLARS & COURTS 101) */
+        .subtab-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin: 0 auto 24px;
+            padding: 12px;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+        }
+
+        .subtab-btn {
+            background: var(--white);
+            border: 1px solid #cbd5e1;
+            color: var(--navy);
+            padding: 8px 13px;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.18s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .subtab-btn:hover {
+            border-color: var(--gold);
+            transform: translateY(-1px);
+        }
+
+        .subtab-btn.active {
+            background: var(--navy);
+            color: var(--gold-bright);
+            border-color: var(--navy);
+            box-shadow: 0 4px 12px rgba(12, 27, 51, 0.16);
+        }
+
+        .subtab-pane {
+            display: none;
+            animation: panelFade 0.2s ease;
+        }
+
+        .subtab-pane.active {
+            display: block;
+        }
+
+        /* GOSHEN SINGLE-PILLAR SPOTLIGHT CARD */
+        .pillar-spotlight {
+            background: linear-gradient(135deg, #0c1b33 0%, #152c52 100%);
+            color: var(--white);
+            border: 2px solid var(--gold);
+            border-radius: 14px;
+            padding: 28px;
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: 0 14px 32px rgba(12, 27, 51, 0.16);
+        }
+
+        .pillar-spotlight-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .pillar-number-pill {
+            background: rgba(197, 155, 39, 0.2);
+            border: 1px solid var(--gold);
+            color: var(--gold-bright);
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 999px;
+            letter-spacing: 0.9px;
+            text-transform: uppercase;
+        }
+
+        .pillar-scripture-pill {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #fde047;
+        }
+
+        .pillar-spotlight h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.48rem;
+            color: var(--white);
+            margin: 0 0 12px;
+        }
+
+        .pillar-spotlight-desc {
+            color: #e2e8f0;
+            font-size: 0.96rem;
+            line-height: 1.72;
+            margin: 0 0 18px;
+        }
+
+        .pillar-specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .pillar-spec-box {
+            background: rgba(6, 14, 28, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 10px;
+            padding: 14px;
+        }
+
+        .pillar-spec-box strong {
+            display: block;
+            font-size: 0.73rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--gold-bright);
+            margin-bottom: 5px;
+        }
+
+        .pillar-spec-box span {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+
+        .pillar-spotlight-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.14);
         }
 
         .about-text {
@@ -724,8 +980,8 @@
 
         .koinonia-callout {
             max-width: 880px;
-            margin: 28px auto 0;
-            padding: 26px 30px;
+            margin: 26px auto 0;
+            padding: 24px 28px;
             background: linear-gradient(135deg, #0c1b33 0%, #14294d 100%);
             color: var(--white);
             border-left: 5px solid var(--gold);
@@ -737,13 +993,13 @@
         .koinonia-callout h3 {
             font-family: 'Cinzel', serif;
             color: var(--gold-bright);
-            font-size: 1.22rem;
+            font-size: 1.2rem;
             margin: 0 0 10px;
         }
 
         .koinonia-callout p {
             color: #e2e8f0;
-            font-size: 0.95rem;
+            font-size: 0.94rem;
             line-height: 1.72;
             margin: 0;
         }
@@ -751,15 +1007,15 @@
         /* CARDS & GRIDS */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+            gap: 18px;
         }
 
         .service-card {
             background: #f8fafc;
             border: 1px solid #e2e8f0;
             border-radius: 10px;
-            padding: 24px;
+            padding: 22px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -778,7 +1034,7 @@
             display: inline-block;
             font-family: 'Cinzel', serif;
             font-weight: 700;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             color: var(--navy);
             background: rgba(197, 155, 39, 0.2);
             border: 1px solid rgba(197, 155, 39, 0.5);
@@ -790,24 +1046,25 @@
         .service-card h3 {
             font-family: 'Cinzel', serif;
             color: var(--navy);
-            font-size: 1.12rem;
+            font-size: 1.1rem;
             margin: 0 0 10px;
         }
 
         .service-card p {
             color: var(--slate);
-            font-size: 0.9rem;
+            font-size: 0.89rem;
             line-height: 1.62;
-            margin: 0 0 18px;
+            margin: 0 0 16px;
         }
 
         .card-btn {
             color: var(--navy);
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.84rem;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
+            justify-content: space-between;
             gap: 6px;
             padding-top: 12px;
             border-top: 1px solid #e2e8f0;
@@ -818,6 +1075,8 @@
             cursor: pointer;
             font-family: 'Montserrat', sans-serif;
             transition: color 0.2s ease;
+            width: 100%;
+            text-align: left;
         }
 
         .card-btn:hover {
@@ -827,8 +1086,8 @@
         /* GOSHEN 8 PILLARS GRID */
         .goshen-pillars-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 18px;
+            grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+            gap: 16px;
         }
 
         .goshen-pillar-card {
@@ -836,7 +1095,11 @@
             border: 1px solid #e2e8f0;
             border-top: 4px solid var(--gold);
             border-radius: 10px;
-            padding: 20px;
+            padding: 18px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
         }
 
@@ -849,15 +1112,21 @@
         .goshen-pillar-card h4 {
             font-family: 'Cinzel', serif;
             color: var(--navy);
-            font-size: 1.02rem;
+            font-size: 1rem;
             margin: 0 0 8px;
         }
 
         .goshen-pillar-card p {
             color: var(--slate);
-            font-size: 0.88rem;
-            line-height: 1.6;
-            margin: 0;
+            font-size: 0.87rem;
+            line-height: 1.58;
+            margin: 0 0 12px;
+        }
+
+        .pillar-card-link {
+            font-size: 0.76rem;
+            font-weight: 700;
+            color: #9e7816;
         }
 
         /* DOCUMENT FILTER & GRID */
@@ -867,7 +1136,7 @@
             justify-content: space-between;
             align-items: center;
             gap: 12px;
-            margin-bottom: 22px;
+            margin-bottom: 20px;
             background: #f8fafc;
             padding: 14px 18px;
             border-radius: 10px;
@@ -910,7 +1179,7 @@
 
         .resources-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
             gap: 16px;
         }
 
@@ -936,13 +1205,13 @@
         .resource-info h4 {
             font-family: 'Cinzel', serif;
             color: var(--navy);
-            font-size: 0.96rem;
+            font-size: 0.95rem;
             margin: 0 0 6px;
         }
 
         .resource-info p {
             color: var(--slate);
-            font-size: 0.84rem;
+            font-size: 0.83rem;
             line-height: 1.52;
             margin: 0;
         }
@@ -966,7 +1235,7 @@
             border-color: var(--gold);
         }
 
-        /* COURTROOM & FORMS & COMMUNITY FALLBACK STYLING */
+        /* COURTROOM & FORMS & COMMUNITY STYLING */
         .courtroom-wrapper {
             max-width: 980px;
             margin: 0 auto;
@@ -974,11 +1243,11 @@
 
         .courtroom-header {
             text-align: center;
-            margin-bottom: 24px;
+            margin-bottom: 18px;
         }
 
         .courtroom-tagline {
-            font-size: 0.75rem;
+            font-size: 0.74rem;
             font-weight: 800;
             letter-spacing: 1.4px;
             color: #9e7816;
@@ -987,16 +1256,16 @@
 
         .courtroom-subheading {
             color: var(--slate);
-            font-size: 1rem;
+            font-size: 0.98rem;
             font-weight: 600;
             margin: 8px 0 0;
         }
 
         .courtroom-body {
-            font-size: 0.95rem;
+            font-size: 0.94rem;
             line-height: 1.72;
             color: #334155;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .matrices-box {
@@ -1004,15 +1273,15 @@
             border: 1px solid #e2e8f0;
             border-left: 4px solid var(--gold);
             border-radius: 10px;
-            padding: 22px;
-            margin-bottom: 26px;
+            padding: 20px;
+            margin-bottom: 18px;
         }
 
         .matrices-title {
             font-family: 'Cinzel', serif;
             color: var(--navy);
             margin: 0 0 8px;
-            font-size: 1.2rem;
+            font-size: 1.16rem;
         }
 
         .matrices-list {
@@ -1021,56 +1290,60 @@
             margin: 0;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
 
         .matrices-list li {
-            font-size: 0.9rem;
-            line-height: 1.58;
+            font-size: 0.89rem;
+            line-height: 1.56;
             color: #334155;
         }
 
         .sessions-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 16px;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .session-card {
             background: #f8fafc;
             border: 1px solid #e2e8f0;
+            border-top: 3px solid var(--navy);
             border-radius: 10px;
             padding: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .session-card h4 {
             font-family: 'Cinzel', serif;
             color: var(--navy);
             margin: 0 0 8px;
-            font-size: 1rem;
+            font-size: 0.98rem;
         }
 
         .session-card p {
             color: var(--slate);
-            font-size: 0.86rem;
+            font-size: 0.85rem;
             line-height: 1.55;
-            margin: 0;
+            margin: 0 0 14px;
         }
 
         .seed-card {
             background: #fffdf5;
             border: 1px solid rgba(197, 155, 39, 0.45);
             border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 24px;
+            padding: 18px;
+            margin-bottom: 20px;
         }
 
         .booking-cta-box {
             background: linear-gradient(135deg, #0c1b33 0%, #152b52 100%);
             color: var(--white);
             border-radius: 12px;
-            padding: 28px;
+            padding: 26px;
             text-align: center;
             border: 1.5px solid var(--gold);
         }
@@ -1087,7 +1360,7 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 12px;
-            margin: 18px 0;
+            margin: 16px 0;
         }
 
         .btn-whatsapp {
@@ -1099,14 +1372,14 @@
             color: #ffffff;
             text-decoration: none;
             font-weight: 700;
-            font-size: 0.9rem;
-            padding: 12px 20px;
+            font-size: 0.88rem;
+            padding: 11px 18px;
             border-radius: 7px;
         }
 
         .forms-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
             gap: 18px;
         }
 
@@ -1114,7 +1387,7 @@
             background: #f8fafc;
             border: 1px solid #e2e8f0;
             border-radius: 10px;
-            padding: 22px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -1123,18 +1396,18 @@
         .form-card h3 {
             font-family: 'Cinzel', serif;
             color: var(--navy);
-            margin: 0 0 10px;
-            font-size: 1.08rem;
+            margin: 0 0 8px;
+            font-size: 1.05rem;
         }
 
         .qr-small {
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
 
         .community-section {
             background: linear-gradient(135deg, #0c1b33 0%, #071020 100%);
             color: var(--white);
-            padding: 44px 24px;
+            padding: 40px 24px;
             text-align: center;
             border-top: 3px solid var(--gold);
         }
@@ -1144,7 +1417,7 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 10px;
-            margin-bottom: 26px;
+            margin-bottom: 24px;
         }
 
         .social-btn {
@@ -1154,7 +1427,7 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             padding: 9px 15px;
             border-radius: 7px;
-            font-size: 0.84rem;
+            font-size: 0.83rem;
             font-weight: 600;
         }
 
@@ -1167,7 +1440,7 @@
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(197, 155, 39, 0.35);
             border-radius: 10px;
-            padding: 20px;
+            padding: 18px;
             max-width: 720px;
             margin: 0 auto;
         }
@@ -1176,8 +1449,8 @@
             background: #050b14;
             color: #94a3b8;
             text-align: center;
-            padding: 18px 20px;
-            font-size: 0.82rem;
+            padding: 16px 20px;
+            font-size: 0.8rem;
         }
 
         /* INSTALL PWA MODAL */
@@ -1236,26 +1509,26 @@
             color: var(--slate);
         }
 
-        /* RESPONSIVE LEFT-COLUMN ADAPTATION */
+        /* RESPONSIVE ADAPTATION */
         @media (max-width: 980px) {
+            body.rail-hidden .app-shell,
             .app-shell {
                 grid-template-columns: 1fr;
             }
 
-            .mobile-rail-toggle {
-                display: inline-flex;
-                align-items: center;
-                gap: 6px;
-            }
-
-            .left-rail {
+            .left-rail,
+            body.rail-hidden .left-rail {
                 display: none;
                 position: fixed;
                 top: 62px;
                 left: 0;
                 width: min(300px, 86vw);
                 height: calc(100vh - 62px);
-                box-shadow: 12px 0 32px rgba(0, 0, 0, 0.45);
+                padding: 16px 13px 24px;
+                border-right: 2px solid rgba(197, 155, 39, 0.45);
+                box-shadow: 12px 0 32px rgba(0, 0, 0, 0.5);
+                opacity: 1;
+                pointer-events: auto;
                 z-index: 1300;
             }
 
@@ -1282,7 +1555,7 @@
 
         @media (max-width: 600px) {
             .command-hero h1 {
-                font-size: 1.6rem;
+                font-size: 1.55rem;
             }
             .resources-grid {
                 grid-template-columns: 1fr;
@@ -1299,38 +1572,51 @@
     <!-- TOP SANCTUARY BAR -->
     <header class="topbar">
         <div class="topbar-inner">
-            <div style="display: flex; align-items: center; gap: 10px;">
-                <button type="button" class="mobile-rail-toggle" id="mobile-rail-btn" aria-label="Toggle Chamber Navigation">
-                    ☰ Chambers
+            <div class="topbar-left">
+                <button type="button" class="rail-toggle-btn" id="header-rail-toggle" aria-label="Hide or Unhide Left Chamber Rail">
+                    <span id="header-rail-icon">◀</span>
+                    <span id="header-rail-label">Hide Rail</span>
                 </button>
-                <a href="#" class="logo" onclick="activateChamber('about'); return false;">
+
+                <a href="#about" class="logo" data-goto-chamber="about">
                     <img src="kek-emblem.png" alt="KEK Emblem">
                     KINGDOM EKKLESIAS <span>KOINONIA</span>
                 </a>
             </div>
 
             <div class="topbar-actions">
-                <a href="portal.html" class="top-link highlight">Member &amp; Classes Portal</a>
-                <a href="watch-hub.html" class="top-link">24/7 Watch &amp; Live</a>
+                <a href="portal.html" class="top-link highlight">Member &amp; Classes Portal &rarr;</a>
+                <a href="watch-hub.html" class="top-link">24/7 Watch &amp; Live &rarr;</a>
                 <button type="button" onclick="triggerKEKInstall()" class="btn-install-nav pwa-install-trigger">
                     📲 Install App
                 </button>
-                <a href="https://calendar.app.google/xPmrk5LuasqAE9rw7" target="_blank" rel="noopener noreferrer" class="btn-gold" style="padding: 7px 14px; font-size: 0.78rem;">Book Session</a>
+                <a href="https://calendar.app.google/xPmrk5LuasqAE9rw7" target="_blank" rel="noopener noreferrer" class="btn-gold" style="padding: 7px 14px; font-size: 0.78rem;">Book Session &nearr;</a>
             </div>
         </div>
     </header>
+
+    <!-- FLOATING UNHIDE RAIL BUTTON (WHEN RAIL IS HIDDEN ON DESKTOP) -->
+    <button type="button" class="floating-unhide-btn" id="floating-unhide-rail" aria-label="Unhide Navigation Rail">
+        <span>▶</span>
+        <span>Unhide Rail</span>
+    </button>
 
     <!-- MAIN LEFT-COLUMN WORKSPACE SHELL -->
     <div class="app-shell">
 
         <!-- LEFT COLUMN CHAMBER NAVIGATOR -->
         <aside class="left-rail" id="left-chamber-rail" aria-label="Chamber Navigation Column">
-            <div class="rail-brand-card">
-                <img src="kek-emblem.png" alt="KEK Crest">
-                <div>
-                    <div class="rail-brand-title">KEK Governance Rail</div>
-                    <div class="rail-brand-sub">Select a chamber to view</div>
+            <div class="rail-top-bar">
+                <div class="rail-brand-card">
+                    <img src="kek-emblem.png" alt="KEK Crest">
+                    <div>
+                        <div class="rail-brand-title">KEK Governance Rail</div>
+                        <div class="rail-brand-sub">Click chamber to open</div>
+                    </div>
                 </div>
+                <button type="button" class="rail-hide-btn" id="rail-inner-hide-btn" title="Hide Navigation Rail">
+                    ✕ Hide
+                </button>
             </div>
 
             <div class="rail-group-label">Core Foundations</div>
@@ -1353,7 +1639,7 @@
                 </button>
             </div>
 
-            <div class="rail-group-label">Courts, Library &amp; Media</div>
+            <div class="rail-group-label">Courts, Library &amp; Action Pages</div>
             <div class="rail-nav-list">
                 <button type="button" class="rail-nav-btn" data-chamber="courtroom-101">
                     <span>📜 Courts of Heaven 101</span>
@@ -1398,6 +1684,10 @@
                     <span>🎓 Member &amp; Classes Portal</span>
                     <span>&rarr;</span>
                 </a>
+                <a href="intake.html" class="rail-ext-link">
+                    <span>📋 Aaron &amp; Hur Coverage Page</span>
+                    <span>&rarr;</span>
+                </a>
                 <a href="https://chat.whatsapp.com/KicB3kPctrrHHZpieyfPfA" target="_blank" rel="noopener noreferrer" class="rail-ext-link">
                     <span>💬 KEK WhatsApp Community</span>
                     <span>&nearr;</span>
@@ -1421,12 +1711,10 @@
                             An Apostolic-Prophetic Governance Assembly equipping mature sons and territorial Ekklesias to operate in the Kingdom of our Father. Through the Courtrooms, Councils, and Heavenly Realms, we legislate under the Headship of Christ Jesus to bring about the complete transformation of individuals, territories, and nations into His true image and likeness.
                         </p>
                         <div class="hero-actions">
-                            <a href="portal.html" class="btn-gold">Member &amp; Academy Portal</a>
-                            <button type="button" onclick="activateChamber('courtroom-101')" class="btn-outline-gold">Explore Courts 101</button>
-                            <button type="button" onclick="activateChamber('goshen-pillars')" class="btn-outline-gold">Goshen 8 Pillars</button>
-                            <button type="button" onclick="triggerKEKInstall()" class="btn-outline-gold pwa-install-trigger">
-                                📲 Install App
-                            </button>
+                            <a href="portal.html" class="btn-gold">Member &amp; Academy Portal &rarr;</a>
+                            <button type="button" data-goto-chamber="courtroom-101" class="btn-outline-gold">Courts 101 &amp; Booking</button>
+                            <button type="button" data-goto-chamber="forms" class="btn-outline-gold">Intake &amp; Enrollment Forms</button>
+                            <a href="watch-hub.html" class="btn-outline-gold">24/7 Watch &amp; Live &rarr;</a>
                         </div>
                     </div>
 
@@ -1440,22 +1728,22 @@
                 </div>
 
                 <div class="hero-metrics">
-                    <div class="metric-tile" onclick="activateChamber('mandates')">
+                    <button type="button" class="metric-tile" data-goto-chamber="mandates">
                         <strong>3 Mandates</strong>
                         <span>Courtrooms &amp; Councils</span>
-                    </div>
-                    <div class="metric-tile" onclick="activateChamber('goshen-pillars')">
+                    </button>
+                    <button type="button" class="metric-tile" data-goto-chamber="goshen-pillars">
                         <strong>8 Pillars</strong>
                         <span>Goshen Cities Ecosystem</span>
-                    </div>
-                    <div class="metric-tile" onclick="activateChamber('services')">
+                    </button>
+                    <button type="button" class="metric-tile" data-goto-chamber="services">
                         <strong>6 Dockets</strong>
                         <span>Apostolic Operations</span>
-                    </div>
-                    <div class="metric-tile" onclick="window.location.href='watch-hub.html'">
-                        <strong>24/7 Watches</strong>
+                    </button>
+                    <button type="button" class="metric-tile" onclick="window.location.href='watch-hub.html'">
+                        <strong>24/7 Watches &rarr;</strong>
                         <span>Territorial Legislation</span>
-                    </div>
+                    </button>
                 </div>
             </section>
 
@@ -1501,7 +1789,10 @@
                             <h3>Judicial Intercession in the Courtrooms of Heaven</h3>
                             <p>We stand before the Ancient of Days, alongside Yeshua our Advocate and the Holy Spirit our Divine Counsel, to audit spiritual landscapes, revoke illegal demonic liens, expunge bloodline ledgers, and enforce Heaven’s verdicts over personal and territorial destinies.</p>
                         </div>
-                        <button type="button" onclick="activateChamber('courtroom-101')" class="card-btn">Enter Courtroom Protocols &rarr;</button>
+                        <button type="button" data-goto-chamber="courtroom-101" class="card-btn">
+                            <span>Enter Courtroom Protocols &amp; Booking</span>
+                            <span>&rarr;</span>
+                        </button>
                     </div>
 
                     <div class="service-card">
@@ -1510,7 +1801,10 @@
                             <h3>Legislative Councils &amp; Melchizedek Order</h3>
                             <p>Operating under the High Priesthood of Melchizedek, we step into the Councils of Heaven to receive divine blueprints, steward Kingdom wealth, and exercise the Keys of the Kingdom—binding systemic corruption and loosing righteousness across the Seven Mountains of Influence.</p>
                         </div>
-                        <button type="button" onclick="activateChamber('resources')" class="card-btn">Access Governance Blueprints &rarr;</button>
+                        <button type="button" data-goto-chamber="resources" class="card-btn">
+                            <span>Access Governance Blueprints (10 PDFs)</span>
+                            <span>&rarr;</span>
+                        </button>
                     </div>
 
                     <div class="service-card">
@@ -1519,57 +1813,100 @@
                             <h3>The Goshen Cities Ecosystem Blueprint</h3>
                             <p>To manifest Heaven's decrees on Earth, we establish autonomous, sustainable "Cities of Hope and Immunity"—territories of distinction shielded from the economic and systemic collapses of the world system.</p>
                         </div>
-                        <button type="button" onclick="activateChamber('goshen-pillars')" class="card-btn">Explore the 8 Pillars &rarr;</button>
+                        <button type="button" data-goto-chamber="goshen-pillars" class="card-btn">
+                            <span>Explore the 8 Pillars</span>
+                            <span>&rarr;</span>
+                        </button>
                     </div>
                 </div>
             </section>
 
-            <!-- CHAMBER 3: THE 8 PILLARS OF THE GOSHEN ECOSYSTEM -->
+            <!-- CHAMBER 3: THE 8 PILLARS OF THE GOSHEN ECOSYSTEM (WITH INTERACTIVE SUB-TABS) -->
             <section id="goshen-pillars" class="chamber-panel" data-chamber-label="The 8 Pillars of the Goshen Ecosystem">
                 <h2 class="section-title">The 8 Pillars of the Goshen Ecosystem</h2>
-                <p class="section-subtitle">Our physical and structural expansion is anchored upon eight foundational pillars:</p>
+                <p class="section-subtitle">Select any individual pillar below to inspect its covenant mandate and practical infrastructure blueprint, or view all eight together.</p>
 
-                <div class="goshen-pillars-grid">
-                    <div class="goshen-pillar-card">
-                        <h4>1. 👑 The Covenant Community</h4>
-                        <p>A royal priesthood of matured sons operating in corporate oneness and non-negotiable alignment with the Father's will.</p>
+                <div class="subtab-bar" role="tablist" aria-label="Goshen 8 Pillars Sub-Tabs" id="goshen-subtab-bar">
+                    <button type="button" class="subtab-btn active" data-pillar-tab="all">All 8 Pillars</button>
+                    <button type="button" class="subtab-btn" data-pillar-tab="1">1. 👑 Covenant</button>
+                    <button type="button" class="subtab-btn" data-pillar-tab="2">2. 🏡 Housing</button>
+                    <button type="button" class="subtab-btn" data-pillar-tab="3">3. 🩺 Wellness</button>
+                    <button type="button" class="subtab-btn" data-pillar-tab="4">4. 🌾 Agriculture</button>
+                    <button type="button" class="subtab-btn" data-pillar-tab="5">5. 📚 Development</button>
+                    <button type="button" class="subtab-btn" data-pillar-tab="6">6. 🚚 Mobility</button>
+                    <button type="button" class="subtab-btn" data-pillar-tab="7">7. ⚖️ Economy</button>
+                    <button type="button" class="subtab-btn" data-pillar-tab="8">8. 🛠️ Technology</button>
+                </div>
+
+                <!-- Overview Grid of All 8 Pillars -->
+                <div id="goshen-all-view" class="goshen-pillars-grid">
+                    <div class="goshen-pillar-card" data-open-pillar="1">
+                        <div>
+                            <h4>1. 👑 The Covenant Community</h4>
+                            <p>A royal priesthood of matured sons operating in corporate oneness and non-negotiable alignment with the Father's will.</p>
+                        </div>
+                        <span class="pillar-card-link">Inspect Pillar 01 &rarr;</span>
                     </div>
 
-                    <div class="goshen-pillar-card">
-                        <h4>2. 🏡 Integrated Housing Systems</h4>
-                        <p>Sustainable physical architecture integrated with consecrated spiritual altars to provide complete safety and rest.</p>
+                    <div class="goshen-pillar-card" data-open-pillar="2">
+                        <div>
+                            <h4>2. 🏡 Integrated Housing Systems</h4>
+                            <p>Sustainable physical architecture integrated with consecrated spiritual altars to provide complete safety and rest.</p>
+                        </div>
+                        <span class="pillar-card-link">Inspect Pillar 02 &rarr;</span>
                     </div>
 
-                    <div class="goshen-pillar-card">
-                        <h4>3. 🩺 Divine Wellness &amp; Healthcare</h4>
-                        <p>Restoring original covenant wellness and caregiving systems shielded from systemic infirmity (Exodus 15:26).</p>
+                    <div class="goshen-pillar-card" data-open-pillar="3">
+                        <div>
+                            <h4>3. 🩺 Divine Wellness &amp; Healthcare</h4>
+                            <p>Restoring original covenant wellness and caregiving systems shielded from systemic infirmity (Exodus 15:26).</p>
+                        </div>
+                        <span class="pillar-card-link">Inspect Pillar 03 &rarr;</span>
                     </div>
 
-                    <div class="goshen-pillar-card">
-                        <h4>4. 🌾 Harmonized Agriculture &amp; Food Security</h4>
-                        <p>Replicating Edenic soil frequencies and advanced greenhouse technologies to ensure 100% regional food security.</p>
+                    <div class="goshen-pillar-card" data-open-pillar="4">
+                        <div>
+                            <h4>4. 🌾 Harmonized Agriculture &amp; Food Security</h4>
+                            <p>Replicating Edenic soil frequencies and advanced greenhouse technologies to ensure 100% regional food security.</p>
+                        </div>
+                        <span class="pillar-card-link">Inspect Pillar 04 &rarr;</span>
                     </div>
 
-                    <div class="goshen-pillar-card">
-                        <h4>5. 📚 Holistic Human Development</h4>
-                        <p>Discipleship-driven education moving beyond academic theory to equip citizens for practical Kingdom governance.</p>
+                    <div class="goshen-pillar-card" data-open-pillar="5">
+                        <div>
+                            <h4>5. 📚 Holistic Human Development</h4>
+                            <p>Discipleship-driven education moving beyond academic theory to equip citizens for practical Kingdom governance.</p>
+                        </div>
+                        <span class="pillar-card-link">Inspect Pillar 05 &rarr;</span>
                     </div>
 
-                    <div class="goshen-pillar-card">
-                        <h4>6. 🚚 Strategic Mobility &amp; Logistics</h4>
-                        <p>Dedicated transport and distribution networks designed for prophetic speed and territorial resource deployment.</p>
+                    <div class="goshen-pillar-card" data-open-pillar="6">
+                        <div>
+                            <h4>6. 🚚 Strategic Mobility &amp; Logistics</h4>
+                            <p>Dedicated transport and distribution networks designed for prophetic speed and territorial resource deployment.</p>
+                        </div>
+                        <span class="pillar-card-link">Inspect Pillar 06 &rarr;</span>
                     </div>
 
-                    <div class="goshen-pillar-card">
-                        <h4>7. ⚖️ Economic Sovereignty</h4>
-                        <p>Debt-free, autonomous financial systems rooted in covenant equity, trade, and Melchizedek wealth stewardship.</p>
+                    <div class="goshen-pillar-card" data-open-pillar="7">
+                        <div>
+                            <h4>7. ⚖️ Economic Sovereignty</h4>
+                            <p>Debt-free, autonomous financial systems rooted in covenant equity, trade, and Melchizedek wealth stewardship.</p>
+                        </div>
+                        <span class="pillar-card-link">Inspect Pillar 07 &rarr;</span>
                     </div>
 
-                    <div class="goshen-pillar-card">
-                        <h4>8. 🛠️ Technological Stewardship</h4>
-                        <p>Spirit-inspired engineering and technological innovation (Exodus 31:1–5) dedicated to serving humanity rather than enslaving the soul.</p>
+                    <div class="goshen-pillar-card" data-open-pillar="8">
+                        <div>
+                            <h4>8. 🛠️ Technological Stewardship</h4>
+                            <p>Spirit-inspired engineering and technological innovation (Exodus 31:1–5) dedicated to serving humanity rather than enslaving the soul.</p>
+                        </div>
+                        <span class="pillar-card-link">Inspect Pillar 08 &rarr;</span>
                     </div>
                 </div>
+
+                <!-- Focused Single-Pillar Spotlight Container -->
+                <div id="goshen-single-view" style="display: none;"></div>
             </section>
 
             <!-- CHAMBER 4: SIX FUNCTIONAL DOCKETS -->
@@ -1584,7 +1921,10 @@
                             <h3>Global Apostolic Equipping</h3>
                             <p>Weekly digital sessions via Google Meet &amp; Zoom unpacking spiritual mechanics, bloodline deliverance, prophetic blueprints, and kingdom governance for believers globally.</p>
                         </div>
-                        <a href="https://chat.whatsapp.com/KicB3kPctrrHHZpieyfPfA" class="card-btn" target="_blank" rel="noopener noreferrer">Join WhatsApp Group &rarr;</a>
+                        <a href="https://chat.whatsapp.com/KicB3kPctrrHHZpieyfPfA" class="card-btn" target="_blank" rel="noopener noreferrer">
+                            <span>Join WhatsApp Group</span>
+                            <span>&nearr;</span>
+                        </a>
                     </div>
 
                     <div class="service-card">
@@ -1593,7 +1933,10 @@
                             <h3>Ekklesia Gatherings &amp; Teaching</h3>
                             <p>Join our online fellowship and virtual prayer sessions to build spiritual foundations and learn heavenly legislation.</p>
                         </div>
-                        <a href="https://chat.whatsapp.com/KicB3kPctrrHHZpieyfPfA" class="card-btn" target="_blank" rel="noopener noreferrer">Join WhatsApp Group &rarr;</a>
+                        <a href="portal.html" class="card-btn">
+                            <span>Open Member &amp; Classes Portal</span>
+                            <span>&rarr;</span>
+                        </a>
                     </div>
 
                     <div class="service-card">
@@ -1602,7 +1945,10 @@
                             <h3>Kingdom Intercession &amp; Warfare</h3>
                             <p>Stand in agreement with our dedicated prayer watchmen and intercessors for strategic breakthrough and spiritual alignment.</p>
                         </div>
-                        <a href="https://chat.whatsapp.com/L8y90Aslvjn2batMryOePn" class="card-btn" target="_blank" rel="noopener noreferrer">Join WhatsApp Group &rarr;</a>
+                        <a href="https://chat.whatsapp.com/L8y90Aslvjn2batMryOePn" class="card-btn" target="_blank" rel="noopener noreferrer">
+                            <span>Join Warfare Watch Room</span>
+                            <span>&nearr;</span>
+                        </a>
                     </div>
 
                     <div class="service-card">
@@ -1611,7 +1957,10 @@
                             <h3>Territorial Watches &amp; Legislation</h3>
                             <p>Consecrated daily watches (including 3:00 PM and Midnight EAT) standing at geographic gates to execute warfare, enforce prophetic scrolls, and dismantle unrighteous altars.</p>
                         </div>
-                        <a href="watch-hub.html" class="card-btn">Open 24/7 Watch Hub &rarr;</a>
+                        <a href="watch-hub.html" class="card-btn">
+                            <span>Open 24/7 Watch &amp; Hebrew Hub</span>
+                            <span>&rarr;</span>
+                        </a>
                     </div>
 
                     <div class="service-card">
@@ -1620,7 +1969,10 @@
                             <h3>Aaron &amp; Hur Intercessory Covering</h3>
                             <p>A subscription partnership matching individuals and entrepreneurs with assigned ministers for daily, personalized prayer coverage and spiritual dossier reporting.</p>
                         </div>
-                        <a href="intake.html" class="card-btn">View Proposal &amp; Subscribe &rarr;</a>
+                        <a href="intake.html" class="card-btn">
+                            <span>View Proposal &amp; Subscribe</span>
+                            <span>&rarr;</span>
+                        </a>
                     </div>
 
                     <div class="service-card">
@@ -1629,12 +1981,15 @@
                             <h3>Kingdom Wealth &amp; Goshen Ecosystem</h3>
                             <p>Aligning households with financial stewardship through private liquidity pools, trust-backed asset protection, agricultural sanctuaries, and insulated family wealth systems.</p>
                         </div>
-                        <button type="button" onclick="activateChamber('resources')" class="card-btn">Download Master Blueprint &rarr;</button>
+                        <button type="button" data-goto-chamber="resources" class="card-btn">
+                            <span>Download Master Blueprints</span>
+                            <span>&rarr;</span>
+                        </button>
                     </div>
                 </div>
             </section>
 
-            <!-- CHAMBER 5: COURTS OF HEAVEN 101 -->
+            <!-- CHAMBER 5: COURTS OF HEAVEN 101 (WITH INTERACTIVE SUB-TABS) -->
             <section id="courtroom-101" class="chamber-panel" data-chamber-label="Courts of Heaven Sessions">
                 <div class="courtroom-wrapper">
                     <div class="courtroom-header">
@@ -1643,117 +1998,183 @@
                         <p class="courtroom-subheading">A Three-Dimensional Shift from the Battleground to the Courtroom</p>
                     </div>
 
-                    <div class="courtroom-body">
-                        <p style="margin-bottom: 14px;">
-                            True transformation is not a product of human willpower or emotional hype—it is a matter of legal alignment in the realms of the spirit.
-                        </p>
-                        <p style="margin-bottom: 14px;">
-                            Many believers face persistent, cyclical battles that seem to resist ordinary prayer. Scripture reveals that our God is not only a loving Father; He is a Righteous Judge (Hebrews 12:23). When invisible ceilings block your destiny despite your devotion, it is often because you are fighting on an emotional battlefield when you ought to be legislating in a Heavenly Courtroom.
-                        </p>
-                        <p>
-                            Under the covenant grace of Yeshua Hamashiach (Jesus Christ)—our Eternal Advocate and High Priest—every legal accusation, ancient covenant, or unrighteous trade can be legally annulled and dismantled.
-                        </p>
+                    <div class="subtab-bar" role="tablist" aria-label="Courts of Heaven 101 Sub-Tabs">
+                        <button type="button" class="subtab-btn active" data-court-tab="court-overview">
+                            ⚖️ 1. Overview &amp; 3 Matrices
+                        </button>
+                        <button type="button" class="subtab-btn" data-court-tab="court-sessions">
+                            🏛️ 2. 5 Legislative Sessions
+                        </button>
+                        <button type="button" class="subtab-btn" data-court-tab="court-booking">
+                            📅 3. Covenant Seed &amp; Book Session
+                        </button>
                     </div>
 
-                    <div class="matrices-box">
-                        <h3 class="matrices-title">The Three Matrices of Bondage We Confront</h3>
-                        <p style="color: var(--slate); font-size: 0.92rem; margin-bottom: 16px;">
-                            Before a systematic destiny shift can occur, three foundational matrices governing your life must be judicially addressed and rewritten:
-                        </p>
-
-                        <ul class="matrices-list">
-                            <li>
-                                <span>⚖️</span>
-                                <strong>Generational Iniquities &amp; Ancient DNA Programming:</strong> The hidden legal codes written into your bloodline that enforce repeated cycles of premature death, marital delays, or financial stagnation.
-                            </li>
-                            <li>
-                                <span>⚖️</span>
-                                <strong>Emotional Trauma &amp; Soul Fractures:</strong> Unhealed wounds and emotional fractures that provide the accuser a legal landing pad for fear, self-sabotage, and spiritual blockage.
-                            </li>
-                            <li>
-                                <span>⚖️</span>
-                                <strong>The Environmental &amp; Relational Matrix:</strong> Unrighteous territorial altars and misaligned associations that act as atmospheric drags against your spiritual growth.
-                            </li>
-                        </ul>
-                    </div>
-
-                    <h3 style="font-family: 'Cinzel', serif; color: var(--navy); text-align: center; font-size: 1.3rem; margin-bottom: 12px;">
-                        Available Courtroom Legislative Sessions
-                    </h3>
-                    <p style="text-align: center; color: var(--slate); font-size: 0.92rem; margin-bottom: 22px;">
-                        We invite individuals, families, enterprise leaders, and corporate groups to book a dedicated, structured Courtroom session to address and resolve:
-                    </p>
-
-                    <div class="sessions-grid">
-                        <div class="session-card">
-                            <h4>🧬 Personal Battles &amp; Destiny Constraints</h4>
-                            <p>Dismantling unexplainable delays, chronic health challenges, and soul trades across your timeline to unseal your personal identity scroll.</p>
+                    <!-- SUB-TAB 1: OVERVIEW & THREE MATRICES -->
+                    <div id="court-overview" class="subtab-pane active">
+                        <div class="courtroom-body">
+                            <p style="margin-bottom: 14px;">
+                                True transformation is not a product of human willpower or emotional hype—it is a matter of legal alignment in the realms of the spirit.
+                            </p>
+                            <p style="margin-bottom: 14px;">
+                                Many believers face persistent, cyclical battles that seem to resist ordinary prayer. Scripture reveals that our God is not only a loving Father; He is a Righteous Judge (Hebrews 12:23). When invisible ceilings block your destiny despite your devotion, it is often because you are fighting on an emotional battlefield when you ought to be legislating in a Heavenly Courtroom.
+                            </p>
+                            <p>
+                                Under the covenant grace of Yeshua Hamashiach (Jesus Christ)—our Eternal Advocate and High Priest—every legal accusation, ancient covenant, or unrighteous trade can be legally annulled and dismantled.
+                            </p>
                         </div>
 
-                        <div class="session-card">
-                            <h4>🏛️ Generational &amp; Family Altars</h4>
-                            <p>Annulling recurring patterns of divorce, premature death, and dysfunctional household cycles to secure an unbroken spiritual legacy for your lineage.</p>
+                        <div class="matrices-box">
+                            <h3 class="matrices-title">The Three Matrices of Bondage We Confront</h3>
+                            <p style="color: var(--slate); font-size: 0.92rem; margin-bottom: 16px;">
+                                Before a systematic destiny shift can occur, three foundational matrices governing your life must be judicially addressed and rewritten:
+                            </p>
+
+                            <ul class="matrices-list">
+                                <li>
+                                    <span>⚖️</span>
+                                    <strong>Generational Iniquities &amp; Ancient DNA Programming:</strong> The hidden legal codes written into your bloodline that enforce repeated cycles of premature death, marital delays, or financial stagnation.
+                                </li>
+                                <li>
+                                    <span>⚖️</span>
+                                    <strong>Emotional Trauma &amp; Soul Fractures:</strong> Unhealed wounds and emotional fractures that provide the accuser a legal landing pad for fear, self-sabotage, and spiritual blockage.
+                                </li>
+                                <li>
+                                    <span>⚖️</span>
+                                    <strong>The Environmental &amp; Relational Matrix:</strong> Unrighteous territorial altars and misaligned associations that act as atmospheric drags against your spiritual growth.
+                                </li>
+                            </ul>
                         </div>
 
-                        <div class="session-card">
-                            <h4>🌾 Financial, Business, &amp; Career Shifting</h4>
-                            <p>Uprooting lack, stagnant enterprise doors, and missing helper connections while aligning your wealth with the insulated Goshen Ecosystem architecture.</p>
-                        </div>
-
-                        <div class="session-card">
-                            <h4>🛡️ Ministry Alignment &amp; Spiritual Authority</h4>
-                            <p>Breaking ministerial ceilings, leadership fatigue, and division—shifting your operations from defensive warfare to legislative governance.</p>
-                        </div>
-
-                        <div class="session-card">
-                            <h4>🌐 Territorial &amp; Jurisdictional Clearance</h4>
-                            <p>Dealing with localized witchcraft, regional strongholds, and environmental limitations to enforce the frequency of the New Jerusalem over your home or land.</p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+                            <button type="button" class="btn-navy-solid" data-court-tab="court-sessions">
+                                Next: Explore the 5 Legislative Sessions &rarr;
+                            </button>
+                            <button type="button" class="btn-gold" data-court-tab="court-booking">
+                                Book a Courtroom Session &rarr;
+                            </button>
                         </div>
                     </div>
 
-                    <div class="seed-card">
-                        <h3 style="font-family: 'Cinzel', serif; color: var(--navy); font-size: 1.15rem; margin-bottom: 10px;">Co-Partnership &amp; Covenant Seed</h3>
-                        <blockquote style="font-style: italic; color: var(--slate); font-size: 0.88rem; margin: 0 0 12px;">
-                            "Every man according as he purposeth in his heart, so let him give; not grudgingly, or of necessity: for God loveth a cheerful giver. And God is able to make all grace abound toward you..." — <strong>2 Corinthians 9:7–8</strong>
-                        </blockquote>
-                        <p style="color: var(--slate); font-size: 0.9rem; margin: 0;">
-                            When we step into these judicial dimensions of divine ministration, co-partnering with the Lord through seeds and love offerings honors the altar, releases intercessory covering, and anchors spiritual verdicts into physical manifestation.
+                    <!-- SUB-TAB 2: 5 LEGISLATIVE SESSIONS -->
+                    <div id="court-sessions" class="subtab-pane">
+                        <h3 style="font-family: 'Cinzel', serif; color: var(--navy); text-align: center; font-size: 1.3rem; margin: 0 0 8px;">
+                            Available Courtroom Legislative Sessions
+                        </h3>
+                        <p style="text-align: center; color: var(--slate); font-size: 0.92rem; margin: 0 0 22px;">
+                            We invite individuals, families, enterprise leaders, and corporate groups to book a dedicated, structured Courtroom session to address and resolve:
                         </p>
+
+                        <div class="sessions-grid">
+                            <div class="session-card">
+                                <div>
+                                    <h4>🧬 Personal Battles &amp; Destiny Constraints</h4>
+                                    <p>Dismantling unexplainable delays, chronic health challenges, and soul trades across your timeline to unseal your personal identity scroll.</p>
+                                </div>
+                                <a href="https://calendar.app.google/xPmrk5LuasqAE9rw7" target="_blank" rel="noopener noreferrer" class="card-btn">
+                                    <span>Book Personal Docket</span>
+                                    <span>&nearr;</span>
+                                </a>
+                            </div>
+
+                            <div class="session-card">
+                                <div>
+                                    <h4>🏛️ Generational &amp; Family Altars</h4>
+                                    <p>Annulling recurring patterns of divorce, premature death, and dysfunctional household cycles to secure an unbroken spiritual legacy for your lineage.</p>
+                                </div>
+                                <a href="https://calendar.app.google/xPmrk5LuasqAE9rw7" target="_blank" rel="noopener noreferrer" class="card-btn">
+                                    <span>Book Family Altar Docket</span>
+                                    <span>&nearr;</span>
+                                </a>
+                            </div>
+
+                            <div class="session-card">
+                                <div>
+                                    <h4>🌾 Financial, Business, &amp; Career Shifting</h4>
+                                    <p>Uprooting lack, stagnant enterprise doors, and missing helper connections while aligning your wealth with the insulated Goshen Ecosystem architecture.</p>
+                                </div>
+                                <a href="https://calendar.app.google/xPmrk5LuasqAE9rw7" target="_blank" rel="noopener noreferrer" class="card-btn">
+                                    <span>Book Enterprise Docket</span>
+                                    <span>&nearr;</span>
+                                </a>
+                            </div>
+
+                            <div class="session-card">
+                                <div>
+                                    <h4>🛡️ Ministry Alignment &amp; Spiritual Authority</h4>
+                                    <p>Breaking ministerial ceilings, leadership fatigue, and division—shifting your operations from defensive warfare to legislative governance.</p>
+                                </div>
+                                <a href="https://calendar.app.google/xPmrk5LuasqAE9rw7" target="_blank" rel="noopener noreferrer" class="card-btn">
+                                    <span>Book Ministry Docket</span>
+                                    <span>&nearr;</span>
+                                </a>
+                            </div>
+
+                            <div class="session-card">
+                                <div>
+                                    <h4>🌐 Territorial &amp; Jurisdictional Clearance</h4>
+                                    <p>Dealing with localized witchcraft, regional strongholds, and environmental limitations to enforce the frequency of the New Jerusalem over your home or land.</p>
+                                </div>
+                                <a href="https://calendar.app.google/xPmrk5LuasqAE9rw7" target="_blank" rel="noopener noreferrer" class="card-btn">
+                                    <span>Book Territorial Docket</span>
+                                    <span>&nearr;</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <button type="button" class="btn-gold" data-court-tab="court-booking">
+                                Proceed to Covenant Seed &amp; Booking Details &rarr;
+                            </button>
+                        </div>
                     </div>
 
-                    <div class="booking-cta-box">
-                        <h3 style="font-family: 'Cinzel', serif; color: var(--gold); font-size: 1.4rem; margin-bottom: 8px;">Book Your Session Today</h3>
-                        <p style="color: #e2e8f0; font-size: 0.92rem; margin-bottom: 18px;">
-                            Move your case from the battleground to the courtroom and enforce the verdict of the Cross over your life, family, or enterprise.
-                        </p>
-
-                        <div class="qr-box">
-                            <img src="https://quickchart.io/qr?text=https%3A%2F%2Fcalendar.app.google%2FxPmrk5LuasqAE9rw7&size=210&margin=1&ecLevel=M&dark=0c1b33" alt="Booking QR Code">
+                    <!-- SUB-TAB 3: COVENANT SEED & BOOK SESSION -->
+                    <div id="court-booking" class="subtab-pane">
+                        <div class="seed-card">
+                            <h3 style="font-family: 'Cinzel', serif; color: var(--navy); font-size: 1.15rem; margin: 0 0 10px;">Co-Partnership &amp; Covenant Seed</h3>
+                            <blockquote style="font-style: italic; color: var(--slate); font-size: 0.88rem; margin: 0 0 12px;">
+                                "Every man according as he purposeth in his heart, so let him give; not grudgingly, or of necessity: for God loveth a cheerful giver. And God is able to make all grace abound toward you..." — <strong>2 Corinthians 9:7–8</strong>
+                            </blockquote>
+                            <p style="color: var(--slate); font-size: 0.9rem; margin: 0;">
+                                When we step into these judicial dimensions of divine ministration, co-partnering with the Lord through seeds and love offerings honors the altar, releases intercessory covering, and anchors spiritual verdicts into physical manifestation.
+                            </p>
                         </div>
 
-                        <div class="cta-buttons">
-                            <a href="https://calendar.app.google/xPmrk5LuasqAE9rw7" target="_blank" rel="noopener noreferrer" class="btn-gold">
-                                📅 Online Calendar Booking
-                            </a>
-                            <a href="https://wa.me/254727953458" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
-                                📲 WhatsApp / SMS: +254 727 953 458
-                            </a>
-                        </div>
+                        <div class="booking-cta-box">
+                            <h3 style="font-family: 'Cinzel', serif; color: var(--gold); font-size: 1.4rem; margin: 0 0 8px;">Book Your Session Today</h3>
+                            <p style="color: #e2e8f0; font-size: 0.92rem; margin: 0 0 18px;">
+                                Move your case from the battleground to the courtroom and enforce the verdict of the Cross over your life, family, or enterprise.
+                            </p>
 
-                        <p style="font-size: 0.88rem; color: #cbd5e1; margin-bottom: 6px;">
-                            ✉️ Executive Desk:
-                            <a href="mailto:ekmwangi@kingdomekklesiaskoinonia.org" style="color: var(--gold); text-decoration: underline;">ekmwangi@kingdomekklesiaskoinonia.org</a>
-                        </p>
-                        <p style="font-size: 0.88rem; color: #cbd5e1; margin-bottom: 16px;">
-                            ✉️ Direct Inquiries &amp; Submissions:
-                            <a href="mailto:kingdom.ekklesias.inv@gmail.com" style="color: var(--gold); text-decoration: underline;">kingdom.ekklesias.inv@gmail.com</a>
-                        </p>
+                            <div class="qr-box">
+                                <img src="https://quickchart.io/qr?text=https%3A%2F%2Fcalendar.app.google%2FxPmrk5LuasqAE9rw7&size=210&margin=1&ecLevel=M&dark=0c1b33" alt="Booking QR Code">
+                            </div>
 
-                        <div class="cta-footer">
-                            <p style="font-style: italic; color: var(--gold); margin-bottom: 6px;">The Court is in session. Enter His gates with bold legislation.</p>
-                            <p style="font-weight: 600; font-size: 0.9rem; margin: 0;">In Kingdom Governance,</p>
-                            <p style="font-family: 'Cinzel', serif; font-size: 1.05rem; color: #fff; margin-top: 4px;">Apostle Kamau Mwangi</p>
-                            <p style="font-size: 0.82rem; color: #cbd5e1; margin: 0;">Kingdom Ekklesias Koinonia (KEK)</p>
+                            <div class="cta-buttons">
+                                <a href="https://calendar.app.google/xPmrk5LuasqAE9rw7" target="_blank" rel="noopener noreferrer" class="btn-gold">
+                                    📅 Online Calendar Booking &nearr;
+                                </a>
+                                <a href="https://wa.me/254727953458" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
+                                    📲 WhatsApp / SMS: +254 727 953 458 &nearr;
+                                </a>
+                            </div>
+
+                            <p style="font-size: 0.88rem; color: #cbd5e1; margin-bottom: 6px;">
+                                ✉️ Executive Desk:
+                                <a href="mailto:ekmwangi@kingdomekklesiaskoinonia.org" style="color: var(--gold); text-decoration: underline;">ekmwangi@kingdomekklesiaskoinonia.org</a>
+                            </p>
+                            <p style="font-size: 0.88rem; color: #cbd5e1; margin-bottom: 16px;">
+                                ✉️ Direct Inquiries &amp; Submissions:
+                                <a href="mailto:kingdom.ekklesias.inv@gmail.com" style="color: var(--gold); text-decoration: underline;">kingdom.ekklesias.inv@gmail.com</a>
+                            </p>
+
+                            <div class="cta-footer">
+                                <p style="font-style: italic; color: var(--gold); margin-bottom: 6px;">The Court is in session. Enter His gates with bold legislation.</p>
+                                <p style="font-weight: 600; font-size: 0.9rem; margin: 0;">In Kingdom Governance,</p>
+                                <p style="font-family: 'Cinzel', serif; font-size: 1.05rem; color: #fff; margin-top: 4px;">Apostle Kamau Mwangi</p>
+                                <p style="font-size: 0.82rem; color: #cbd5e1; margin: 0;">Kingdom Ekklesias Koinonia (KEK)</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1892,7 +2313,7 @@
                     <div class="video-card">
                         <h4>Courts of Heaven 101: Understanding Spiritual Governance</h4>
                         <p>An introduction to operating in the judicial chambers of Heaven and enacting binding decrees.</p>
-                        <a href="https://youtube.com/@kingdomekklesiaskoinonia" target="_blank" rel="noopener noreferrer" class="btn-watch">Watch on YouTube</a>
+                        <a href="https://youtube.com/@kingdomekklesiaskoinonia" target="_blank" rel="noopener noreferrer" class="btn-watch">Watch on YouTube &nearr;</a>
                     </div>
                 </div>
             </section>
@@ -1900,42 +2321,48 @@
             <!-- CHAMBER 9: ENGAGE & INTAKE FORMS -->
             <section id="forms" class="chamber-panel" data-chamber-label="Engage With the Ekklesia">
                 <h2 class="section-title">Engage With the Ekklesia</h2>
-                <p class="section-subtitle">Step into judicial alignment, daily intercessory covering, and covenantal ecosystem building.</p>
+                <p class="section-subtitle">Open the exact form or portal where you submit your response, dossier, or onboarding details.</p>
 
                 <div class="forms-container">
                     <div class="form-card form-card-booking">
                         <div>
                             <h3>🏛️ Schedule a Judicial Session</h3>
-                            <p style="color: var(--slate); font-size: 0.88rem; margin-bottom: 14px;">Address generational iniquities, bloodline covenants, and territorial altars with legal precision through our Courts of Heaven Session Bookings.</p>
+                            <p style="color: var(--slate); font-size: 0.88rem; margin-bottom: 14px;">Book your Courts of Heaven session on the live calendar or respond directly via WhatsApp.</p>
                             <div class="qr-small">
                                 <img src="https://quickchart.io/qr?text=https%3A%2F%2Fcalendar.app.google%2FxPmrk5LuasqAE9rw7&size=140&margin=1&ecLevel=M&dark=0c1b33" alt="Booking QR Code">
                             </div>
                         </div>
-                        <a href="https://calendar.app.google/xPmrk5LuasqAE9rw7" target="_blank" rel="noopener noreferrer" class="btn-gold" style="width: 100%;">Book a Courtroom Session</a>
+                        <a href="https://calendar.app.google/xPmrk5LuasqAE9rw7" target="_blank" rel="noopener noreferrer" class="btn-gold" style="width: 100%;">Open Booking Calendar &nearr;</a>
                     </div>
 
                     <div class="form-card">
                         <div>
                             <h3>📋 The Aaron &amp; Hur Altar Initiative</h3>
-                            <p style="color: var(--slate); font-size: 0.88rem; margin-bottom: 18px;">Enroll for daily, consecrated intercessory coverage over your household, enterprise, and dossier.</p>
+                            <p style="color: var(--slate); font-size: 0.88rem; margin-bottom: 18px;">Submit your prayer dossier form or review coverage tiers on the Aaron &amp; Hur page.</p>
                         </div>
-                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSc5otxpeGsrobn43rVCo0qhg5HNFMxpkNi_0NHQunyqKwPcBg/viewform?usp=sharing&ouid=102920709206727082882" target="_blank" rel="noopener noreferrer" class="btn-gold" style="background-color: var(--navy); color: var(--white) !important;">Submit Prayer Dossier</a>
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSc5otxpeGsrobn43rVCo0qhg5HNFMxpkNi_0NHQunyqKwPcBg/viewform?usp=sharing&ouid=102920709206727082882" target="_blank" rel="noopener noreferrer" class="btn-gold" style="background-color: var(--navy); color: var(--white) !important;">Open Prayer Dossier Form &nearr;</a>
+                            <a href="intake.html" class="card-btn" style="padding-top: 8px; border-top: none;">
+                                <span>View Aaron &amp; Hur Coverage Page</span>
+                                <span>&rarr;</span>
+                            </a>
+                        </div>
                     </div>
 
                     <div class="form-card">
                         <div>
                             <h3>🌾 Become a Goshen Builder</h3>
-                            <p style="color: var(--slate); font-size: 0.88rem; margin-bottom: 18px;">Partner with us as a covenant stakeholder in establishing regional hubs, agricultural blueprints, and wealth deployment networks.</p>
+                            <p style="color: var(--slate); font-size: 0.88rem; margin-bottom: 18px;">Complete the Goshen Builder intake form to partner on regional hubs, agriculture, and wealth systems.</p>
                         </div>
-                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfJJXaEFN77UXfbHU3fGmsMEjFMq94wWx6lXotnD5vmEyGWzg/viewform?usp=header" target="_blank" rel="noopener noreferrer" class="btn-gold" style="background-color: var(--navy); color: var(--white) !important;">Goshen Builder Intake</a>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfJJXaEFN77UXfbHU3fGmsMEjFMq94wWx6lXotnD5vmEyGWzg/viewform?usp=header" target="_blank" rel="noopener noreferrer" class="btn-gold" style="background-color: var(--navy); color: var(--white) !important;">Open Goshen Builder Form &nearr;</a>
                     </div>
 
                     <div class="form-card">
                         <div>
                             <h3>🤝 Co-Laborer &amp; Watchman Onboarding</h3>
-                            <p style="color: var(--slate); font-size: 0.88rem; margin-bottom: 18px;">Register to serve across KEK operational offices, Day &amp; Night prayer watches, and regional outreach teams.</p>
+                            <p style="color: var(--slate); font-size: 0.88rem; margin-bottom: 18px;">Submit the onboarding form to serve in KEK operations, prayer watches, or regional teams.</p>
                         </div>
-                        <a href="https://forms.gle/nhn6zZ5RQ2VU5tLt7" target="_blank" rel="noopener noreferrer" class="btn-gold" style="background-color: var(--navy); color: var(--white) !important;">Enroll as Co-Laborer</a>
+                        <a href="https://forms.gle/nhn6zZ5RQ2VU5tLt7" target="_blank" rel="noopener noreferrer" class="btn-gold" style="background-color: var(--navy); color: var(--white) !important;">Open Co-Laborer Form &nearr;</a>
                     </div>
                 </div>
             </section>
@@ -2011,7 +2438,7 @@
         </div>
     </div>
 
-    <!-- LEFT-COLUMN CHAMBER CONTROLLER & STEPPER -->
+    <!-- LEFT-COLUMN CHAMBER CONTROLLER, SUB-TABS & STEPPER -->
     <script>
         const chamberOrder = [
             "about",
@@ -2028,17 +2455,76 @@
 
         let activeChamberId = "about";
         let isFullScrollMode = false;
+        let isRailHidden = false;
 
         const railButtons = Array.from(document.querySelectorAll(".rail-nav-btn"));
         const chamberPanels = Array.from(document.querySelectorAll(".chamber-panel"));
         const leftRail = document.getElementById("left-chamber-rail");
-        const mobileRailBtn = document.getElementById("mobile-rail-btn");
+        const headerRailToggle = document.getElementById("header-rail-toggle");
+        const headerRailIcon = document.getElementById("header-rail-icon");
+        const headerRailLabel = document.getElementById("header-rail-label");
+        const railInnerHideBtn = document.getElementById("rail-inner-hide-btn");
+        const floatingUnhideBtn = document.getElementById("floating-unhide-rail");
         const stepperTag = document.getElementById("stepper-tag");
         const stepperTitle = document.getElementById("stepper-title");
         const prevBtn = document.getElementById("prev-chamber-btn");
         const nextBtn = document.getElementById("next-chamber-btn");
         const focusedModeBtn = document.getElementById("mode-focused-btn");
         const fullScrollModeBtn = document.getElementById("mode-fullscroll-btn");
+
+        function syncRailVisibilityUI() {
+            const isMobile = window.innerWidth <= 980;
+            if (isMobile) {
+                const openMobile = leftRail.classList.contains("mobile-open");
+                headerRailIcon.textContent = openMobile ? "✕" : "☰";
+                headerRailLabel.textContent = openMobile ? "Close Rail" : "Chambers";
+            } else {
+                document.body.classList.toggle("rail-hidden", isRailHidden);
+                headerRailIcon.textContent = isRailHidden ? "▶" : "◀";
+                headerRailLabel.textContent = isRailHidden ? "Unhide Rail" : "Hide Rail";
+            }
+        }
+
+        function setRailHidden(hidden) {
+            const isMobile = window.innerWidth <= 980;
+            if (isMobile) {
+                leftRail.classList.toggle("mobile-open", !hidden);
+            } else {
+                isRailHidden = Boolean(hidden);
+                try {
+                    localStorage.setItem("kek_rail_hidden", isRailHidden ? "1" : "0");
+                } catch (_) {}
+            }
+            syncRailVisibilityUI();
+        }
+
+        function toggleRail() {
+            const isMobile = window.innerWidth <= 980;
+            if (isMobile) {
+                leftRail.classList.toggle("mobile-open");
+                syncRailVisibilityUI();
+            } else {
+                setRailHidden(!isRailHidden);
+            }
+        }
+
+        try {
+            if (localStorage.getItem("kek_rail_hidden") === "1") {
+                isRailHidden = true;
+            }
+        } catch (_) {}
+        syncRailVisibilityUI();
+
+        headerRailToggle.addEventListener("click", toggleRail);
+        railInnerHideBtn.addEventListener("click", () => setRailHidden(true));
+        floatingUnhideBtn.addEventListener("click", () => setRailHidden(false));
+
+        window.addEventListener("resize", () => {
+            if (window.innerWidth > 980) {
+                leftRail.classList.remove("mobile-open");
+            }
+            syncRailVisibilityUI();
+        });
 
         function updateStepperUI(chamberId) {
             const idx = chamberOrder.indexOf(chamberId);
@@ -2050,8 +2536,9 @@
             nextBtn.disabled = idx >= chamberOrder.length - 1;
         }
 
-        function activateChamber(chamberId, scrollIntoView = false) {
+        function activateChamber(chamberId, opts = {}) {
             if (!chamberOrder.includes(chamberId)) return;
+            const shouldScroll = Boolean(opts.scroll);
             activeChamberId = chamberId;
 
             railButtons.forEach(btn => {
@@ -2068,38 +2555,50 @@
 
             if (leftRail.classList.contains("mobile-open")) {
                 leftRail.classList.remove("mobile-open");
+                syncRailVisibilityUI();
             }
 
-            if (scrollIntoView) {
+            if (shouldScroll) {
                 const target = document.getElementById(chamberId);
                 if (target) {
-                    const topOffset = 74;
-                    const y = target.getBoundingClientRect().top + window.scrollY - topOffset;
+                    const y = target.getBoundingClientRect().top + window.scrollY - 74;
                     window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
                 }
             } else if (!isFullScrollMode) {
                 const stepperTop = document.querySelector(".stage-stepper")?.getBoundingClientRect().top;
-                if (stepperTop !== undefined && stepperTop < 55) {
+                if (stepperTop !== undefined && stepperTop < 58) {
                     window.scrollTo({ top: Math.max(0, window.scrollY + stepperTop - 74), behavior: "smooth" });
                 }
             }
         }
 
+        window.activateChamber = (id, scroll = false) => activateChamber(id, { scroll });
+
         railButtons.forEach(btn => {
             btn.addEventListener("click", () => {
                 const targetId = btn.getAttribute("data-chamber");
-                activateChamber(targetId, isFullScrollMode);
+                activateChamber(targetId, { scroll: isFullScrollMode });
+            });
+        });
+
+        document.querySelectorAll("[data-goto-chamber]").forEach(el => {
+            el.addEventListener("click", (e) => {
+                const targetId = el.getAttribute("data-goto-chamber");
+                if (targetId && chamberOrder.includes(targetId)) {
+                    e.preventDefault();
+                    activateChamber(targetId, { scroll: isFullScrollMode });
+                }
             });
         });
 
         prevBtn.addEventListener("click", () => {
             const idx = chamberOrder.indexOf(activeChamberId);
-            if (idx > 0) activateChamber(chamberOrder[idx - 1], isFullScrollMode);
+            if (idx > 0) activateChamber(chamberOrder[idx - 1], { scroll: isFullScrollMode });
         });
 
         nextBtn.addEventListener("click", () => {
             const idx = chamberOrder.indexOf(activeChamberId);
-            if (idx < chamberOrder.length - 1) activateChamber(chamberOrder[idx + 1], isFullScrollMode);
+            if (idx < chamberOrder.length - 1) activateChamber(chamberOrder[idx + 1], { scroll: isFullScrollMode });
         });
 
         focusedModeBtn.addEventListener("click", () => {
@@ -2107,7 +2606,7 @@
             document.body.classList.remove("scroll-all-mode");
             focusedModeBtn.classList.add("active");
             fullScrollModeBtn.classList.remove("active");
-            activateChamber(activeChamberId, false);
+            activateChamber(activeChamberId, { scroll: false });
         });
 
         fullScrollModeBtn.addEventListener("click", () => {
@@ -2115,32 +2614,27 @@
             document.body.classList.add("scroll-all-mode");
             fullScrollModeBtn.classList.add("active");
             focusedModeBtn.classList.remove("active");
-            activateChamber(activeChamberId, false);
-        });
-
-        mobileRailBtn.addEventListener("click", () => {
-            leftRail.classList.toggle("mobile-open");
+            activateChamber(activeChamberId, { scroll: true });
         });
 
         document.addEventListener("click", (e) => {
             if (
                 leftRail.classList.contains("mobile-open") &&
                 !leftRail.contains(e.target) &&
-                !mobileRailBtn.contains(e.target)
+                !headerRailToggle.contains(e.target)
             ) {
                 leftRail.classList.remove("mobile-open");
+                syncRailVisibilityUI();
             }
         });
 
-        // Scroll-spy when in Full Scroll mode
         window.addEventListener("scroll", () => {
             if (!isFullScrollMode) return;
             let currentBest = chamberOrder[0];
             for (const id of chamberOrder) {
                 const el = document.getElementById(id);
                 if (!el) continue;
-                const rect = el.getBoundingClientRect();
-                if (rect.top <= 180) {
+                if (el.getBoundingClientRect().top <= 180) {
                     currentBest = id;
                 }
             }
@@ -2152,6 +2646,187 @@
                 updateStepperUI(activeChamberId);
             }
         }, { passive: true });
+
+        /* ==============================================================
+           GOSHEN 8 PILLARS INTERACTIVE SUB-TABS
+        ============================================================== */
+        const GOSHEN_PILLARS_DATA = {
+            "1": {
+                num: "Pillar 01 of 08",
+                icon: "👑",
+                title: "The Covenant Community",
+                scripture: "1 Peter 2:9 • Psalm 133:1–3",
+                desc: "A royal priesthood of matured sons operating in corporate oneness, spiritual accountability, and non-negotiable alignment with the Father's will—transitioning from casual fellowship into covenantal Koinonia.",
+                governanceRole: "Establishes the spiritual altar, apostolic order, and relational covering that anchors every territorial Goshen hub.",
+                infrastructure: "Household altars, elder councils, and 24/7 Tabernacle of David watch rotations."
+            },
+            "2": {
+                num: "Pillar 02 of 08",
+                icon: "🏡",
+                title: "Integrated Housing Systems",
+                scripture: "Isaiah 32:18 • Isaiah 65:21–22",
+                desc: "Sustainable physical architecture integrated with consecrated spiritual altars to provide complete safety, generational stability, and peaceful habitation.",
+                governanceRole: "Replaces predatory debt-mortgages with covenantal family estates and multi-generational housing sanctuaries.",
+                infrastructure: "Modern, energy-efficient eco-construction (EPS & interlocking block systems) designed around family prayer gates."
+            },
+            "3": {
+                num: "Pillar 03 of 08",
+                icon: "🩺",
+                title: "Divine Wellness & Healthcare",
+                scripture: "Exodus 15:26 • 3 John 1:2",
+                desc: "Restoring original covenant wellness, preventive nutrition, and compassionate caregiving systems shielded from systemic infirmity and toxic lifestyles.",
+                governanceRole: "Combines Courts of Heaven healing decrees with clean living, restorative nutrition, and holistic family care.",
+                infrastructure: "Community wellness sanctuaries, clean-water systems, and botanical/nutritional restoration centers."
+            },
+            "4": {
+                num: "Pillar 04 of 08",
+                icon: "🌾",
+                title: "Harmonized Agriculture & Food Security",
+                scripture: "Genesis 2:15 • Amos 9:13",
+                desc: "Replicating Edenic soil frequencies, regenerative farming, and controlled-environment greenhouse technologies to guarantee 100% regional food sovereignty.",
+                governanceRole: "Breaks dependency on fragile supply chains by turning consecrated land into high-yield Goshen storehouses.",
+                infrastructure: "Hydroponic/greenhouse units, organic soil restoration, seed banks, and regional grain/produce reserves."
+            },
+            "5": {
+                num: "Pillar 05 of 08",
+                icon: "📚",
+                title: "Holistic Human Development",
+                scripture: "Proverbs 22:6 • Daniel 1:17–20",
+                desc: "Discipleship-driven education moving beyond passive academic theory to equip children, youth, and adults for practical Kingdom governance and excellence.",
+                governanceRole: "Raises a generation fluent in both spiritual legislation and high-level technical, civic, and entrepreneurial stewardship.",
+                infrastructure: "KEK Academy classrooms, mentorship cohorts, and character-plus-skill training labs."
+            },
+            "6": {
+                num: "Pillar 06 of 08",
+                icon: "🚚",
+                title: "Strategic Mobility & Logistics",
+                scripture: "Isaiah 60:8–9 • Habakkuk 2:2",
+                desc: "Dedicated transport, supply, and distribution corridors engineered for prophetic speed and reliable resource deployment across regional hubs.",
+                governanceRole: "Connects rural agricultural Goshen hubs with urban Ekklesia assemblies without middleman bottlenecks.",
+                infrastructure: "Coordinated fleet logistics, cold-chain storage, and territorial distribution nodes."
+            },
+            "7": {
+                num: "Pillar 07 of 08",
+                icon: "⚖️",
+                title: "Economic Sovereignty",
+                scripture: "Deuteronomy 8:18 • Genesis 47:27",
+                desc: "Debt-free, autonomous financial architecture rooted in covenant equity, ethical trade, and Melchizedek wealth stewardship shielded from currency turbulence.",
+                governanceRole: "Enforces Courts of Heaven financial decrees through disciplined household cash-flow firewalls and productive asset ownership.",
+                infrastructure: "Family enterprise ledgers, dynastic trust structures, and cooperative capital deployment pools."
+            },
+            "8": {
+                num: "Pillar 08 of 08",
+                icon: "🛠️",
+                title: "Technological Stewardship",
+                scripture: "Exodus 31:1–5 • Proverbs 8:12",
+                desc: "Spirit-inspired engineering, clean energy, and digital automation dedicated to multiplying human productivity and Kingdom reach rather than enslaving the soul.",
+                governanceRole: "Equips Bezaleel-anointed builders to design sovereign software, renewable power, and communications infrastructure.",
+                infrastructure: "Digital sanctuary platforms, solar microgrids, and automated operational tools."
+            }
+        };
+
+        const goshenAllView = document.getElementById("goshen-all-view");
+        const goshenSingleView = document.getElementById("goshen-single-view");
+        const goshenTabBtns = Array.from(document.querySelectorAll("[data-pillar-tab]"));
+
+        function renderGoshenSubTab(tabKey) {
+            goshenTabBtns.forEach(b => {
+                b.classList.toggle("active", b.getAttribute("data-pillar-tab") === tabKey);
+            });
+
+            if (tabKey === "all") {
+                goshenSingleView.style.display = "none";
+                goshenAllView.style.display = "grid";
+                return;
+            }
+
+            const p = GOSHEN_PILLARS_DATA[tabKey];
+            if (!p) return;
+
+            const numInt = parseInt(tabKey, 10);
+            const prevKey = numInt > 1 ? String(numInt - 1) : "8";
+            const nextKey = numInt < 8 ? String(numInt + 1) : "1";
+
+            goshenAllView.style.display = "none";
+            goshenSingleView.style.display = "block";
+            goshenSingleView.innerHTML = `
+                <div class="pillar-spotlight">
+                    <div class="pillar-spotlight-top">
+                        <span class="pillar-number-pill">${p.num}</span>
+                        <span class="pillar-scripture-pill">${p.scripture}</span>
+                    </div>
+                    <h3>${p.icon} ${p.title}</h3>
+                    <p class="pillar-spotlight-desc">${p.desc}</p>
+                    <div class="pillar-specs-grid">
+                        <div class="pillar-spec-box">
+                            <strong>Kingdom Governance Mandate</strong>
+                            <span>${p.governanceRole}</span>
+                        </div>
+                        <div class="pillar-spec-box">
+                            <strong>Physical &amp; Operational Infrastructure</strong>
+                            <span>${p.infrastructure}</span>
+                        </div>
+                    </div>
+                    <div class="pillar-spotlight-actions">
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfJJXaEFN77UXfbHU3fGmsMEjFMq94wWx6lXotnD5vmEyGWzg/viewform?usp=header" target="_blank" rel="noopener noreferrer" class="btn-gold">
+                                🌾 Become a Goshen Builder &nearr;
+                            </a>
+                            <button type="button" class="btn-outline-gold" onclick="activateChamber('resources')">
+                                📄 Download Blueprints
+                            </button>
+                        </div>
+                        <div style="display: flex; gap: 8px;">
+                            <button type="button" class="btn-outline-gold" style="padding: 8px 12px; font-size: 0.78rem;" data-jump-pillar="${prevKey}">&larr; Prev Pillar</button>
+                            <button type="button" class="btn-outline-gold" style="padding: 8px 12px; font-size: 0.78rem;" data-jump-pillar="${nextKey}">Next Pillar &rarr;</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            goshenSingleView.querySelectorAll("[data-jump-pillar]").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    renderGoshenSubTab(btn.getAttribute("data-jump-pillar"));
+                });
+            });
+        }
+
+        goshenTabBtns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                renderGoshenSubTab(btn.getAttribute("data-pillar-tab"));
+            });
+        });
+
+        document.querySelectorAll("[data-open-pillar]").forEach(card => {
+            card.addEventListener("click", () => {
+                renderGoshenSubTab(card.getAttribute("data-open-pillar"));
+            });
+        });
+
+        /* ==============================================================
+           COURTS OF HEAVEN 101 INTERACTIVE SUB-TABS
+        ============================================================== */
+        const courtTabBtns = Array.from(document.querySelectorAll("[data-court-tab]"));
+        const courtPanes = ["court-overview", "court-sessions", "court-booking"].map(id => document.getElementById(id));
+
+        function renderCourtSubTab(targetPaneId) {
+            courtTabBtns.forEach(btn => {
+                if (btn.classList.contains("subtab-btn")) {
+                    btn.classList.toggle("active", btn.getAttribute("data-court-tab") === targetPaneId);
+                }
+            });
+            courtPanes.forEach(pane => {
+                if (pane) {
+                    pane.classList.toggle("active", pane.id === targetPaneId);
+                }
+            });
+        }
+
+        courtTabBtns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                renderCourtSubTab(btn.getAttribute("data-court-tab"));
+            });
+        });
     </script>
 
     <!-- Document Search & Filter Script -->
@@ -2243,7 +2918,7 @@
                 <div class="video-card">
                   <h4>${v.title}</h4>
                   <p>${v.description}</p>
-                  <a href="${v.video_url}" target="_blank" rel="noopener noreferrer" class="btn-watch">Watch Teaching</a>
+                  <a href="${v.video_url}" target="_blank" rel="noopener noreferrer" class="btn-watch">Watch Teaching &nearr;</a>
                 </div>
               `).join('');
             }
