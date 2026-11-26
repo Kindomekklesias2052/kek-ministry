@@ -5,64 +5,145 @@
 
   const style = document.createElement("style");
   style.textContent = `
-    .kek-shared-return-bar {
-      position: sticky;
+    :root {
+      --kek-left-nav-w: 236px;
+    }
+
+    @media (min-width: 961px) {
+      body.kek-has-left-nav {
+        padding-left: var(--kek-left-nav-w);
+      }
+    }
+
+    .kek-left-sidebar {
+      position: fixed;
       top: 0;
-      z-index: 1400;
-      background: rgba(7, 16, 32, 0.97);
-      border-bottom: 1.5px solid rgba(197, 155, 39, 0.5);
-      padding: 8px 16px;
+      left: 0;
+      bottom: 0;
+      width: var(--kek-left-nav-w);
+      background: rgba(7, 16, 32, 0.98);
+      border-right: 1.5px solid rgba(197, 155, 39, 0.5);
+      padding: 18px 14px;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
-      font-family: 'Montserrat', sans-serif;
-    }
-    .kek-shared-return-links {
-      display: flex;
-      align-items: center;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
       gap: 8px;
-      flex-wrap: wrap;
+      overflow-y: auto;
+      z-index: 1400;
+      font-family: 'Montserrat', sans-serif;
+      box-shadow: 6px 0 24px rgba(0, 0, 0, 0.25);
+      transition: transform 0.22s ease;
     }
-    .kek-shared-home-btn {
-      background: linear-gradient(135deg, #d4ab38 0%, #b5891b 100%);
-      color: #0c1b33;
-      text-decoration: none;
-      font-weight: 700;
+
+    .kek-left-sidebar-title {
+      font-family: 'Cinzel', serif;
       font-size: 0.78rem;
-      padding: 6px 12px;
-      border-radius: 6px;
+      font-weight: 700;
+      letter-spacing: 0.9px;
+      text-transform: uppercase;
+      color: #e3bc4b;
+      padding: 4px 10px 10px;
+      margin-bottom: 2px;
+      border-bottom: 1px solid rgba(197, 155, 39, 0.28);
     }
-    .kek-shared-chamber-link {
+
+    .kek-left-nav-links {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 7px;
+    }
+
+    .kek-left-chamber-link {
+      display: block;
       color: #e2e8f0;
       text-decoration: none;
-      font-size: 0.76rem;
+      font-size: 0.8rem;
       font-weight: 600;
-      padding: 5px 9px;
-      border-radius: 6px;
+      padding: 9px 12px;
+      border-radius: 7px;
       border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.02);
+      transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
     }
-    .kek-shared-chamber-link:hover {
+
+    .kek-left-chamber-link:hover {
       color: #e3bc4b;
       border-color: #c59b27;
+      background: rgba(197, 155, 39, 0.12);
+    }
+
+    .kek-mobile-sidebar-btn {
+      display: none;
+      position: fixed;
+      bottom: 18px;
+      left: 18px;
+      z-index: 1500;
+      background: #0c1b33;
+      color: #e3bc4b;
+      border: 1.5px solid #c59b27;
+      border-radius: 999px;
+      padding: 9px 14px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.32);
+    }
+
+    @media (max-width: 960px) {
+      .kek-mobile-sidebar-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .kek-left-sidebar {
+        transform: translateX(-100%);
+      }
+
+      .kek-left-sidebar.is-open {
+        transform: translateX(0);
+      }
     }
   `;
   document.head.appendChild(style);
 
-  const bar = document.createElement("nav");
-  bar.className = "kek-shared-return-bar";
-  bar.setAttribute("aria-label", "Main Page and Chambers Return Bar");
-  bar.innerHTML = `
-    <a href="index.html" class="kek-shared-home-btn">&larr; Main Hub (index.html)</a>
-    <div class="kek-shared-return-links">
-      <a href="index.html?chamber=about" class="kek-shared-chamber-link">Who We Are</a>
-      <a href="index.html?chamber=goshen-pillars" class="kek-shared-chamber-link">Goshen 8 Pillars</a>
-      <a href="index.html?chamber=courtroom-101" class="kek-shared-chamber-link">Courts 101</a>
-      <a href="index.html?chamber=resources" class="kek-shared-chamber-link">Documents</a>
-      <a href="index.html?chamber=forms" class="kek-shared-chamber-link">Intake Forms</a>
+  document.body.classList.add("kek-has-left-nav");
+
+  const sidebar = document.createElement("nav");
+  sidebar.className = "kek-left-sidebar";
+  sidebar.setAttribute("aria-label", "Chambers Navigation");
+  sidebar.innerHTML = `
+    <div class="kek-left-sidebar-title">Sanctuary Chambers</div>
+    <div class="kek-left-nav-links">
+      <a href="index.html?chamber=about" class="kek-left-chamber-link">Who We Are</a>
+      <a href="index.html?chamber=goshen-pillars" class="kek-left-chamber-link">Goshen 8 Pillars</a>
+      <a href="index.html?chamber=courtroom-101" class="kek-left-chamber-link">Courts 101</a>
+      <a href="index.html?chamber=resources" class="kek-left-chamber-link">Documents</a>
+      <a href="index.html?chamber=forms" class="kek-left-chamber-link">Intake Forms</a>
     </div>
   `;
 
-  document.body.insertBefore(bar, document.body.firstChild);
+  const toggleBtn = document.createElement("button");
+  toggleBtn.type = "button";
+  toggleBtn.className = "kek-mobile-sidebar-btn";
+  toggleBtn.textContent = "☰ Chambers";
+  toggleBtn.setAttribute("aria-expanded", "false");
+
+  toggleBtn.addEventListener("click", () => {
+    const isOpen = sidebar.classList.toggle("is-open");
+    toggleBtn.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  sidebar.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      sidebar.classList.remove("is-open");
+      toggleBtn.setAttribute("aria-expanded", "false");
+    });
+  });
+
+  document.body.insertBefore(toggleBtn, document.body.firstChild);
+  document.body.insertBefore(sidebar, document.body.firstChild);
 })();
