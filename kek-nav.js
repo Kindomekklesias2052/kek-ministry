@@ -6,24 +6,32 @@
   const style = document.createElement("style");
   style.textContent = `
     :root {
-      --kek-left-col-w: 230px;
+      --kek-right-col-w: 236px;
     }
 
     @media (min-width: 961px) {
-      body.kek-left-col-active {
-        padding-left: var(--kek-left-col-w);
+      body.kek-right-col-active {
+        padding-right: var(--kek-right-col-w);
+      }
+
+      /* Hide the duplicate top row nav/links on subpages so navigation lives in the right column */
+      body.kek-right-col-active header nav,
+      body.kek-right-col-active header .nav-links {
+        display: none !important;
       }
     }
 
     .kek-shared-return-bar {
       position: fixed;
       top: 0;
-      left: 0;
+      right: 0;
       bottom: 0;
-      width: var(--kek-left-col-w);
+      left: auto;
+      width: var(--kek-right-col-w);
       z-index: 1400;
       background: rgba(7, 16, 32, 0.98);
-      border-right: 1.5px solid rgba(197, 155, 39, 0.55);
+      border-left: 1.5px solid rgba(197, 155, 39, 0.55);
+      border-right: none;
       padding: 18px 14px;
       display: flex;
       flex-direction: column;
@@ -32,7 +40,7 @@
       gap: 8px;
       overflow-y: auto;
       font-family: 'Montserrat', sans-serif;
-      box-shadow: 6px 0 22px rgba(0, 0, 0, 0.25);
+      box-shadow: -6px 0 22px rgba(0, 0, 0, 0.25);
       transition: transform 0.2s ease;
     }
 
@@ -74,11 +82,11 @@
       background: rgba(197, 155, 39, 0.14);
     }
 
-    .kek-left-col-toggle {
+    .kek-right-col-toggle {
       display: none;
       position: fixed;
       bottom: 18px;
-      left: 18px;
+      right: 18px;
       z-index: 1500;
       background: #0c1b33;
       color: #e3bc4b;
@@ -93,14 +101,14 @@
     }
 
     @media (max-width: 960px) {
-      .kek-left-col-toggle {
+      .kek-right-col-toggle {
         display: inline-flex;
         align-items: center;
         gap: 6px;
       }
 
       .kek-shared-return-bar {
-        transform: translateX(-100%);
+        transform: translateX(100%);
       }
 
       .kek-shared-return-bar.is-open {
@@ -110,7 +118,7 @@
   `;
   document.head.appendChild(style);
 
-  document.body.classList.add("kek-left-col-active");
+  document.body.classList.add("kek-right-col-active");
 
   const bar = document.createElement("nav");
   bar.className = "kek-shared-return-bar";
@@ -128,7 +136,7 @@
 
   const toggleBtn = document.createElement("button");
   toggleBtn.type = "button";
-  toggleBtn.className = "kek-left-col-toggle";
+  toggleBtn.className = "kek-right-col-toggle";
   toggleBtn.textContent = "☰ Chambers";
   toggleBtn.setAttribute("aria-expanded", "false");
 
