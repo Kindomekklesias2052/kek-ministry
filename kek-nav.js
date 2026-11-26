@@ -4,8 +4,15 @@
 
   const currentFile = (window.location.pathname.split("/").pop() || "index.html").toLowerCase();
   const isHomePage = currentFile === "" || currentFile === "index.html";
+
+  // Let index.html manage its own built-in left chamber rail without duplicate sidebars
+  if (isHomePage) {
+    document.body.classList.remove("kek-left-nav-enabled", "kek-right-col-active", "kek-is-subpage");
+    return;
+  }
+
   const params = new URLSearchParams(window.location.search);
-  let activeChamber = params.get("chamber") || "";
+  const activeChamber = params.get("chamber") || "";
   let readingMode = localStorage.getItem(MODE_KEY) || "focused";
 
   const MAIN_PAGES = [
@@ -21,9 +28,9 @@
       heading: "CORE FOUNDATIONS",
       items: [
         { icon: "🏛️", label: "Who We Are & Koinonia", badge: "01", chamber: "about", href: "index.html?chamber=about" },
-        { icon: "⚖️", label: "Governance Mandates", badge: "3", chamber: "governance", href: "index.html?chamber=governance" },
+        { icon: "⚖️", label: "Governance Mandates", badge: "3", chamber: "mandates", href: "index.html?chamber=mandates" },
         { icon: "🌾", label: "Goshen 8 Pillars", badge: "8", chamber: "goshen-pillars", href: "index.html?chamber=goshen-pillars" },
-        { icon: "🛡️", label: "Functional Dockets", badge: "6", chamber: "dockets", href: "index.html?chamber=dockets" }
+        { icon: "🛡️", label: "Functional Dockets", badge: "6", chamber: "services", href: "index.html?chamber=services" }
       ]
     },
     {
@@ -31,8 +38,8 @@
       items: [
         { icon: "📜", label: "Courts of Heaven 101", badge: "Law", chamber: "courtroom-101", href: "index.html?chamber=courtroom-101" },
         { icon: "📚", label: "Documents & Decrees", badge: "10", chamber: "resources", href: "index.html?chamber=resources" },
-        { icon: "📁", label: "Work Log & Milestones", badge: "Log", chamber: "milestones", href: "index.html?chamber=milestones" },
-        { icon: "🎥", label: "Teachings & Video", badge: "Live", chamber: "media", href: "index.html?chamber=media" },
+        { icon: "🗂️", label: "Work Log & Milestones", badge: "Log", chamber: "logs", href: "index.html?chamber=logs" },
+        { icon: "🎥", label: "Teachings & Video", badge: "Live", chamber: "videos", href: "index.html?chamber=videos" },
         { icon: "📝", label: "Engage & Intake Forms", badge: "Join", chamber: "forms", href: "index.html?chamber=forms" },
         { icon: "🖼️", label: "Photo & Media Gallery", badge: "Pics", chamber: "gallery", href: "index.html?chamber=gallery" }
       ]
@@ -62,14 +69,6 @@
           overflow-x: hidden;
         }
 
-        /* Prevent duplicate sidebars/rails from splitting the page into two columns */
-        body.kek-left-nav-enabled aside:not(.kek-left-sidebar),
-        body.kek-left-nav-enabled [class*="rail"]:not(.kek-left-sidebar):not(.kek-left-sidebar *),
-        body.kek-left-nav-enabled [id*="rail"]:not(.kek-left-sidebar):not(.kek-left-sidebar *) {
-          display: none !important;
-        }
-
-        /* Hide duplicate top horizontal nav bars on subpages */
         body.kek-left-nav-enabled.kek-is-subpage header nav,
         body.kek-left-nav-enabled.kek-is-subpage header .nav-links,
         body.kek-left-nav-enabled.kek-is-subpage .kek-shared-return-bar {
@@ -291,58 +290,20 @@
   }
 
   document.body.classList.remove("kek-right-col-active");
-  document.body.classList.add("kek-left-nav-enabled");
-  if (!isHomePage) {
-    document.body.classList.add("kek-is-subpage");
-  }
+  document.body.classList.add("kek-left-nav-enabled", "kek-is-subpage");
 
-  function applyReadingMode(mode, targetChamber = "") {
+  function applyReadingMode(mode) {
     readingMode = mode === "scroll" ? "scroll" : "focused";
     localStorage.setItem(MODE_KEY, readingMode);
 
     document.querySelectorAll(".kek-left-layout-btn").forEach((btn) => {
       btn.classList.toggle("is-selected", btn.getAttribute("data-mode") === readingMode);
     });
-
-    const modeTabbedBtn = document.getElementById("mode-tabbed-btn");
-    const modeAllBtn = document.getElementById("mode-all-btn");
-    if (modeTabbedBtn && modeAllBtn) {
-      if (readingMode === "scroll" && !modeAllBtn.classList.contains("active-mode")) {
-        modeAllBtn.click();
-      } else if (readingMode === "focused" && !modeTabbedBtn.classList.contains("active-mode")) {
-        modeTabbedBtn.click();
-      }
-    }
-
-    if (isHomePage) {
-      const chambers = Array.from(document.querySelectorAll("[data-chamber], .chamber-section"));
-      if (chambers.length > 0 && readingMode === "focused" && targetChamber) {
-        const matched = document.querySelector(`[data-chamber="${targetChamber}"], #${targetChamber}`);
-        if (matched) {
-          chambers.forEach((el) => {
-            el.style.display = el === matched || matched.contains(el) ? "" : "none";
-          });
-          matched.style.display = "";
-          matched.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      } else if (readingMode === "scroll") {
-        chambers.forEach((el) => {
-          el.style.display = "";
-        });
-      }
-    }
   }
 
   function isPageItemActive(item) {
     if (!item.pageMatch) return false;
-    if (item.pageMatch === "index.html") {
-      return isHomePage && !activeChamber;
-    }
     return currentFile === item.pageMatch;
-  }
-
-  function isChamberItemActive(item) {
-    return Boolean(isHomePage && activeChamber && item.chamber === activeChamber);
   }
 
   function renderNavRow(item, active) {
@@ -367,7 +328,7 @@
   `;
 
   const groupsHtml = NAV_GROUPS.map((grp) => {
-    const itemsHtml = grp.items.map((item) => renderNavRow(item, isChamberItemActive(item))).join("");
+    const itemsHtml = grp.items.map((item) => renderNavRow(item, false)).join("");
     return `
       <div class="kek-left-group-label">${grp.heading}</div>
       <div class="kek-left-list">${itemsHtml}</div>
@@ -419,33 +380,19 @@
 
   sidebar.querySelectorAll(".kek-left-layout-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
-      applyReadingMode(btn.getAttribute("data-mode"), activeChamber);
+      applyReadingMode(btn.getAttribute("data-mode"));
     });
   });
 
   sidebar.querySelectorAll(".kek-left-link").forEach((link) => {
-    link.addEventListener("click", (e) => {
-      const targetChamber = link.getAttribute("data-chamber");
+    link.addEventListener("click", () => {
       sidebar.classList.remove("is-open");
       toggleBtn.setAttribute("aria-expanded", "false");
-
-      if (isHomePage && targetChamber) {
-        const targetEl = document.querySelector(`[data-chamber="${targetChamber}"], #${targetChamber}`);
-        if (targetEl) {
-          e.preventDefault();
-          activeChamber = targetChamber;
-          window.history.replaceState({}, "", `${window.location.pathname}?chamber=${encodeURIComponent(targetChamber)}`);
-          sidebar.querySelectorAll(".kek-left-link").forEach((itemEl) => {
-            itemEl.classList.toggle("is-active", itemEl === link);
-          });
-          applyReadingMode(readingMode, targetChamber);
-        }
-      }
     });
   });
 
   document.body.insertBefore(sidebar, document.body.firstChild);
   document.body.appendChild(toggleBtn);
 
-  applyReadingMode(readingMode, activeChamber);
+  applyReadingMode(readingMode);
 })();
