@@ -1,5 +1,4 @@
 (function () {
-  const STORAGE_KEY = "kek_homepage_nav_snapshot_v1";
   const MODE_KEY = "kek_reading_mode";
   const SIDEBAR_WIDTH = "284px";
 
@@ -9,8 +8,15 @@
   let activeChamber = params.get("chamber") || "";
   let readingMode = localStorage.getItem(MODE_KEY) || "focused";
 
-  // Fallback navigation structure matching the homepage sidebar if snapshot is not yet cached
-  const FALLBACK_GROUPS = [
+  const MAIN_PAGES = [
+    { icon: "🏛️", label: "Main Sanctuary", badge: "Home", href: "index.html", pageMatch: "index.html" },
+    { icon: "⏱️", label: "24/7 Watch & Hebrew Cal", badge: "Live", href: "watch-hub.html", pageMatch: "watch-hub.html" },
+    { icon: "🎓", label: "Member & Classes Portal", badge: "Portal", href: "portal.html", pageMatch: "portal.html" },
+    { icon: "📋", label: "Aaron & Hur Coverage", badge: "Watch", href: "aaron-hur.html", pageMatch: "aaron-hur.html" },
+    { icon: "🔒", label: "Privacy & Confidentiality", badge: "Policy", href: "privacy.html", pageMatch: "privacy.html" }
+  ];
+
+  const NAV_GROUPS = [
     {
       heading: "CORE FOUNDATIONS",
       items: [
@@ -23,122 +29,19 @@
     {
       heading: "COURTS, LIBRARY & ACTION PAGES",
       items: [
-        { icon: "📜", label: "Courts of Heaven 101", badge: "Law", chamber: "courtroom-101", href: "index.html?chamber=courtroom-101", matchPage: "courtroom" },
-        { icon: "📚", label: "Documents & Decrees", badge: "10", chamber: "resources", href: "index.html?chamber=resources", matchPage: "decrees" },
-        { icon: "📁", label: "Work Log & Milestones", badge: "Log", chamber: "milestones", href: "index.html?chamber=milestones", matchPage: "milestones" },
-        { icon: "🎥", label: "Teachings & Video", badge: "Live", chamber: "media", href: "index.html?chamber=media", matchPage: "media" },
-        { icon: "📝", label: "Engage & Intake Forms", badge: "Join", chamber: "forms", href: "index.html?chamber=forms", matchPage: "forms" },
-        { icon: "🖼️", label: "Photo & Media Gallery", badge: "Pics", chamber: "gallery", href: "index.html?chamber=gallery", matchPage: "gallery" }
+        { icon: "📜", label: "Courts of Heaven 101", badge: "Law", chamber: "courtroom-101", href: "index.html?chamber=courtroom-101" },
+        { icon: "📚", label: "Documents & Decrees", badge: "10", chamber: "resources", href: "index.html?chamber=resources" },
+        { icon: "📁", label: "Work Log & Milestones", badge: "Log", chamber: "milestones", href: "index.html?chamber=milestones" },
+        { icon: "🎥", label: "Teachings & Video", badge: "Live", chamber: "media", href: "index.html?chamber=media" },
+        { icon: "📝", label: "Engage & Intake Forms", badge: "Join", chamber: "forms", href: "index.html?chamber=forms" },
+        { icon: "🖼️", label: "Photo & Media Gallery", badge: "Pics", chamber: "gallery", href: "index.html?chamber=gallery" }
       ]
     }
   ];
 
-  const FALLBACK_QUICK_LINKS = [
-    { icon: "⏱️", label: "24/7 Watch & Hebrew Cal", href: "watch-hub.html", arrow: "→", external: false },
-    { icon: "🎓", label: "Member & Classes Portal", href: "portal.html", arrow: "→", external: false },
-    { icon: "📋", label: "Aaron & Hur Coverage Page", href: "aaron-hur.html", arrow: "→", external: false },
+  const COMMUNITY_LINKS = [
     { icon: "💬", label: "KEK WhatsApp Community", href: "https://chat.whatsapp.com/KicB3kPctrrHHZpieyfPfA", arrow: "↗", external: true }
   ];
-
-  // If on index.html, harvest any existing homepage sidebar/nav structure so subpages match 1:1
-  function harvestHomepageNav() {
-    if (!isHomePage) return null;
-
-    const existingSidebar = document.querySelector(
-      "aside:not(.kek-left-sidebar), .sidebar:not(.kek-left-sidebar), [data-home-nav]"
-    );
-
-    if (!existingSidebar) return null;
-
-    const groups = [];
-    const quickLinks = [];
-    let currentGroup = null;
-
-    existingSidebar.querySelectorAll("div, section, nav, ul, a").forEach((el) => {
-      if (el.closest(".kek-quick-stack, .kek-layout-box")) return;
-
-      if (el.matches("div, section, p, h2, h3, h4, span")) {
-        const txt = (el.textContent || "").trim();
-        const isUpperHeading =
-          txt.length > 2 &&
-          txt.length < 70 &&
-          txt === txt.toUpperCase() &&
-          /[A-Z]/.test(txt) &&
-          el.children.length === 0;
-
-        if (isUpperHeading) {
-          currentGroup = { heading: txt, items: [] };
-          groups.push(currentGroup);
-        }
-      }
-
-      if (el.tagName === "A") {
-        const href = el.getAttribute("href") || "#";
-        const fullText = (el.textContent || "").trim();
-        if (!fullText) return;
-
-        const isExternal = /^https?:\/\//i.test(href);
-        const arrowMatch = fullText.match(/(→|↗)$/);
-
-        if (isExternal || arrowMatch) {
-          const cleanLabel = fullText.replace(/(→|↗)$/, "").trim();
-          quickLinks.push({
-            icon: "•",
-            label: cleanLabel,
-            href,
-            arrow: arrowMatch ? arrowMatch[1] : (isExternal ? "↗" : "→"),
-            external: isExternal
-          });
-        } else {
-          if (!currentGroup) {
-            currentGroup = { heading: "NAVIGATION", items: [] };
-            groups.push(currentGroup);
-          }
-          const badgeEl = el.querySelector(".badge, .count, span:last-child");
-          const badge = badgeEl && badgeEl !== el ? (badgeEl.textContent || "").trim() : "";
-          const label = badge
-            ? fullText.slice(0, fullText.lastIndexOf(badge)).trim() || fullText
-            : fullText;
-
-          const chamberMatch = href.match(/[?&]chamber=([^&]+)/i) || href.match(/#(.+)$/);
-          currentGroup.items.push({
-            icon: "•",
-            label,
-            badge,
-            chamber: chamberMatch ? decodeURIComponent(chamberMatch[1]) : "",
-            href
-          });
-        }
-      }
-    });
-
-    if (groups.length > 0) {
-      const snapshot = { groups, quickLinks: quickLinks.length > 0 ? quickLinks : FALLBACK_QUICK_LINKS };
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(snapshot));
-      } catch (_) {}
-      return snapshot;
-    }
-
-    return null;
-  }
-
-  function getNavData() {
-    const harvested = harvestHomepageNav();
-    if (harvested) return harvested;
-
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (parsed && Array.isArray(parsed.groups) && parsed.groups.length > 0) {
-          return parsed;
-        }
-      }
-    } catch (_) {}
-
-    return { groups: FALLBACK_GROUPS, quickLinks: FALLBACK_QUICK_LINKS };
-  }
 
   if (!document.getElementById("kek-left-sidebar-styles")) {
     const style = document.createElement("style");
@@ -158,7 +61,7 @@
           padding-right: 0;
         }
 
-        /* On subpages, hide duplicate top horizontal nav bars so the left sidebar is the unified nav */
+        /* Hide duplicate top row nav bars on subpages so the left sidebar is primary navigation */
         body.kek-left-nav-enabled.kek-is-subpage header nav,
         body.kek-left-nav-enabled.kek-is-subpage header .nav-links,
         body.kek-left-nav-enabled.kek-is-subpage .kek-shared-return-bar {
@@ -393,7 +296,6 @@
       btn.classList.toggle("is-selected", btn.getAttribute("data-mode") === readingMode);
     });
 
-    // Sync with existing hub mode toggles when present (such as watch-hub.html)
     const modeTabbedBtn = document.getElementById("mode-tabbed-btn");
     const modeAllBtn = document.getElementById("mode-all-btn");
     if (modeTabbedBtn && modeAllBtn) {
@@ -424,64 +326,64 @@
     }
   }
 
-  function isItemActive(item) {
-    if (isHomePage && activeChamber) {
-      return item.chamber === activeChamber;
+  function isPageItemActive(item) {
+    if (!item.pageMatch) return false;
+    if (item.pageMatch === "index.html") {
+      return isHomePage && !activeChamber;
     }
-    if (!isHomePage && item.matchPage && currentFile.includes(item.matchPage)) {
-      return true;
-    }
-    if (isHomePage && !activeChamber && item.chamber === "about") {
-      return true;
-    }
-    return false;
+    return currentFile === item.pageMatch;
   }
 
-  const navData = getNavData();
+  function isChamberItemActive(item) {
+    return Boolean(isHomePage && activeChamber && item.chamber === activeChamber);
+  }
 
-  const groupsHtml = navData.groups
-    .map((grp) => {
-      const itemsHtml = grp.items
-        .map((item) => {
-          const activeClass = isItemActive(item) ? " is-active" : "";
-          const badgeHtml = item.badge ? `<span class="kek-left-badge">${item.badge}</span>` : "";
-          return `
-            <a href="${item.href}" class="kek-left-link${activeClass}" data-chamber="${item.chamber || ""}">
-              <span class="kek-left-link-main">
-                <span class="kek-left-icon">${item.icon || "•"}</span>
-                <span class="kek-left-label">${item.label}</span>
-              </span>
-              ${badgeHtml}
-            </a>
-          `;
-        })
-        .join("");
+  function renderNavRow(item, active) {
+    const activeClass = active ? " is-active" : "";
+    const badgeHtml = item.badge ? `<span class="kek-left-badge">${item.badge}</span>` : "";
+    return `
+      <a href="${item.href}" class="kek-left-link${activeClass}" data-chamber="${item.chamber || ""}">
+        <span class="kek-left-link-main">
+          <span class="kek-left-icon">${item.icon || "•"}</span>
+          <span class="kek-left-label">${item.label}</span>
+        </span>
+        ${badgeHtml}
+      </a>
+    `;
+  }
 
-      return `
-        <div class="kek-left-group-label">${grp.heading}</div>
-        <div class="kek-left-list">${itemsHtml}</div>
-      `;
-    })
-    .join("");
+  const mainPagesHtml = `
+    <div class="kek-left-group-label">MAIN PAGES</div>
+    <div class="kek-left-list">
+      ${MAIN_PAGES.map((item) => renderNavRow(item, isPageItemActive(item))).join("")}
+    </div>
+  `;
 
-  const quickLinksHtml = navData.quickLinks
-    .map(
-      (q) => `
-        <a href="${q.href}" class="kek-left-quick-card"${q.external ? ' target="_blank" rel="noopener noreferrer"' : ""}>
-          <span class="kek-left-link-main">
-            <span class="kek-left-icon">${q.icon || "•"}</span>
-            <span class="kek-left-label">${q.label}</span>
-          </span>
-          <span class="kek-left-quick-arrow">${q.arrow || "→"}</span>
-        </a>
-      `
-    )
-    .join("");
+  const groupsHtml = NAV_GROUPS.map((grp) => {
+    const itemsHtml = grp.items.map((item) => renderNavRow(item, isChamberItemActive(item))).join("");
+    return `
+      <div class="kek-left-group-label">${grp.heading}</div>
+      <div class="kek-left-list">${itemsHtml}</div>
+    `;
+  }).join("");
+
+  const communityHtml = COMMUNITY_LINKS.map(
+    (q) => `
+      <a href="${q.href}" class="kek-left-quick-card"${q.external ? ' target="_blank" rel="noopener noreferrer"' : ""}>
+        <span class="kek-left-link-main">
+          <span class="kek-left-icon">${q.icon || "•"}</span>
+          <span class="kek-left-label">${q.label}</span>
+        </span>
+        <span class="kek-left-quick-arrow">${q.arrow || "→"}</span>
+      </a>
+    `
+  ).join("");
 
   const sidebar = document.createElement("aside");
   sidebar.className = "kek-left-sidebar";
   sidebar.setAttribute("aria-label", "KEK Sanctuary Navigation");
   sidebar.innerHTML = `
+    ${mainPagesHtml}
     ${groupsHtml}
 
     <div class="kek-left-layout-box">
@@ -493,7 +395,7 @@
     </div>
 
     <div class="kek-left-quick-stack">
-      ${quickLinksHtml}
+      ${communityHtml}
     </div>
   `;
 
