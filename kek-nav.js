@@ -17,7 +17,6 @@
     return;
   }
 
-  const params = new URLSearchParams(window.location.search);
   let readingMode = localStorage.getItem(MODE_KEY) || "focused";
   let isHidden = localStorage.getItem(HIDDEN_KEY) === "1";
 
@@ -108,7 +107,7 @@
       }
 
       @media (min-width: 981px) {
-        body.kek-left-nav-hidden .kek-left-sidebar {
+        body.kek-left-nav-enabled.kek-left-nav-hidden .kek-left-sidebar {
           transform: translateX(-100%);
         }
       }
@@ -149,35 +148,40 @@
         color: #091324;
       }
 
-      .kek-left-unhide-btn {
+      /* Desktop / Laptop Hide & Unhide Floating Control */
+      .kek-desktop-nav-btn {
         display: none;
-        position: fixed;
-        top: 16px;
-        left: 16px;
-        z-index: 1600;
-        background: #0c1b33;
-        color: var(--kek-gold-bright);
-        border: 1.5px solid var(--kek-gold);
-        border-radius: 999px;
-        padding: 9px 14px;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 0.76rem;
-        font-weight: 700;
-        cursor: pointer;
-        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
-        align-items: center;
-        gap: 6px;
-        transition: all 0.15s ease;
-      }
-
-      .kek-left-unhide-btn:hover {
-        background: var(--kek-gold);
-        color: #091324;
       }
 
       @media (min-width: 981px) {
-        body.kek-left-nav-hidden .kek-left-unhide-btn {
+        .kek-desktop-nav-btn {
           display: inline-flex;
+          position: fixed;
+          top: 14px;
+          left: calc(var(--kek-left-w) + 14px);
+          z-index: 2000;
+          background: #0c1b33;
+          color: var(--kek-gold-bright);
+          border: 1.5px solid var(--kek-gold);
+          border-radius: 999px;
+          padding: 8px 14px;
+          font-family: 'Montserrat', sans-serif;
+          font-size: 0.75rem;
+          font-weight: 700;
+          cursor: pointer;
+          box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+          align-items: center;
+          gap: 6px;
+          transition: left 0.22s ease, background 0.15s ease, color 0.15s ease;
+        }
+
+        body.kek-left-nav-enabled.kek-left-nav-hidden .kek-desktop-nav-btn {
+          left: 16px;
+        }
+
+        .kek-desktop-nav-btn:hover {
+          background: var(--kek-gold);
+          color: #091324;
         }
       }
 
@@ -342,7 +346,7 @@
         position: fixed;
         bottom: 18px;
         left: 18px;
-        z-index: 1600;
+        z-index: 2000;
         background: #0c1b33;
         color: var(--kek-gold-bright);
         border: 1.5px solid var(--kek-gold);
@@ -377,6 +381,15 @@
   document.body.classList.remove("kek-right-col-active");
   document.body.classList.add("kek-left-nav-enabled", "kek-is-subpage");
 
+  function updateToggleLabels() {
+    desktopToggleBtn.innerHTML = isHidden
+      ? `<span>▶</span><span>Unhide Nav</span>`
+      : `<span>◀</span><span>Hide Nav</span>`;
+    desktopToggleBtn.setAttribute("aria-expanded", String(!isHidden));
+    mobileToggleBtn.textContent = isHidden ? "☰ Unhide Nav" : "✕ Hide Nav";
+    mobileToggleBtn.setAttribute("aria-expanded", String(!isHidden));
+  }
+
   function syncNavHiddenState(hidden) {
     isHidden = Boolean(hidden);
     localStorage.setItem(HIDDEN_KEY, isHidden ? "1" : "0");
@@ -384,12 +397,11 @@
     if (window.innerWidth > 980) {
       document.body.classList.toggle("kek-left-nav-hidden", isHidden);
       sidebar.classList.remove("is-open");
-      toggleBtn.setAttribute("aria-expanded", "false");
     } else {
+      document.body.classList.remove("kek-left-nav-hidden");
       sidebar.classList.toggle("is-open", !isHidden);
-      toggleBtn.textContent = isHidden ? "☰ Unhide Nav" : "✕ Hide Nav";
-      toggleBtn.setAttribute("aria-expanded", String(!isHidden));
     }
+    updateToggleLabels();
   }
 
   function applyReadingMode(mode) {
@@ -471,27 +483,24 @@
     </div>
   `;
 
-  const unhideBtn = document.createElement("button");
-  unhideBtn.type = "button";
-  unhideBtn.className = "kek-left-unhide-btn";
-  unhideBtn.id = "kek-left-unhide-btn";
-  unhideBtn.innerHTML = `<span>▶</span><span>Unhide Nav</span>`;
+  const desktopToggleBtn = document.createElement("button");
+  desktopToggleBtn.type = "button";
+  desktopToggleBtn.className = "kek-desktop-nav-btn";
+  desktopToggleBtn.id = "kek-desktop-nav-btn";
 
-  const toggleBtn = document.createElement("button");
-  toggleBtn.type = "button";
-  toggleBtn.className = "kek-left-mobile-btn";
-  toggleBtn.textContent = isHidden ? "☰ Unhide Nav" : "☰ Navigation";
-  toggleBtn.setAttribute("aria-expanded", String(!isHidden));
+  const mobileToggleBtn = document.createElement("button");
+  mobileToggleBtn.type = "button";
+  mobileToggleBtn.className = "kek-left-mobile-btn";
 
   sidebar.querySelector("#kek-left-hide-btn")?.addEventListener("click", () => {
     syncNavHiddenState(true);
   });
 
-  unhideBtn.addEventListener("click", () => {
-    syncNavHiddenState(false);
+  desktopToggleBtn.addEventListener("click", () => {
+    syncNavHiddenState(!isHidden);
   });
 
-  toggleBtn.addEventListener("click", () => {
+  mobileToggleBtn.addEventListener("click", () => {
     syncNavHiddenState(!isHidden);
   });
 
@@ -503,6 +512,7 @@
       document.body.classList.remove("kek-left-nav-hidden");
       sidebar.classList.toggle("is-open", !isHidden);
     }
+    updateToggleLabels();
   });
 
   sidebar.querySelectorAll(".kek-left-layout-btn").forEach((btn) => {
@@ -520,12 +530,13 @@
   });
 
   document.body.insertBefore(sidebar, document.body.firstChild);
-  document.body.appendChild(unhideBtn);
-  document.body.appendChild(toggleBtn);
+  document.body.appendChild(desktopToggleBtn);
+  document.body.appendChild(mobileToggleBtn);
 
   if (window.innerWidth > 980 && isHidden) {
     document.body.classList.add("kek-left-nav-hidden");
   }
 
+  updateToggleLabels();
   applyReadingMode(readingMode);
 })();
