@@ -44,28 +44,28 @@
         .nav-container {
             max-width: 1260px;
             margin: 0 auto;
-            padding: 12px 24px;
+            padding: 10px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 10px;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             text-decoration: none;
             font-family: 'Cinzel', serif;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 0.96rem;
             color: var(--white);
         }
 
         .logo img {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 8px;
             border: 1.5px solid var(--gold);
         }
@@ -75,14 +75,14 @@
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 18px;
+            gap: 16px;
             flex-wrap: wrap;
         }
 
         .nav-links a {
             color: #e2e8f0;
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-weight: 600;
         }
 
@@ -92,10 +92,10 @@
             background: linear-gradient(135deg, #d4ab38 0%, #b5891b 100%);
             color: var(--navy);
             border: none;
-            padding: 10px 18px;
+            padding: 9px 16px;
             border-radius: 6px;
             font-weight: 700;
-            font-size: 0.84rem;
+            font-size: 0.82rem;
             cursor: pointer;
             font-family: 'Montserrat', sans-serif;
             text-decoration: none;
@@ -147,59 +147,62 @@
             border-color: var(--gold);
         }
 
+        /* ABOVE-THE-FOLD HERO & ACTIVE JERUSALEM WATCH COMMAND DISPLAY */
         .hub-hero {
             background: radial-gradient(circle at top, #162f59 0%, #0c1b33 65%, #060e1c 100%);
             color: var(--white);
-            padding: 46px 24px 40px;
+            padding: 26px 24px 30px;
             text-align: center;
             border-bottom: 4px solid var(--gold);
         }
 
         .hero-kicker {
             display: inline-block;
-            font-size: 0.74rem;
+            font-size: 0.72rem;
             font-weight: 700;
-            letter-spacing: 1.5px;
+            letter-spacing: 1.4px;
             text-transform: uppercase;
             color: var(--gold-bright);
             border: 1px solid rgba(197, 155, 39, 0.45);
             background: rgba(197, 155, 39, 0.12);
-            padding: 5px 14px;
+            padding: 4px 13px;
             border-radius: 999px;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
         .hub-hero h1 {
             font-family: 'Cinzel', serif;
-            font-size: 2.15rem;
-            margin: 0 0 10px;
+            font-size: 1.85rem;
+            margin: 0 0 14px;
         }
 
-        .hub-hero p {
-            color: #cbd5e1;
-            max-width: 820px;
-            margin: 0 auto 24px;
-            font-size: 0.95rem;
-            line-height: 1.68;
+        .zion-command-card {
+            max-width: 1060px;
+            margin: 0 auto;
+            background: rgba(6, 14, 28, 0.78);
+            border: 2px solid var(--gold);
+            border-radius: 14px;
+            padding: 18px 22px;
+            box-shadow: 0 14px 36px rgba(0, 0, 0, 0.35);
+            text-align: left;
         }
 
-        .jerusalem-clock-banner {
-            display: inline-flex;
+        .zion-top-bar {
+            display: flex;
             flex-wrap: wrap;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            gap: 16px;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(197, 155, 39, 0.55);
-            border-radius: 12px;
-            padding: 14px 24px;
+            gap: 10px;
+            padding-bottom: 12px;
+            margin-bottom: 14px;
+            border-bottom: 1px solid rgba(197, 155, 39, 0.3);
         }
 
         .live-indicator {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            font-size: 0.78rem;
+            font-size: 0.76rem;
             font-weight: 700;
             letter-spacing: 1px;
             text-transform: uppercase;
@@ -219,86 +222,125 @@
             box-shadow: 0 0 12px var(--live-red);
         }
 
-        .jerusalem-time-display {
-            font-family: monospace;
-            font-size: 1.24rem;
-            font-weight: 700;
-            color: var(--gold-bright);
+        .clock-cluster {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
         }
 
-        .local-time-pill {
-            font-size: 0.78rem;
-            color: #cbd5e1;
-            background: rgba(6, 14, 28, 0.55);
+        .jerusalem-time-display {
+            font-family: monospace;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--gold-bright);
+            background: rgba(197, 155, 39, 0.14);
+            border: 1px solid rgba(197, 155, 39, 0.45);
+            padding: 4px 12px;
+            border-radius: 7px;
+        }
+
+        .time-sub-pill {
+            font-size: 0.76rem;
+            color: #e2e8f0;
+            background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.14);
-            padding: 4px 10px;
+            padding: 5px 10px;
             border-radius: 6px;
             font-weight: 600;
         }
 
-        .active-watch-label {
-            font-size: 0.87rem;
+        .zion-watch-main {
+            display: grid;
+            grid-template-columns: 1.45fr 1fr;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .now-in-watch-badge {
+            display: inline-block;
+            background: var(--live-green);
+            color: #052e16;
+            font-size: 0.71rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.9px;
+            padding: 3px 10px;
+            border-radius: 999px;
+            margin-bottom: 6px;
+        }
+
+        .zion-watch-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.42rem;
+            font-weight: 800;
             color: var(--white);
-            font-weight: 600;
+            margin: 0 0 4px;
+        }
+
+        .zion-watch-scripture {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--gold-bright);
+            margin-bottom: 6px;
+        }
+
+        .zion-watch-mandate {
+            font-size: 0.84rem;
+            color: #cbd5e1;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .zion-action-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 10px;
+            padding: 12px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+
+        .watch-countdown-text {
+            font-size: 0.79rem;
+            color: #fde047;
+            font-weight: 700;
+            font-family: monospace;
+        }
+
+        .zion-quick-btns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
         }
 
         .container {
             max-width: 1240px;
             margin: 0 auto;
-            padding: 42px 24px 72px;
+            padding: 38px 24px 72px;
         }
 
         .section-heading {
             font-family: 'Cinzel', serif;
             color: var(--navy);
-            font-size: 1.65rem;
+            font-size: 1.6rem;
             margin: 0 0 8px;
         }
 
         .section-sub {
             color: var(--slate);
-            font-size: 0.93rem;
-            margin: 0 0 24px;
+            font-size: 0.92rem;
+            margin: 0 0 22px;
             line-height: 1.6;
-        }
-
-        /* TABERNACLE OF DAVID 3 PILLARS */
-        .pillars-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-            gap: 20px;
-            margin-bottom: 46px;
-        }
-
-        .pillar-card {
-            background: var(--white);
-            border: 1px solid #e2e8f0;
-            border-left: 4px solid var(--gold);
-            border-radius: 10px;
-            padding: 20px 22px;
-            box-shadow: 0 4px 14px rgba(12, 27, 51, 0.04);
-        }
-
-        .pillar-card h3 {
-            font-family: 'Cinzel', serif;
-            color: var(--navy);
-            font-size: 1.04rem;
-            margin: 0 0 8px;
-        }
-
-        .pillar-card p {
-            color: var(--slate);
-            font-size: 0.85rem;
-            line-height: 1.6;
-            margin: 0;
         }
 
         /* 3-LAYER MEDIA HUB */
         .media-hub-grid {
             display: grid;
-            grid-template-columns: 1.38fr 1fr;
+            grid-template-columns: 1.35fr 1fr;
             gap: 24px;
-            margin-bottom: 52px;
+            margin-bottom: 48px;
         }
 
         .media-layer-card {
@@ -466,7 +508,7 @@
         }
 
         .now-playing-bar {
-            background: rgba(6, 14, 28, 0.7);
+            background: rgba(6, 14, 28, 0.75);
             border: 1px solid rgba(255, 255, 255, 0.14);
             border-radius: 7px;
             padding: 10px 12px;
@@ -478,8 +520,26 @@
         .radio-controls {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
+        }
+
+        .volume-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            background: rgba(6, 14, 28, 0.5);
+            padding: 7px 11px;
+            border-radius: 6px;
+            font-size: 0.76rem;
+            color: #cbd5e1;
+        }
+
+        .volume-bar input[type="range"] {
+            flex: 1;
+            accent-color: var(--gold-bright);
+            cursor: pointer;
         }
 
         .playlist-drawer {
@@ -721,6 +781,7 @@
         }
 
         @media (max-width: 920px) {
+            .zion-watch-main { grid-template-columns: 1fr; }
             .media-hub-grid { grid-template-columns: 1fr; }
             .war-room-links { grid-template-columns: 1fr; }
         }
@@ -738,44 +799,54 @@
                 <a href="index.html">Main Sanctuary</a>
                 <a href="portal.html" style="color: var(--gold-bright);">Member &amp; Classes Portal</a>
                 <a href="admin.html">Executive Desk</a>
-                <a href="https://calendar.app.google/xPmrk5LuasqAE9rw7" target="_blank" rel="noopener noreferrer" class="btn-gold" style="padding: 8px 14px; font-size: 0.8rem;">Book Courtroom Session</a>
+                <a href="https://calendar.app.google/xPmrk5LuasqAE9rw7" target="_blank" rel="noopener noreferrer" class="btn-gold" style="padding: 7px 13px; font-size: 0.79rem;">Book Courtroom Session</a>
             </div>
         </div>
     </header>
 
+    <!-- ABOVE-THE-FOLD HERO WITH AUTOMATIC JERUSALEM WATCH COMMAND CARD -->
     <section class="hub-hero">
         <span class="hero-kicker">Isaiah 2:3 &bull; 1 Chronicles 16:37 &bull; Isaiah 62:6–7 &bull; Acts 15:16</span>
         <h1>Tabernacle of David 24/7 Watch &amp; Live Media Hub</h1>
-        <p>Synchronized universally to <strong>Jerusalem Biblical Time (Zion Standard)</strong>—uniting unceasing apostolic legislation, Zoom-to-YouTube live sanctuary broadcasts, automated 24/7 prophetic audio from Google Cloud Storage, and Aaron &amp; Hur watchman triads across all eight watches.</p>
 
-        <div class="jerusalem-clock-banner">
-            <span class="live-indicator" id="hero-status-indicator"><span class="pulse-dot" id="hero-pulse-dot"></span> <span id="hero-status-text">Altar Online (24/7)</span></span>
-            <span class="jerusalem-time-display" id="jerusalem-clock">00:00:00 JERUSALEM</span>
-            <span class="local-time-pill" id="local-clock-pill">Your Local Time: 00:00</span>
-            <span class="active-watch-label" id="active-watch-banner">Synchronizing Watch...</span>
+        <div class="zion-command-card">
+            <div class="zion-top-bar">
+                <span class="live-indicator" id="hero-status-indicator">
+                    <span class="pulse-dot" id="hero-pulse-dot"></span>
+                    <span id="hero-status-text">Altar Online (24/7)</span>
+                </span>
+
+                <div class="clock-cluster">
+                    <span class="jerusalem-time-display" id="jerusalem-clock">00:00:00 JERUSALEM</span>
+                    <span class="time-sub-pill" id="biblical-hour-pill">Biblical Hour: --</span>
+                    <span class="time-sub-pill" id="local-clock-pill">Your Local Time: 00:00</span>
+                </div>
+            </div>
+
+            <div class="zion-watch-main">
+                <div>
+                    <span class="now-in-watch-badge" id="hero-watch-window">● CURRENTLY IN JERUSALEM WATCH</span>
+                    <h2 class="zion-watch-title" id="hero-watch-name">Loading Current Jerusalem Watch...</h2>
+                    <div class="zion-watch-scripture" id="hero-watch-scripture">Zion Standard Time (Asia/Jerusalem)</div>
+                    <p class="zion-watch-mandate" id="hero-watch-mandate">Synchronizing unceasing Levitical sound, judicial courtroom petitions, and Aaron &amp; Hur watchman triads.</p>
+                </div>
+
+                <div class="zion-action-box">
+                    <div class="watch-countdown-text" id="hero-watch-countdown">Remaining in Watch: --:--:--</div>
+                    <div class="zion-quick-btns">
+                        <button type="button" id="hero-listen-btn" class="btn-gold" style="flex: 1;">
+                            ▶ Listen to 24/7 Radio
+                        </button>
+                        <a href="#watches-section" class="btn-navy" style="border-color: var(--gold);">
+                            🛡️ Claim Seat
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <div class="container">
-
-        <!-- TABERNACLE OF DAVID 3-PILLAR ORDER -->
-        <h2 class="section-heading">Tabernacle of David — Apostolic Altar Order</h2>
-        <p class="section-sub">Rebuilding David's fallen tabernacle on Zion's prophetic clock so unceasing worship, judicial courtroom petitions, and territorial watchkeeping operate together 24 hours a day.</p>
-
-        <div class="pillars-grid">
-            <div class="pillar-card">
-                <h3>I. Unceasing Levitical Sound</h3>
-                <p><strong>1 Chronicles 25:1–7 &bull; Revelation 5:8:</strong> Continuous harp-and-bowl prophetic worship and scripture decrees ascending without interruption across all 24 hours via our automated &amp; live audio altar.</p>
-            </div>
-            <div class="pillar-card">
-                <h3>II. Judicial Courts of Heaven</h3>
-                <p><strong>Daniel 7:10 &bull; Hebrews 12:24:</strong> Standing in the Melchizedek order to present petitions, silence bloodline &amp; territorial accusations, and legislate Kingdom verdicts in each watch.</p>
-            </div>
-            <div class="pillar-card">
-                <h3>III. Aaron &amp; Hur Covenant Triads</h3>
-                <p><strong>Exodus 17:12 &bull; Ecclesiastes 4:12:</strong> Every 3-hour watch is guarded by a three-fold cord—<strong>Primary Watchman</strong>, <strong>Aaron</strong> (priestly intercession), and <strong>Hur</strong> (prophetic reinforcement).</p>
-            </div>
-        </div>
 
         <!-- 3-LAYER LIVE MEDIA & BROADCAST HUB -->
         <h2 class="section-heading">3-Layer Live Media &amp; Automated Broadcast Altar</h2>
@@ -788,7 +859,7 @@
                 <span class="layer-tag">Layer 01 &bull; Video Broadcast Altar (Zoom &rarr; YouTube Live)</span>
                 <h3>Sanctuary Video Stream &amp; Courts of Heaven Broadcasts</h3>
                 <p style="color: var(--slate); font-size: 0.87rem; margin: 0;">
-                    When a Zoom session goes <strong>Live on YouTube</strong>, it streams right here. You can also load any YouTube link directly into the sanctuary screen or enter the live Zoom room.
+                    When a Zoom session goes <strong>Live on YouTube</strong>, it streams right here. You can also load any YouTube link directly into the sanctuary screen.
                 </p>
 
                 <div class="video-switcher-bar">
@@ -866,8 +937,14 @@
                                 ⏭ Next Track
                             </button>
                             <button type="button" id="copy-radio-link-btn" class="btn-navy" style="padding: 8px 12px; border-color: rgba(255,255,255,0.25);">
-                                🔗 Share Radio Link
+                                🔗 Share Radio
                             </button>
+                        </div>
+
+                        <div class="volume-bar">
+                            <span>🔊 Volume</span>
+                            <input type="range" id="radio-volume-slider" min="0" max="100" value="85">
+                            <span id="radio-volume-label">85%</span>
                         </div>
 
                         <div class="playlist-drawer" id="playlist-drawer">
@@ -934,9 +1011,9 @@
         </div>
 
         <!-- 8 BIBLICAL & TERRITORIAL WATCHES GRID -->
-        <h2 class="section-heading">Tabernacle of David — 8 Biblical &amp; Territorial Watches (Jerusalem Time)</h2>
+        <h2 class="section-heading" id="watches-section">Tabernacle of David — 8 Biblical &amp; Territorial Watches (Jerusalem Time)</h2>
         <p class="section-sub">
-            The active Biblical watch highlights automatically in gold based on <strong>Jerusalem Time (Asia/Jerusalem)</strong>. Signed-in KEK Citizens can claim one of the 3 covenant seats (<strong>Primary Watchman</strong>, <strong>Aaron</strong>, or <strong>Hur</strong>) on any shift.
+            The active Biblical watch highlights automatically in gold based on <strong>Jerusalem Time (IST/IDT)</strong>. Signed-in KEK Citizens can claim one of the 3 covenant seats (<strong>Primary Watchman</strong>, <strong>Aaron</strong>, or <strong>Hur</strong>) on any shift.
         </p>
 
         <div id="watches-grid" class="watches-grid"></div>
@@ -973,8 +1050,7 @@
     </div>
 
     <!-- =========================================================================
-         PART 1: ZERO-DEPENDENCY PURE UTC MATH JERUSALEM CLOCK & 8 WATCHES
-         Guaranteed to run in 100% of browsers with zero Intl exceptions.
+         PART 1: ZERO-DEPENDENCY PURE UTC MATH JERUSALEM CLOCK & TOP WATCH DISPLAY
     ========================================================================== -->
     <script>
         window.KEK_WATCHES = [
@@ -1069,8 +1145,6 @@
         ];
 
         // Pure UTC Math for Israel/Jerusalem (IST = UTC+2, IDT = UTC+3)
-        // Israel DST starts Friday before last Sunday of March at 02:00 IST (00:00 UTC)
-        // Israel DST ends last Sunday of October at 02:00 IDT (23:00 UTC Saturday)
         window.getJerusalemInfo = function() {
             const now = new Date();
             const utcMs = now.getTime();
@@ -1097,6 +1171,14 @@
             const biblicalDate = new Date(jerusalemDate.getTime() + (hours >= 18 ? 6 * 3600000 : 0));
             const dateKey = biblicalDate.toISOString().slice(0, 10);
 
+            // Compute Biblical Hour (1st to 12th Hour of Day or Night)
+            const isNight = hours >= 18 || hours < 6;
+            const rawBiblicalHour = isNight
+                ? ((hours - 18 + 24) % 12) + 1
+                : ((hours - 6 + 12) % 12) + 1;
+            const ordinal = (n) => n === 1 ? "1st" : n === 2 ? "2nd" : n === 3 ? "3rd" : `${n}th`;
+            const biblicalHourLabel = `${ordinal(rawBiblicalHour)} Hour of the ${isNight ? "Night" : "Day"}`;
+
             const pad = n => String(n).padStart(2, "0");
             const localTimeStr = `${pad(now.getHours())}:${pad(now.getMinutes())}`;
 
@@ -1106,6 +1188,7 @@
                 seconds,
                 tzLabel,
                 dateKey,
+                biblicalHourLabel,
                 localTimeStr
             };
         };
@@ -1115,18 +1198,50 @@
             return window.KEK_WATCHES.find(w => hours >= w.startHour && hours < w.endHour) || window.KEK_WATCHES[0];
         };
 
+        let lastRenderedWatchId = "";
+
         function tickJerusalemClock() {
             try {
-                const { hours, minutes, seconds, tzLabel, localTimeStr } = window.getJerusalemInfo();
+                const { hours, minutes, seconds, tzLabel, biblicalHourLabel, localTimeStr } = window.getJerusalemInfo();
                 const pad = n => String(n).padStart(2, "0");
+                const active = window.getActiveWatch();
+
                 const clockEl = document.getElementById("jerusalem-clock");
+                const hourPillEl = document.getElementById("biblical-hour-pill");
                 const localEl = document.getElementById("local-clock-pill");
-                const bannerEl = document.getElementById("active-watch-banner");
 
                 if (clockEl) clockEl.textContent = `${pad(hours)}:${pad(minutes)}:${pad(seconds)} JERUSALEM (${tzLabel})`;
+                if (hourPillEl) hourPillEl.textContent = `Biblical Time: ${biblicalHourLabel}`;
                 if (localEl) localEl.textContent = `Your Local Time: ${localTimeStr}`;
-                const active = window.getActiveWatch();
-                if (bannerEl) bannerEl.textContent = `Active Now: ${active.name}`;
+
+                // Update Top Hero Watch Command Card immediately (visible before scrolling)
+                const heroWindowEl = document.getElementById("hero-watch-window");
+                const heroNameEl = document.getElementById("hero-watch-name");
+                const heroScriptureEl = document.getElementById("hero-watch-scripture");
+                const heroMandateEl = document.getElementById("hero-watch-mandate");
+                const heroCountdownEl = document.getElementById("hero-watch-countdown");
+
+                if (heroWindowEl) heroWindowEl.textContent = `● CURRENTLY IN: ${active.timeLabel.toUpperCase()}`;
+                if (heroNameEl) heroNameEl.textContent = active.name;
+                if (heroScriptureEl) heroScriptureEl.textContent = active.biblicalRef;
+                if (heroMandateEl) heroMandateEl.textContent = active.mandate;
+
+                // Live countdown to the end of current 3-hour Jerusalem watch
+                const currentTotalSec = hours * 3600 + minutes * 60 + seconds;
+                const endTotalSec = active.endHour * 3600;
+                const remSec = Math.max(0, endTotalSec - currentTotalSec);
+                const remH = Math.floor(remSec / 3600);
+                const remM = Math.floor((remSec % 3600) / 60);
+                const remS = remSec % 60;
+                if (heroCountdownEl) {
+                    heroCountdownEl.textContent = `Remaining in Current Watch: ${pad(remH)}h ${pad(remM)}m ${pad(remS)}s`;
+                }
+
+                // Automatically re-highlight the 8 watches grid when the Jerusalem watch shifts
+                if (lastRenderedWatchId && lastRenderedWatchId !== active.id && window.refreshWatchHighlight) {
+                    window.refreshWatchHighlight();
+                }
+                lastRenderedWatchId = active.id;
             } catch (e) {
                 console.error("Clock tick error:", e);
             }
@@ -1136,7 +1251,7 @@
         tickJerusalemClock();
 
         // Permanent YouTube Channel Live Embed (Paste your UC... Channel ID below once)
-        const YOUTUBE_CHANNEL_ID = ""; // e.g. "UCxxxxxxxxxxxxxxxxxxxxxx"
+        const YOUTUBE_CHANNEL_ID = "";
 
         function extractYouTubeId(input) {
             const clean = (input || "").trim();
@@ -1278,7 +1393,7 @@
     </script>
 
     <!-- =========================================================================
-         PART 2: ISOLATED FIREBASE & HYBRID 24/7 AUDIO ENGINE
+         PART 2: ISOLATED FIREBASE & AUDIBLE 24/7 SANCTUARY RADIO ENGINE
     ========================================================================== -->
     <script type="module">
         import { auth, db, onAuthStateChanged, writeAuditLog } from "./firebase-config.js";
@@ -1298,43 +1413,77 @@
         const ALTAR_ROOM_ID = "KEKAltarWatch2026";
         const HEARTBEAT_TTL_MS = 90000;
 
+        // Optional: Paste direct Google Cloud Storage MP3 links here as permanent defaults
+        const DEFAULT_FALLBACK_TRACKS = [
+            // Example:
+            // { title: "Courts of Heaven Apostolic Teaching", url: "https://storage.googleapis.com/kek-ministry-altar-audio/teaching-1.mp3" }
+        ];
+
         let currentUser = null;
         let currentProfile = null;
         let listenerTunedIn = false;
         let isHostingLive = false;
         let heartbeatTimer = null;
         let remoteLiveState = { is_live: false };
-        let ALTAR_PLAYLIST = [];
+        let ALTAR_PLAYLIST = [...DEFAULT_FALLBACK_TRACKS];
         let currentTrackIndex = 0;
+        let masterVolume = 0.85;
 
         let audioCtx = null;
         let padNodes = null;
+        let chordInterval = null;
 
-        function startAmbientSoakingPad() {
+        // Audible Harmonic Sanctuary Chord Engine (Plays rich warm chords when MP3 queue is empty)
+        async function startAmbientSoakingPad() {
             if (padNodes) return;
             const AudioContextClass = window.AudioContext || window.webkitAudioContext;
             if (!AudioContextClass) return;
             if (!audioCtx) audioCtx = new AudioContextClass();
-            if (audioCtx.state === "suspended") audioCtx.resume();
+            if (audioCtx.state === "suspended") {
+                await audioCtx.resume();
+            }
 
             const masterGain = audioCtx.createGain();
-            masterGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
-            masterGain.gain.exponentialRampToValueAtTime(0.045, audioCtx.currentTime + 2.5);
+            const targetGain = Math.max(0.001, masterVolume * 0.35);
+            masterGain.gain.setValueAtTime(0.01, audioCtx.currentTime);
+            masterGain.gain.linearRampToValueAtTime(targetGain, audioCtx.currentTime + 1.2);
             masterGain.connect(audioCtx.destination);
 
-            const freqs = [146.83, 220.00, 329.63, 369.99];
-            const oscs = freqs.map(f => {
+            // Warm D-Major 9th Sanctuary Progression (D4, F#4, A4, E5)
+            const chords = [
+                [293.66, 369.99, 440.00, 659.25], // Dmaj9
+                [246.94, 369.99, 440.00, 587.33], // Bm7
+                [196.00, 293.66, 440.00, 587.33], // Gmaj9
+                [220.00, 329.63, 440.00, 554.37]  // A6
+            ];
+            let chordStep = 0;
+
+            const oscs = chords[0].map((f, i) => {
                 const osc = audioCtx.createOscillator();
-                osc.type = "sine";
+                osc.type = i % 2 === 0 ? "triangle" : "sine";
                 osc.frequency.setValueAtTime(f, audioCtx.currentTime);
                 osc.connect(masterGain);
                 osc.start();
                 return osc;
             });
+
+            chordInterval = setInterval(() => {
+                if (!padNodes || !audioCtx) return;
+                chordStep = (chordStep + 1) % chords.length;
+                const nextChord = chords[chordStep];
+                oscs.forEach((osc, idx) => {
+                    osc.frequency.setTargetAtTime(nextChord[idx], audioCtx.currentTime, 0.4);
+                });
+            }, 5000);
+
             padNodes = { oscs, masterGain };
         }
 
         function stopAmbientSoakingPad() {
+            if (chordInterval) {
+                clearInterval(chordInterval);
+                chordInterval = null;
+            }
             if (!padNodes) return;
             try {
                 padNodes.oscs.forEach(o => o.stop());
@@ -1344,8 +1493,13 @@
         }
 
         const playlistAudio = document.getElementById("altar-playlist-audio");
+        playlistAudio.volume = masterVolume;
+
+        const heroListenBtn = document.getElementById("hero-listen-btn");
         const listenerBtn = document.getElementById("listener-toggle-btn");
         const nextTrackBtn = document.getElementById("next-track-btn");
+        const volumeSlider = document.getElementById("radio-volume-slider");
+        const volumeLabel = document.getElementById("radio-volume-label");
         const nowPlayingText = document.getElementById("now-playing-text");
         const altarModePill = document.getElementById("altar-mode-pill");
         const radioBox = document.getElementById("radio-box");
@@ -1353,9 +1507,18 @@
         const listenerLiveBox = document.getElementById("listener-live-frame-box");
         const listenerLiveIframe = document.getElementById("listener-live-iframe");
 
+        volumeSlider.addEventListener("input", () => {
+            masterVolume = Number(volumeSlider.value) / 100;
+            volumeLabel.textContent = `${volumeSlider.value}%`;
+            playlistAudio.volume = masterVolume;
+            if (padNodes && audioCtx) {
+                padNodes.masterGain.gain.setTargetAtTime(Math.max(0.001, masterVolume * 0.35), audioCtx.currentTime, 0.1);
+            }
+        });
+
         function renderPlaylistDrawer() {
             if (ALTAR_PLAYLIST.length === 0) {
-                playlistDrawer.innerHTML = `<div style="color: #cbd5e1; font-size: 0.76rem;">No MP3 tracks added yet. Add Google Cloud Storage URLs in <a href="admin.html" style="color: var(--gold-bright);">Executive Desk</a> (ambient soaking pad active).</div>`;
+                playlistDrawer.innerHTML = `<div style="color: #fde047; font-size: 0.76rem;">Built-In Sanctuary Chord Stream Active. To play MP3 sermons/worship, upload MP3s to Google Cloud Storage (<strong>allUsers &rarr; Storage Object Viewer</strong>) and add their URLs in <a href="admin.html" style="color: var(--gold-bright); text-decoration: underline;">Executive Desk</a>.</div>`;
                 return;
             }
             playlistDrawer.innerHTML = ALTAR_PLAYLIST.map((t, idx) => `
@@ -1382,21 +1545,22 @@
             return true;
         }
 
-        function playCurrentPlaylistTrack() {
+        async function playCurrentPlaylistTrack() {
             renderPlaylistDrawer();
             if (ALTAR_PLAYLIST.length === 0) {
-                startAmbientSoakingPad();
-                nowPlayingText.textContent = "24/7 Prophetic Soaking Pad (Upload MP3s to Google Cloud Storage & add in Admin Desk)";
+                await startAmbientSoakingPad();
+                nowPlayingText.textContent = "🔊 Playing Built-In Sanctuary Harmonic Stream (Add MP3 URLs in Admin Desk for Teachings)";
                 return;
             }
             stopAmbientSoakingPad();
             const track = ALTAR_PLAYLIST[currentTrackIndex % ALTAR_PLAYLIST.length];
             playlistAudio.src = track.url;
+            playlistAudio.volume = masterVolume;
             playlistAudio.play().then(() => {
-                nowPlayingText.textContent = `24/7 Playlist: ${track.title}`;
-            }).catch(() => {
-                startAmbientSoakingPad();
-                nowPlayingText.textContent = "24/7 Prophetic Soaking Pad (Audio track awaiting browser permission)";
+                nowPlayingText.textContent = `🔊 24/7 Playlist: ${track.title}`;
+            }).catch(async () => {
+                await startAmbientSoakingPad();
+                nowPlayingText.textContent = "🔊 MP3 URL blocked or private (check Google Cloud bucket public access) — Playing Built-In Sanctuary Stream";
             });
         }
 
@@ -1448,6 +1612,7 @@
 
             if (!listenerTunedIn) {
                 listenerBtn.textContent = "▶ Listen to Altar";
+                if (heroListenBtn) heroListenBtn.textContent = "▶ Listen to 24/7 Radio";
                 playlistAudio.pause();
                 stopAmbientSoakingPad();
                 listenerLiveBox.style.display = "none";
@@ -1459,6 +1624,7 @@
             }
 
             listenerBtn.textContent = "⏸ Pause Listening";
+            if (heroListenBtn) heroListenBtn.textContent = "⏸ Pause 24/7 Radio";
 
             if (isHostingLive) {
                 playlistAudio.pause();
@@ -1486,10 +1652,13 @@
             }
         }
 
-        listenerBtn.addEventListener("click", () => {
+        function toggleListenerStream() {
             listenerTunedIn = !listenerTunedIn;
             syncAudioPlaybackState();
-        });
+        }
+
+        listenerBtn.addEventListener("click", toggleListenerStream);
+        if (heroListenBtn) heroListenBtn.addEventListener("click", toggleListenerStream);
 
         const goLiveBtn = document.getElementById("go-live-btn");
         const endLiveBtn = document.getElementById("end-live-btn");
@@ -1575,7 +1744,9 @@
                 const loaded = [];
                 snap.forEach(d => loaded.push(d.data()));
                 loaded.sort((a, b) => (a.created_at_iso || "").localeCompare(b.created_at_iso || ""));
-                ALTAR_PLAYLIST = loaded;
+                if (loaded.length > 0) {
+                    ALTAR_PLAYLIST = loaded;
+                }
             } catch (_) {}
             renderPlaylistDrawer();
         }
@@ -1620,6 +1791,8 @@
                 }
             });
         }
+
+        window.refreshWatchHighlight = refreshTriadRosters;
 
         async function renderDecreesFeed() {
             const feed = document.getElementById("decrees-feed");
