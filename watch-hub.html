@@ -24,7 +24,7 @@
             --live-red: #ef4444;
         }
 
-        * { box-sizing: border-box; }
+        *, *::before, *::after { box-sizing: border-box; }
 
         body {
             font-family: 'Montserrat', sans-serif;
@@ -1983,7 +1983,6 @@
                 }
             } catch (_) {}
 
-            // Fallback to UTC+2 / UTC+3 if Intl timezone is unavailable
             const utcMs = nowDate.getTime();
             const year = nowDate.getUTCFullYear();
             const marchLastDay = new Date(Date.UTC(year, 2, 31));
@@ -2885,5 +2884,7 @@
             await renderDecreesFeed();
         });
     </script>
+
+    <script src="kek-nav.js" defer></script>
 </body>
 </html>
