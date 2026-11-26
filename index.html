@@ -10,20 +10,17 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="KEK Portal">
 
-    <!-- SEO Meta Tags -->
     <title>Kingdom Ekklesias Koinonia (KEK) | Manifesting the Sons of God &amp; Goshen Ecosystem</title>
     <meta name="description" content="An Apostolic-Prophetic Governance Assembly equipping mature sons and territorial Ekklesias to legislate in the Courts of Heaven and build the Goshen Cities Ecosystem. Led by Apostle Elizaphan Kamau Mwangi.">
     <meta name="keywords" content="Kingdom Ekklesias Koinonia, KEK, Courts of Heaven, Spiritual Legislation, Kingdom Governance, Melchizedek Order, Goshen Cities Ecosystem, Apostle Kamau Mwangi, Nairobi Ministry, Bloodline Cleansing">
     <meta name="author" content="Apostle Elizaphan Kamau Mwangi">
 
-    <!-- Open Graph / Social Sharing -->
     <meta property="og:title" content="Kingdom Ekklesias Koinonia (KEK) | Seated in Heavenly Places, Building on Earth">
     <meta property="og:description" content="An Apostolic-Prophetic Governance Assembly legislating in the Courtrooms and Councils of Heaven and establishing the 8 Pillars of the Goshen Cities Ecosystem.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kingdomekklesiaskoinonia.org/">
     <meta property="og:image" content="https://kingdomekklesiaskoinonia.org/kek-emblem.png">
 
-    <!-- Favicon & PWA Manifest -->
     <link rel="icon" type="image/png" href="kek-emblem.png">
     <link rel="apple-touch-icon" href="kek-emblem.png">
     <link rel="manifest" href="manifest.json">
@@ -31,7 +28,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 
-    <!-- Capture PWA Install Prompt Immediately on Load -->
     <script>
       window.__kekInstallPrompt = null;
       window.addEventListener('beforeinstallprompt', (e) => {
@@ -43,7 +39,6 @@
       });
     </script>
 
-    <!-- Schema.org Structured Data for Search Engines & AI Agents -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -300,7 +295,7 @@
             border-color: var(--gold);
         }
 
-        /* FLOATING UNHIDE RAIL BUTTON (SHOWN WHEN RAIL IS HIDDEN) */
+        /* FLOATING UNHIDE RAIL BUTTON */
         .floating-unhide-btn {
             display: none;
             position: fixed;
@@ -656,6 +651,43 @@
             line-height: 1.45;
         }
 
+        /* LIVE WATCH & HEBREW DATE BAR */
+        .watch-live-strip {
+            margin-top: 16px;
+            padding: 12px 16px;
+            border-radius: 11px;
+            background: rgba(6, 14, 28, 0.68);
+            border: 1px solid rgba(197, 155, 39, 0.38);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .watch-live-meta {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            font-size: 0.79rem;
+            color: #e2e8f0;
+        }
+
+        .watch-live-badge {
+            background: rgba(34, 197, 94, 0.16);
+            border: 1px solid rgba(34, 197, 94, 0.45);
+            color: #86efac;
+            padding: 3px 9px;
+            border-radius: 999px;
+            font-size: 0.69rem;
+            font-weight: 700;
+        }
+
+        .watch-live-clocks strong {
+            color: var(--gold-bright);
+        }
+
         .hero-actions {
             display: flex;
             flex-wrap: wrap;
@@ -664,7 +696,7 @@
         }
 
         .hero-metrics {
-            margin-top: 20px;
+            margin-top: 16px;
             padding-top: 16px;
             border-top: 1px solid rgba(255, 255, 255, 0.12);
             display: grid;
@@ -704,7 +736,7 @@
             letter-spacing: 0.6px;
         }
 
-        /* STAGE TOOLBAR (PREV / NEXT CHAMBER STEPPER) */
+        /* STAGE TOOLBAR */
         .stage-stepper {
             background: var(--white);
             border: 1px solid #e2e8f0;
@@ -827,7 +859,7 @@
             line-height: 1.65;
         }
 
-        /* INTERACTIVE SUB-TABS (GOSHEN 8 PILLARS & COURTS 101) */
+        /* INTERACTIVE SUB-TABS */
         .subtab-bar {
             display: flex;
             flex-wrap: wrap;
@@ -1595,7 +1627,7 @@
         </div>
     </header>
 
-    <!-- FLOATING UNHIDE RAIL BUTTON (WHEN RAIL IS HIDDEN ON DESKTOP) -->
+    <!-- FLOATING UNHIDE RAIL BUTTON -->
     <button type="button" class="floating-unhide-btn" id="floating-unhide-rail" aria-label="Unhide Navigation Rail">
         <span>▶</span>
         <span>Unhide Rail</span>
@@ -1727,6 +1759,22 @@
                     </div>
                 </div>
 
+                <!-- LIVE WATCH & HEBREW DATE STATUS BAR -->
+                <div class="watch-live-strip" aria-live="polite">
+                    <div class="watch-live-meta">
+                        <span class="watch-live-badge">● 24/7 WATCH ACTIVE</span>
+                        <span class="watch-live-clocks" id="live-watch-readout">
+                            <strong>EAT:</strong> --:--:-- &bull; <strong>Jerusalem:</strong> --:--:-- &bull; <strong>Watch:</strong> Loading...
+                        </span>
+                        <span class="watch-live-clocks" id="live-hebrew-readout">
+                            <strong>Hebrew Year:</strong> 5787
+                        </span>
+                    </div>
+                    <a href="watch-hub.html" class="btn-outline-gold" style="padding: 6px 12px; font-size: 0.76rem;">
+                        Open Full Watch &amp; Hebrew Hub &rarr;
+                    </a>
+                </div>
+
                 <div class="hero-metrics">
                     <button type="button" class="metric-tile" data-goto-chamber="mandates">
                         <strong>3 Mandates</strong>
@@ -1821,7 +1869,7 @@
                 </div>
             </section>
 
-            <!-- CHAMBER 3: THE 8 PILLARS OF THE GOSHEN ECOSYSTEM (WITH INTERACTIVE SUB-TABS) -->
+            <!-- CHAMBER 3: THE 8 PILLARS OF THE GOSHEN ECOSYSTEM -->
             <section id="goshen-pillars" class="chamber-panel" data-chamber-label="The 8 Pillars of the Goshen Ecosystem">
                 <h2 class="section-title">The 8 Pillars of the Goshen Ecosystem</h2>
                 <p class="section-subtitle">Select any individual pillar below to inspect its covenant mandate and practical infrastructure blueprint, or view all eight together.</p>
@@ -1838,7 +1886,6 @@
                     <button type="button" class="subtab-btn" data-pillar-tab="8">8. 🛠️ Technology</button>
                 </div>
 
-                <!-- Overview Grid of All 8 Pillars -->
                 <div id="goshen-all-view" class="goshen-pillars-grid">
                     <div class="goshen-pillar-card" data-open-pillar="1">
                         <div>
@@ -1905,7 +1952,6 @@
                     </div>
                 </div>
 
-                <!-- Focused Single-Pillar Spotlight Container -->
                 <div id="goshen-single-view" style="display: none;"></div>
             </section>
 
@@ -1989,7 +2035,7 @@
                 </div>
             </section>
 
-            <!-- CHAMBER 5: COURTS OF HEAVEN 101 (WITH INTERACTIVE SUB-TABS) -->
+            <!-- CHAMBER 5: COURTS OF HEAVEN 101 -->
             <section id="courtroom-101" class="chamber-panel" data-chamber-label="Courts of Heaven Sessions">
                 <div class="courtroom-wrapper">
                     <div class="courtroom-header">
@@ -2010,7 +2056,6 @@
                         </button>
                     </div>
 
-                    <!-- SUB-TAB 1: OVERVIEW & THREE MATRICES -->
                     <div id="court-overview" class="subtab-pane active">
                         <div class="courtroom-body">
                             <p style="margin-bottom: 14px;">
@@ -2056,7 +2101,6 @@
                         </div>
                     </div>
 
-                    <!-- SUB-TAB 2: 5 LEGISLATIVE SESSIONS -->
                     <div id="court-sessions" class="subtab-pane">
                         <h3 style="font-family: 'Cinzel', serif; color: var(--navy); text-align: center; font-size: 1.3rem; margin: 0 0 8px;">
                             Available Courtroom Legislative Sessions
@@ -2129,7 +2173,6 @@
                         </div>
                     </div>
 
-                    <!-- SUB-TAB 3: COVENANT SEED & BOOK SESSION -->
                     <div id="court-booking" class="subtab-pane">
                         <div class="seed-card">
                             <h3 style="font-family: 'Cinzel', serif; color: var(--navy); font-size: 1.15rem; margin: 0 0 10px;">Co-Partnership &amp; Covenant Seed</h3>
@@ -2438,7 +2481,7 @@
         </div>
     </div>
 
-    <!-- LEFT-COLUMN CHAMBER CONTROLLER, SUB-TABS & STEPPER -->
+    <!-- UNIFIED NAVIGATION, HIDE/UNHIDE RAIL, SUB-TABS & LIVE WATCH CLOCK -->
     <script>
         const chamberOrder = [
             "about",
@@ -2515,9 +2558,21 @@
         } catch (_) {}
         syncRailVisibilityUI();
 
-        headerRailToggle.addEventListener("click", toggleRail);
-        railInnerHideBtn.addEventListener("click", () => setRailHidden(true));
-        floatingUnhideBtn.addEventListener("click", () => setRailHidden(false));
+        headerRailToggle.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleRail();
+        });
+        railInnerHideBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setRailHidden(true);
+        });
+        floatingUnhideBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setRailHidden(false);
+        });
 
         window.addEventListener("resize", () => {
             if (window.innerWidth > 980) {
@@ -2537,8 +2592,8 @@
         }
 
         function activateChamber(chamberId, opts = {}) {
-            if (!chamberOrder.includes(chamberId)) return;
-            const shouldScroll = Boolean(opts.scroll);
+            if (!chamberOrder.includes(chamberId)) return false;
+            const shouldScroll = opts.scroll !== undefined ? Boolean(opts.scroll) : isFullScrollMode;
             activeChamberId = chamberId;
 
             railButtons.forEach(btn => {
@@ -2561,91 +2616,19 @@
             if (shouldScroll) {
                 const target = document.getElementById(chamberId);
                 if (target) {
-                    const y = target.getBoundingClientRect().top + window.scrollY - 74;
+                    const y = target.getBoundingClientRect().top + window.scrollY - 76;
                     window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
                 }
             } else if (!isFullScrollMode) {
                 const stepperTop = document.querySelector(".stage-stepper")?.getBoundingClientRect().top;
                 if (stepperTop !== undefined && stepperTop < 58) {
-                    window.scrollTo({ top: Math.max(0, window.scrollY + stepperTop - 74), behavior: "smooth" });
+                    window.scrollTo({ top: Math.max(0, window.scrollY + stepperTop - 76), behavior: "smooth" });
                 }
             }
+            return true;
         }
 
         window.activateChamber = (id, scroll = false) => activateChamber(id, { scroll });
-
-        railButtons.forEach(btn => {
-            btn.addEventListener("click", () => {
-                const targetId = btn.getAttribute("data-chamber");
-                activateChamber(targetId, { scroll: isFullScrollMode });
-            });
-        });
-
-        document.querySelectorAll("[data-goto-chamber]").forEach(el => {
-            el.addEventListener("click", (e) => {
-                const targetId = el.getAttribute("data-goto-chamber");
-                if (targetId && chamberOrder.includes(targetId)) {
-                    e.preventDefault();
-                    activateChamber(targetId, { scroll: isFullScrollMode });
-                }
-            });
-        });
-
-        prevBtn.addEventListener("click", () => {
-            const idx = chamberOrder.indexOf(activeChamberId);
-            if (idx > 0) activateChamber(chamberOrder[idx - 1], { scroll: isFullScrollMode });
-        });
-
-        nextBtn.addEventListener("click", () => {
-            const idx = chamberOrder.indexOf(activeChamberId);
-            if (idx < chamberOrder.length - 1) activateChamber(chamberOrder[idx + 1], { scroll: isFullScrollMode });
-        });
-
-        focusedModeBtn.addEventListener("click", () => {
-            isFullScrollMode = false;
-            document.body.classList.remove("scroll-all-mode");
-            focusedModeBtn.classList.add("active");
-            fullScrollModeBtn.classList.remove("active");
-            activateChamber(activeChamberId, { scroll: false });
-        });
-
-        fullScrollModeBtn.addEventListener("click", () => {
-            isFullScrollMode = true;
-            document.body.classList.add("scroll-all-mode");
-            fullScrollModeBtn.classList.add("active");
-            focusedModeBtn.classList.remove("active");
-            activateChamber(activeChamberId, { scroll: true });
-        });
-
-        document.addEventListener("click", (e) => {
-            if (
-                leftRail.classList.contains("mobile-open") &&
-                !leftRail.contains(e.target) &&
-                !headerRailToggle.contains(e.target)
-            ) {
-                leftRail.classList.remove("mobile-open");
-                syncRailVisibilityUI();
-            }
-        });
-
-        window.addEventListener("scroll", () => {
-            if (!isFullScrollMode) return;
-            let currentBest = chamberOrder[0];
-            for (const id of chamberOrder) {
-                const el = document.getElementById(id);
-                if (!el) continue;
-                if (el.getBoundingClientRect().top <= 180) {
-                    currentBest = id;
-                }
-            }
-            if (currentBest !== activeChamberId) {
-                activeChamberId = currentBest;
-                railButtons.forEach(btn => {
-                    btn.classList.toggle("active", btn.getAttribute("data-chamber") === activeChamberId);
-                });
-                updateStepperUI(activeChamberId);
-            }
-        }, { passive: true });
 
         /* ==============================================================
            GOSHEN 8 PILLARS INTERACTIVE SUB-TABS
@@ -2692,7 +2675,7 @@
                 icon: "📚",
                 title: "Holistic Human Development",
                 scripture: "Proverbs 22:6 • Daniel 1:17–20",
-                desc: "Discipleship-driven education moving beyond passive academic theory to equip children, youth, and adults for practical Kingdom governance and excellence.",
+                desc: "Discipleship-driven education moving beyond academic theory to equip children, youth, and adults for practical Kingdom governance and excellence.",
                 governanceRole: "Raises a generation fluent in both spiritual legislation and high-level technical, civic, and entrepreneurial stewardship.",
                 infrastructure: "KEK Academy classrooms, mentorship cohorts, and character-plus-skill training labs."
             },
@@ -2710,7 +2693,7 @@
                 icon: "⚖️",
                 title: "Economic Sovereignty",
                 scripture: "Deuteronomy 8:18 • Genesis 47:27",
-                desc: "Debt-free, autonomous financial architecture rooted in covenant equity, ethical trade, and Melchizedek wealth stewardship shielded from currency turbulence.",
+                desc: "Debt-free, autonomous financial architecture rooted in covenant equity, trade, and Melchizedek wealth stewardship shielded from currency turbulence.",
                 governanceRole: "Enforces Courts of Heaven financial decrees through disciplined household cash-flow firewalls and productive asset ownership.",
                 infrastructure: "Family enterprise ledgers, dynastic trust structures, and cooperative capital deployment pools."
             },
@@ -2772,36 +2755,18 @@
                             <a href="https://docs.google.com/forms/d/e/1FAIpQLSfJJXaEFN77UXfbHU3fGmsMEjFMq94wWx6lXotnD5vmEyGWzg/viewform?usp=header" target="_blank" rel="noopener noreferrer" class="btn-gold">
                                 🌾 Become a Goshen Builder &nearr;
                             </a>
-                            <button type="button" class="btn-outline-gold" onclick="activateChamber('resources')">
+                            <button type="button" class="btn-outline-gold" data-goto-chamber="resources">
                                 📄 Download Blueprints
                             </button>
                         </div>
                         <div style="display: flex; gap: 8px;">
-                            <button type="button" class="btn-outline-gold" style="padding: 8px 12px; font-size: 0.78rem;" data-jump-pillar="${prevKey}">&larr; Prev Pillar</button>
-                            <button type="button" class="btn-outline-gold" style="padding: 8px 12px; font-size: 0.78rem;" data-jump-pillar="${nextKey}">Next Pillar &rarr;</button>
+                            <button type="button" class="btn-outline-gold" style="padding: 8px 12px; font-size: 0.78rem;" data-pillar-tab="${prevKey}">&larr; Prev Pillar</button>
+                            <button type="button" class="btn-outline-gold" style="padding: 8px 12px; font-size: 0.78rem;" data-pillar-tab="${nextKey}">Next Pillar &rarr;</button>
                         </div>
                     </div>
                 </div>
             `;
-
-            goshenSingleView.querySelectorAll("[data-jump-pillar]").forEach(btn => {
-                btn.addEventListener("click", () => {
-                    renderGoshenSubTab(btn.getAttribute("data-jump-pillar"));
-                });
-            });
         }
-
-        goshenTabBtns.forEach(btn => {
-            btn.addEventListener("click", () => {
-                renderGoshenSubTab(btn.getAttribute("data-pillar-tab"));
-            });
-        });
-
-        document.querySelectorAll("[data-open-pillar]").forEach(card => {
-            card.addEventListener("click", () => {
-                renderGoshenSubTab(card.getAttribute("data-open-pillar"));
-            });
-        });
 
         /* ==============================================================
            COURTS OF HEAVEN 101 INTERACTIVE SUB-TABS
@@ -2810,6 +2775,7 @@
         const courtPanes = ["court-overview", "court-sessions", "court-booking"].map(id => document.getElementById(id));
 
         function renderCourtSubTab(targetPaneId) {
+            if (!document.getElementById(targetPaneId)) return;
             courtTabBtns.forEach(btn => {
                 if (btn.classList.contains("subtab-btn")) {
                     btn.classList.toggle("active", btn.getAttribute("data-court-tab") === targetPaneId);
@@ -2822,11 +2788,173 @@
             });
         }
 
-        courtTabBtns.forEach(btn => {
-            btn.addEventListener("click", () => {
-                renderCourtSubTab(btn.getAttribute("data-court-tab"));
-            });
+        /* ==============================================================
+           UNIFIED DELEGATED NAVIGATION HANDLER
+        ============================================================== */
+        document.addEventListener("click", (e) => {
+            const pillarBtn = e.target.closest("[data-pillar-tab]");
+            if (pillarBtn) {
+                e.preventDefault();
+                renderGoshenSubTab(pillarBtn.getAttribute("data-pillar-tab"));
+                return;
+            }
+
+            const openPillarCard = e.target.closest("[data-open-pillar]");
+            if (openPillarCard) {
+                e.preventDefault();
+                renderGoshenSubTab(openPillarCard.getAttribute("data-open-pillar"));
+                return;
+            }
+
+            const courtBtn = e.target.closest("[data-court-tab]");
+            if (courtBtn) {
+                e.preventDefault();
+                activateChamber("courtroom-101");
+                renderCourtSubTab(courtBtn.getAttribute("data-court-tab"));
+                return;
+            }
+
+            const railBtn = e.target.closest("[data-chamber]");
+            if (railBtn) {
+                e.preventDefault();
+                activateChamber(railBtn.getAttribute("data-chamber"));
+                return;
+            }
+
+            const gotoBtn = e.target.closest("[data-goto-chamber]");
+            if (gotoBtn) {
+                const targetId = gotoBtn.getAttribute("data-goto-chamber");
+                if (chamberOrder.includes(targetId)) {
+                    e.preventDefault();
+                    activateChamber(targetId);
+                    return;
+                }
+            }
+
+            const anchorLink = e.target.closest('a[href^="#"]');
+            if (anchorLink) {
+                const rawHash = anchorLink.getAttribute("href").slice(1);
+                if (chamberOrder.includes(rawHash)) {
+                    e.preventDefault();
+                    activateChamber(rawHash);
+                    return;
+                }
+            }
+
+            if (
+                leftRail.classList.contains("mobile-open") &&
+                !leftRail.contains(e.target) &&
+                !headerRailToggle.contains(e.target)
+            ) {
+                leftRail.classList.remove("mobile-open");
+                syncRailVisibilityUI();
+            }
         });
+
+        prevBtn.addEventListener("click", () => {
+            const idx = chamberOrder.indexOf(activeChamberId);
+            if (idx > 0) activateChamber(chamberOrder[idx - 1]);
+        });
+
+        nextBtn.addEventListener("click", () => {
+            const idx = chamberOrder.indexOf(activeChamberId);
+            if (idx < chamberOrder.length - 1) activateChamber(chamberOrder[idx + 1]);
+        });
+
+        focusedModeBtn.addEventListener("click", () => {
+            isFullScrollMode = false;
+            document.body.classList.remove("scroll-all-mode");
+            focusedModeBtn.classList.add("active");
+            fullScrollModeBtn.classList.remove("active");
+            activateChamber(activeChamberId, { scroll: false });
+        });
+
+        fullScrollModeBtn.addEventListener("click", () => {
+            isFullScrollMode = true;
+            document.body.classList.add("scroll-all-mode");
+            fullScrollModeBtn.classList.add("active");
+            focusedModeBtn.classList.remove("active");
+            activateChamber(activeChamberId, { scroll: true });
+        });
+
+        window.addEventListener("scroll", () => {
+            if (!isFullScrollMode) return;
+            let currentBest = chamberOrder[0];
+            for (const id of chamberOrder) {
+                const el = document.getElementById(id);
+                if (!el) continue;
+                if (el.getBoundingClientRect().top <= 180) {
+                    currentBest = id;
+                }
+            }
+            if (currentBest !== activeChamberId) {
+                activeChamberId = currentBest;
+                railButtons.forEach(btn => {
+                    btn.classList.toggle("active", btn.getAttribute("data-chamber") === activeChamberId);
+                });
+                updateStepperUI(activeChamberId);
+            }
+        }, { passive: true });
+
+        /* ==============================================================
+           LIVE JERUSALEM WATCH & HEBREW DATE CLOCK
+        ============================================================== */
+        function getWatchWindowLabel(hour24) {
+            if (hour24 >= 0 && hour24 < 3) return "1st Watch (Midnight – 3 AM)";
+            if (hour24 >= 3 && hour24 < 6) return "2nd Watch (3 AM – 6 AM)";
+            if (hour24 >= 6 && hour24 < 9) return "3rd Watch (6 AM – 9 AM)";
+            if (hour24 >= 9 && hour24 < 12) return "4th Watch (9 AM – 12 PM)";
+            if (hour24 >= 12 && hour24 < 15) return "5th Watch (12 PM – 3 PM)";
+            if (hour24 >= 15 && hour24 < 18) return "6th Watch (3 PM – 6 PM)";
+            if (hour24 >= 18 && hour24 < 21) return "7th Watch (6 PM – 9 PM)";
+            return "8th Watch (9 PM – Midnight)";
+        }
+
+        function updateLiveWatchAndHebrewDate() {
+            const now = new Date();
+            const eatFormatter = new Intl.DateTimeFormat("en-GB", {
+                timeZone: "Africa/Nairobi",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+                hour12: false
+            });
+            const jerFormatter = new Intl.DateTimeFormat("en-GB", {
+                timeZone: "Asia/Jerusalem",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+                hour12: false
+            });
+
+            const eatStr = eatFormatter.format(now);
+            const jerStr = jerFormatter.format(now);
+            const eatHour = parseInt(eatStr.split(":")[0], 10) || 0;
+            const watchLabel = getWatchWindowLabel(eatHour);
+
+            const watchReadout = document.getElementById("live-watch-readout");
+            if (watchReadout) {
+                watchReadout.innerHTML = `<strong>EAT:</strong> ${eatStr} &bull; <strong>Jerusalem:</strong> ${jerStr} &bull; <strong>Active Watch:</strong> ${watchLabel}`;
+            }
+
+            const hebrewReadout = document.getElementById("live-hebrew-readout");
+            if (hebrewReadout) {
+                try {
+                    const hebStr = new Intl.DateTimeFormat("en-u-ca-hebrew", {
+                        timeZone: "Africa/Nairobi",
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric"
+                    }).format(now);
+                    hebrewReadout.innerHTML = `<strong>Hebrew Date:</strong> ${hebStr}`;
+                } catch (_) {
+                    hebrewReadout.innerHTML = `<strong>Hebrew Cycle:</strong> Year 5787`;
+                }
+            }
+        }
+
+        updateLiveWatchAndHebrewDate();
+        setInterval(updateLiveWatchAndHebrewDate, 1000);
     </script>
 
     <!-- Document Search & Filter Script -->
