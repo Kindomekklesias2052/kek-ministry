@@ -423,7 +423,7 @@
         .container {
             max-width: 1240px;
             margin: 0 auto;
-            padding: 28px 24px 68px;
+            padding: 28px 24px 88px;
         }
 
         .hub-station {
@@ -661,7 +661,7 @@
             border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 7px;
             padding: 9px 12px;
-            max-height: 140px;
+            max-height: 150px;
             overflow-y: auto;
             font-size: 0.78rem;
         }
@@ -1325,7 +1325,7 @@
                         <span class="layer-tag">Layer 02 &bull; Automated 24/7 + Live Watch Radio</span>
                         <h3>Continuous Altar Stream &amp; Live Prayer Takeover</h3>
                         <p style="color: var(--slate); font-size: 0.84rem; margin: 0 0 10px;">
-                            Streams your Google Cloud Storage 24/7 audio rotation automatically. When a watchman goes live, listeners switch to live prayer and return to the playlist on sign-off.
+                            Streams your Google Cloud Storage (<code>kek-ministry-altar-audio</code>) 24/7 watch rotation automatically. When a watchman goes live, listeners switch to live prayer and return to the playlist on sign-off.
                         </p>
 
                         <div class="radio-box" id="radio-box">
@@ -1360,7 +1360,7 @@
                                 <div style="color: #94a3b8; font-size: 0.74rem;">24/7 Google Cloud Storage Queue: Loading tracks...</div>
                             </div>
 
-                            <audio id="altar-playlist-audio" preload="none"></audio>
+                            <audio id="altar-playlist-audio" preload="none" crossOrigin="anonymous"></audio>
 
                             <div class="webrtc-frame-box" id="listener-live-frame-box">
                                 <iframe id="listener-live-iframe" allow="autoplay; encrypted-media" title="KEK Live Watch Audio Receiver"></iframe>
@@ -2411,7 +2411,52 @@
         const ALTAR_ROOM_ID = "KEKAltarWatch2026";
         const HEARTBEAT_TTL_MS = 90000;
 
-        const DEFAULT_FALLBACK_TRACKS = [];
+        const DEFAULT_FALLBACK_TRACKS = [
+            {
+                title: "1st Watch: Midnight Courts & Gates (00:00–03:00 EAT)",
+                url: "https://storage.googleapis.com/kek-ministry-altar-audio/watch-01-midnight-courts.mp3"
+            },
+            {
+                title: "2nd Watch: Breaking & Dawn Legislation (03:00–06:00 EAT)",
+                url: "https://storage.googleapis.com/kek-ministry-altar-audio/watch-02-dawn-legislation.mp3"
+            },
+            {
+                title: "3rd Watch: Morning Alignment & Scroll (06:00–09:00 EAT)",
+                url: "https://storage.googleapis.com/kek-ministry-altar-audio/watch-03-morning-scroll.mp3"
+            },
+            {
+                title: "4th Watch: Marketplace & Goshen Mandate (09:00–12:00 EAT)",
+                url: "https://storage.googleapis.com/kek-ministry-altar-audio/watch-04-goshen-mandate.mp3"
+            },
+            {
+                title: "5th Watch: Noon Altar & Melchizedek Order (12:00–15:00 EAT)",
+                url: "https://storage.googleapis.com/kek-ministry-altar-audio/watch-05-melchizedek-order.mp3"
+            },
+            {
+                title: "6th Watch: 3:00 PM Hour of Prayer & Decrees (15:00–18:00 EAT)",
+                url: "https://storage.googleapis.com/kek-ministry-altar-audio/watch-06-hour-of-prayer.mp3"
+            },
+            {
+                title: "7th Watch: Evening Sacrifice & Family Altar (18:00–21:00 EAT)",
+                url: "https://storage.googleapis.com/kek-ministry-altar-audio/watch-07-evening-sacrifice.mp3"
+            },
+            {
+                title: "8th Watch: Night Threshold & Territorial Shield (21:00–00:00 EAT)",
+                url: "https://storage.googleapis.com/kek-ministry-altar-audio/watch-08-night-threshold.mp3"
+            }
+        ];
+
+        function getInitialEatWatchTrackIndex() {
+            const eatHour = parseInt(
+                new Intl.DateTimeFormat("en-GB", {
+                    timeZone: "Africa/Nairobi",
+                    hour: "2-digit",
+                    hour12: false
+                }).format(new Date()),
+                10
+            ) || 0;
+            return Math.floor(eatHour / 3);
+        }
 
         let currentUser = null;
         let currentProfile = null;
@@ -2420,7 +2465,7 @@
         let heartbeatTimer = null;
         let remoteLiveState = { is_live: false };
         let ALTAR_PLAYLIST = [...DEFAULT_FALLBACK_TRACKS];
-        let currentTrackIndex = 0;
+        let currentTrackIndex = getInitialEatWatchTrackIndex();
         let masterVolume = 0.85;
 
         let audioCtx = null;
@@ -2509,10 +2554,6 @@
         });
 
         function renderPlaylistDrawer() {
-            if (ALTAR_PLAYLIST.length === 0) {
-                playlistDrawer.innerHTML = `<div style="color: #fde047; font-size: 0.76rem;">Built-In Sanctuary Chord Stream Active. To play MP3 sermons/worship, upload MP3s to Google Cloud Storage (<strong>allUsers &rarr; Storage Object Viewer</strong>) and add their URLs in <a href="admin.html" style="color: var(--gold-bright); text-decoration: underline;">Executive Desk</a>.</div>`;
-                return;
-            }
             playlistDrawer.innerHTML = ALTAR_PLAYLIST.map((t, idx) => `
                 <div class="playlist-row ${idx === (currentTrackIndex % ALTAR_PLAYLIST.length) ? 'active-track' : ''}" data-idx="${idx}">
                     <span>${idx + 1}. ${t.title}</span>
@@ -2541,18 +2582,18 @@
             renderPlaylistDrawer();
             if (ALTAR_PLAYLIST.length === 0) {
                 await startAmbientSoakingPad();
-                nowPlayingText.textContent = "🔊 Playing Built-In Sanctuary Harmonic Stream (Add MP3 URLs in Admin Desk for Teachings)";
+                nowPlayingText.textContent = "🔊 Playing Built-In Sanctuary Harmonic Stream";
                 return;
             }
             stopAmbientSoakingPad();
             const track = ALTAR_PLAYLIST[currentTrackIndex % ALTAR_PLAYLIST.length];
-            playlistAudio.src = track.url;
+            playlistAudio.src = track.url.replace(/^http:\/\//i, "https://");
             playlistAudio.volume = masterVolume;
             playlistAudio.play().then(() => {
-                nowPlayingText.textContent = `🔊 24/7 Playlist: ${track.title}`;
+                nowPlayingText.textContent = `🔊 Google Cloud 24/7: ${track.title}`;
             }).catch(async () => {
                 await startAmbientSoakingPad();
-                nowPlayingText.textContent = "🔊 MP3 URL blocked or private (check Google Cloud bucket public access) — Playing Built-In Sanctuary Stream";
+                nowPlayingText.textContent = `🔊 Audio pending in kek-ministry-altar-audio (${track.title}) — Playing Sanctuary Harmonic Fallback`;
             });
         }
 
@@ -2615,6 +2656,11 @@
                 return;
             }
 
+            // Pause footer radio bar so both audio engines never overlap
+            if (window.KEKRadio && typeof window.KEKRadio.pause === "function") {
+                window.KEKRadio.pause();
+            }
+
             listenerBtn.textContent = "⏸ Pause Listening";
             if (heroListenBtn) heroListenBtn.textContent = "⏸ Pause 24/7 Radio";
 
@@ -2651,6 +2697,14 @@
 
         listenerBtn.addEventListener("click", toggleListenerStream);
         if (heroListenBtn) heroListenBtn.addEventListener("click", toggleListenerStream);
+
+        // If the footer radio bar starts playing, pause the page-level player automatically
+        window.addEventListener("kek:watch-tick", (e) => {
+            if (e.detail && e.detail.isPlaying && listenerTunedIn) {
+                listenerTunedIn = false;
+                syncAudioPlaybackState();
+            }
+        });
 
         const goLiveBtn = document.getElementById("go-live-btn");
         const endLiveBtn = document.getElementById("end-live-btn");
@@ -2852,6 +2906,8 @@
                 syncAudioPlaybackState();
             });
         } catch (_) {}
+
+        renderPlaylistDrawer();
 
         onAuthStateChanged(auth, async (user) => {
             if (user) {
